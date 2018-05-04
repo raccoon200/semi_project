@@ -4,10 +4,9 @@
 <html lang="ko">
 <head>
 <meta charset=UTF-8>
-<title>인덱스 페이지</title>
+<title>Insert title here</title>
 </head>
 <body>
-<!-- 주석테스트 -->
-	인덱스페이지입니다.
+
 </body>
 </html>
