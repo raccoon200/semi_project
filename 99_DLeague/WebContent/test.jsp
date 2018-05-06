@@ -48,8 +48,8 @@ ul.main-nav li.main-nav-list a{
 	text-decoration:none;
 	color:#292929;
 }
-ul.main-nav li:hover{background:rgb(173,255,165);border-radius:5px;}
-ul.main-nav li:hover>a{color:black;}
+ul.main-nav li.main-nav-list:hover{border-radius:5px;}
+
 
 /*header*/
 div#header-div{
@@ -79,7 +79,9 @@ ul#header-list li{
 ul#header-list li a{
 	text-decoration:none;
 	font-family:"휴먼모음T", sans-serif;
-	
+	color:gray;
+}
+ul#header-list li a:hover{
 	color:black;
 }
 div.main-nav-sub ul{
@@ -97,8 +99,9 @@ div.main-nav-sub ul li a{
 	text-decoration:none;
 	font-family:"휴먼모음T", sans-serif;
 	font-size:16px;
-	color:black;
+	
 }
+
 div.main-nav-sub {
 	position:absolute;
 	top:40px;
