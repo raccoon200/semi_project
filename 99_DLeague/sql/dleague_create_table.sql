@@ -139,7 +139,7 @@ CREATE TABLE GAME (
 	GAME_CONTENT CLOB, /* ���ӳ��� */
 	STATUS VARCHAR2(1) /* ���翩�� */
 );
-
+alter table game modify game_reg_date default sysdate;
 CREATE UNIQUE INDEX PK_GAME
 	ON GAME (
 		GAME_NO ASC
