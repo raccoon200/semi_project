@@ -35,7 +35,7 @@ $(function() {
 	</div>
 </div>
 
-	<input type="text" id="date-format" class="form-control floating-label" placeholder="Begin Date Time">
+	<input type="text" id="date-format" class="form-control floating-label" placeholder="Begin Date Time" style="width: 250px;">
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>	
