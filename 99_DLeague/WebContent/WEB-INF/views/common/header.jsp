@@ -9,16 +9,15 @@
 
 <script src="<%=request.getContextPath()%>/js/jquery-3.3.1.js"></script>
 <style>
-/********** 전체컨테이너 **********/
+/* 전체컨테이너 */
 div#container	{width:960px; margin:0 auto;}
 
-/********** header **********/
-header			{ height:120px; position:relative; padding:10px 0 0 0;}
-header h1 		{margin-left:10px;}
+/*header*/
 
+header#header			{ height:120px; position:relative; padding:10px 0 0 0;}
+header#header h1 		{margin-left:10px;}
 
-/* 메인메뉴 */
-header nav {
+header#header nav {
 	 
 	width:100%; 
 	margin-top:15px;
@@ -29,7 +28,7 @@ ul.main-nav {
 	padding:0px; /*ul태그가 가진 기본padding초기화*/
 	margin:auto;
 }
-ul.main-nav li.main-nav-list{
+ul.main-nav > li.main-nav-list{
 	list-style-type:none;
 	width:8em;
 	height:2em;
@@ -42,23 +41,21 @@ ul.main-nav li.main-nav-list{
 	background-color:white;
 }
 
-ul.main-nav li.main-nav-list a{
+ul.main-nav > li.main-nav-list > a{
 	display:block;
 	padding:.5em;
 	text-decoration:none;
 	color:#292929;
 }
-ul.main-nav li.main-nav-list:hover{border-radius:5px;}
+ul.main-nav > li.main-nav-list:hover{border-radius:5px;}
 
-
-/*header*/
 div#header-div{
 	display:block;
 	height:50px;
 }
 img#header-image {
 	padding-left:10px;
-	width:60px;
+	width:180px;
 	height:60px;
 	float:left;
 	display:inline;
@@ -84,24 +81,27 @@ ul#header-list li a{
 ul#header-list li a:hover{
 	color:black;
 }
-div.main-nav-sub ul{
+
+div.main-nav-sub > ul{
 	background:rgb(245,245,245);
 	padding:0px;
 	border-radius:5px;
 }
-div.main-nav-sub ul li{
+div.main-nav-sub > ul > li{
 	list-style-type:none;
 	display:inline-block;
-	
-	padding:0px;
+	padding:2px;
 }
-div.main-nav-sub ul li a{
+div.main-nav-sub > ul > li > a{
 	text-decoration:none;
 	font-family:"휴먼모음T", sans-serif;
 	font-size:16px;
+	color:rgb(100,100,100);
 	
 }
-
+div.main-nav-sub > ul > li> a:hover{
+	color:black;
+}
 div.main-nav-sub {
 	position:absolute;
 	top:40px;
@@ -110,37 +110,40 @@ div.main-nav-sub {
 	
 }
 div#main-nav-sub-board{
-	left:170px;
+	left:180px;
 }
 div#main-nav-sub-register{
-	left:390px;
+	left:400px;
 }
 div#main-nav-sub-search{
-	left:580px;
+	left:600px;
 }
 div#main-nav-sub-mypage{
-	left:700px;
+	left:730px;
 }
+
 /*section-center*/
 section#center{
 	height:700px;
 	overflow:hidden;
 	height:auto;
-	background:rgba(173,255,165,0.8);
+	background:rgb(64,128,183);
 	
 }
+/*content*/
 section#content{
 	display:inline-block;
 	margin:2px;
 	width:758px;
 	background:white;
 	border:1px solid rgb(245,245,245);
+	border-radius: 4px;
 	
 }
 /*nav*/
 nav#nav{
 background:rgb(255,255,255);
-border:2px solid rgb(173,255,165);
+border:2px solid rgb(64,128,183);
 width:186px;
 float:left;
 margin-left:3px;
@@ -157,12 +160,14 @@ nav#nav ul.nav-list li{
 	list-style-type:none;
 	text-align:center;
 }
-nav#nav ul.nav-list li:hover{
-	background:rgb(173,255,165);
-}
+
 nav#nav ul.nav-list li a{
 	text-decoration:none;
 	color:gray;
+}
+nav#nav ul.nav-list li a:hover{
+
+	color:black;
 }
 nav#nav h2#nav-header{
 	font-family:"휴먼모음T", sans-serif;
@@ -171,49 +176,38 @@ nav#nav h2#nav-header{
 }
 
 /*footer*/
-footer{
+footer#footer{
 	background:rgb(240,240,240);
 	padding:5px;
 	display:block;
 }
-footer p {
+footer#footer p {
 	font-family:"휴먼모음T", sans-serif;
 	color:gray;
 	text-align:center;
 	font-size:0.7em;
 }
+
 </style>
 <script>
 $(function() {
-	$("#main-nav-board").hover(function() {
-		$("#main-nav-sub-board").show();
+	$(".main-nav-list").hover(function() {
+		$(this).children("div").show();
+		$(this).children("a").css("color","rgb(64,128,183)")
 	}, function() {
-		$("#main-nav-sub-board").hide();
-	});
-	$("#main-nav-register").hover(function() {
-		$("#main-nav-sub-register").show();
-	}, function() {
-		$("#main-nav-sub-register").hide();
-	});
-	$("#main-nav-search").hover(function() {
-		$("#main-nav-sub-search").show();
-	}, function() {
-		$("#main-nav-sub-search").hide();
-	});
-	$("#main-nav-mypage").hover(function() {
-		$("#main-nav-sub-mypage").show();
-	}, function() {
-		$("#main-nav-sub-mypage").hide();
-	});
+		$(this).children("div").hide();
+		$(this).children("a").css("color","black")
+	})
+	
 });
 
 </script>
 </head>
 <body>
 	<div id="container">
-		<header>
+		<header id="header">
 			<div id="header-div">
-			<img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.png" alt="" />
+			<a href="#"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" alt="" /></a>
 			<ul id="header-list">
 				<li><a href="#">회원가입</a></li>
 				<li><a href="#">로그인</a></li>
