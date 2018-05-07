@@ -217,6 +217,7 @@ $(function() {
 			<ul id="header-list">
 				<li><a href="#">회원가입</a></li>
 				<li><a href="#">로그인</a></li>
+				<li><a href="#">관리자페이지</a></li>
 			</ul>
 			
 			</div>
@@ -323,36 +324,7 @@ $(function() {
 			</ul> -->
 		</nav>
 		<section id="content">
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />	
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />	
+	
 		
 		</section>
 		
