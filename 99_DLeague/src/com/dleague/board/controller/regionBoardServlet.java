@@ -1,16 +1,21 @@
-package com.dleague.board;
+package com.dleague.board.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.board.model.vo.RegionBoard;
+import com.dleague.board.model.service.BoardService;
+
 /**
  * Servlet implementation class regionBoardServlet
  */
-@WebServlet("/board/resionBoard")
+@WebServlet("/board/regionBoard")
 public class regionBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,8 +31,16 @@ public class regionBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		List<RegionBoard> regionBoard =  new BoardService().selectAll();
+		
+		if(regionBoard!=null && !regionBoard.isEmpty()) {
+			request.setAttribute("param", "board");
+			request.setAttribute("regionBoard", regionBoard);
+			request.getRequestDispatcher("/WEB-INF/views/board/regionBoard.jsp").forward(request,response);
+		}else {
+			//error
+		}
+		
 	}
 
 	/**

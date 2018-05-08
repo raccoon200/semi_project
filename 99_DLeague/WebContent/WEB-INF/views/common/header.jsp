@@ -138,10 +138,11 @@ section#center{
 section#content{
 	display:inline-block;
 	margin:2px;
-	width:758px;
+	width:750px;
 	background:white;
 	border:1px solid rgb(245,245,245);
 	border-radius: 4px;
+	padding-left:10px;
 	
 }
 /*nav*/
