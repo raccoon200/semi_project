@@ -120,8 +120,8 @@ public class TeamDAO {
 			//공식2 시작 rownum과 마지막 rownum을 구하는 공식
 			pstmt.setInt(1, numPerPage*(cPage-1)+1);
 			pstmt.setInt(2, numPerPage*cPage);
-			System.out.println(numPerPage*(cPage-1)+1);
-			System.out.println(numPerPage*cPage);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
 			rset=pstmt.executeQuery();
 			
 			list = new ArrayList<Team>();
@@ -134,6 +134,7 @@ public class TeamDAO {
 				t.setIntroduce(rset.getString("introduce"));
 				t.setFoundingDate(rset.getDate("foundingDate"));
 				t.setStatus(rset.getString("status"));
+				t.setRnum(rset.getInt("rnum"));
 				
 				list.add(t);
 			}

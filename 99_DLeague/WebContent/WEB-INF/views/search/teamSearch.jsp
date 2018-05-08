@@ -205,7 +205,7 @@
 		<%}else{ 
 			for(Team t : list){%>
 			<tr>
-				<td class="ranking" scope="row">1</td>
+				<td class="ranking" scope="row"><%=t.getRnum() %></td>
 				<td><%=t.getTeamName() %></td>
 	        	<td>
 	        		<%if("G1".equals(t.getRegionCode()) ) {%>

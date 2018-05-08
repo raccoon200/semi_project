@@ -10,8 +10,22 @@ public class Team {
 	private String introduce;
 	private Date foundingDate;
 	private String status;
+	private int rnum;
 	
 	public Team() {}
+	
+	public Team(String teamName, String regionCode, String capTain, String teamLogo, String introduce,
+			Date foundingDate, String status, int rnum) {
+		super();
+		this.teamName = teamName;
+		this.regionCode = regionCode;
+		this.capTain = capTain;
+		this.teamLogo = teamLogo;
+		this.introduce = introduce;
+		this.foundingDate = foundingDate;
+		this.status = status;
+		this.rnum = rnum;
+	}
 
 	public Team(String teamName, String regionCode, String capTain, String teamLogo, String introduce, Date foundinDate,
 			String status) {
@@ -24,7 +38,15 @@ public class Team {
 		this.foundingDate = foundinDate;
 		this.status = status;
 	}
+	
+	public int getRnum() {
+		return rnum;
+	}
 
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	
 	public String getTeamName() {
 		return teamName;
 	}
@@ -84,7 +106,8 @@ public class Team {
 	@Override
 	public String toString() {
 		return "[teamName=" + teamName + ", regionCode=" + regionCode + ", capTain=" + capTain + ", teamLogo="
-				+ teamLogo + ", introduce=" + introduce + ", foundingDate=" + foundingDate + ", status=" + status + "]";
+				+ teamLogo + ", introduce=" + introduce + ", foundingDate=" + foundingDate + ", status=" + status
+				+ ", rnum=" + rnum + "]";
 	}
 	
 

@@ -46,7 +46,7 @@ public class TeamSearchServlet extends HttpServlet {
 			//cPage파리미터가 값이 없거나, 부정입력된 경우대비
 			cPage=1;
 		}
-		System.out.println("cPage="+cPage);
+		/*System.out.println("cPage="+cPage);*/
 		
 		//1.비지니스 로직 처리
 		int numPerPage = 5;
@@ -68,14 +68,14 @@ public class TeamSearchServlet extends HttpServlet {
 		if(pageNo == 1) {
 			
 		} else {
-			pageBar += "<a href= '"+request.getContextPath()+"/admin/memberList?cPage="+(pageNo-1)+"'><span>[이전]</span></a>";
+			pageBar += "<a href= '"+request.getContextPath()+"/search/teamSearch?cPage="+(pageNo-1)+"'><span class='page gradient'>[이전]</span></a>";
 		}
 		//[pageNo]
 		while(pageNo <= pageEnd && pageNo <= totalPage){
 			if(pageNo==cPage) {
-				pageBar += "<span>"+pageNo+"</span>";				
+				pageBar += "<span class='page active'>"+pageNo+"</span>";				
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/admin/memberList?cPage="+pageNo+"'><span>"+pageNo+"</span></a>";	
+				pageBar+="<a href='"+request.getContextPath()+"/search/teamSearch?cPage="+pageNo+"'><span class='page gradient'>"+pageNo+"</span></a>";	
 			}
 			pageNo++;
 		}
@@ -83,9 +83,9 @@ public class TeamSearchServlet extends HttpServlet {
 		if(pageNo > totalPage) {
 			
 		}else {
-			pageBar += "<a href= '"+request.getContextPath()+"/admin/memberList?cPage="+(pageNo)+"'><span>[다음]</span></a>";
+			pageBar += "<a href= '"+request.getContextPath()+"/search/teamSearch?cPage="+(pageNo)+"'><span class='page gradient'>[다음]</span></a>";
 		}
-		System.out.println("list@AdminMemberListServlet="+list);
+		/*System.out.println("list@AdminMemberListServlet="+list);*/
 		
 		//2. view단 처리위임
 		request.setAttribute("list", list);
