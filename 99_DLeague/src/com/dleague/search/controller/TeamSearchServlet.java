@@ -92,6 +92,7 @@ public class TeamSearchServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("ht", ht);
+		request.setAttribute("param", "teamSearch");
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamSearch.jsp");
 		reqDispatcher.forward(request, response);
 	}
