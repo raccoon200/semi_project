@@ -221,7 +221,7 @@ $(function() {
 	<div id="container">
 		<header id="header">
 			<div id="header-div">
-			<a href="#"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" /></a>
+			<a href="<%=request.getContextPath() %>/"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" /></a>
 			<ul id="header-list">
 				<%if(memberLoggedIn==null) {%>
 					<li><a href="#">회원가입</a></li>
@@ -229,6 +229,8 @@ $(function() {
 					<!-- <li><a href="#">관리자페이지</a></li> -->
 				<%} else { %>
 					<li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
+					<li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
+					
 				<%} %>
 			</ul>
 			
