@@ -240,9 +240,9 @@ $(function() {
 						<!-- 게시판 -->
 						<div class="main-nav-sub" id="main-nav-sub-board">
 							<ul class="main-nav-sub-ul">
-								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/FreeBoard" >자유게시판</a></li>
-								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/RegionBoard" >지역게시판</a></li>
-								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/ComplainBoard">신고게시판</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/freeBoard" >자유게시판</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/regionBoard" >지역게시판</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
 							</ul>
 						</div>
 					</li>
