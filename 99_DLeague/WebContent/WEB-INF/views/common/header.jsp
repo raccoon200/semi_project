@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.dleague.member.model.vo.*" %>
+<% Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn"); %>
 
 <!DOCTYPE html>
 <html>
@@ -219,11 +221,15 @@ $(function() {
 	<div id="container">
 		<header id="header">
 			<div id="header-div">
-			<a href="#"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" alt="" /></a>
+			<a href="#"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" /></a>
 			<ul id="header-list">
-				<li><a href="#">회원가입</a></li>
-				<li><a href="#">로그인</a></li>
-				<li><a href="#">관리자페이지</a></li>
+				<%if(memberLoggedIn==null) {%>
+					<li><a href="#">회원가입</a></li>
+					<li><a href="<%=request.getContextPath() %>/login/login.jsp">로그인</a></li>
+					<!-- <li><a href="#">관리자페이지</a></li> -->
+				<%} else { %>
+					<li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
+				<%} %>
 			</ul>
 			
 			</div>
