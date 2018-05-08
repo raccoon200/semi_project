@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String param = (String)request.getAttribute("param"); %>
+
 <script>
 console.log("<%=param%>");
 </script>
@@ -38,12 +38,15 @@ console.log("<%=param%>");
 			<%if(param=="passwordUpdate") {%>
 			<h2 id="nav-header">비밀번호 변경</h2>
 			<%} %>
+			<%if(param=="gameRegister") {%>
 			<!-- 경기등록  -->
-			<!-- <h2 id="nav-header">경기등록</h2>
+			<h2 id="nav-header">경기등록</h2>
 			<ul class="nav-list">
-				<li><a href="#">경기등록</a></li>
+				<li><a href="<%=request.getContextPath() %>/game/gameRegister" id='<%=param=="gameRegister"?"nav-selected":""%>'>경기등록</a></li>
 				<li><a href="#">내팀경기일정</a></li>
 			</ul>
+			<%} %>
+			<!-- 
 			검색 
 			<h2 id="nav-header">검색</h2>
 			<ul class="nav-list">
