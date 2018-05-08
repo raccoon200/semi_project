@@ -5,6 +5,7 @@ import static com.dleague.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -139,6 +140,32 @@ public class TeamDAO {
 				list.add(t);
 			}
 //			System.out.println("list@AdminDAO.selectMemberList="+list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<String> selectByName(Connection conn, String searchName) {
+		List<String> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectByName");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchName+"%");
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while(rset.next()) {
+				list.add(rset.getString("teamname"));
+			}
+			System.out.println("DAO="+list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -40,6 +40,13 @@ public class searchService {
 		return list;
 	}
 
+	public List<String> selectByName(String searchName) {
+		Connection conn = getConnection();
+		List<String> list = new TeamDAO().selectByName(conn, searchName);
+		close(conn);
+		return list;
+	}
+
 
 
 }

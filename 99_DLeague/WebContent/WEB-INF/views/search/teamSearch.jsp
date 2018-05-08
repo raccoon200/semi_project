@@ -25,7 +25,27 @@
     
     /* 검색옵션 */
     select{height: 30px; width: 100px;}
-    #search{height: 25px; width: 150px;}
+    
+    ul#autoComplete{
+	min-width:171px;
+	border:1px solid gray;
+	display:inline-block;
+	padding:0;
+	margin:0;
+	}
+	ul#autoComplete li{
+		padding:0 10px;
+		list-style:none;
+		cursor:pointer;
+	}
+	ul#autoComplete li.sel{
+		background:lightseagreen;
+		color:white;
+	}
+	span.srchval{
+		color:red;
+	}
+    #searchName{height: 25px; width: 150px;}
     /* 검색옵션 끝*/
     
     /* 버튼 */
@@ -163,19 +183,143 @@
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
-    <select>
-        <option value="서울">서울</option>
-        <option value="경기">경기</option>
-        <option value="충북">충북</option>
-        <option value="충남">충남</option>
-        <option value="경북">경북</option>
-        <option value="전북">전북</option>
-        <option value="전남">전남</option>
-        <option value="제주">제주</option>
+    <select id="selectCode">
+        <option value="G1">서울</option>
+        <option value="G2">경기</option>
+        <option value="G3">강원</option>
+        <option value="G4">충북</option>
+        <option value="G5">충남</option>
+        <option value="G6">경북</option>
+        <option value="G7">전북</option>
+        <option value="G8">전남</option>
+        <option value="G9">제주</option>
     </select>
-	<input type="text" id="search" />
-	<button class="button">팀검색</button>
+    <input type="text" id="searchName" />
+    <br/>
+	<ul id="autoComplete"></ul>
+	<button class="button" id="teamOneSearch">팀검색</button>
 	</div>
+	<script>
+	<!-- 서치텍스트스 이벤트 -->
+	$(function(){
+		<%-- $("#searchName").focus(function(){
+			location.href="<%=request.getContextPath()%>/search/teamAutoSearch";
+		}); --%>
+		$("#autoComplete").hide();
+		
+		$("#searchName").keyup(function(e){
+			//console.log(e.key+", "+$(this).val());
+			//방향키(ArrowUp, ArrowDown), 엔터(Enter)일 경우, 선택효과 및 선택처리함
+			//그 외의 키일 경우 ajax요청처리
+			var sel = $(".sel");
+			var li = $("#autoComplete li");
+			
+			if(e.key == 'ArrowDown'){
+				//아무것도 선택되지 않은 경우
+				if(sel.length == 0){
+					$("#autoComplete li:first").addClass("sel");
+				}
+				//선택된 sel이 마지막 li태그인 경우
+				else if(sel.is(li.last())){
+					//처리코드 없음, 못내려오게할려면 sel을없앤다
+					sel.removeClass("sel");            
+				}else{
+					sel.removeClass("sel").next().addClass("sel");
+				}
+				
+			}else if(e.key=='ArrowUp'){
+				//아무것도 선택되지 않은 경우
+				if(sel.length == 0){
+					$("#autoComplete li:last").addClass("sel");
+				}
+				//선택된 sel이 마지막 li태그인 경우
+				else if(sel.is(li.first())){
+					sel.removeClass("sel");
+				}else{
+					sel.removeClass("sel").prev().addClass("sel");
+				}
+			}else if(e.key=="Enter"){
+				$(this).val(sel.text());
+				//검색어목록은 감추고, li태그는 삭제
+				$("#autoComplete").hide().children().remove();
+			}else{
+				var searchName = $(this).val();
+				
+				$.ajax({
+					<%-- url:"<%=request.getContextPath()%>/jq/autoComplete.do?searchName="+searchName, get방식일때--%>
+					url:"<%=request.getContextPath()%>/search/teamAutoSearch",
+					type:"post",
+					data:"searchName="+searchName,/* +"&age=" 두개이상일떄*/
+					success:function(data){
+						//console.log(data);
+						//아무값도 넘어오지 않는 경우, data.split(",")의 길이가 1임.
+						if(data.trim().length==0){
+							$("#autoComplete").hide();					
+						}else {
+							var dataArr = data.split(",");
+							var html = "";
+							for(var i=0; i<dataArr.length; i++){
+								html += "<li>"+dataArr[i]
+								.replace(searchName,"<span class='srchval'>"+searchName+"</span>")+"</li> ";
+							}
+							$("#autoComplete").html(html).show();
+						}
+						
+						/* //새로새성한 li태그 이벤트핸들러 바인딩
+						//click : enter와 동일한 효과
+						$("#autoComplete li").on("click",function(){
+							$("#searchName").val($(this).text());
+							$("#autoComplete").hide().children().remove();
+						});
+						//hover
+						$("#autoComplete li").hover(function(){
+							$(this).siblings().removeClass("sel");
+							$(this).addClass("sel");
+						},function(){
+							$(this).removeClass("sel");
+						}); */
+						
+					},
+					error:function(jqxhr, textStatus,errorThrown){
+						console.log("ajax처리실패!");
+						console.log(jqxhr);
+						console.log(textStatus);
+						console.log(errorThrown);
+					}
+				});
+			}
+		});
+	
+		//부모요소에 이벤트 핸들러를 설정하고, 자식요소를 이벤트소스로 사용
+		//click : enter와 동일한 효과
+		$("#autoComplete").on("click","li",function(){
+			$("#searchName").val($(this).text());
+			$("#autoComplete").hide().children().remove();
+		});
+		//hover      호버는 on이 안먹힘
+		//mouseover,mouseout도 가능하다.
+		$("#autoComplete").on("mouseenter","li",function(){
+			$(this).siblings().removeClass("sel");
+			$(this).addClass("sel");
+		});
+		$("#autoComplete").on("mouseleave","li",function(){
+			$(this).removeClass("sel");
+		});
+		
+	});
+	<!-- 서치텍스트스 이벤트 끝-->
+	
+	<!-- 검색 이벤트 -->
+	$(function(){
+		$("#teamOneSearch").click(function(){
+			console.log($("#searchName").val());
+			console.log($("#selectCode").val());
+			<%-- location.href="<%=request.getContextPath()%>/search/teamOneSearch"; --%>
+		});
+	});
+	<!-- 검색 이벤트 끝-->
+	
+	</script>
     <!--ui object -->
     <table class="tbl_type"  cellspacing="0">
         <legend>◎팀리스트</legend>
@@ -239,7 +383,7 @@
         <tr>
         <td>종합</td>
         <td>총 팀수</td>
-        <td>서울</td>
+        <td>전체</td>
         <td colspan="3">6개팀</td>
         </tr>
         </tfoot>
