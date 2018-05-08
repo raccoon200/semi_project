@@ -20,11 +20,12 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/pretty_date_time_picker/js/material.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/pretty_date_time_picker/js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/pretty_date_time_picker/js/bootstrap-material-datetimepicker.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=f3nKBZeo1DvNZrIIPMNu&submodules=geocoder"></script>
 <script>
 $(function() {
 	$('#date-format').bootstrapMaterialDatePicker
 	({
-		format: 'dddd DD MMMM YYYY - HH:mm'
+		format: 'YYYY년 MM월 DD일 ddd - HH:mm'
 	});
 });
 //opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
@@ -45,13 +46,16 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	document.form.roadAddrPart2.value = roadAddrPart2;
 	document.form.addrDetail.value = addrDetail;
 	document.form.zipNo.value = zipNo;
+	searchAddressToCoordinate(roadAddrPart1);
+	
 }
 </script>
+
 <h2>경기 등록</h2>
 <form name="form" id="form" method="post">
 	<div class="row col-md-6">
 		<h4>날짜 및 시간 선택</h4>
-		<input type="text" id="date-format" class="form-control floating-label" placeholder="Begin Date Time" style="width: 250px;">
+		<input type="text" id="date-format" class="form-control floating-label" placeholder="날짜와 시간을 입력하세요." style="width: 250px;">
 	</div>
 	<br style="clear:both;"/>
 	<br />
@@ -65,26 +69,129 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<th>우편번호</th>
 				<td>
 				    <input type="hidden" id="confmKey" name="confmKey" value=""  >
-					<input type="text" id="zipNo" name="zipNo" readonly style="width:100px">
-					<input type="button"  value="주소검색" onclick="goPopup();">
+					<input type="text" id="zipNo" class="form-control floating-label" name="zipNo" readonly style="width:100px; display: inline-block;">
+					<input type="button" class="btn btn-primary btn-sm" value="주소검색" onclick="goPopup();">
 				</td>
 			</tr>
 			<tr>
 				<th><label>도로명주소</label></th>
-				<td><input type="text" id="roadAddrPart1" style="width:85%"></td>
+				<td><input type="text" class="form-control floating-label" id="roadAddrPart1" readonly style="width:100%"></td>
 			</tr>
 			<tr>
 				<th>상세주소</th>
-					<td>
-						<input type="text" id="addrDetail" style="width:40%" value="">
-						<input type="text" id="roadAddrPart2"  style="width:40%" value="">
-					</td>
+				<td>
+					<input type="text" id="addrDetail" class="form-control floating-label" readonly style="width:45%; display: inline-block;" value="">
+					<input type="text" id="roadAddrPart2" class="form-control floating-label" readonly style="width:45%; display: inline-block; font-size: 10px;" value="">
+				</td>
 			</tr>
 		</tbody>
 	</table>
 	<br />
-	<input type="submit" value="등록"/>
-	<input type="reset" value="취소"/>
+	<div id="map" style="width:90%;height:350px;"></div>
+	<br />
+	<h4>경기 내용</h4>
+	<textarea name="game_content" id="game_content" class="form-control" cols="50" rows="5" placeholder="경기내용을 입력하세요."></textarea>
+	<br />
+	<input type="submit" class="btn btn-primary btn-sm" value="등록"/>
+	<input type="reset" class="btn btn-primary btn-sm" value="취소"/>
 </form>
+<script>
+var map = new naver.maps.Map("map", {
+    center: new naver.maps.LatLng(37.3595316, 127.1052133),
+    zoom: 10,
+    mapTypeControl: true
+});
+
+var infoWindow = new naver.maps.InfoWindow({
+    anchorSkew: true
+});
+
+map.setCursor('grap');
+
+function searchCoordinateToAddress(latlng) {
+    var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
+
+    infoWindow.close();
+
+    naver.maps.Service.reverseGeocode({
+        location: tm128,
+        coordType: naver.maps.Service.CoordType.TM128
+    }, function(status, response) {
+        if (status === naver.maps.Service.Status.ERROR) {
+            return alert('Something Wrong!');
+        }
+
+        var items = response.result.items,
+            htmlAddresses = [];
+
+        for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
+            item = items[i];
+            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]';
+
+            htmlAddresses.push((i+1) +'. '+ addrType +' '+ item.address);
+            htmlAddresses.push('&nbsp&nbsp&nbsp -> '+ item.point.x +','+ item.point.y);
+        }
+
+        infoWindow.setContent([
+                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                '<h4 style="margin-top:5px;">검색 좌표 : '+ response.result.userquery +'</h4><br />',
+                htmlAddresses.join('<br />'),
+                '</div>'
+            ].join('\n'));
+
+        infoWindow.open(map, latlng);
+    });
+}
+function searchAddressToCoordinate(address) {
+    naver.maps.Service.geocode({
+        address: address
+    }, function(status, response) {
+        if (status === naver.maps.Service.Status.ERROR) {
+            return alert('Something Wrong!');
+        }
+
+        var item = response.result.items[0],
+            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+            point = new naver.maps.Point(item.point.x, item.point.y);
+
+        infoWindow.setContent([
+                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                '<h4 style="margin-top:5px;">검색 주소 : '+ response.result.userquery +'</h4><br />',
+                addrType +' '+ item.address +'<br />',
+                '<a href="https://map.naver.com/?eX='+point.x+'&eY='+point.y+'&eText='+item.address+'&sY=&sText=" target="_blank">길찾기</a></br>',
+                '</div>'
+            ].join('\n'));
+
+
+        map.setCenter(point);
+        infoWindow.open(map, point);
+    });
+}
+function initGeocoder() {
+    map.addListener('click', function(e) {
+        searchCoordinateToAddress(e.coord);
+    });
+
+    $('#address').on('keydown', function(e) {
+        var keyCode = e.which;
+
+        if (keyCode === 13) { // Enter Key
+            searchAddressToCoordinate($('#address').val());
+        }
+    });
+
+    $('#submit').on('click', function(e) {
+        e.preventDefault();
+
+        searchAddressToCoordinate($('#address').val());
+    });
+
+    searchAddressToCoordinate('정자동 178-1');
+}
+function initGeocoder() {
+    searchAddressToCoordinate('정자동 178-1');
+}
+naver.maps.onJSContentLoaded = initGeocoder;
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>	
