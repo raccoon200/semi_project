@@ -248,13 +248,6 @@
     <!-- <div id="container"> -->
     <div class="pagination" >
     	<%=request.getAttribute("pageBar") %>
-        <!-- <a href="#" class="page gradient">first</a>
-        <a href="#" class="page gradient">2</a>
-        <a href="#" class="page gradient">3</a>
-        <span class="page active">4</span>
-        <a href="#" class="page gradient">5</a>
-        <a href="#" class="page gradient">6</a>
-        <a href="#" class="page gradient">last</a> -->
 	</div>
 	<!-- </div> -->
 </div>
