@@ -48,8 +48,8 @@ ul.main-nav li.main-nav-list a{
 	text-decoration:none;
 	color:#292929;
 }
-ul.main-nav li:hover{background:rgb(230,230,230);}
-ul.main-nav li:hover>a{color:black;}
+ul.main-nav li.main-nav-list:hover{border-radius:5px;}
+
 
 /*header*/
 div#header-div{
@@ -58,13 +58,13 @@ div#header-div{
 }
 img#header-image {
 	padding-left:10px;
-	width:200px;
+	width:60px;
 	height:60px;
 	float:left;
 	display:inline;
 }
 ul#header-list {
-	
+	display:block;
 	float:right;
 	display:table;
 	padding:0px; /*ul태그가 가진 기본padding초기화*/
@@ -79,25 +79,29 @@ ul#header-list li{
 ul#header-list li a{
 	text-decoration:none;
 	font-family:"휴먼모음T", sans-serif;
-	
+	color:gray;
+}
+ul#header-list li a:hover{
 	color:black;
 }
 div.main-nav-sub ul{
-	background:lightgray;
+	background:rgb(245,245,245);
 	padding:0px;
-
+	border-radius:5px;
 }
 div.main-nav-sub ul li{
 	list-style-type:none;
 	display:inline-block;
+	
 	padding:0px;
 }
 div.main-nav-sub ul li a{
 	text-decoration:none;
 	font-family:"휴먼모음T", sans-serif;
 	font-size:16px;
-	color:black;
+	
 }
+
 div.main-nav-sub {
 	position:absolute;
 	top:40px;
@@ -122,41 +126,54 @@ section#center{
 	height:700px;
 	overflow:hidden;
 	height:auto;
+	background:rgba(173,255,165,0.8);
+	
 }
 section#content{
 	display:inline-block;
-	width:760px;
-	background:gray;
+	margin:2px;
+	width:758px;
+	background:white;
+	border:1px solid rgb(245,245,245);
 	
 }
 /*nav*/
 nav#nav{
-background:rgb(230,230,230);
-width:190px;
+background:rgb(255,255,255);
+border:2px solid rgb(173,255,165);
+width:186px;
 float:left;
-margin-right:10px;
+margin-left:3px;
+border-radius:5px;
 }
 nav#nav ul.nav-list{
-	padding:20px;
+	padding:0px;
 }
 nav#nav ul.nav-list li{
 	font-family:"휴먼모음T", sans-serif;
 	padding-top:10px;
+	color:gray;
 	font-size:1.2em;
 	list-style-type:none;
+	text-align:center;
+}
+nav#nav ul.nav-list li:hover{
+	background:rgb(173,255,165);
 }
 nav#nav ul.nav-list li a{
 	text-decoration:none;
-	color:black;
+	color:gray;
 }
 nav#nav h2#nav-header{
 	font-family:"휴먼모음T", sans-serif;
 	text-align:center;
+	padding:0px;
 }
 
 /*footer*/
 footer{
 	background:rgb(240,240,240);
+	padding:5px;
 	display:block;
 }
 footer p {
@@ -196,10 +213,11 @@ $(function() {
 	<div id="container">
 		<header>
 			<div id="header-div">
-			<img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.PNG" alt="" />
+			<img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.png" alt="" />
 			<ul id="header-list">
 				<li><a href="#">회원가입</a></li>
 				<li><a href="#">로그인</a></li>
+				<li><a href="#">관리자페이지</a></li>
 			</ul>
 			
 			</div>
@@ -254,6 +272,7 @@ $(function() {
 			</nav>
 			<!-- 메인메뉴 끝 -->
 		</header>
+		
 		<section id="center">
 		<nav id="nav">
 			
@@ -270,6 +289,7 @@ $(function() {
 			</ul> -->
 			<!-- 게시판 -->
 			<h2 id="nav-header">게시판</h2>
+			<hr style="border:0;height:2px;background: rgb(244,244,244);"/>
 			<ul class="nav-list">
 				<li><a href="#">자유게시판</a></li>
 				<li><a href="#">지역게시판</a></li>
@@ -304,26 +324,7 @@ $(function() {
 			</ul> -->
 		</nav>
 		<section id="content">
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />	
+	
 		
 		</section>
 		
