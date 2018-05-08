@@ -26,6 +26,7 @@ public class GameRegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("param", "gameRegister");
 		request.getRequestDispatcher("/WEB-INF/views/game/gameRegister.jsp").forward(request, response);
 	}
 
