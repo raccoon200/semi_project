@@ -229,7 +229,7 @@ $(function() {
 						<!-- 검색 -->
 						<div class="main-nav-sub" id="main-nav-sub-search">
 							<ul class="main-nav-sub-ul">
-								<li class="main-nav-sub-li"><a href="#">팀 검색</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath()%>/search/teamSearch">팀 검색</a></li>
 								<li class="main-nav-sub-li"><a href="#">경기 검색</a></li>
 							</ul>
 						</div>
