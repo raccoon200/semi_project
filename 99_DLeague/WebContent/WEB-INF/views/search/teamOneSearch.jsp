@@ -4,6 +4,12 @@
 <%
 	List<Team> list = (List<Team>)request.getAttribute("list");
 	Hashtable<String,Integer> ht = (Hashtable<String,Integer>)request.getAttribute("ht");
+	int rnum = 0;
+	String code="";
+	for(Team t2 : list){
+		rnum = t2.getRnum();
+		code = t2.getRegionCode();
+	}
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
@@ -352,7 +358,7 @@
 			<tr>
 				<td class="ranking" scope="row"><%=t.getRnum() %></td>
 				<td><%=t.getTeamName() %></td>
-	        	<td>
+	        	<td id="code">
 	        		<%if("G1".equals(t.getRegionCode()) ) {%>
 	        			서울
 	        		<%}else if("G2".equals(t.getRegionCode()) ) { %>
@@ -378,15 +384,36 @@
 	        	<td><%=ht.get(t.getTeamName()) %></td>
 			</tr>
 		<%}
-		} %>
+			} %>
     </tbody>
     <tfoot>
         <tr>
         <td>종합</td>
         <td>총 팀수</td>
-        <td>전체</td>
-        <td colspan="3">5개팀</td>
+        <td>
+	        <%if("G1".equals(code) ) {%>
+				서울
+			<%}else if("G2".equals(code) ) { %>
+				경기
+			<%}else if("G3".equals(code) ) { %>
+				강원
+			<%}else if("G4".equals(code) ) { %>
+				충북
+			<%}else if("G5".equals(code) ) { %>
+				충남
+			<%}else if("G6".equals(code) ) { %>
+				경북
+			<%}else if("G7".equals(code) ) { %>
+				전북
+			<%}else if("G8".equals(code) ) { %>
+				전남
+			<%}else if("G9".equals(code) ) { %>
+				제주					
+			<%} %>
+        </td>
+        <td colspan="3"><%=rnum %>개팀</td>
         </tr>
+        
         </tfoot>
     </table>
     <!--//ui object -->
