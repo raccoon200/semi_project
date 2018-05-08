@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.*, com.dleague.search.model.vo.*"%>
+<%
+	List<Team> list = (List<Team>)request.getAttribute("list");
+	Hashtable<String,Integer> ht = (Hashtable<String,Integer>)request.getAttribute("ht");
+%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
     <style>
@@ -159,12 +164,14 @@
     <div id="teamDiv">
     <div id="teamDiv2">
     <select>
-        <option value="서울시">서울시</option>
-        <option value="부산시">부산시</option>
-        <option value="경기도">경기도</option>
-        <option value="제주도">제주도</option>
-        <option value="전라남도">전라남도</option>
-        <option value="경상북도">경상북도</option>
+        <option value="서울">서울</option>
+        <option value="경기">경기</option>
+        <option value="충북">충북</option>
+        <option value="충남">충남</option>
+        <option value="경북">경북</option>
+        <option value="전북">전북</option>
+        <option value="전남">전남</option>
+        <option value="제주">제주</option>
     </select>
 	<input type="text" id="search" />
 	<button class="button">팀검색</button>
@@ -185,60 +192,48 @@
         <th scope="col">순번</th>
         <th scope="col">팀명</th>
         <th scope="col">지역</th>
-        <th scope="col">소속선수</th>
+        <th scope="col">팀장</th>
         <th scope="col">창단일</th>
-        <th scope="col">경기수</th>
+        <th scope="col">소속선수</th>
     </tr>
     </thead>
     <tbody>
-        <tr>
-        <td class="ranking" scope="row">1</td>
-        <td>콜로라도</td>
-        <td>서울</td>
-        <td>90</td>
-        <td>1991-05-01</td>
-        <td>120</td>
-        </tr>
-        <tr>
-        <td class="ranking" scope="row">2</td>
-        <td>샌디에이고</td>
-        <td>부산</td>
-        <td>24</td>
-        <td>2007-05-01</td>
-        <td>100</td>
-        </tr>
-        <tr>
-        <td class="ranking" scope="row">3</td>
-        <td>뉴욕m</td>
-        <td>경기도</td>
-        <td>23</td>
-        <td>2015-05-01</td>
-        <td>23</td>
-        </tr>
-        <tr>
-        <td class="ranking" scope="row">4</td>
-        <td>애틀랜타</td>
-        <td>강원도</td>
-        <td>5</td>
-        <td>2008-05-01</td>
-        <td>1</td>
-        </tr>
-        <tr>
-        <td class="ranking" scope="row">5</td>
-        <td>밀워키</td>
-        <td>전라남도</td>
-        <td>83</td>
-        <td>2002-02-02</td>
-        <td>10</td>
-        </tr>
-        <tr>
-        <td class="ranking" scope="row">6</td>
-        <td>lad</td>
-        <td>경상북도</td>
-        <td>30</td>
-        <td>2001-05-01</td>
-        <td>30</td>
-    </tr>
+    <%if(list == null || list.isEmpty()){ %>
+		<tr>
+			<td colspan="5" align="center">데이터가 존재하지 않습니다.</td>
+		</tr>
+		<%}else{ 
+			for(Team t : list){%>
+			<tr>
+				<td class="ranking" scope="row"><%=t.getRnum() %></td>
+				<td><%=t.getTeamName() %></td>
+	        	<td>
+	        		<%if("G1".equals(t.getRegionCode()) ) {%>
+	        			서울
+	        		<%}else if("G2".equals(t.getRegionCode()) ) { %>
+	        			경기
+	        		<%}else if("G3".equals(t.getRegionCode()) ) { %>
+	        			강원
+	        		<%}else if("G4".equals(t.getRegionCode()) ) { %>
+	        			충북
+	        		<%}else if("G5".equals(t.getRegionCode()) ) { %>
+	        			충남
+	        		<%}else if("G6".equals(t.getRegionCode()) ) { %>
+	        			경북
+	        		<%}else if("G7".equals(t.getRegionCode()) ) { %>
+	        			전북
+	        		<%}else if("G8".equals(t.getRegionCode()) ) { %>
+	        			전남
+	        		<%}else if("G9".equals(t.getRegionCode()) ) { %>
+	        			제주					
+	        		<%} %>
+	        	</td>
+		        <td><%=t.getCapTain() %></td>
+		        <td><%=t.getFoundingDate() %></td>
+	        	<td><%=ht.get(t.getTeamName()) %></td>
+			</tr>
+		<%}
+		} %>
     </tbody>
     <tfoot>
         <tr>
@@ -252,13 +247,14 @@
     <!--//ui object -->
     <!-- <div id="container"> -->
     <div class="pagination" >
-        <a href="#" class="page gradient">first</a>
+    	<%=request.getAttribute("pageBar") %>
+        <!-- <a href="#" class="page gradient">first</a>
         <a href="#" class="page gradient">2</a>
         <a href="#" class="page gradient">3</a>
         <span class="page active">4</span>
         <a href="#" class="page gradient">5</a>
         <a href="#" class="page gradient">6</a>
-        <a href="#" class="page gradient">last</a>
+        <a href="#" class="page gradient">last</a> -->
 	</div>
 	<!-- </div> -->
 </div>
