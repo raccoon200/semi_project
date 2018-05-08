@@ -188,6 +188,13 @@ footer#footer p {
 	font-size:0.7em;
 }
 
+/*effect*/
+ul.main-nav > li.main-nav-list a#header-selected {
+	color:rgb(64,128,183);
+}
+nav#nav ul.nav-list li a#nav-selected{
+	color:black;
+}
 </style>
 <script>
 $(function() {
@@ -196,7 +203,12 @@ $(function() {
 		$(this).children("a").css("color","rgb(64,128,183)")
 	}, function() {
 		$(this).children("div").hide();
-		$(this).children("a").css("color","black")
+		
+		if($(this).children("a").attr("id")=="header-selected"){
+			$(this).children("a").css("color","rgb(64,128,183)");
+		}else {
+			$(this).children("a").css("color","black");
+		}
 	})
 	
 });
@@ -218,17 +230,17 @@ $(function() {
 			<nav>
 				<ul class="main-nav">
 					<li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
-					<li id="main-nav-board" class="main-nav-list"><a href="#">게시판</a>
+					<li id="main-nav-board" class="main-nav-list"><a href="#" id="header-selected">게시판</a>
 						<!-- 게시판 -->
 						<div class="main-nav-sub" id="main-nav-sub-board">
 							<ul class="main-nav-sub-ul">
-								<li class="main-nav-sub-li"><a href="#">자유게시판</a></li>
-								<li class="main-nav-sub-li"><a href="#">지역게시판</a></li>
-								<li class="main-nav-sub-li"><a href="#">신고게시판</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/FreeBoard" >자유게시판</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/RegionBoard" >지역게시판</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/ComplainBoard">신고게시판</a></li>
 							</ul>
 						</div>
 					</li>
-					<li id="main-nav-register" class="main-nav-list"><a href="#">경기등록</a>
+					<li id="main-nav-register" class="main-nav-list"><a href="#" >경기등록</a>
 						<!-- 경기등록  -->
 						<div class="main-nav-sub" id="main-nav-sub-register">
 							<ul class="main-nav-sub-ul">

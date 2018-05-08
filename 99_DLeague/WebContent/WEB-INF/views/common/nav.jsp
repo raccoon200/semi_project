@@ -17,9 +17,9 @@
 			<h2 id="nav-header">게시판</h2>
 			<hr style="border:0;height:2px;background: rgb(244,244,244);"/>
 			<ul class="nav-list">
-				<li><a href="#">자유게시판</a></li>
-				<li><a href="#">지역게시판</a></li>
-				<li><a href="#">신고게시판</a></li>
+				<li><a href="<%=request.getContextPath() %>/board/FreeBoard">자유게시판</a></li>
+				<li><a href="<%=request.getContextPath() %>/board/RegionBoard" id="nav-selected">지역게시판</a></li>
+				<li><a href="<%=request.getContextPath() %>/board/ComplainBoard">신고게시판</a></li>
 			</ul>
 			<!-- 경기등록  -->
 			<!-- <h2 id="nav-header">경기등록</h2>
