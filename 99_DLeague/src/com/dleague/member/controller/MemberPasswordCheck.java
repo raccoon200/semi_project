@@ -48,7 +48,8 @@ public class MemberPasswordCheck extends HttpServlet {
 		
 		if(result==MemberService.CHECK_OK) {
 			request.setAttribute("userId", userId);
-			request.getRequestDispatcher("/login/passwordUpdate.jsp").forward(request, response);
+			request.setAttribute("param", "passwordUpdate");
+			request.getRequestDispatcher("/WEB-INF/views/login/passwordUpdate.jsp").forward(request, response);
 		}
 		
 		//체크 실패한경우
@@ -79,7 +80,6 @@ public class MemberPasswordCheck extends HttpServlet {
 			= request.getRequestDispatcher(view);
 			reqDispatcher.forward(request, response);
 		}
-		
 		
 	}
 
