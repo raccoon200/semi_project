@@ -225,7 +225,7 @@ $(function() {
 			<ul id="header-list">
 				<%if(memberLoggedIn==null) {%>
 					<li><a href="#">회원가입</a></li>
-					<li><a href="<%=request.getContextPath() %>/login/login.jsp">로그인</a></li>
+					<li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
 					<!-- <li><a href="#">관리자페이지</a></li> -->
 				<%} else { %>
 					<li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
@@ -270,8 +270,8 @@ $(function() {
 						<!-- 마이페이지 -->
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
+								<li><a href="/member/memberInfo">내 정보</a></li>
 								<li><a href="#">내 팀 정보</a></li>
-								<li><a href="#">내 정보</a></li>
 								<li><a href="#">내 팀 관리</a></li>
 							</ul>
 						</div>

@@ -10,9 +10,9 @@
     <title>free login form -bootstrap</title>
  
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
     <!-- font awesome -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Style -->
    
  
@@ -34,12 +34,13 @@
     <div class="container">
       <div class="row">
         <div class="page-header">
+   
           <h2>로그인 </h2>
         </div>
         <div class="col-md-3">
           <div class="login-box well">
         <form id="loginFrm" method="post" action="<%=request.getContextPath() %>/member/login">
-            <legend>로그인</legend>
+          
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input name="userId" id="userId" placeholder="UserId" type="text" class="form-control" />
@@ -51,7 +52,7 @@
             <div class="form-group">
                 <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
             </div>
-            <span class='text-center'><a href="<%=request.getContextPath() %>/login/passwordCheck.jsp" class="text-sm">비밀번호 찾기</a></span>
+            <span class='text-center'><a href="<%=request.getContextPath() %>/login/passwordCheckPage" class="text-sm">비밀번호 찾기</a></span>
             <hr />
             <div class="form-group">
                 <a href="" class="btn btn-default btn-block m-t-md">회원가입</a>
@@ -66,7 +67,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
 
-  <script src="js/bootstrap.min.js"></script>
+  <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
   </body>
   <%@ include file="/WEB-INF/views/common/footer.jsp"%>
   </html>

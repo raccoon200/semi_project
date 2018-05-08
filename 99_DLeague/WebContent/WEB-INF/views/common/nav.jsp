@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% String param = (String)request.getAttribute("param"); %>
+<script>
+console.log("<%=param%>");
+</script>
 			<nav id="nav">
 			
-			<!-- 로그인/회원가입 -->
-			<!-- <h2 id="nav-header"></h2>
-			<ul class="nav-list">
-				<li><a href="#">회원가입</a></li>
-				<li><a href="#">로그인</a></li>
-			</ul>
-			공지사항 
+			
+			<!-- 공지사항 
 			<h2 id="nav-header">공지사항</h2>
 			<ul class="nav-list">
 				<li><a href="#">공지사항</a></li>
-			</ul> -->
+			</ul> --> 
+			
 			<!-- 게시판 -->
+			<% if(param=="board") {%>
 			<h2 id="nav-header">게시판</h2>
 			<hr style="border:0;height:2px;background: rgb(244,244,244);"/>
 			<ul class="nav-list">
@@ -21,6 +22,22 @@
 				<li><a href="<%=request.getContextPath() %>/board/regionBoard" id="nav-selected">지역게시판</a></li>
 				<li><a href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
 			</ul>
+			<%} %>
+			<!-- 로그인/회원가입 -->
+			<%if(param=="login") {%>
+			<h2 id="nav-header"></h2>
+			<ul class="nav-list">
+				<li><a href="<%=request.getContextPath() %>/member/loginPage" id="nav-selected">로그인</a></li>
+				
+				<li><a href="#" id=<%=param=="enroll"?"nav-selected":""%>>회원가입</a></li>
+			</ul>
+			<%}%>
+			<%if(param=="passwordCheck") {%>
+			<h2 id = "nav-header">비밀번호 찾기</h2>
+			<%} %>
+			<%if(param=="passwordUpdate") {%>
+			<h2 id="nav-header">비밀번호 변경</h2>
+			<%} %>
 			<!-- 경기등록  -->
 			<!-- <h2 id="nav-header">경기등록</h2>
 			<ul class="nav-list">
