@@ -30,9 +30,10 @@ public class MemberInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Member m = (Member)session.getAttribute("memberLoggedIn");
-		request.setAttribute("Member", m);
-		request.getRequestDispatcher("/WEB-INF/views/MemberInfo.jsp").forward(request, response);
+		Member member = (Member)session.getAttribute("memberLoggedIn");
+		request.setAttribute("Member", member);
+		request.getRequestDispatcher("/WEB-INF/views/member/MemberInfo.jsp").forward(request, response);
+		
 	}
 
 	/**
