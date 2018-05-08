@@ -21,6 +21,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/pretty_date_time_picker/js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/pretty_date_time_picker/js/bootstrap-material-datetimepicker.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=f3nKBZeo1DvNZrIIPMNu&submodules=geocoder"></script>
+<% String teamName = ""; %>
 <%if(memberLoggedIn == null){ %>
 <script>
 $(function() {
@@ -29,6 +30,7 @@ $(function() {
 })
 </script>
 <%} else if(memberLoggedIn.getTeamname() == null){%>
+<% teamName = memberLoggedIn.getTeamname(); %>
 <script>
 $(function() {
 	alert("팀이 필요한 서비스입니다.\n\n팀을 생성하거나 팀가입을 해주세요.");
@@ -68,6 +70,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 <h2>경기 등록</h2>
 <form name="form" id="form" action="<%=request.getContextPath() %>/game/gameRegisterEnd" method="post" onsubmit="return fn_Validate();">
+	<input type="hidden" name="teamName" value="<%=teamName%>"/>
 	<div class="row col-md-6">
 		<h4>날짜 및 시간 선택</h4>
 		<input type="text" name="date" id="date-format" value="" class="form-control floating-label" placeholder="날짜와 시간을 입력하세요." style="width: 250px;">
@@ -97,7 +100,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			<tr>
 				<th>상세주소</th>
 				<td>
-					<input type="text" id="addrDetail" class="form-control floating-label" readonly style="width:45%; display: inline-block;" value="">
+					<input type="text" id="addrDetail" name="addrDetail" class="form-control floating-label" readonly style="width:45%; display: inline-block;" value="">
 					<input type="text" id="roadAddrPart2" class="form-control floating-label" readonly style="width:45%; display: inline-block; font-size: 10px;" value="">
 				</td>
 			</tr>
