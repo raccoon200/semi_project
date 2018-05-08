@@ -1,4 +1,4 @@
-package com.dleague.game;
+package com.dleague.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GameRegisterServlet
+ * Servlet implementation class MemberLoginPageServlet
  */
-@WebServlet("/game/gameRegister")
-public class GameRegisterServlet extends HttpServlet {
+@WebServlet("/member/loginPage")
+public class MemberLoginPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameRegisterServlet() {
+    public MemberLoginPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,8 @@ public class GameRegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("param", "gameRegister");
-		request.getRequestDispatcher("/WEB-INF/views/game/gameRegister.jsp").forward(request, response);
+		request.setAttribute("param", "login");
+		request.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(request, response);
 	}
 
 	/**

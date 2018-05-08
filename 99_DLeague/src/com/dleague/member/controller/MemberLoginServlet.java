@@ -93,6 +93,7 @@ public class MemberLoginServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			
+			
 			RequestDispatcher reqDispatcher 
 			= request.getRequestDispatcher(view);
 			reqDispatcher.forward(request, response);
