@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -29,14 +30,39 @@ public class BoardDAO {
 		}
 	}
 	
-	public List<RegionBoard> selectAll(Connection conn) {
+	
+	public int selectRegionBoardCount(Connection conn) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		//String query = prop.getProperty("selectAll");
+		String query = "SELECT COUNT(*) AS cnt FROM BOARD_REGION";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+	
+	public List<RegionBoard> selectAll(Connection conn, int cPage, int numPerPage) {
 		List<RegionBoard> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		//String query = prop.getProperty("selectAll");
-		String query = "select * from board_region";
+		String query = "SELECT V.* FROM ( SELECT ROWNUM AS RNUM, V.* FROM( SELECT * FROM BOARD_REGION ORDER BY BOARD_REGION_DATE DESC) V ) V WHERE RNUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				RegionBoard board = new RegionBoard(); 
@@ -58,5 +84,7 @@ public class BoardDAO {
 		}
 		return list;
 	}
+
+
 	
 }

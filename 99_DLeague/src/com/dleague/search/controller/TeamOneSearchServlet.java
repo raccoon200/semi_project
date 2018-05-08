@@ -15,16 +15,16 @@ import com.dleague.search.model.searchService.searchService;
 import com.dleague.search.model.vo.Team;
 
 /**
- * Servlet implementation class TeamSearchServlet
+ * Servlet implementation class TeamOneSearchServlet
  */
-@WebServlet("/search/teamSearch")
-public class TeamSearchServlet extends HttpServlet {
+@WebServlet("/search/teamOneSearch")
+public class TeamOneSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TeamSearchServlet() {
+    public TeamOneSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,6 +37,9 @@ public class TeamSearchServlet extends HttpServlet {
 		/*List<Team> list = new searchService().selectList();*/
 		//System.out.println("list@searchService="+list);
 		Hashtable<String,Integer> ht = new searchService().MemberCount();
+		String searchName = request.getParameter("searchName");
+		String selectCode = request.getParameter("selectCode");
+		/*System.out.println("searchName="+searchName+",selectCode="+selectCode);*/
 		
 		//1. 파라미터 변수에 담기
 		int cPage; 
@@ -51,12 +54,12 @@ public class TeamSearchServlet extends HttpServlet {
 		//1.비지니스 로직 처리
 		int numPerPage = 5;
 		//전체 게시물 수 
-		int totalMember = new searchService().selectMemberCount();
+		int totalMember = new searchService().selectMemberCount(selectCode, searchName);
 		// (공식1) totalPage
 		int totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
 		
 		//2.2 페이징된 회원리스트 가져오기
-		List<Team> list = new searchService().selectMemberList(cPage, numPerPage);
+		List<Team> list = new searchService().selectChoiceList(cPage, numPerPage, selectCode, searchName);
 		//2.3 페이징바 만들기
 		String pageBar ="";
 		int pageBarSize = 5;
@@ -68,14 +71,14 @@ public class TeamSearchServlet extends HttpServlet {
 		if(pageNo == 1) {
 			
 		} else {
-			pageBar += "<a href= '"+request.getContextPath()+"/search/teamSearch?cPage="+(pageNo-1)+"'><span class='page gradient'>이전</span></a>";
+			pageBar += "<a href= '"+request.getContextPath()+"/search/teamOneSearch?cPage="+(pageNo-1)+"&searchName="+searchName+"&selectCode="+selectCode+"'><span class='page gradient'>이전</span></a>";
 		}
 		//[pageNo]
 		while(pageNo <= pageEnd && pageNo <= totalPage){
 			if(pageNo==cPage) {
 				pageBar += "<span class='page active'>"+pageNo+"</span>";				
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/search/teamSearch?cPage="+pageNo+"'><span class='page gradient'>"+pageNo+"</span></a>";	
+				pageBar+="<a href='"+request.getContextPath()+"/search/teamOneSearch?cPage="+pageNo+"&searchName="+searchName+"&selectCode="+selectCode+"'><span class='page gradient'>"+pageNo+"</span></a>";	
 			}
 			pageNo++;
 		}
@@ -83,7 +86,7 @@ public class TeamSearchServlet extends HttpServlet {
 		if(pageNo > totalPage) {
 			
 		}else {
-			pageBar += "<a href= '"+request.getContextPath()+"/search/teamSearch?cPage="+(pageNo)+"'><span class='page gradient'>다음</span></a>";
+			pageBar += "<a href= '"+request.getContextPath()+"/search/teamOneSearch?cPage="+(pageNo)+"&searchName="+searchName+"&selectCode="+selectCode+"'><span class='page gradient'>다음</span></a>";
 		}
 		/*System.out.println("list@AdminMemberListServlet="+list);*/
 		
@@ -93,9 +96,10 @@ public class TeamSearchServlet extends HttpServlet {
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("ht", ht);
 		request.setAttribute("param", "teamSearch");
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamSearch.jsp");
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamOneSearch.jsp");
 		reqDispatcher.forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

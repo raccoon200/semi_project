@@ -40,6 +40,26 @@ public class searchService {
 		return list;
 	}
 
+	public List<String> selectByName(String searchName) {
+		Connection conn = getConnection();
+		List<String> list = new TeamDAO().selectByName(conn, searchName);
+		close(conn);
+		return list;
+	}
+
+	public List<Team> selectChoiceList(int cPage, int numPerPage, String selectCode, String searchName) {
+		Connection conn = getConnection();
+		List<Team> list = new TeamDAO().selectChoiceList(conn, cPage, numPerPage, selectCode, searchName);
+		close(conn);
+		return list;
+	}
+
+	public int selectMemberCount(String selectCode, String searchName) {
+		Connection conn = getConnection();
+		int totalMember = new TeamDAO().selectMemberCount(conn, selectCode, searchName);
+		close(conn);
+		return totalMember;
+	}
 
 
 }
