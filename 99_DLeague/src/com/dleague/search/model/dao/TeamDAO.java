@@ -208,7 +208,7 @@ public class TeamDAO {
 				
 				list.add(t);
 			}
-			System.out.println("list@AdminDAO.selectMemberList="+list);
+			/*System.out.println("list@AdminDAO.selectMemberList="+list);*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

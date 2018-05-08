@@ -68,7 +68,7 @@ public class TeamSearchServlet extends HttpServlet {
 		if(pageNo == 1) {
 			
 		} else {
-			pageBar += "<a href= '"+request.getContextPath()+"/search/teamSearch?cPage="+(pageNo-1)+"'><span class='page gradient'>[이전]</span></a>";
+			pageBar += "<a href= '"+request.getContextPath()+"/search/teamSearch?cPage="+(pageNo-1)+"'><span class='page gradient'>이전</span></a>";
 		}
 		//[pageNo]
 		while(pageNo <= pageEnd && pageNo <= totalPage){
@@ -83,7 +83,7 @@ public class TeamSearchServlet extends HttpServlet {
 		if(pageNo > totalPage) {
 			
 		}else {
-			pageBar += "<a href= '"+request.getContextPath()+"/search/teamSearch?cPage="+(pageNo)+"'><span class='page gradient'>[다음]</span></a>";
+			pageBar += "<a href= '"+request.getContextPath()+"/search/teamSearch?cPage="+(pageNo)+"'><span class='page gradient'>다음</span></a>";
 		}
 		/*System.out.println("list@AdminMemberListServlet="+list);*/
 		

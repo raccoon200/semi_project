@@ -15,9 +15,10 @@
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
     <style>
     #teamDiv{background:white; padding:10px 10px 10px 10px;}
-    #teamDiv2{text-align:right; padding:0px 40px 0px 0px;}
+    #teamDiv2{text-align:left; padding:0px 10px 0px 0px;}
     
     /* table Object */
+   	legend{margin:30px 0 0 0;}
     .tbl_type{margin:auto;}
     .tbl_type,.tbl_type th,.tbl_type td{border:0}
     .tbl_type{border:1px;width:90%;border-bottom:2px solid #dcdcdc;font-family:'돋움',dotum;font-size:12px;text-align:center;border-collapse:collapse}
@@ -32,12 +33,15 @@
     /* 검색옵션 */
     select{height: 30px; width: 100px;}
     
+    #test{height: 100px; width: 500px; position:absolute; margin:0 0 0 30px;}
+    
     ul#autoComplete{
-	min-width:171px;
+    background:white;
+	min-width:152px;
 	border:1px solid gray;
 	display:inline-block;
 	padding:0;
-	margin:0;
+	margin:0 0 0 105px;
 	}
 	ul#autoComplete li{
 		padding:0 10px;
@@ -56,6 +60,8 @@
     
     /* 버튼 */
     .button {
+    margin:0 0 0 295px;
+    position:absolute;
       height:33px;
 	  display: inline;
 	  vertical-align: top;
@@ -85,18 +91,6 @@
 	  background: #475fc9;
 	  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.8);
 	}
-	/* .button:before {
-	  content: '';
-	  position: absolute;
-	  top: 9px;
-	  right: 12px;
-	  width: 17px;
-	  height: 17px;
-	  background: #374fbb;
-	  border-radius: 9px;
-	  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px rgba(255, 255, 255, 0.2);
-	  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px rgba(255, 255, 255, 0.2);
-	} */
 	.button:after {
 	  content: '>';
 	  float: right;
@@ -189,22 +183,25 @@
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
-    <select id="selectCode">
-        <option value="G1">서울</option>
-        <option value="G2">경기</option>
-        <option value="G3">강원</option>
-        <option value="G4">충북</option>
-        <option value="G5">충남</option>
-        <option value="G6">경북</option>
-        <option value="G7">전북</option>
-        <option value="G8">전남</option>
-        <option value="G9">제주</option>
-    </select>
-    <input type="text" id="searchName" />
-    <br/>
-	<ul id="autoComplete"></ul>
-	<button class="button" id="teamOneSearch">팀검색</button>
-	</div>
+    	<div id="test">
+		    <select id="selectCode">
+		        <option value="G1">서울</option>
+		        <option value="G2">경기</option>
+		        <option value="G3">강원</option>
+		        <option value="G4">충북</option>
+		        <option value="G5">충남</option>
+		        <option value="G6">경북</option>
+		        <option value="G7">전북</option>
+		        <option value="G8">전남</option>
+		        <option value="G9">제주</option>
+		    </select>
+	    
+		    <input type="text" id="searchName" />
+		    <br/>
+			<ul id="autoComplete"></ul>
+			</div>
+			<button class="button" id="teamOneSearch">팀검색</button>
+		</div>
 	<script>
 	<!-- 서치텍스트스 이벤트 -->
 	$(function(){
@@ -288,9 +285,9 @@
 					},
 					error:function(jqxhr, textStatus,errorThrown){
 						console.log("ajax처리실패!");
-						console.log(jqxhr);
+						/* console.log(jqxhr);
 						console.log(textStatus);
-						console.log(errorThrown);
+						console.log(errorThrown); */
 					}
 				});
 			}
