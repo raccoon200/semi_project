@@ -3,7 +3,7 @@
 	작성 날짜 : 2018.05.07
 	수정 날짜 : X
 	페이지 설명 : 경기 등록 페이지
-	최근 수정 사항 : 
+	최근 수정 사항 :     
  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

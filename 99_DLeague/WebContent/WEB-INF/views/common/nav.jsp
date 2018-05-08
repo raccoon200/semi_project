@@ -8,7 +8,7 @@
 				<li><a href="#">회원가입</a></li>
 				<li><a href="#">로그인</a></li>
 			</ul>
-			공지사항 
+			공지사항   
 			<h2 id="nav-header">공지사항</h2>
 			<ul class="nav-list">
 				<li><a href="#">공지사항</a></li>

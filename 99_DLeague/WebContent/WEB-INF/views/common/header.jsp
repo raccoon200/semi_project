@@ -261,7 +261,7 @@ $(function() {
 				<%-- 	<%if(memberLoggedIn!=null&&"admin".equals(memberLoggedIn.getUserId())){ %>
 					<li id="admin"><a href="<%=request.getContextPath()%>/admin/memberList">회원관리</a></li>
 					<%} %> --%>
-				</ul>
+				</ul> 
 				
 			</nav>
 			<!-- 메인메뉴 끝 -->
