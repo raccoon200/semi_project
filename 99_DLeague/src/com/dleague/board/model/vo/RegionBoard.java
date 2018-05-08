@@ -92,5 +92,14 @@ public class RegionBoard {
 		this.count = count;
 	}
 
+	@Override
+	public String toString() {
+		return "RegionBoard [board_region_no=" + board_region_no + ", board_region_title=" + board_region_title
+				+ ", board_region_writer=" + board_region_writer + ", board_regioncode=" + board_regioncode
+				+ ", board_region_content=" + board_region_content + ", board_region_date=" + board_region_date
+				+ ", original_file_name=" + original_file_name + ", renamed_file_name=" + renamed_file_name
+				+ ", status=" + status + ", count=" + count + "]";
+	}
+
 	
 }

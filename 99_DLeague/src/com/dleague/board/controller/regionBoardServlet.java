@@ -35,6 +35,7 @@ public class regionBoardServlet extends HttpServlet {
 		
 		if(regionBoard!=null && !regionBoard.isEmpty()) {
 			request.setAttribute("param", "board");
+			request.setAttribute("regionBoard", regionBoard);
 			request.getRequestDispatcher("/WEB-INF/views/board/regionBoard.jsp").forward(request,response);
 		}else {
 			//error
