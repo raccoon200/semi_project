@@ -22,6 +22,10 @@ public class Region {
 	public void setRegionName(String regionName) {
 		this.regionName = regionName;
 	}
+	@Override
+	public String toString() {
+		return "Region [RegionCode=" + RegionCode + ", regionName=" + regionName + "]";
+	}
 	
 	
 }

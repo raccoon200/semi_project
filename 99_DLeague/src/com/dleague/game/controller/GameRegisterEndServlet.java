@@ -58,7 +58,7 @@ public class GameRegisterEndServlet extends HttpServlet {
 		g.setGameContent(game_content);
 		g.setPlace(gamePlace+"#"+addrDetail+"#"+point_x+"#"+point_y);
 		
-		
+		int result = new Game
 	}
 
 	/**

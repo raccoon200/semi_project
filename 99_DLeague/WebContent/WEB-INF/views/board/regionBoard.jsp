@@ -100,7 +100,7 @@ div#pageBar span{
 			<td style="text-align:left"><%=board.getBoard_region_title() %></td>
 			<td><%=board.getBoard_region_writer() %></td>
 			<td><%=(regionMap!=null)?regionMap.get(board.getBoard_regioncode()):"" %></td>
-			<td><%if(board.getOriginal_file_name().trim().length()>0){%>
+			<td><%if(board.getOriginal_file_name()!=null){%>
 				<img id="file-image" src="<%=request.getContextPath() %>/images/fileImage.png" alt="파일이미지" />
 				<%} %>
 				
