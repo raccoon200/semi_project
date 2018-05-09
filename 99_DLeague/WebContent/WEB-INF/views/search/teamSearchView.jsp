@@ -12,13 +12,14 @@
 	String introduce="";
 	Date foundInDate=null;
 	int rnum=0;
-	
+	String rogo="";
 	for(Team t : list){
 		teamName = t.getTeamName();
 		capTain = t.getCapTain();
 		rCode = t.getRegionCode();
 		foundInDate = t.getFoundingDate();
 		introduce=t.getIntroduce();
+		rogo=t.getTeamLogo();
 	}
 	for(TeamMember tm2 : memberList){
 		rnum = tm2.getRnum();
@@ -28,19 +29,20 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
 <style>
-	img{
-	    width: 400px;
-	    height: 300px;
-	    display: inline-block;
-	    float: left;
-	}
-	div#bu,#a,#b,#c,#d{border: 1px solid black;}
-	div#bu{height: 550px; width: 700px; display: inline-block;}
-	div#a{height: 100px; width: 200px; line-height: 20px; text-align: center; display: inline-block;}
-	div#b{height: 100px; width: 200px;line-height: 20px; text-align: center; display: inline-block;}
-	div#c{height: 80px; width: 200px; line-height: 10px; text-align: center; display: inline-block;}
-	div#d{height: 80px; width: 200px; line-height: 10px; text-align: center; display: inline-block;}
-
+	img#logoimg{width: 250px;height: 200px;display: inline-block;margin: 50px 0 0 0;}
+	img#logo{width: 200px;height: 80px;display: inline-block;}
+	div#logoDiv{width: 200px;height: 80px;display: inline-block; }
+	div#imgDiv{width: 410px;height: 315px;display: inline-block;float: left;text-align:center;}
+	/* div#bu,#a,#b,#c,#d{border: 1px solid black;} */
+	div#bu{height: 590px; width: 700px; display: inline-block;}
+	div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; line-height: 20px; text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#b{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;line-height: 10px; text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#c{border-radius: 10px;background:lightgreen;height: 80px; width: 200px; line-height: 10px; text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#d{height: 80px; width: 200px;line-height: 10px; text-align: center; display: inline-block;}
+	
+	h1#aa{color:#2828CD;}
+	h1#bb{color:#DB631F;}
+	
     /* 테이블 공통 UI Object */
     .tbl_type,.tbl_type th,.tbl_type td{border:0}
     .tbl_type{border:1px;width:90%;border-bottom:2px solid #dcdcdc;font-family:'돋움',dotum;font-size:12px;text-align:center;border-collapse:collapse}
@@ -59,24 +61,26 @@
     /*teamTable*/
 </style>
     <div id="bu">
-        <img src="" alt="">
+    	<div id="imgDiv">
+        	<img id="logoimg" src="<%=request.getContextPath() %>/images/team/default.jpg" alt="첨부파일" style="display:<%=rogo==null?"inline":"none" %>;"/>
+        </div>
         <div id="a">
-            <h1>팀이름</h1>
+            <h1 id="bb">팀이름</h1>
             <h2><%=teamName %></h2>
         </div>
         <br>
         <div id="b">
-            <h1>팀장</h1>
+            <h1 id="bb">팀장</h1>
             <h2><%=capTain %></h2>
         </div>
         <br>
         <div id="c">
-            <h1>팀원수</h1>
+            <h1 id="bb">팀원수</h1>
             <h2> <%=rnum %>명</h2>
         </div>
-        <br> <br>
+        <br /> <br /><br />
         <div id="d">
-            <h1>활동지역</h1>
+            <h1 id="aa">활동지역</h1>
             <h2>
             	<%if("G1".equals(rCode) ) {%>
         			서울
@@ -100,11 +104,14 @@
             </h2>
          </div>
          <div id="d">
-            <h1>창단일</h1>
+            <h1 id="aa">창단일</h1>
             <h2><%=foundInDate %></h2>
         </div>
+        <div id="logoDiv">
+        	<img id="logo" src="<%=request.getContextPath() %>/images/headerImage.jpg" alt="첨부파일"/>
+        </div>
         <br><br>
-        <textarea name="" id="" cols="79" rows="7" readonly style="resize: none"><%=introduce %></textarea>
+        <textarea name="" id="" cols="93" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
     <div id="memberTable">

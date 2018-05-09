@@ -1,7 +1,5 @@
 package com.dleague.member.model.vo;
 
-import java.sql.Date;
-
 public class Member {
 	String userId;   
 	String password; 
@@ -9,19 +7,19 @@ public class Member {
 	String regioncode; 
 	String phone; 
 	String email; 
-	Date birthday;
+	String birthday;
 	String teamname; 
 	String profile; 
 	String grade; 
 	String photo; 
-	Date enrolldate;
+	String enrolldate;
 	
 	public Member() {
 		
 	}
 //sas
 	public Member(String userId, String password, String userName, String regioncode, String phone, String email,
-			Date birthday, String teamname, String profile, String grade, String photo, Date enrolldate) {
+			String birthday, String teamname, String profile, String grade, String photo, String enrolldate) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -85,11 +83,11 @@ public class Member {
 		this.email = email;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
@@ -125,11 +123,11 @@ public class Member {
 		this.photo = photo;
 	}
 
-	public Date getEnrolldate() {
+	public String getEnrolldate() {
 		return enrolldate;
 	}
 
-	public void setEnrolldate(Date enrolldate) {
+	public void setEnrolldate(String enrolldate) {
 		this.enrolldate = enrolldate;
 	}
 

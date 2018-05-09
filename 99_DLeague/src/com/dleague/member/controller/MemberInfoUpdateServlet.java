@@ -1,6 +1,8 @@
 package com.dleague.member.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.dleague.common.MyFileRenamePolicy;
+import com.dleague.member.model.service.MemberService;
 import com.dleague.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -69,6 +72,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		String photo = multiReq.getFilesystemName("up_file");//실제시스템에 저장된 파일명
 		Member member = new Member(userId, password, userName, regioncode, phone, email, birthday, teamname
 				, profile, grade, photo, null);
+		int result = new MemberService().memberInfoUpdate(member);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
