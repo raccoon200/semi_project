@@ -52,7 +52,7 @@ public class TeamOneSearchServlet extends HttpServlet {
 		/*System.out.println("cPage="+cPage);*/
 		
 		//1.비지니스 로직 처리
-		int numPerPage = 5;
+		int numPerPage = 10;
 		//전체 게시물 수 
 		int totalMember = new searchService().selectMemberCount(selectCode, searchName);
 		// (공식1) totalPage
@@ -96,6 +96,7 @@ public class TeamOneSearchServlet extends HttpServlet {
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("ht", ht);
 		request.setAttribute("param", "teamSearch");
+		request.setAttribute("totalOneTeam", totalMember);		//선택된 총팀갯수
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamOneSearch.jsp");
 		reqDispatcher.forward(request, response);
 	}

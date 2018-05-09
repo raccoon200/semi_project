@@ -36,7 +36,7 @@ public class TeamSearchServlet extends HttpServlet {
 		//1. 비지니스 로직
 		/*List<Team> list = new searchService().selectList();*/
 		//System.out.println("list@searchService="+list);
-		Hashtable<String,Integer> ht = new searchService().MemberCount();
+		Hashtable<String,Integer> ht = new searchService().MemberCount();	//멤버카운트
 		
 		//1. 파라미터 변수에 담기
 		int cPage; 
@@ -49,9 +49,9 @@ public class TeamSearchServlet extends HttpServlet {
 		/*System.out.println("cPage="+cPage);*/
 		
 		//1.비지니스 로직 처리
-		int numPerPage = 5;
+		int numPerPage = 10;
 		//전체 게시물 수 
-		int totalMember = new searchService().selectMemberCount();
+		int totalMember = new searchService().selectMemberCount();	//팀토탈카운트
 		// (공식1) totalPage
 		int totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
 		
@@ -91,8 +91,9 @@ public class TeamSearchServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
-		request.setAttribute("ht", ht);
-		request.setAttribute("param", "teamSearch");
+		request.setAttribute("ht", ht);					//소속선수 수
+		request.setAttribute("param", "teamSearch");	//검색파라미터
+		request.setAttribute("totalTeam", totalMember);	//팀토탈수
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamSearch.jsp");
 		reqDispatcher.forward(request, response);
 	}

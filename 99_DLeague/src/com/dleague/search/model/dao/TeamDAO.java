@@ -243,4 +243,31 @@ public class TeamDAO {
 		return totalMember;
 	}
 
+	public List<Team> teaSearch(Connection conn, String teamName) {
+		List<Team> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("teamNameSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while(rset.next()) {
+				list.add(rset.getString("teamname"));
+			}
+			/*System.out.println("DAO="+list);*/
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
 }

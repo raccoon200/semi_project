@@ -1,7 +1,6 @@
 package com.dleague.game.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.game.model.service.GameService;
 import com.dleague.game.model.vo.Game;
 
 /**
@@ -46,6 +46,7 @@ public class GameRegisterEndServlet extends HttpServlet {
 		System.out.println("point_y = " + point_y);
 		System.out.println("game_content = " + game_content);
 		System.out.println("addrDetail = " + addrDetail);
+		System.out.println("teamName = " + teamName);
 		
 		String[] sepDateTime = dateTime.split(" - ");
 
@@ -58,7 +59,19 @@ public class GameRegisterEndServlet extends HttpServlet {
 		g.setGameContent(game_content);
 		g.setPlace(gamePlace+"#"+addrDetail+"#"+point_x+"#"+point_y);
 		
+		int result = new GameService().insertGame(g);
 		
+		String msg = "";
+		String loc = "/";
+		if(result > 0) {
+			msg = "경기가 등록되었습니다.";
+		} else {
+			msg = "경기 등록에 실패하였습니다.";
+			loc = "/game/gameRegister";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

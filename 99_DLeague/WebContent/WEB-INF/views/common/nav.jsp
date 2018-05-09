@@ -54,21 +54,23 @@ console.log("<%=param%>");
 				<li><a href="#">경기검색</a></li>
 			</ul>
 			<%} %>
-			<!--
-			마이페이지 
+			
+			<%if(param=="memberInfo") {%>
 			<h2 id="nav-header">마이페이지</h2>
 			<ul class="nav-list">
+				<li><a href="<%=request.getContextPath() %>/member/memberInfo" id="<%=param=="memberInfo"?"nav-selected":"" %>" >내 정보</a></li>
 				<li><a href="#">내 팀 정보</a></li>
-				<li><a href="#">내 정보</a></li>
 				<li><a href="#">내 팀 관리</a></li>
 			</ul>
-			관리자페이지 
+			<%} %>
+			
+			<!-- 관리자페이지 
 			<h2 id="nav-header">관리자페이지</h2>
 			<ul class="nav-list">
 				<li><a href="#">회원 관리</a></li>
 				<li><a href="#">팀 관리</a></li>
 				<li><a href="#">팀 수락</a></li>
 				<li><a href="#">접속 통계</a></li>
-			</ul> -->
+			</ul>  -->
 		</nav>
 		<section id="content">

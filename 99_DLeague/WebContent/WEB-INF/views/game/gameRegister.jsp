@@ -30,14 +30,17 @@ $(function() {
 })
 </script>
 <%} else if(memberLoggedIn.getTeamname() == null){%>
-<% teamName = memberLoggedIn.getTeamname(); %>
 <script>
 $(function() {
 	alert("팀이 필요한 서비스입니다.\n\n팀을 생성하거나 팀가입을 해주세요.");
 	location.href = "<%=request.getContextPath()%>/";
 })
 </script>
-<%} %>
+<%
+} else{
+	teamName = memberLoggedIn.getTeamname();
+}
+%>
 <script>
 $(function() {
 	$('#date-format').bootstrapMaterialDatePicker
