@@ -1,26 +1,30 @@
-package com.dleague.member.controller;
+package com.dleague.search.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.dleague.member.model.vo.Member;
+import com.dleague.search.model.searchService.searchService;
+import com.dleague.search.model.vo.Team;
+
 
 /**
- * Servlet implementation class MemberInfoServlet
+ * Servlet implementation class TeamViewServlet
  */
-@WebServlet("/member/memberInfo")
-public class MemberInfoServlet extends HttpServlet {
+@WebServlet("/search/searchView")
+public class TeamViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInfoServlet() {
+    public TeamViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,12 +33,16 @@ public class MemberInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Member member = (Member)session.getAttribute("memberLoggedIn");
-		request.setAttribute("Member", member);
-		request.setAttribute("param", "memberInfo");
-		request.getRequestDispatcher("/WEB-INF/views/member/MemberInfo.jsp").forward(request, response);
+		//1. 파라미터 변수에 담기
+		String teamName = request.getParameter("teamName");
+		//2. 업무로직 요청
+		List<Team> list = new searchService().teamSearch(teamName);
 		
+		//3. view단 처리위임
+		request.setAttribute("list", list);	//팀토탈수	
+		request.setAttribute("param", "teamSearch");
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamSearchView.jsp");
+		reqDispatcher.forward(request, response);
 	}
 
 	/**

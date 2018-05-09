@@ -4,10 +4,9 @@
 <%
 	List<Team> list = (List<Team>)request.getAttribute("list");
 	Hashtable<String,Integer> ht = (Hashtable<String,Integer>)request.getAttribute("ht");
-	int rnum = 0;
+	int totalOneTeam = (Integer)request.getAttribute("totalOneTeam");
 	String code="";
 	for(Team t2 : list){
-		rnum = t2.getRnum();
 		code = t2.getRegionCode();
 	}
 %>
@@ -408,7 +407,7 @@
 				제주					
 			<%} %>
         </td>
-        <td colspan="3"><%=rnum %>개팀</td>
+        <td colspan="3"><%=totalOneTeam %>개팀</td>
         </tr>
         
         </tfoot>
