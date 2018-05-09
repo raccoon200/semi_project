@@ -19,7 +19,7 @@ public class Member {
 	public Member() {
 		
 	}
-
+//sas
 	public Member(String userId, String password, String userName, String regioncode, String phone, String email,
 			Date birthday, String teamname, String profile, String grade, String photo, Date enrolldate) {
 		super();
