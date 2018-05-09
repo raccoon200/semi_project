@@ -17,10 +17,16 @@ function fn_checkValidate() {
 	return true;
 }
 </script>
+<style>
+form{	
+	text-align:center;
+}
+</style>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 <body>
 	<form action="<%=request.getContextPath()%>/member/passwordCheck" onsubmit="return fn_checkValidate();">
+	<br /> <br /> <br />
 	
 	<label for="userId">검색할 아이디: </label>
 	<input type="text" name="userId" id="userId" placeholder="userId"/>
@@ -28,9 +34,12 @@ function fn_checkValidate() {
 	<label for="birthday">생년월일: </label>
 	<input type="text" name="birthday" id="birthday" placeholder="910209"/>
 	<br /> <br />
-	<input type="submit" value="전송" />
-	<input type="reset" value="리셋" />
 	
+	<input type="submit" value="전송" style="background:rgb(64,128,183); color:white;" />
+	<input type="reset" value="리셋" style="background:rgb(64,128,183); color:white;"/>
+	<br />
+	<br />
+	<br />
 	</form>
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

@@ -147,4 +147,10 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+
+	public int memberInfoUpdate(Connection conn, Member member) {
+		int result = 0;
+		String query = prop.getProperty("memberInfoUpdate");
+		return 0;
+	}
 }

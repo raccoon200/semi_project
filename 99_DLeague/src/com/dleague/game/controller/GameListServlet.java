@@ -1,4 +1,4 @@
-package com.dleague.game;
+package com.dleague.game.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GameRegisterServlet
+ * Servlet implementation class GameListServlet
  */
-@WebServlet("/game/gameRegister")
-public class GameRegisterServlet extends HttpServlet {
+@WebServlet("/game/myGameList")
+public class GameListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameRegisterServlet() {
+    public GameListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,10 @@ public class GameRegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/game/gameRegister.jsp").forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		
+		request.setAttribute("param", "myGameList");
+		request.getRequestDispatcher("/WEB-INF/views/game/myGameList.jsp").forward(request, response);;
 	}
 
 	/**

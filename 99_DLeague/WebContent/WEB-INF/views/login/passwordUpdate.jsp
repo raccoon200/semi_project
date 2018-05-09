@@ -4,16 +4,23 @@
 <html>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/nav.jsp" %>
+<style>
+form{
+	text-align:center;
+}
+</style>
 <body>
 	<form action="<%=request.getContextPath()%>/member/passwordUpdate">
+	<br /> <br /> <br />
 	<label for="userId">유저 아이디: </label>
 	<input type="text" name="userId" id="userId" value=<%=request.getAttribute("userId") %>  readonly/>
 	<br /> <br />
 	<label for="password">비밀번호 변경: </label>
 	<input type="text" name="password" id="password" />
 	<br /> <br />
-	<input type="submit" value="변경" />
-	<input type="reset" value="초기화" />
+	<input type="submit" value="변경" style="background:rgb(64,128,183); color:white;"/>
+	<input type="reset" value="초기화" style="background:rgb(64,128,183); color:white;"/>
+	<br /> <br /> <br />	
 	</form>
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

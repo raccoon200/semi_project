@@ -2,6 +2,7 @@ package com.dleague.member.controller;
 
 import java.io.IOException;
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -92,6 +93,7 @@ public class MemberLoginServlet extends HttpServlet {
 			}
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
+			
 			
 			RequestDispatcher reqDispatcher 
 			= request.getRequestDispatcher(view);
