@@ -3,7 +3,7 @@
 	작성 날짜 : 2018.05.07
 	수정 날짜 : X
 	페이지 설명 : 경기 등록 페이지
-	최근 수정 사항 :     
+	최근 수정 사항 : 유효성 검사 및 서블릿 연결
  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,6 +21,23 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/pretty_date_time_picker/js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/pretty_date_time_picker/js/bootstrap-material-datetimepicker.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=f3nKBZeo1DvNZrIIPMNu&submodules=geocoder"></script>
+<% String teamName = ""; %>
+<%if(memberLoggedIn == null){ %>
+<script>
+$(function() {
+	alert("로그인이 필요한 서비스 입니다.\n\n로그인을 해주새요.");
+	location.href = "<%=request.getContextPath()%>/";
+})
+</script>
+<%} else if(memberLoggedIn.getTeamname() == null){%>
+<% teamName = memberLoggedIn.getTeamname(); %>
+<script>
+$(function() {
+	alert("팀이 필요한 서비스입니다.\n\n팀을 생성하거나 팀가입을 해주세요.");
+	location.href = "<%=request.getContextPath()%>/";
+})
+</script>
+<%} %>
 <script>
 $(function() {
 	$('#date-format').bootstrapMaterialDatePicker
@@ -52,10 +69,11 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 </script>
 
 <h2>경기 등록</h2>
-<form name="form" id="form" method="post">
+<form name="form" id="form" action="<%=request.getContextPath() %>/game/gameRegisterEnd" method="post" onsubmit="return fn_Validate();">
+	<input type="hidden" name="teamName" value="<%=teamName%>"/>
 	<div class="row col-md-6">
 		<h4>날짜 및 시간 선택</h4>
-		<input type="text" id="date-format" class="form-control floating-label" placeholder="날짜와 시간을 입력하세요." style="width: 250px;">
+		<input type="text" name="date" id="date-format" value="" class="form-control floating-label" placeholder="날짜와 시간을 입력하세요." style="width: 250px;">
 	</div>
 	<br style="clear:both;"/>
 	<br />
@@ -71,16 +89,18 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				    <input type="hidden" id="confmKey" name="confmKey" value=""  >
 					<input type="text" id="zipNo" class="form-control floating-label" name="zipNo" readonly style="width:100px; display: inline-block;">
 					<input type="button" class="btn btn-primary btn-sm" value="주소검색" onclick="goPopup();">
+					<input type="hidden" id = "point_x" name = "point_x" value=""/>
+					<input type="hidden" id = "point_y" name = "point_y" value=""/>
 				</td>
 			</tr>
 			<tr>
 				<th><label>도로명주소</label></th>
-				<td><input type="text" class="form-control floating-label" id="roadAddrPart1" readonly style="width:100%"></td>
+				<td><input type="text" name="gamePlace" class="form-control floating-label" id="roadAddrPart1" readonly style="width:100%"></td>
 			</tr>
 			<tr>
 				<th>상세주소</th>
 				<td>
-					<input type="text" id="addrDetail" class="form-control floating-label" readonly style="width:45%; display: inline-block;" value="">
+					<input type="text" id="addrDetail" name="addrDetail" class="form-control floating-label" readonly style="width:45%; display: inline-block;" value="">
 					<input type="text" id="roadAddrPart2" class="form-control floating-label" readonly style="width:45%; display: inline-block; font-size: 10px;" value="">
 				</td>
 			</tr>
@@ -97,7 +117,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 </form>
 <script>
 var map = new naver.maps.Map("map", {
-    center: new naver.maps.LatLng(37.3595316, 127.1052133),
+    center: new naver.maps.LatLng(126.8319882,37.3068984),
     zoom: 10,
     mapTypeControl: true
 });
@@ -138,7 +158,7 @@ function searchCoordinateToAddress(latlng) {
                 htmlAddresses.join('<br />'),
                 '</div>'
             ].join('\n'));
-
+		
         infoWindow.open(map, latlng);
     });
 }
@@ -161,37 +181,35 @@ function searchAddressToCoordinate(address) {
                 '<a href="https://map.naver.com/?eX='+point.x+'&eY='+point.y+'&eText='+item.address+'&sY=&sText=" target="_blank">길찾기</a></br>',
                 '</div>'
             ].join('\n'));
-
+		document.form.point_x.value = point.x;
+		document.form.point_y.value = point.y;
 
         map.setCenter(point);
         infoWindow.open(map, point);
     });
 }
+
 function initGeocoder() {
-    map.addListener('click', function(e) {
-        searchCoordinateToAddress(e.coord);
-    });
-
-    $('#address').on('keydown', function(e) {
-        var keyCode = e.which;
-
-        if (keyCode === 13) { // Enter Key
-            searchAddressToCoordinate($('#address').val());
-        }
-    });
-
-    $('#submit').on('click', function(e) {
-        e.preventDefault();
-
-        searchAddressToCoordinate($('#address').val());
-    });
-
-    searchAddressToCoordinate('정자동 178-1');
-}
-function initGeocoder() {
-    searchAddressToCoordinate('정자동 178-1');
+    searchAddressToCoordinate('광덕동로 25');
 }
 naver.maps.onJSContentLoaded = initGeocoder;
+
+function fn_Validate () {
+	if($("#date-format").val().trim().length == 0){
+		alert("시간을 입력해주세요.");
+		return false;
+	}
+	if($("#zipNo").val().trim().length == 0){
+		alert("경기 장소를 입력해주세요.");
+		return false;
+	}
+	if($("#game_content").val().trim().length == 0){
+		alert("경기 내용을 입력해주세요.");
+		return false;
+	}
+	
+	return true;
+}
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>	

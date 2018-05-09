@@ -138,10 +138,11 @@ section#center{
 section#content{
 	display:inline-block;
 	margin:2px;
-	width:758px;
+	width:750px;
 	background:white;
 	border:1px solid rgb(245,245,245);
 	border-radius: 4px;
+	padding-left:10px;
 	
 }
 /*nav*/
@@ -259,11 +260,11 @@ $(function() {
 							</ul>
 						</div>
 					</li>
-					<li id="main-nav-search" class="main-nav-list"><a href="#">검색</a>
+					<li id="main-nav-search" class="main-nav-list"><a href="<%=request.getContextPath() %>/search/teamSearch" id='<%=param=="teamSearch"?"header-selected":""%>'>검색</a>
 						<!-- 검색 -->
 						<div class="main-nav-sub" id="main-nav-sub-search">
 							<ul class="main-nav-sub-ul">
-								<li class="main-nav-sub-li"><a href="#">팀 검색</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/search/teamSearch" >팀 검색</a></li>
 								<li class="main-nav-sub-li"><a href="#">경기 검색</a></li>
 							</ul>
 						</div>

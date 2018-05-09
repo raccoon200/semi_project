@@ -11,7 +11,6 @@ import java.util.Properties;
  * SingleTon Pattern : 클래스에 대한 객체가 프로그램 구동 내내 한개만 작성되어 사용되게 함. static을 이용할거임.
  * static특징 : 모든 필드, 메소드가 static이어야한다.
  * 
- * @author nobodj
  *
  */
 public class JDBCTemplate {
@@ -22,10 +21,13 @@ public class JDBCTemplate {
 		try {
 			Properties prop = new Properties();
 			//jdbc프로젝트와 달리 웹프로젝트는 루트경로가 달라짐.
-//			prop.load(new FileReader("resources/driver.properties"));
-			//클래스 객체를 통해서 절대결로 가져오고, 여기서 해당파일을 찾음.
+			//prop.load(new FileReader("resources/driver.properties"));
+			
+			//클래스객체를 통해서 절대경로 가져오고, 여기서 해당파일을 찾음.
+//			String fileName = JDBCTemplate.class.getResource("/").getPath();
+			//fileName@JDBCTemplate=/C:/Workspaces/webserver_workspace/02_ProductStockManager/WebContent/WEB-INF/classes/
 			String fileName = JDBCTemplate.class.getResource("/driver.properties").getPath();
-			System.out.println("fileName@JDBCTemplate="+fileName);
+			//System.out.println("fileName@JDBCTemplate="+fileName);
 			prop.load(new FileReader(fileName));
 			
 			String driver = prop.getProperty("driver");
