@@ -5,10 +5,8 @@
 	List<Team> list = (List<Team>)request.getAttribute("list");
 	Hashtable<String,Integer> ht = (Hashtable<String,Integer>)request.getAttribute("ht");
 	
-	int rnum = 0;
-	for(Team t2 : list){
-		rnum = t2.getRnum();
-	}
+	int totalTeam = (Integer)request.getAttribute("totalTeam");
+
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
@@ -266,27 +264,9 @@
 							}
 							$("#autoComplete").html(html).show();
 						}
-						
-						/* //새로새성한 li태그 이벤트핸들러 바인딩
-						//click : enter와 동일한 효과
-						$("#autoComplete li").on("click",function(){
-							$("#searchName").val($(this).text());
-							$("#autoComplete").hide().children().remove();
-						});
-						//hover
-						$("#autoComplete li").hover(function(){
-							$(this).siblings().removeClass("sel");
-							$(this).addClass("sel");
-						},function(){
-							$(this).removeClass("sel");
-						}); */
-						
 					},
 					error:function(jqxhr, textStatus,errorThrown){
 						console.log("ajax처리실패!");
-						/* console.log(jqxhr);
-						console.log(textStatus);
-						console.log(errorThrown); */
 					}
 				});
 			}
@@ -353,7 +333,7 @@
 			for(Team t : list){%>
 			<tr>
 				<td class="ranking" scope="row"><%=t.getRnum() %></td>
-				<td><%=t.getTeamName() %></td>
+				<td><a href="<%=request.getContextPath() %>/search/searchView?teamName=<%=t.getTeamName() %>"><%=t.getTeamName() %></a></td>
 	        	<td>
 	        		<%if("G1".equals(t.getRegionCode()) ) {%>
 	        			서울
@@ -387,7 +367,7 @@
         <td>종합</td>
         <td>총 팀수</td>
         <td>전체</td>
-        <td colspan="3"><%=rnum %>개팀</td>
+        <td colspan="3"><%=totalTeam %>개팀</td>
         </tr>
         </tfoot>
     </table>
