@@ -1,14 +1,16 @@
 package com.dleague.game.model.dao;
 
+import static com.dleague.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
 import com.dleague.game.model.vo.Game;
-import static com.dleague.common.JDBCTemplate.*;
 public class GameDAO {
 	Properties prop = new Properties();
 	
@@ -41,6 +43,25 @@ public class GameDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+	public int getGameCountByTeamName(Connection conn, String teamname) {
+		int cnt = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("getGameCountByTeamName");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamname);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				cnt = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 
 }

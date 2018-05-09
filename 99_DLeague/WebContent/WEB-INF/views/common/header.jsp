@@ -251,12 +251,12 @@ $(function() {
 							</ul>
 						</div>
 					</li>
-					<li id="main-nav-register" class='main-nav-list'><a href="<%=request.getContextPath() %>/game/gameRegister" id='<%=param=="gameRegister"?"header-selected":""%>'>경기등록</a>
+					<li id="main-nav-register" class='main-nav-list'><a href="<%=request.getContextPath() %>/game/gameRegister" id='<%=param=="gameRegister"||param=="myGameList"?"header-selected":""%>'>경기등록</a>
 						<!-- 경기등록  -->
 						<div class="main-nav-sub" id="main-nav-sub-register">
 							<ul class="main-nav-sub-ul">
 								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/game/gameRegister">경기등록</a></li>
-								<li class="main-nav-sub-li"><a href="#">내팀경기일정</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/game/myGameList">내팀경기일정</a></li>
 							</ul>
 						</div>
 					</li>
@@ -273,7 +273,7 @@ $(function() {
 						<!-- 마이페이지 -->
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
-								<li><a href="<%=request.getContextPath() %>/member/memberInfo">내 정보</a></li>
+								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 								<li><a href="#">내 팀 정보</a></li>
 								<li><a href="#">내 팀 관리</a></li>
 							</ul>

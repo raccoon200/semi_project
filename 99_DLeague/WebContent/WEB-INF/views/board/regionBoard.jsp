@@ -62,8 +62,26 @@ div#pageBar span{
 	font-size:20px;
 	color:rgb(64,128,183);
 }
+.write-btn{
+	margin-right:40px;
+	float:right;
+}
 </style>
+<script>
+function fn_writeAuthorityCheck() {
+	
+	
+}
+$(function() {
+	$("tr").click(function() {
+		if($(this).attr("id")!=null){
+			location.href="<%=request.getContextPath()%>/board/regionBoardView?no="+$(this).attr("id");
+		}
+	})
+	
+});
 
+</script>
 <h2>지역게시판</h2>
 <section id="region-board-area">
 	<select name="regionSelect" id="region-select">
@@ -95,7 +113,7 @@ div#pageBar span{
 			for(int i=0; i<boardList.size(); i++) {
 				RegionBoard board = boardList.get(i);	
 		%>
-		<tr>
+		<tr id="<%=board.getBoard_region_no()%>">
 			<td><%=board.getBoard_region_no() %></td>
 			<td style="text-align:left"><%=board.getBoard_region_title() %></td>
 			<td><%=board.getBoard_region_writer() %></td>
@@ -116,7 +134,8 @@ div#pageBar span{
 		<%} %>
 	</table>
 	<div id="pageBar">
-		<%=request.getAttribute("pageBar") %>
+		<%=(request.getAttribute("pageBar")!=null)?request.getAttribute("pageBar"):"" %>
+		<input type="button" class="write-btn" onsubmit="fn_writeAuthorityCheck()" value="글쓰기" />
 	</div>
 </section>
 <br />
