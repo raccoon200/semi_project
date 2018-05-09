@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.dleague.common.MyFileRenamePolicy;
+import com.dleague.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -40,7 +41,8 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		}
 		
 		//1.b saveDirectory
-		String saveDirectory = getServletContext().getRealPath("/upload");
+		String saveDirectory = "C:\\Users\\user1\\git\\semi_project\\99_DLeague\\WebContent\\upload\\member";
+		
 		System.out.println("saveDirectory="+saveDirectory);
 		
 		//1.c maxPostSize
@@ -64,9 +66,9 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		String profile = multiReq.getParameter("profile"); 
 		String grade = multiReq.getParameter("grade");
 		String enrolldate = multiReq.getParameter("enrolldate");
-		
 		String photo = multiReq.getFilesystemName("up_file");//실제시스템에 저장된 파일명
-		System.out.println(photo);
+		Member member = new Member(userId, password, userName, regioncode, phone, email, birthday, teamname
+				, profile, grade, photo, null);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
