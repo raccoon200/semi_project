@@ -101,7 +101,10 @@ public class regionBoardServlet extends HttpServlet {
 			request.setAttribute("pageBar", pageBar);
 			request.getRequestDispatcher("/WEB-INF/views/board/regionBoard.jsp").forward(request,response);
 		}else {
-			//error
+			//region_board테이블에 값이 없을 경우
+			request.setAttribute("param", "board");
+			request.setAttribute("regionList", regionList);
+			request.getRequestDispatcher("/WEB-INF/views/board/regionBoard.jsp").forward(request,response);
 		}
 		
 	}
