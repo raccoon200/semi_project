@@ -16,4 +16,11 @@ public class GameService {
 		close(conn);
 		return result;
 	}
+
+	public int getGameCountByTeamName(String teamname) {
+		Connection conn = getConnection();
+		int cnt = new GameDAO().getGameCountByTeamName(conn, teamname);
+		close(conn);
+		return cnt;
+	}
 }
