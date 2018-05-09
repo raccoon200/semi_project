@@ -61,5 +61,12 @@ public class searchService {
 		return totalMember;
 	}
 
+	public List<Team> teamSearch(String teamName) {
+		Connection conn = getConnection();
+		List<Team> list = new TeamDAO().teaSearch(conn,teamName);
+		close(conn);
+		return list;
+	}
+
 
 }
