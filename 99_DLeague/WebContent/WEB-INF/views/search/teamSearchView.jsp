@@ -1,6 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.*, com.dleague.search.model.vo.*"%>
+<%
+	List<Team> list = (List<Team>)request.getAttribute("list");
+	List<TeamMember> memberList = (List<TeamMember>)request.getAttribute("memberList");
+	
+	//team정보
+	String teamName="";
+	String capTain="";
+	String rCode="";
+	String introduce="";
+	Date foundInDate=null;
+	int rnum=0;
+	
+	for(Team t : list){
+		teamName = t.getTeamName();
+		capTain = t.getCapTain();
+		rCode = t.getRegionCode();
+		foundInDate = t.getFoundingDate();
+		introduce=t.getIntroduce();
+	}
+	for(TeamMember tm2 : memberList){
+		rnum = tm2.getRnum();
+	}
+%>
+
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
 <style>
@@ -35,38 +59,58 @@
     /*teamTable*/
 </style>
     <div id="bu">
-        <img src="img/fighting.jpg" alt="">
+        <img src="" alt="">
         <div id="a">
             <h1>팀이름</h1>
-            <h2>투톱체제</h2>
+            <h2><%=teamName %></h2>
         </div>
         <br>
         <div id="b">
             <h1>팀장</h1>
-            <h2>대연</h2>
+            <h2><%=capTain %></h2>
         </div>
         <br>
         <div id="c">
             <h1>팀원수</h1>
-            <h2> 6명</h2>
+            <h2> <%=rnum %>명</h2>
         </div>
         <br> <br>
         <div id="d">
             <h1>활동지역</h1>
-            <h2>서울</h2>
+            <h2>
+            	<%if("G1".equals(rCode) ) {%>
+        			서울
+        		<%}else if("G2".equals(rCode) ) { %>
+        			경기
+        		<%}else if("G3".equals(rCode) ) { %>
+        			강원
+        		<%}else if("G4".equals(rCode) ) { %>
+        			충북
+        		<%}else if("G5".equals(rCode) ) { %>
+        			충남
+        		<%}else if("G6".equals(rCode) ) { %>
+        			경북
+        		<%}else if("G7".equals(rCode) ) { %>
+        			전북
+        		<%}else if("G8".equals(rCode) ) { %>
+        			전남
+        		<%}else if("G9".equals(rCode) ) { %>
+        			제주					
+	        	<%} %>
+            </h2>
          </div>
          <div id="d">
             <h1>창단일</h1>
-            <h2>2018-05-01</h2>
+            <h2><%=foundInDate %></h2>
         </div>
         <br><br>
-        <textarea name="" id="" cols="79" rows="7">팀소개텍스트</textarea>
+        <textarea name="" id="" cols="79" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
     <div id="memberTable">
     <!--ui object -->
     <table class="tbl_type"  cellspacing="0">
-            <legend>◎팀원정보</legend>
+        <legend>◎팀원정보</legend>
         <colgroup>
             <col width="10%"> 
             <col width="15%">
@@ -84,54 +128,41 @@
         </tr>
         </thead>
         <tbody>
+        <%for(TeamMember tm : memberList){ %>
             <tr>
-            <td class="ranking" scope="row">1</td>
-            <td>콜로라도</td>
-            <td>서울</td>
-            <td>90</td>
-            <td>1991-05-01</td>
+	            <td class="ranking" scope="row"><%=tm.getRnum() %></td>
+	            <td><%=tm.getUserId() %></td>
+	            <td>
+	            	<%if("G1".equals(tm.getRegionCode()) ) {%>
+	        			서울
+	        		<%}else if("G2".equals(tm.getRegionCode()) ) { %>
+	        			경기
+	        		<%}else if("G3".equals(tm.getRegionCode()) ) { %>
+	        			강원
+	        		<%}else if("G4".equals(tm.getRegionCode()) ) { %>
+	        			충북
+	        		<%}else if("G5".equals(tm.getRegionCode()) ) { %>
+	        			충남
+	        		<%}else if("G6".equals(tm.getRegionCode()) ) { %>
+	        			경북
+	        		<%}else if("G7".equals(tm.getRegionCode()) ) { %>
+	        			전북
+	        		<%}else if("G8".equals(tm.getRegionCode()) ) { %>
+	        			전남
+	        		<%}else if("G9".equals(tm.getRegionCode()) ) { %>
+	        			제주					
+	        		<%} %>
+	            </td>
+	            <td><%=tm.getGrade() %></td>
+	            <td><%=tm.getT_EnrollDate() %></td>
             </tr>
-            <tr>
-            <td class="ranking" scope="row">2</td>
-            <td>샌디에이고</td>
-            <td>부산</td>
-            <td>24</td>
-            <td>2007-05-01</td>
-            </tr>
-            <tr>
-            <td class="ranking" scope="row">3</td>
-            <td>뉴욕m</td>
-            <td>경기도</td>
-            <td>23</td>
-            <td>2015-05-01</td>
-            </tr>
-            <tr>
-            <td class="ranking" scope="row">4</td>
-            <td>애틀랜타</td>
-            <td>강원도</td>
-            <td>5</td>
-            <td>2008-05-01</td>
-            </tr>
-            <tr>
-            <td class="ranking" scope="row">5</td>
-            <td>밀워키</td>
-            <td>전라남도</td>
-            <td>83</td>
-            <td>2002-02-02</td>
-            </tr>
-            <tr>
-            <td class="ranking" scope="row">6</td>
-            <td>lad</td>
-            <td>경상북도</td>
-            <td>30</td>
-            <td>2001-05-01</td>
-        </tr>
+        <%} %>
         </tbody>
         <tfoot>
             <tr>
             <td>종합</td>
             <td colspan="2">총 팀원수</td>
-            <td colspan="3">6명</td>
+            <td colspan="3"><%=rnum %>명</td>
             </tr>
             </tfoot>
         </table>

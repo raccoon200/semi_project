@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.search.model.vo.Team;
+import com.dleague.search.model.vo.TeamMember;
 import com.dleague.search.model.dao.TeamDAO;
 
 public class TeamDAO {
@@ -256,8 +257,18 @@ public class TeamDAO {
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<>();
+			
 			while(rset.next()) {
-				list.add(rset.getString("teamname"));
+				Team t = new Team();
+				t.setTeamName(rset.getString("teamName"));
+				t.setRegionCode(rset.getString("regionCode"));
+				t.setCapTain(rset.getString("capTain"));
+				t.setTeamLogo(rset.getString("teamLogo"));
+				t.setIntroduce(rset.getString("introduce"));
+				t.setFoundingDate(rset.getDate("foundingDate"));
+				t.setStatus(rset.getString("status"));
+				
+				list.add(t);
 			}
 			/*System.out.println("DAO="+list);*/
 		} catch (SQLException e) {
@@ -268,6 +279,41 @@ public class TeamDAO {
 		}
 		
 		return list;
+	}
+
+	public List<TeamMember> teamMemberSearch(Connection conn, String teamName) {
+		List<TeamMember> memberList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("TeamMemberSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			
+			rset = pstmt.executeQuery();
+			
+			memberList = new ArrayList<>();
+			
+			while(rset.next()) {
+				TeamMember tm = new TeamMember();
+				tm.setRnum(rset.getInt("rnum"));
+				tm.setTeamName(rset.getString("teamname"));
+				tm.setUserId(rset.getString("userid"));
+				tm.setGrade(rset.getString("grade"));
+				tm.setT_EnrollDate(rset.getDate("t_enrolldate"));
+				tm.setRegionCode(rset.getString("regioncode"));
+				
+				memberList.add(tm);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return memberList;
 	}
 
 }

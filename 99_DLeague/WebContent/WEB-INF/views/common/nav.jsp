@@ -38,12 +38,12 @@ console.log("<%=param%>");
 			<%if(param=="passwordUpdate") {%>
 			<h2 id="nav-header">비밀번호 변경</h2>
 			<%} %>
-			<%if(param=="gameRegister") {%>
+			<%if(param=="gameRegister"||param=="myGameList") {%>
 			<!-- 경기등록  -->
 			<h2 id="nav-header">경기등록</h2>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/game/gameRegister" id='<%=param=="gameRegister"?"nav-selected":""%>'>경기등록</a></li>
-				<li><a href="#">내팀경기일정</a></li>
+				<li><a href="<%=request.getContextPath() %>/game/myGameList" id='<%=param=="myGameList"?"nav-selected":""%>'>내팀경기일정</a></li>
 			</ul>
 			<%} %>
 			<%if(param=="teamSearch") {%>
