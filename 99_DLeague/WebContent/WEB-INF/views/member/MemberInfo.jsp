@@ -5,7 +5,7 @@
 <% Member member = (Member)request.getAttribute("Member"); %>
 <style>
 table{border:1px solid;}
-#profileImg{}
+#profileImg{width:300px; height:300px;}
 #imgsection{position: relative; left:350px; top:200px;}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
