@@ -5,15 +5,13 @@
 <% Member member = (Member)request.getAttribute("Member"); %>
 <style>
 table{border:1px solid;}
-#profileImg{width:300px; height:300px;}
-#imgsection{position: relative; left:350px; top:200px;}
+#profileImg{width:150px; height:150px;}
+#imgsection{position: relative; left:350px; top:-250px;}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
-<section id="imgsection">
-<input type="image" src="" id="profileImg"/>
-<input type="file" name="" id="" />
-</section>
+
+<section>
 <form action="">
 <table>
 <tr>
@@ -85,5 +83,17 @@ table{border:1px solid;}
 </table>
 
 </form>
+<section id="imgsection">
+<input type="image" src="" id="profileImg"/>
+<br />
+<input type="file" name="" id="" accept="image/*" onchange="fn_fileUpload()"/>
+</section>
+<script>
+
+function fn_fileUpload(){
+	$("#profileImg").attr("src", "<%=request.getContextPath()%>/images/headerImage.jpg");
+}
+
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
