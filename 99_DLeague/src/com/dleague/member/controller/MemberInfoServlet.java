@@ -32,6 +32,7 @@ public class MemberInfoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("memberLoggedIn");
 		request.setAttribute("Member", member);
+		request.setAttribute("param", "memberInfo");
 		request.getRequestDispatcher("/WEB-INF/views/member/MemberInfo.jsp").forward(request, response);
 		
 	}
