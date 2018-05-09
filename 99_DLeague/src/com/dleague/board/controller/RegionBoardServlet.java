@@ -19,13 +19,13 @@ import com.dleague.board.model.service.BoardService;
  * Servlet implementation class regionBoardServlet
  */
 @WebServlet("/board/regionBoard")
-public class regionBoardServlet extends HttpServlet {
+public class RegionBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public regionBoardServlet() {
+    public RegionBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
