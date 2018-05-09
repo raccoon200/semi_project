@@ -21,6 +21,7 @@ public class BoardDAO {
 	
 	public BoardDAO() {
 		String fileName = BoardDAO.class.getResource("/sql/board/board-query.properties").getPath();
+		System.out.println("fileName : "+fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -35,8 +36,8 @@ public class BoardDAO {
 		int count = -1;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		//String query = prop.getProperty("selectAll");
-		String query = "SELECT COUNT(*) AS cnt FROM BOARD_REGION";
+		String query = prop.getProperty("selectRegionBoardCount");
+		//String query = "SELECT COUNT(*) AS cnt FROM BOARD_REGION";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -56,8 +57,8 @@ public class BoardDAO {
 		List<RegionBoard> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		//String query = prop.getProperty("selectAll");
-		String query = "SELECT V.* FROM ( SELECT ROWNUM AS RNUM, V.* FROM( SELECT * FROM BOARD_REGION ORDER BY BOARD_REGION_DATE DESC) V ) V WHERE RNUM BETWEEN ? AND ?";
+		String query = prop.getProperty("selectAll");
+		//String query = "SELECT V.* FROM ( SELECT ROWNUM AS RNUM, V.* FROM( SELECT * FROM BOARD_REGION ORDER BY BOARD_REGION_DATE DESC) V ) V WHERE RNUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			
@@ -90,7 +91,7 @@ public class BoardDAO {
 		RegionBoard board = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from board_region where board_region_no=?";
+		String query = prop.getProperty("selectRegionBoardOne");
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, no);
@@ -117,6 +118,56 @@ public class BoardDAO {
 		return board;
 	}
 
+
+	public int insertRegionBoard(Connection conn, RegionBoard board) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertRegionBoard");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, board.getBoard_region_title());
+			pstmt.setString(2, board.getBoard_region_writer());
+			pstmt.setString(3, board.getBoard_regioncode());
+			pstmt.setString(4, board.getBoard_region_content());
+			pstmt.setString(5, board.getOriginal_file_name());
+			pstmt.setString(6, board.getRenamed_file_name());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int selectRegionBoardNo(Connection conn) {
+		int result = -1;
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectRecentRegionBoardNo");
+		
+		try {
+			pstmt =conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("no");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 
 	
 }

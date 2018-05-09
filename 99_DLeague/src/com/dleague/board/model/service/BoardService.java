@@ -28,6 +28,22 @@ public class BoardService {
 		close(conn);
 		return board;
 	}
-
+	public int insertRegionBoard(RegionBoard board) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().insertRegionBoard(conn, board);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int selectRecentRegionBoardNo() {
+		Connection conn = getConnection();
+		int result = new BoardDAO().selectRegionBoardNo(conn);
+		close(conn);
+		return result;
+	}
 
 }

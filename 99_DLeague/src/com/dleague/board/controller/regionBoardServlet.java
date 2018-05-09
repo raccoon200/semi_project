@@ -52,7 +52,7 @@ public class regionBoardServlet extends HttpServlet {
 		
 		//2.2 전체게시글수, 전체페이지수 구하기
 		int totalBoardCount = new BoardService().selectRegionBoardCount();
-		System.out.println("totalBoardCount : "+totalBoardCount);
+		
 		//(공식2)전체페이지수구하기
 		int totalPage = (int)Math.ceil((double)totalBoardCount/numPerPage);
 		

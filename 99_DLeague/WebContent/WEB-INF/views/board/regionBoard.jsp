@@ -135,7 +135,9 @@ $(function() {
 	</table>
 	<div id="pageBar">
 		<%=(request.getAttribute("pageBar")!=null)?request.getAttribute("pageBar"):"" %>
-		<input type="button" class="write-btn" onsubmit="fn_writeAuthorityCheck()" value="글쓰기" />
+		<%if(memberLoggedIn!=null) { %>
+			<input type="button" class="write-btn" value="글쓰기" onclick="location.href='<%=request.getContextPath()%>/board/regionBoardForm'"/>
+		<%} %>
 	</div>
 </section>
 <br />
