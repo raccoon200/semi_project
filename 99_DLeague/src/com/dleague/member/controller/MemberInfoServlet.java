@@ -1,4 +1,4 @@
-package com.dleague.board;
+package com.dleague.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class regionBoardServlet
+ * Servlet implementation class MemberInfoServlet
  */
-@WebServlet("/board/resionBoard")
-public class regionBoardServlet extends HttpServlet {
+@WebServlet("/member/memberInfo")
+public class MemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public regionBoardServlet() {
+    public MemberInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

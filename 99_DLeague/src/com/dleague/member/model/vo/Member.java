@@ -10,10 +10,21 @@ public class Member {
 	String phone; 
 	String email; 
 	Date birthday;
+	String birthdayString;
+	public String getBirthdayString() {
+		return birthdayString;
+	}
+
+	public void setBirthdayString(String birthdayString) {
+		this.birthdayString = birthdayString;
+	}
+
 	String teamname; 
 	String profile; 
 	String grade; 
 	String photo; 
+	String originalFileName;
+	String renamedFileName;
 	Date enrolldate;
 	
 	public Member() {
@@ -21,7 +32,7 @@ public class Member {
 	}
 
 	public Member(String userId, String password, String userName, String regioncode, String phone, String email,
-			Date birthday, String teamname, String profile, String grade, String photo, Date enrolldate) {
+			Date birthday, String teamname, String profile, String grade, String photo, String originalFileName, String renamedFileName, Date enrolldate) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -34,6 +45,8 @@ public class Member {
 		this.profile = profile;
 		this.grade = grade;
 		this.photo = photo;
+		this.originalFileName = originalFileName;
+		this.renamedFileName = renamedFileName;
 		this.enrolldate = enrolldate;
 	}
 	
@@ -124,7 +137,13 @@ public class Member {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+		
+	}
 	public Date getEnrolldate() {
 		return enrolldate;
 	}
@@ -137,7 +156,7 @@ public class Member {
 	public String toString() {
 		return "Member [userId=" + userId + ", password=" + password + ", userName=" + userName + ", regioncode="
 				+ regioncode + ", phone=" + phone + ", email=" + email + ", birthday=" + birthday + ", teamname="
-				+ teamname + ", profile=" + profile + ", grade=" + grade + ", photo=" + photo + ", enrolldate="
+				+ teamname + ", profile=" + profile + ", grade=" + grade + ", photo=" + photo + ", originalFileName=" + originalFileName +", renamedFileName=" + renamedFileName + ", enrolldate="
 				+ enrolldate + "]";
 	}
 	

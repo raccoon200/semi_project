@@ -1,4 +1,4 @@
-package com.dleague.search;
+package com.dleague.member.controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class TeamSearchServlet
+ * Servlet implementation class MemberEnrollServlet
  */
-@WebServlet("/search/teamSearch")
-public class TeamSearchServlet extends HttpServlet {
+@WebServlet("/member/memberEnroll")
+public class MemberEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TeamSearchServlet() {
+    public MemberEnrollServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,9 +28,10 @@ public class TeamSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamSearch.jsp");
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/member/memberEnroll.jsp");
 		reqDispatcher.forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.dleague.member.model.vo.*, java.util.*" %>
+    <%
+    Member m = (Member)request.getAttribute("member");
+    %>
 <script>
 function fn_checkIdDuplicate(){
 	var userid = $("#userid_").val().trim();
@@ -28,7 +32,7 @@ function fn_checkIdDuplicate(){
 <tr>
 <th>아이디</th>
 <td>
-<input type="text" name="userid" id="userid_" required/>
+<input type="text" name="userId" id="userId_" required/>
 <input type="button" value="아이디체크"
 id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <input type = "hidden" name="idValid" value="0" />
@@ -49,18 +53,13 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <tr>
 <th>이름</th>
 <td>
-<input type="text" name="username" id="username"/>
+<input type="text" name="userName" id="userName"/>
 </td>
 </tr>
 <tr>
 <th>첨부파일</th>
 <td>
-<% if(m.getOriginalFileName() != null){ %>
-<a href="javascript:fn_fileDownload('<%=m.getOriginalFileName() %>','<%=m.getRenamedFileName() %>');">
-<img alt="첨부파일" src="<%=request.getContextPath() %>/images/file.png" width=16px>
-<%= m.getOriginalFileName() %>
-</a>
-<% }%>
+<input type="file" name="up_file"/>
  </td>
  </tr>
 <tr>
@@ -74,6 +73,13 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <td>
 <input type="tel" id="phone" name="phone"
 placeholder="(-없이)01012345678" maxlength="11"/>
+</td>
+</tr>
+<tr>
+<th>이메일</th>
+<td>
+<input type="email" id="email" name="email_"
+placeholder="abc@email.com" />
 </td>
 </tr>
 <tr>
@@ -100,6 +106,12 @@ placeholder="(-없이)01012345678" maxlength="11"/>
 <textarea id="profile" name="profile" maxlength="2048" style="height:180px;"></textarea>
 </td></tr>
 </table>
+<input type="submit" value="가입" />
+<input type="reset" value="취소" />
+</form>
+<form name="checkIdDuplicateFrm" method="post">
+<input type="hidden" name="userid"/>
+</form>
 </section>
 
 

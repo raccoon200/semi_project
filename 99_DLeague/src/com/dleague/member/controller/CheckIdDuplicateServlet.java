@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.member.model.service.MemberService;
+import com.dleague.member.model.vo.Member;
+
 /**
  * Servlet implementation class CheckIdDuplicateServlet
  */

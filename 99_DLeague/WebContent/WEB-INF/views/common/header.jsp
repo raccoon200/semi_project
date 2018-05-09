@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.dleague.member.model.vo.*" %>
-<% Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn"); %>
+<% Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+	String param = (String)request.getAttribute("param");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -136,10 +138,11 @@ section#center{
 section#content{
 	display:inline-block;
 	margin:2px;
-	width:758px;
+	width:750px;
 	background:white;
 	border:1px solid rgb(245,245,245);
 	border-radius: 4px;
+	padding-left:10px;
 	
 }
 /*nav*/
@@ -224,8 +227,8 @@ $(function() {
 			<a href="<%=request.getContextPath() %>/"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" /></a>
 			<ul id="header-list">
 				<%if(memberLoggedIn==null) {%>
-					<li><a href="#">회원가입</a></li>
-					<li><a href="<%=request.getContextPath() %>/login/login.jsp">로그인</a></li>
+					<li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
+					<li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
 					<!-- <li><a href="#">관리자페이지</a></li> -->
 				<%} else { %>
 					<li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
@@ -238,7 +241,7 @@ $(function() {
 			<nav>
 				<ul class="main-nav">
 					<li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
-					<li id="main-nav-board" class="main-nav-list"><a href="#" id="header-selected">게시판</a>
+					<li id="main-nav-board" class="main-nav-list"><a href="#">게시판</a>
 						<!-- 게시판 -->
 						<div class="main-nav-sub" id="main-nav-sub-board">
 							<ul class="main-nav-sub-ul">
@@ -248,20 +251,20 @@ $(function() {
 							</ul>
 						</div>
 					</li>
-					<li id="main-nav-register" class="main-nav-list"><a href="#" >경기등록</a>
+					<li id="main-nav-register" class='main-nav-list'><a href="<%=request.getContextPath() %>/game/gameRegister" id='<%=param=="gameRegister"?"header-selected":""%>'>경기등록</a>
 						<!-- 경기등록  -->
 						<div class="main-nav-sub" id="main-nav-sub-register">
 							<ul class="main-nav-sub-ul">
-								<li class="main-nav-sub-li"><a href="#">경기등록</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/game/gameRegister">경기등록</a></li>
 								<li class="main-nav-sub-li"><a href="#">내팀경기일정</a></li>
 							</ul>
 						</div>
 					</li>
-					<li id="main-nav-search" class="main-nav-list"><a href="#">검색</a>
+					<li id="main-nav-search" class="main-nav-list"><a href="<%=request.getContextPath() %>/search/teamSearch" id='<%=param=="teamSearch"?"header-selected":""%>'>검색</a>
 						<!-- 검색 -->
 						<div class="main-nav-sub" id="main-nav-sub-search">
 							<ul class="main-nav-sub-ul">
-								<li class="main-nav-sub-li"><a href="#">팀 검색</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/search/teamSearch" >팀 검색</a></li>
 								<li class="main-nav-sub-li"><a href="#">경기 검색</a></li>
 							</ul>
 						</div>
@@ -270,8 +273,8 @@ $(function() {
 						<!-- 마이페이지 -->
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
+								<li><a href="/member/memberInfo">내 정보</a></li>
 								<li><a href="#">내 팀 정보</a></li>
-								<li><a href="#">내 정보</a></li>
 								<li><a href="#">내 팀 관리</a></li>
 							</ul>
 						</div>
