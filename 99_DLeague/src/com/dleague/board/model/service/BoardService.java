@@ -22,6 +22,12 @@ public class BoardService {
 		close(conn);
 		return count;
 	}
+	public RegionBoard selectRegionBoardOne(int no) {
+		Connection conn = getConnection();
+		RegionBoard board = new BoardDAO().selectRegionBoardOne(conn, no);
+		close(conn);
+		return board;
+	}
 
 
 }
