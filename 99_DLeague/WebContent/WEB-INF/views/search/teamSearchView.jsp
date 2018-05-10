@@ -4,6 +4,7 @@
 <%
 	List<Team> list = (List<Team>)request.getAttribute("list");
 	List<TeamMember> memberList = (List<TeamMember>)request.getAttribute("memberList");
+	List<Activity> activityList = (List<Activity>)request.getAttribute("activityList");
 	
 	//team정보
 	String teamName="";
@@ -13,6 +14,7 @@
 	Date foundInDate=null;
 	int rnum=0;
 	String rogo="";
+	//팀정보
 	for(Team t : list){
 		teamName = t.getTeamName();
 		capTain = t.getCapTain();
@@ -21,27 +23,36 @@
 		introduce=t.getIntroduce();
 		rogo=t.getTeamLogo();
 	}
+	//팀원수
 	for(TeamMember tm2 : memberList){
 		rnum = tm2.getRnum();
+	}
+	//활동내역 경기 유/무확인
+	int num=0;
+	for(Activity a2: activityList){
+		num = a2.getActivity_No();	
 	}
 %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 	img#logoimg{width: 250px;height: 200px;display: inline-block;margin: 50px 0 0 0;}
 	img#logo{width: 200px;height: 80px;display: inline-block;}
-	div#logoDiv{width: 200px;height: 80px;display: inline-block; }
+	div#logoDiv{width: 200px;height: 80px;display: inline-block;}
 	div#imgDiv{width: 410px;height: 315px;display: inline-block;float: left;text-align:center;}
 	/* div#bu,#a,#b,#c,#d{border: 1px solid black;} */
 	div#bu{height: 590px; width: 700px; display: inline-block;}
-	div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; line-height: 20px; text-align: center; display: inline-block; margin:10px 0 0 0;}
-	div#b{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;line-height: 10px; text-align: center; display: inline-block; margin:10px 0 0 0;}
-	div#c{border-radius: 10px;background:lightgreen;height: 80px; width: 200px; line-height: 10px; text-align: center; display: inline-block; margin:10px 0 0 0;}
-	div#d{height: 80px; width: 200px;line-height: 10px; text-align: center; display: inline-block;}
-	
-	h1#aa{color:#2828CD;}
-	h1#bb{color:#DB631F;}
+	div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#b{border-radius: 10px;background:lightgreen;height: 80px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#c{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;  text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#d{height: 80px; width: 200px; text-align: center; display: inline-block;}
+	/*글자색깔*/
+	h2#aa{color:#2828CD;}
+	h2#bb{color:#DB631F;}
+	h3#bb{color:#DB631F;}
 	
     /* 테이블 공통 UI Object */
     .tbl_type,.tbl_type th,.tbl_type td{border:0}
@@ -60,28 +71,37 @@
     div#teamTable{width: 350px; display: inline-block;}
     /*teamTable*/
 </style>
+	<h2>팀상세정보</h2>
+	<hr />
+	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
-        	<img id="logoimg" src="<%=request.getContextPath() %>/images/team/default.jpg" alt="첨부파일" style="display:<%=rogo==null?"inline":"none" %>;"/>
+        	<img id="logoimg" src=
+        	<%if(rogo!=null){ %>
+        		"<%=request.getContextPath() %>/images/team/<%=rogo %>"
+        	<%}else{ %>
+        	 	"<%=request.getContextPath() %>/images/team/default.png" 
+        	<%} %>
+        	 alt="첨부파일" style="display:<%=rogo==null?"inline":"none" %>;"/>
         </div>
         <div id="a">
-            <h1 id="bb">팀이름</h1>
-            <h2><%=teamName %></h2>
+            <h2 id="bb">팀이름</h2>
+            <h4><%=teamName %></h4>
         </div>
         <br>
         <div id="b">
-            <h1 id="bb">팀장</h1>
-            <h2><%=capTain %></h2>
+            <h3 id="bb">팀장</h3>
+            <h4><%=capTain %></h4>
         </div>
         <br>
         <div id="c">
-            <h1 id="bb">팀원수</h1>
-            <h2> <%=rnum %>명</h2>
+            <h3 id="bb">팀원수</h3>
+            <h4> <%=rnum %>명</h4>
         </div>
         <br /> <br /><br />
         <div id="d">
-            <h1 id="aa">활동지역</h1>
-            <h2>
+            <h2 id="aa">활동지역</h2>
+            <h3>
             	<%if("G1".equals(rCode) ) {%>
         			서울
         		<%}else if("G2".equals(rCode) ) { %>
@@ -101,17 +121,17 @@
         		<%}else if("G9".equals(rCode) ) { %>
         			제주					
 	        	<%} %>
-            </h2>
+            </h3>
          </div>
-         <div id="d">
-            <h1 id="aa">창단일</h1>
-            <h2><%=foundInDate %></h2>
-        </div>
-        <div id="logoDiv">
+         <div id="logoDiv">
         	<img id="logo" src="<%=request.getContextPath() %>/images/headerImage.jpg" alt="첨부파일"/>
         </div>
+         <div id="d">
+            <h2 id="aa">창단일</h2>
+            <h3><%=foundInDate %></h3>
+        </div>
         <br><br>
-        <textarea name="" id="" cols="93" rows="7" readonly style="resize: none"><%=introduce %></textarea>
+        <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
     <div id="memberTable">
@@ -183,80 +203,42 @@
                 <col width="10%"> 
                 <col width="10%">
                 <col width="10%">
-                <col width="10%">
-                <col width="10%">
+                <col width="25%">
                 <col width="10%">
             </colgroup>
             <thead>
             <tr>
-                <th scope="col">순번</th>
-                <th scope="col">팀명</th>
-                <th scope="col">지역</th>
-                <th scope="col">소속선수</th>
-                <th scope="col">창단일</th>
-                <th scope="col">경기수</th>
+                <th scope="col">게임번호</th>
+                <th scope="col">HomeTeam</th>
+                <th scope="col">AwayTeam</th>
+                <th scope="col">게임날짜</th>
+                <th scope="col">결과</th>
             </tr>
             </thead>
             <tbody>
-                <tr>
-                <td class="ranking" scope="row">1</td>
-                <td>콜로라도</td>
-                <td>서울</td>
-                <td>90</td>
-                <td>1991-05-01</td>
-                <td>120</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">2</td>
-                <td>샌디에이고</td>
-                <td>부산</td>
-                <td>24</td>
-                <td>2007-05-01</td>
-                <td>100</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">3</td>
-                <td>뉴욕m</td>
-                <td>경기도</td>
-                <td>23</td>
-                <td>2015-05-01</td>
-                <td>23</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">4</td>
-                <td>애틀랜타</td>
-                <td>강원도</td>
-                <td>5</td>
-                <td>2008-05-01</td>
-                <td>1</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">5</td>
-                <td>밀워키</td>
-                <td>전라남도</td>
-                <td>83</td>
-                <td>2002-02-02</td>
-                <td>10</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">6</td>
-                <td>lad</td>
-                <td>경상북도</td>
-                <td>30</td>
-                <td>2001-05-01</td>
-                <td>30</td>
+            <%if(num==0){ %>
+            <tr>
+                <td colspan="5">데이터가 없습니다.</td>
             </tr>
+            <%}else{ %>
+            <%for(Activity a: activityList){ %>
+            <tr>
+                <td class="ranking" scope="row"><%=a.getActivity_No() %></td>
+                <td style="color:<%=((a.getHome().equals(teamName))?"red":"black" )%>"><%=a.getHome() %></td>
+                <td style="color:<%=((a.getAway().equals(teamName))?"red":"black" )%>"><%=a.getAway() %></td>
+                <td><%=a.getActivityDate() %></td>
+                <td><%=a.getResult() %></td>
+                </tr>
+            </tr>
+            <%}} %>
             </tbody>
             <tfoot>
                 <tr>
-                <td>종합</td>
-                <td>총 팀수</td>
-                <td>서울</td>
-                <td colspan="3">6개팀</td>
+                <td colspan="5">활동내역</td>
                 </tr>
                 </tfoot>
             </table>
             <!--//ui object -->
         </div>
-
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

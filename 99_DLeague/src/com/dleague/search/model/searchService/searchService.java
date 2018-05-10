@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.util.Hashtable;
 import java.util.List;
 
+import com.dleague.game.model.vo.Game;
 import com.dleague.search.model.dao.TeamDAO;
+import com.dleague.search.model.vo.Activity;
 import com.dleague.search.model.vo.Team;
 import com.dleague.search.model.vo.TeamMember;
 
@@ -41,9 +43,9 @@ public class searchService {
 		return list;
 	}
 
-	public List<String> selectByName(String searchName) {
+	public List<String> selectByName(String searchName, String selectCode) {
 		Connection conn = getConnection();
-		List<String> list = new TeamDAO().selectByName(conn, searchName);
+		List<String> list = new TeamDAO().selectByName(conn, searchName,selectCode);
 		close(conn);
 		return list;
 	}
@@ -73,6 +75,18 @@ public class searchService {
 		Connection conn = getConnection();
 		List<TeamMember> memberList = new TeamDAO().teamMemberSearch(conn, teamName);
 		return memberList;
+	}
+
+	public List<Activity> activityListSearch(String teamName) {
+		Connection conn = getConnection();
+		List<Activity> activityList = new TeamDAO().activityListSearch(conn,teamName);
+		return activityList;
+	}
+
+	public List<Game> gameSearchList() {
+		Connection conn = getConnection();
+		List<Game> gameSearchList = new TeamDAO().gameSearchList(conn);
+		return gameSearchList;
 	}
 
 

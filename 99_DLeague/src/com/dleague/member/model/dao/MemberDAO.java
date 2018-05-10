@@ -6,9 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import com.dleague.member.model.vo.Member;
@@ -82,12 +85,13 @@ private Properties prop = new Properties();
 				m.setRegioncode(rset.getString("regioncode"));
 				m.setPhone(rset.getString("phone"));
 				m.setEmail(rset.getString("email"));
-				m.setBirthday(rset.getDate("birthday"));
+				m.setBirthday(rset.getString("birthday"));
 				m.setTeamname(rset.getString("teamname"));
 				m.setProfile(rset.getString("profile"));
 				m.setGrade(rset.getString("grade"));
 				m.setPhoto(rset.getString("photo"));
 				m.setEnrolldate(rset.getDate("enrolldate"));
+				
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -147,10 +151,62 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
-
 	public int memberInfoUpdate(Connection conn, Member member) {
-		int result = 0;
-		String query = prop.getProperty("memberInfoUpdate");
-		return 0;
+	      int result = 0;
+	      String query = prop.getProperty("memberInfoUpdate");
+	      PreparedStatement pstmt = null;
+	      try {
+	         //ssssssssss
+	         pstmt = conn.prepareStatement(query);
+	         pstmt.setString(1, member.getPassword());
+	         pstmt.setString(2, member.getUserName());
+	         pstmt.setString(3, member.getRegioncode());
+	         pstmt.setString(4, member.getPhone());
+	         pstmt.setString(5, member.getEmail());
+	         pstmt.setString(6, member.getBirthday());
+	         pstmt.setString(7, member.getTeamname());
+	         pstmt.setString(8, member.getProfile());
+	         pstmt.setString(9, member.getGrade());
+	         
+	         pstmt.setDate(10, member.getEnrolldate());
+	         pstmt.setString(11, member.getPhoto());
+	         pstmt.setString(12, member.getUserId());
+	         result = pstmt.executeUpdate();
+	         System.out.println(result);
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } 
+		 finally {
+	         close(pstmt);
+	      }
+	      return result;
+	   }
+
+
+	public int insertMember(Connection conn, Member member) {
+int result = 0;
+PreparedStatement pstmt = null;
+String query = prop.getProperty("insertMember");
+System.out.println(member);
+try {
+	pstmt = conn.prepareStatement(query);
+	pstmt.setString(1,  member.getUserId());
+	pstmt.setString(2,  member.getPassword());
+	pstmt.setString(3, member.getUserName());
+	pstmt.setString(4,  member.getRegioncode());
+	pstmt.setString(5,  member.getPhone());
+	pstmt.setString(6,  member.getEmail());
+	pstmt.setString(7,  member.getBirthday());
+	pstmt.setString(8,  member.getProfile());
+	pstmt.setString(9, member.getPhoto());
+
+	
+result = pstmt.executeUpdate();
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+return result;
 	}
 }
+		

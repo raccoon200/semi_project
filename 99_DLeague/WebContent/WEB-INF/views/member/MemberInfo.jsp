@@ -86,18 +86,46 @@ table{border:1px solid;}
 <input type="submit" value="수정" />
 <input type="reset" value="초기화" />
 <section id="imgsection">
-<input type="image" src="" id="profileImg"/>
-<br />
-<input type="file" name="up_file" id="up_file" accept="image/*" onchange="fn_fileUpload()"/>
+<input type="image" <%-- src="<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>" --%> id="profileImg"/>
+<br /> 
+<div style="position:relative;">
+<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" />
+<span id="fname">프로필 사진 변경</span>
+</div>
 </section>
-
 </form>
 <script>
+$(function (){
 
-function fn_fileUpload(){
-	$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/fileImage.png");
-}
-
+$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/board/<%=member.getPhoto()%>");
+});
+$("[name=up_file]").change(function(){ 
+	//$(this).val()은 선택한 파일명임.
+	if($(this).val()==""){
+		$("#fname").show();
+	}	
+	else{
+		$("#fname").hide();
+	}
+});	
+function fn_fileUpload(value){
+	 if(value.files && value.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+             $('#profileImg').attr('src', e.target.result);
+			}
+        }
+        reader.readAsDataURL(value.files[0]);
+	}
 </script>
-
+<style>
+/* SS */
+span#fname{
+	position:absolute;
+	left:76px;
+	top:3px;
+	width:285px;
+	background:white;
+}
+</style>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

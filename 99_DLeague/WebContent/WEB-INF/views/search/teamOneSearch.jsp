@@ -12,6 +12,8 @@
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
     #teamDiv{background:white; padding:10px 10px 10px 10px;}
     #teamDiv2{text-align:left; padding:0px 10px 0px 0px;}
@@ -107,8 +109,8 @@
 	
 	/*페이지*/
 	.pagination {
-	    width: 625px;
-	    margin: 0 auto;
+	    width: 645px;
+	    margin: 0 0 0 36px;
 	    text-align:center;
 	} 
 	.btn {
@@ -182,6 +184,8 @@
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
+    <h2>팀 검색</h2>
+    <hr />
     	<div id="test">
 		    <select id="selectCode">
 		        <option value="G1">서울</option>
@@ -201,6 +205,7 @@
 			</div>
 			<button class="button" id="teamOneSearch">팀검색</button>
 		</div>
+		<br />
 	<script>
 	<!-- 서치텍스트스 이벤트 -->
 	$(function(){
@@ -208,7 +213,6 @@
 			location.href="<%=request.getContextPath()%>/search/teamAutoSearch";
 		}); --%>
 		$("#autoComplete").hide();
-		
 		$("#searchName").keyup(function(e){
 			//console.log(e.key+", "+$(this).val());
 			//방향키(ArrowUp, ArrowDown), 엔터(Enter)일 경우, 선택효과 및 선택처리함
@@ -246,12 +250,12 @@
 				$("#autoComplete").hide().children().remove();
 			}else{
 				var searchName = $(this).val();
-				
+				var selectCode = $("#selectCode").val();
 				$.ajax({
 					<%-- url:"<%=request.getContextPath()%>/jq/autoComplete.do?searchName="+searchName, get방식일때--%>
 					url:"<%=request.getContextPath()%>/search/teamAutoSearch",
 					type:"post",
-					data:"searchName="+searchName,/* +"&age=" 두개이상일떄*/
+					data:"searchName="+searchName+"&selectCode="+selectCode,/* +"&age=" 두개이상일떄*/
 					success:function(data){
 						//console.log(data);
 						//아무값도 넘어오지 않는 경우, data.split(",")의 길이가 1임.
@@ -266,27 +270,9 @@
 							}
 							$("#autoComplete").html(html).show();
 						}
-						
-						/* //새로새성한 li태그 이벤트핸들러 바인딩
-						//click : enter와 동일한 효과
-						$("#autoComplete li").on("click",function(){
-							$("#searchName").val($(this).text());
-							$("#autoComplete").hide().children().remove();
-						});
-						//hover
-						$("#autoComplete li").hover(function(){
-							$(this).siblings().removeClass("sel");
-							$(this).addClass("sel");
-						},function(){
-							$(this).removeClass("sel");
-						}); */
-						
 					},
 					error:function(jqxhr, textStatus,errorThrown){
 						console.log("ajax처리실패!");
-						/* console.log(jqxhr);
-						console.log(textStatus);
-						console.log(errorThrown); */
 					}
 				});
 			}
@@ -353,7 +339,7 @@
 			for(Team t : list){%>
 			<tr>
 				<td class="ranking" scope="row"><%=t.getRnum() %></td>
-				<td><%=t.getTeamName() %></td>
+				<td><a href="<%=request.getContextPath() %>/search/searchView?teamName=<%=t.getTeamName() %>"><%=t.getTeamName() %></a></td>
 	        	<td id="code">
 	        		<%if("G1".equals(t.getRegionCode()) ) {%>
 	        			서울

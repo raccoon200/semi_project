@@ -227,7 +227,7 @@ $(function() {
 			<a href="<%=request.getContextPath() %>/"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" /></a>
 			<ul id="header-list">
 				<%if(memberLoggedIn==null) {%>
-					<li><a href="#">회원가입</a></li>
+					<li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
 					<li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
 					<!-- <li><a href="#">관리자페이지</a></li> -->
 				<%} else { %>
@@ -265,7 +265,7 @@ $(function() {
 						<div class="main-nav-sub" id="main-nav-sub-search">
 							<ul class="main-nav-sub-ul">
 								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/search/teamSearch" >팀 검색</a></li>
-								<li class="main-nav-sub-li"><a href="#">경기 검색</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/search/gameSearchList">경기 검색</a></li>
 							</ul>
 						</div>
 					</li>

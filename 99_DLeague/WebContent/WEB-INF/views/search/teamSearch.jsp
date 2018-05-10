@@ -10,6 +10,8 @@
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
     #teamDiv{background:white; padding:10px 10px 10px 10px;}
     #teamDiv2{text-align:left; padding:0px 10px 0px 0px;}
@@ -57,9 +59,9 @@
     
     /* 버튼 */
     .button {
-    margin:0 0 0 295px;
-    position:absolute;
-      height:33px;
+		margin:0 0 0 295px;
+    	position:absolute;
+      	height:33px;
 	  display: inline;
 	  vertical-align: top;
 	 /*  position: relative; */
@@ -105,8 +107,8 @@
 	
 	/*페이지*/
 	.pagination {
-	    width: 625px;
-	    margin: 0 auto;
+	    width: 645px;
+	    margin: 0 0 0 36px;
 	    text-align:center;
 	} 
 	.btn {
@@ -180,6 +182,8 @@
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
+    <h2>팀 검색</h2>
+    <hr />
     	<div id="test">
 		    <select id="selectCode">
 		        <option value="G1">서울</option>
@@ -199,6 +203,7 @@
 			</div>
 			<button class="button" id="teamOneSearch">팀검색</button>
 		</div>
+		<br />
 	<script>
 	<!-- 서치텍스트스 이벤트 -->
 	$(function(){
@@ -206,7 +211,6 @@
 			location.href="<%=request.getContextPath()%>/search/teamAutoSearch";
 		}); --%>
 		$("#autoComplete").hide();
-		
 		$("#searchName").keyup(function(e){
 			//console.log(e.key+", "+$(this).val());
 			//방향키(ArrowUp, ArrowDown), 엔터(Enter)일 경우, 선택효과 및 선택처리함
@@ -244,12 +248,12 @@
 				$("#autoComplete").hide().children().remove();
 			}else{
 				var searchName = $(this).val();
-				
+				var selectCode = $("#selectCode").val();
 				$.ajax({
 					<%-- url:"<%=request.getContextPath()%>/jq/autoComplete.do?searchName="+searchName, get방식일때--%>
 					url:"<%=request.getContextPath()%>/search/teamAutoSearch",
 					type:"post",
-					data:"searchName="+searchName,/* +"&age=" 두개이상일떄*/
+					data:"searchName="+searchName+"&selectCode="+selectCode,/* +"&age=" 두개이상일떄*/
 					success:function(data){
 						//console.log(data);
 						//아무값도 넘어오지 않는 경우, data.split(",")의 길이가 1임.
