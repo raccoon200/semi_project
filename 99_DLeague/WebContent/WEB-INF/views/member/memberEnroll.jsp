@@ -2,23 +2,25 @@
     pageEncoding="UTF-8"%>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-    <%@ page import="com.dleague.member.model.vo.*, java.util.*" %>
+    <%@ page import="com.dleague.member.model.vo.*, com.dleague.region.model.vo.*, java.util.*" %>
     <%
     Member m = (Member)request.getAttribute("member");
+	List<Region> regionList = (List<Region>)request.getAttribute("regionList");
+	System.out.println("list="+regionList);
     %>
     <style>
     table{align:center;}
     </style>
 <script>
 function fn_checkIdDuplicate(){
-	var userid = $("#userId_").val().trim();
-	if(userid.length<4){
+	var userId = $("#userId_").val().trim();
+	if(userId.length<4){
 		alert('아이디는 4글자 이상부터 가능합니다.');
 		return;
 	}
 	
 	var url = "<%=request.getContextPath()%>/member/checkIdDuplicate";
-	var title = "checkDuplicate";
+	var title = "checkIdDuplicate";
 	var status = "left=350px, top=100px, width=300px, height=200px";
 	var popup = window.open("",title,status);
 	
@@ -67,7 +69,7 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <tr>
 <th>Photo</th>
 <td>
-<input type="file" name="up_file" id="photo"/>
+<input type="file" name="photo" id="photo"/>
  </td>
  </tr>
 <tr>
@@ -119,24 +121,18 @@ $("#selectEmail").change(function() {
 <tr>
 <th>거주지역</th>   
 <td>
-<input type="radio" id="regioncode1" name="regioncode"/>
-<label for = "regioncode1">서울</label>
-<input type="radio" id="regioncode2" name="regioncode"/>
-<label for = "regioncode2">경기</label>
-<input type="radio" id="regioncode3" name="regioncode"/>
-<label for = "regioncode3">강원</label>
-<input type="radio" id="regioncode4" name="regioncode"/>
-<label for = "regioncode4">충남</label>
-<input type="radio" id="regioncode5" name="regioncode"/>
-<label for = "regioncode5">충북</label>
-<input type="radio" id="regioncode6" name="regioncode"/>
-<label for = "regioncode6">전남</label>
-<input type="radio" id="regioncode7" name="regioncode"/>
-<label for = "regioncode7">경북</label>
-<input type="radio" id="regioncode8" name="regioncode"/>
-<label for = "regioncode8">경남</label>
-</td>
-</tr>
+				<select name="regionSelect" id="">
+				<%if(regionList!=null && !regionList.isEmpty()){
+				for(int i=0; i<regionList.size(); i++) {
+					Region region = regionList.get(i);
+				%>
+					<option value="<%=region.getRegionCode()%>"><%= region.getRegionName()%></option>
+				<%
+					}
+				} %>
+				</select>
+				</td>
+				</tr>
 <tr>
 <th>프로필</th>
 <td>
@@ -147,7 +143,7 @@ $("#selectEmail").change(function() {
 <input type="reset" value="취소" />
 </form>
 <form name="checkIdDuplicateFrm" method="post">
-<input type="hidden" name="userid"/>
+<input type="hidden" name="userId"/>
 </form>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

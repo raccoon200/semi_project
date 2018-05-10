@@ -327,7 +327,7 @@ public class BoardDAO {
 			pstmt.setString(2, regionBoardComment.getBoard_region_comment_writer());
 			pstmt.setString(3, regionBoardComment.getBoard_region_comment_content());
 			pstmt.setInt(4, regionBoardComment.getBoard_region_ref());
-			pstmt.setInt(5, regionBoardComment.getBoard_region_comment_ref());
+			pstmt.setString(5, boardRegionCommentRef);
 			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -336,6 +336,35 @@ public class BoardDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+
+	public List<RegionBoardComment> selectRegionCommentAll(Connection conn, int no) {
+		List<RegionBoardComment> regionbcList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectRegionCommentAll");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				RegionBoardComment bc = new RegionBoardComment();
+				bc.setBoard_region_comment_no(rset.getInt("board_region_comment_no"));
+				bc.setBoard_region_comment_level(rset.getInt("board_region_comment_level"));
+				bc.setBoard_region_comment_writer(rset.getString("board_region_comment_writer"));
+				bc.setBoard_region_ref(rset.getInt("board_region_ref"));
+				bc.setBoard_region_comment_ref(rset.getInt("board_region_comment_ref"));
+				bc.setBoard_region_comment_date(rset.getDate("board_region_comment_date"));
+				regionbcList.add(bc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return regionbcList;
 	}
 	
 }

@@ -5,7 +5,9 @@ import java.sql.Date;
 public class Activity {
 	private int activity_No;
 	private String home;
+	private String homeLogo;
 	private String away;
+	private String awayLogo;
 	private String place;
 	private Date activityDate;
 	private String result;
@@ -70,10 +72,29 @@ public class Activity {
 		this.result = result;
 	}
 
+	public String getHomeLogo() {
+		return homeLogo;
+	}
+
+	public void setHomeLogo(String homeLogo) {
+		this.homeLogo = homeLogo;
+	}
+
+	public String getAwayLogo() {
+		return awayLogo;
+	}
+
+	public void setAwayLogo(String awayLogo) {
+		this.awayLogo = awayLogo;
+	}
+
 	@Override
 	public String toString() {
-		return "[activity_No=" + activity_No + ", home=" + home + ", away=" + away + ", place=" + place
-				+ ", activityDate=" + activityDate + ", result=" + result + "]";
+		return "Activity [activity_No=" + activity_No + ", home=" + home + ", homeLogo=" + homeLogo + ", away=" + away
+				+ ", awayLogo=" + awayLogo + ", place=" + place + ", activityDate=" + activityDate + ", result="
+				+ result + "]";
 	}
+
+	
 	
 }

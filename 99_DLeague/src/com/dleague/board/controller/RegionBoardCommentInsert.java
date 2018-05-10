@@ -45,16 +45,17 @@ public class RegionBoardCommentInsert extends HttpServlet {
 		regionBoardComment.setBoard_region_comment_ref(regionBoardCommentRef);
 		regionBoardComment.setBoard_region_comment_level(regionBoardCommentLevel);
 		
+		System.out.println(regionBoardComment);
 		int result = new BoardService().insertRegionBoardComment(regionBoardComment);
 		
 		String view = "";
 		
 		if(result>0) {
-			view="/WEB-INF/views/board/regionBoardView?no="+regionBoardRef;
+			view="/board/regionBoardView?no="+regionBoardRef;
 		}else {
 			view = "/WEB-INF/views/common/msg.jsp";
 			request.setAttribute("msg", "댓글 등록 실패!");
-			request.setAttribute("loc", "/WEB-INF/views/board/regionBoardView?no="+regionBoardRef);
+			request.setAttribute("loc", "/board/regionBoardView?no="+regionBoardRef);
 		}
 		
 		
