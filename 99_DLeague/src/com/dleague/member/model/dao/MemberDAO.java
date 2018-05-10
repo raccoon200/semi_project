@@ -173,7 +173,22 @@ return 0;
 		String query = prop.getProperty("memberInfoUpdate");
 		PreparedStatement pstmt = null;
 		try {
+			//sss
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getPassword());
+			pstmt.setString(2, member.getUserName());
+			pstmt.setString(3, member.getRegioncode());
+			pstmt.setString(4, member.getPhone());
+			pstmt.setString(5, member.getEmail());
+			pstmt.setString(6, member.getBirthday());
+			pstmt.setString(7, member.getTeamname());
+			pstmt.setString(8, member.getProfile());
+			pstmt.setString(9, member.getGrade());
+			pstmt.setString(10, member.getEnrolldate());
+			pstmt.setString(11, member.getPhoto());
+			pstmt.setString(12, member.getUserId());
+			result = pstmt.executeUpdate();
+			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
