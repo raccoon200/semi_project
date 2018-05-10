@@ -26,7 +26,10 @@
 	.col-md-3{
 		postion: relative;
 		left: 250px;
+		width:300px;
+		height:400px;
 	}
+	
 </style>   
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/nav.jsp" %>

@@ -46,7 +46,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		}
 		
 		//1.b saveDirectory
-		String saveDirectory = getServletContext().getRealPath("upload/member"); 
+		String saveDirectory = getServletContext().getRealPath("upload/board"); 
 				
 		System.out.println("saveDirectory="+saveDirectory);
 		
@@ -82,10 +82,11 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		int result = new MemberService().memberInfoUpdate(member);
 		String msg = "";
 		String loc = "/";
-		if(result>0) msg = "성공적으로 수정되었습니다!";
+		if(result>0) msg = "성공적으로 수정되었습니다! 프로필 사진은 재로그인 시에 변경됩니다!";
 		else msg = "수정오류! 관리자에게 문의하시오!";
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
+		request.setAttribute("imgPath", photo);
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		
 	}

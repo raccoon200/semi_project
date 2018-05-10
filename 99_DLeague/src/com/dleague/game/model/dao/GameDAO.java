@@ -113,6 +113,7 @@ public class GameDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
+				g = new Game();
 				g.setGameNo(rset.getInt("game_no"));
 				g.setHome(rset.getString("home"));
 				g.setAway(rset.getString("away"));
@@ -133,8 +134,29 @@ public class GameDAO {
 	}
 	public Activity selectOneWithResult(Connection conn, int no) {
 		Activity a = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
-		return null;
+		String query = prop.getProperty("selectOneWithResult");
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				a.setActivity_No(rset.getInt("activity_no"));
+				a.setHome(rset.getString("home"));
+				a.setHomeLogo(rset.getString("homelogo"));
+				a.setAway(rset.getString("away"));
+				a.setAwayLogo(rset.getString("awaylogo"));
+				a.setPlace(rset.getString("place"));
+				a.setActivityDate(rset.getDate("activitydate"));
+				a.setResult(rset.getString("result"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return a;
 	}
 
 }
