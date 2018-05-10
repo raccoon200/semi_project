@@ -87,8 +87,8 @@ td.view-content{
 <%} %>
 <div id="comment-container">
 	<div class="comment-editor">
-		<form name="boardCommentFrm" action="<%=request.getContextPath()%>/board/boardCommentInsert" method="post">
-			<textarea name="boardCommentContent" cols="60" rows="3"></textarea>
+		<form name="boardCommentFrm" action="<%=request.getContextPath()%>/board/regionBoardCommentInsert" method="post">
+			<textarea name="boardCommentContent" cols="80" rows="3"></textarea>
 			<button type="submit" id="btn-insert">등록</button>
 			<input type="hidden" name="boardCommentWriter" value="<%=memberLoggedIn!=null?memberLoggedIn.getUserId():""%>" />
 			<input type="hidden" name="boardRef" value="<%=board.getBoard_region_no()%>" />

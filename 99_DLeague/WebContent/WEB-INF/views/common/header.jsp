@@ -227,7 +227,7 @@ $(function() {
 			<a href="<%=request.getContextPath() %>/"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" /></a>
 			<ul id="header-list">
 				<%if(memberLoggedIn==null) {%>
-					<li><a href="#">회원가입</a></li>
+					<li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
 					<li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
 					<!-- <li><a href="#">관리자페이지</a></li> -->
 				<%} else { %>
