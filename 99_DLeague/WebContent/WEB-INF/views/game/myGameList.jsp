@@ -41,7 +41,7 @@ function fn_MemberList(gameNo,status){
 					</td>
 				</tr>
 				<tr>
-					<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getHome())?"red":""%>'>
+					<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getHome())?"red":""%>; font-size : 18px;'>
 						<%=g.getHome() %>			
 					</td>
 				</tr>
@@ -54,7 +54,7 @@ function fn_MemberList(gameNo,status){
 					</td>
 				</tr>
 				<tr>
-					<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getAway())?"red":""%>'>
+					<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getAway())?"red":""%>; font-size : 18px;'>
 						<%=g.getAway()==null?"&nbsp;":g.getAway() %>					
 					</td>
 				</tr>
