@@ -18,7 +18,7 @@ function fn_checkIdDuplicate(){
 	} 
 	$("#userId").val(userId);
 	return true;
-	}
+	} 
 	function setUserId(userId){
 		var frm = opener.document.memberEnrollFrm;
 		frm.userId.value= userId;
