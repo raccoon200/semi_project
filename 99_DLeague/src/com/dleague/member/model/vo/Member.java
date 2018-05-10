@@ -18,20 +18,15 @@ public class Member {
 		this.birthdayString = birthdayString;
 	}
 
-=======
 	String birthday;
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 	String teamname; 
 	String profile; 
 	String grade; 
 	String photo; 
-<<<<<<< HEAD
 	String originalFileName;
 	String renamedFileName;
 	Date enrolldate;
-=======
 	String enrolldate;
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 	
 	public Member() {
 		

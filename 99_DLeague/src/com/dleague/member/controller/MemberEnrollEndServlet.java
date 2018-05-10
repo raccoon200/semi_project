@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.dleague.common.MyFileRenamePolicy;
 import com.dleague.member.model.service.MemberService;
 import com.dleague.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -63,7 +64,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String regioncode = request.getParameter("regioncode");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email"); 
-		Date birthday =request.getParameter("birthday");
+		String birthday =request.getParameter("birthday");
 		String profile = request.getParameter("profile");
 		String photo = multiReq.getParameter("Photo");
 		
