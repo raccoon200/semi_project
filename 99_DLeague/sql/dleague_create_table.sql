@@ -14,7 +14,7 @@ CREATE TABLE TBL_USER (
 	ENROLLDATE DATE DEFAULT SYSDATE NOT NULL /* ���Գ�¥ */
 );
 alter table tbl_user modify photo default 'default.jpg';
-alter table tbl_user modify class default '선수';
+alter table tbl_user modify grade default '선수';
 
 CREATE UNIQUE INDEX PK_TBL_USER
 	ON TBL_USER (
@@ -686,3 +686,13 @@ ALTER TABLE NOTICE
         
 insert into tbl_user values('admin', '1234', 'admin', 'G2', '01027809071', 'raccoon200@naver.com', '930322', null, '관리자관리자', '관리자', default, sysdate);
 COMMIT;
+
+ALTER TABLE ACTIVITY
+	ADD
+		CONSTRAINT FK_GAME_TO_ACTIVITY
+		FOREIGN KEY (
+			ACTIVITY_NO
+		)
+		REFERENCES GAME (
+			GAME_NO
+		);

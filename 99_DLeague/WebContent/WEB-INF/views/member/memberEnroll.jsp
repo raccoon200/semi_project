@@ -117,7 +117,7 @@ $("#selectEmail").change(function() {
 </td>
 </tr>
 <tr>
-<th>거주지역</th>
+<th>거주지역</th>   
 <td>
 <input type="radio" id="regioncode1" name="regioncode"/>
 <label for = "regioncode1">서울</label>

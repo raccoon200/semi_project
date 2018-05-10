@@ -96,17 +96,9 @@ table{border:1px solid;}
 </form>
 <script>
 $(function (){
-	$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>");
+
+$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>");
 });
-function fn_fileUpload(value){
-	 if(value.files && value.files[0]) {
-         var reader = new FileReader();
-         reader.onload = function (e) {
-              $('#profileImg').attr('src', e.target.result);
-         }
-         reader.readAsDataURL(value.files[0]);
-	}
-}
 $("[name=up_file]").change(function(){ 
 	//$(this).val()은 선택한 파일명임.
 	if($(this).val()==""){
@@ -116,6 +108,15 @@ $("[name=up_file]").change(function(){
 		$("#fname").hide();
 	}
 });	
+function fn_fileUpload(value){
+	 if(value.files && value.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+             $('#profileImg').attr('src', e.target.result);
+			}
+        }
+        reader.readAsDataURL(value.files[0]);
+	}
 </script>
 <style>
 span#fname{
