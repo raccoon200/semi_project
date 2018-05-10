@@ -28,7 +28,20 @@ function fn_checkIdDuplicate(){
 	checkIdDuplicateFrm.target = title;
 	checkIdDuplicateFrm.action = url;
 	checkIdDuplicateFrm.submit();
+	
 }
+$('#selectEmail').change(function() {
+	$("#selectEmail option:selected").each(function() {
+		if($(this).val() =='1') {
+			$("#email_1").val('');
+			$("#email_1").attr("disabled",false);
+			}else {
+				$("#email_1").val($(this).text());
+				$("#email_1").attr("disabled",true);
+			}
+		
+	});
+});
 </script>
 <section id = "enroll-container">
 <h2>회원가입 정보입력</h2>
@@ -85,12 +98,16 @@ placeholder="(-없이)01012345678" maxlength="11"/>
 <th>이메일</th>
 
 <td>
-<input type="email" id="email" name="email_"
-placeholder="abc@email.com" />@<select name = "email1">
-<option value="naver.com">네이버
-<option value="daum.net">다음
-<option value="nate.com">네이트
-<option value="gamil.com">구글
+<input type="email" name="email"  id="email_" >@
+<input type="text" name = "email" id="email_1" disabled value="naver.com">
+<select name="selectEmail" id="selectEmail">
+<option value="1">직접입력</option>
+
+<option value="naver.com" selected>naver.com</option>
+<option value="daum.net">daum.net</option>
+<option value="hotmail.com">hotmail.com</option>
+<option value="gmail.com">gmail.com</option>
+
 </select>
 </td>
 </tr>
