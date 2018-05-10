@@ -17,6 +17,7 @@ import java.util.Properties;
 import com.dleague.search.model.vo.Activity;
 import com.dleague.search.model.vo.Team;
 import com.dleague.search.model.vo.TeamMember;
+import com.dleague.game.model.vo.Game;
 import com.dleague.search.model.dao.TeamDAO;
 
 public class TeamDAO {
@@ -352,6 +353,44 @@ public class TeamDAO {
 		}
 		
 		return activityList;
+	}
+
+	public List<Game> gameSearchList(Connection conn) {
+		List<Game> gameSearchList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("gameSearchList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			gameSearchList = new ArrayList<>();
+			
+			while(rset.next()) {
+				Game g = new Game();
+				
+				g.setGameNo(rset.getInt("game_no"));
+				g.setHome(rset.getString("home"));
+				g.setAway(rset.getString("away"));
+				g.setGameDate(rset.getDate("gamedate"));
+				g.setGameRegDate(rset.getDate("game_reg_date"));
+				g.setPlace(rset.getString("place"));
+				g.setStartTime(rset.getString("start_time"));
+				g.setGameContent(rset.getString("game_content"));
+				g.setStatus(rset.getString("status"));
+				
+				gameSearchList.add(g);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return gameSearchList;
 	}
 
 }

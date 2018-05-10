@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.Hashtable;
 import java.util.List;
 
+import com.dleague.game.model.vo.Game;
 import com.dleague.search.model.dao.TeamDAO;
 import com.dleague.search.model.vo.Activity;
 import com.dleague.search.model.vo.Team;
@@ -80,6 +81,12 @@ public class searchService {
 		Connection conn = getConnection();
 		List<Activity> activityList = new TeamDAO().activityListSearch(conn,teamName);
 		return activityList;
+	}
+
+	public List<Game> gameSearchList() {
+		Connection conn = getConnection();
+		List<Game> gameSearchList = new TeamDAO().gameSearchList(conn);
+		return gameSearchList;
 	}
 
 
