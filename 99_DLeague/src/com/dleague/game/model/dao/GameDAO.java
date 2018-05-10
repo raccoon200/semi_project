@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.game.model.vo.Game;
+import com.dleague.search.model.vo.Activity;
 public class GameDAO {
 	Properties prop = new Properties();
 	
@@ -97,6 +98,43 @@ public class GameDAO {
 		}
 		
 		return list;
+	}
+	public Game selectOneGame(Connection conn, int no) {
+		Game g = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOneGame");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				g.setGameNo(rset.getInt("game_no"));
+				g.setHome(rset.getString("home"));
+				g.setAway(rset.getString("away"));
+				g.setGameDate(rset.getDate("gamedate"));
+				g.setGameRegDate(rset.getDate("game_reg_date"));
+				g.setPlace(rset.getString("place"));
+				g.setStartTime(rset.getString("start_time"));
+				g.setGameContent(rset.getString("game_content"));
+				g.setStatus(rset.getString("status"));
+				g.setHomeLogo(rset.getString("homelogo"));
+				g.setAwayLogo(rset.getString("awaylogo"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return g;
+	}
+	public Activity selectOneWithResult(Connection conn, int no) {
+		Activity a = null;
+		
+		return null;
 	}
 
 }
