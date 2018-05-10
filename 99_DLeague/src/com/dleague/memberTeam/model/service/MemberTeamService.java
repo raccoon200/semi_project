@@ -3,66 +3,36 @@ package com.dleague.memberTeam.model.service;
 import static com.dleague.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
 
-import com.dleague.member.model.dao.MemberDAO;
-import com.dleague.member.model.vo.Member;
+import com.dleague.memberTeam.model.dao.MemberTeamDAO;
+import com.dleague.memberTeam.model.vo.Activity;
+import com.dleague.memberTeam.model.vo.Team;
+import com.dleague.memberTeam.model.vo.TeamMember;
 
-public class MemberService {
-	//로그인처리를 위한 상수선언
-	public static final int LOGIN_OK = 1;
-	public static final int WRONG_PASSWORD = 0;
-	public static final int ID_NOT_EXIST = -1;
-	
-	public static final int CHECK_OK = 1;
-	public static final int WRONG_BIRTHDAY = 0;
-	public static final int WRONG_ID = -1;
-	
-	public int loginCheck(String userId, String password) {
+
+
+public class MemberTeamService {
+
+	public List<Team> teamSearch(String teamName) {
 		Connection conn = getConnection();
-		int result = new MemberDAO().loginCheck(conn, userId, password);
+		List<Team> list = new MemberTeamDAO().teamSearch(conn,teamName);
 		close(conn);
-		return result;
+		return list;
 	}
-	public Member selectOne(String userId) {
+
+	public List<TeamMember> teamMemberSearch(String teamName) {
 		Connection conn = getConnection();
-		Member m = new MemberDAO().selectOne(conn, userId);
-		close(conn);
-		return m;
+		List<TeamMember> memberList = new MemberTeamDAO().teamMemberSearch(conn, teamName);
+		return memberList;
 	}
-	public int passwordCheck(String userId, String birthday) {
+
+	public List<Activity> activityListSearch(String teamName) {
 		Connection conn = getConnection();
-		int result = new MemberDAO().passwordCheck(conn, userId, birthday);
-		close(conn);
-		return result;
-	}
-	public int passwordUpdate(String userId, String password) {
-		Connection conn = getConnection();
-		int result = new MemberDAO().passwordUpdate(conn, userId, password);
-		close(conn);
-		if(result>0) commit(conn);
-		else rollback(conn);
-		return result;
-	}
-	public int insertMember(Member member) {
-		Connection conn = getConnection();
-		int result = new MemberDAO().insertMember(conn, member);
-		if(result > 0)
-			commit(conn);
-		else 
-			rollback(conn);
-		close(conn);
-		return result;
+		List<Activity> activityList = new MemberTeamDAO().activityListSearch(conn,teamName);
+		return activityList;
 	}
 	
-		
-	public int memberInfoUpdate(Member member) {
-		Connection conn = getConnection();
-		int result = new MemberDAO().memberInfoUpdate(conn, member);
-		close(conn);
-		if(result>0) commit(conn);
-		else rollback(conn);
-		return result;
-	}
 	
 	
 }

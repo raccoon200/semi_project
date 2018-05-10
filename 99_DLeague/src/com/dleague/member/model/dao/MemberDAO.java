@@ -2,6 +2,7 @@ package com.dleague.member.model.dao;
 
 import static com.dleague.common.JDBCTemplate.*;
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -172,7 +173,7 @@ private Properties prop = new Properties();
 	         pstmt.setString(11, member.getPhoto());
 	         pstmt.setString(12, member.getUserId());
 	         result = pstmt.executeUpdate();
-	         System.out.println(result);
+	         System.out.println("MemberDAO@memberinfoUpdate"+member);
 	      } catch (SQLException e) {
 	         e.printStackTrace();
 	      } 
