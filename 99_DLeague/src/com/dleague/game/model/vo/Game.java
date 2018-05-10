@@ -12,7 +12,8 @@ public class Game {
 	private String place;
 	private String startTime;
 	private String gameContent;
-	
+	private String status;
+
 	public Game() {}
 
 	/**
@@ -107,6 +108,19 @@ public class Game {
 
 	public void setGameDateString(String gameDateString) {
 		this.gameDateString = gameDateString;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Game [gameNo=" + gameNo + ", home=" + home + ", away=" + away + ", gameDate=" + gameDate
+				+ ", gameDateString=" + gameDateString + ", gameRegDate=" + gameRegDate + ", place=" + place
+				+ ", startTime=" + startTime + ", gameContent=" + gameContent + ", status=" + status + "]";
 	}
 	
 }
