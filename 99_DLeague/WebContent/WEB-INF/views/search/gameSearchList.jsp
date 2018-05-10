@@ -24,16 +24,16 @@ div#result{margin: 50px 10px 0 0;}
 <h2>경기검색</h2>
 <hr />
 <table class="table table-hover">
-<%if(list != null || list.isEmpty()){ %>
+	<pre>  <span class="sp" id="sp1">경기날짜</span>                        <span class="sp" id="sp2">경기팀</span>                       <span class="sp" id="sp3">게임시간<span/> <span class="sp" id="sp4">상제정보</span></pre>
+	<%if(list != null || list.isEmpty()){ %>
 	<%for(Game g : list){ %>
-	<pre>  <span class="sp" id="sp1">경기날짜</span>                        <span class="sp" id="sp2">경기팀</span>                    <span class="sp" id="sp3">게임시간<span/>   <span class="sp" id="sp4">상제정보</span></pre>
 	<tr>
 		<td id="td1" class="td1"><h4><%=g.getGameDate() %></h4></td>
 		<td>
 			<table style="display: inline-block;">
 				<tr>
 					<td>
-						<img src="<%=request.getContextPath() %>/images/team/<%=g.getHomeLogo()!=null?g.getHomeLogo():"default.png" %>" alt="home" style="height: 110.188px;"/>
+						<img src="<%=request.getContextPath() %>/images/team/<%=g.getHomeLogo()!=null?g.getHomeLogo():"default.png" %>" alt="home" style="height: 100px; width:130px;"/>
 					</td>
 				</tr>
 				<tr>
@@ -44,7 +44,7 @@ div#result{margin: 50px 10px 0 0;}
 			<table style="display: inline-block;">
 				<tr>
 					<td>
-						<img src='<%=request.getContextPath() %>/images/team/<%=g.getAway()!=null? (g.getAwayLogo()!=null?g.getAwayLogo():"default.png"):"awayNull.png" %>' alt="away" style="height: 110.188px;"/>
+						<img src='<%=request.getContextPath() %>/images/team/<%=g.getAway()!=null? (g.getAwayLogo()!=null?g.getAwayLogo():"default.png"):"awayNull.png" %>' alt="away" style="height: 100px; width:130px;"/>
 					</td>
 				</tr>
 				<tr>
@@ -54,15 +54,15 @@ div#result{margin: 50px 10px 0 0;}
 		</td>
 		<td id="td2" class="td1"><h3 ><%=g.getStartTime() %></h3></td>
 		<td>
-			<%if((g.getStatus()).equals("Y")){ %>
-			<div class="alert alert-warning center" id="result">
-				경기완료
-			</div>
-			<%}else{ %>
+			<%if(g.getStatus()==null){ %>
 			<div class="alert alert-info center" id="result">
 				상세보기
 			</div>
-			<%} %>
+			<%}else if((g.getStatus()).equals("Y")){ %>
+			<div class="alert alert-warning center" id="result">
+				경기완료
+			</div>
+			<%} %> 
 		</td>
 	</tr>
 <%} %>
