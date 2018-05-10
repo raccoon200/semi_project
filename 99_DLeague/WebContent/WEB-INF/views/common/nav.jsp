@@ -56,11 +56,11 @@ console.log("<%=param%>");
 			</ul>
 			<%} %>
 			
-			<%if(param=="memberInfo") {%>
+			<%if(param=="memberInfo" || param=="memberTeamInfo") {%>
 			<h2 id="nav-header">마이페이지</h2>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/member/memberInfo" id="<%=param=="memberInfo"?"nav-selected":"" %>" >내 정보</a></li>
-				<li><a href="#">내 팀 정보</a></li>
+				<li><a href="<%=request.getContextPath() %>/member/memberTeamInfo" id="<%=param=="memberTeamInfo"?"nav-selected":"" %>">내 팀 정보</a></li>
 				<li><a href="#">내 팀 관리</a></li>
 			</ul>
 			<%} %>
