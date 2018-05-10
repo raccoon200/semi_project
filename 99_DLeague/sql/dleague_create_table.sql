@@ -15,6 +15,7 @@ CREATE TABLE TBL_USER (
 );
 alter table tbl_user modify photo default 'default.jpg';
 alter table tbl_user modify grade default '선수';
+alter table tbl_user modify (birthday varchar2(30));
 
 CREATE UNIQUE INDEX PK_TBL_USER
 	ON TBL_USER (
