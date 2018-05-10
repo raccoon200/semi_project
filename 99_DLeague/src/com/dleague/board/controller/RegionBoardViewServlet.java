@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,13 +37,50 @@ public class RegionBoardViewServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		int no = Integer.parseInt(request.getParameter("no"));
+		BoardService boardService = new BoardService();
 		
-		RegionBoard board = new BoardService().selectRegionBoardOne(no);
 		List<Region> regionList = new RegionService().selectRegionList();
+		
+		
+		//쿠키검사 (조회수)
+		Cookie[] cookies = request.getCookies();
+		String boardCookieVal = "";
+		boolean hasRead = false;
+		
+		if(cookies!=null) {
+			for(Cookie c: cookies) {
+				String name = c.getName();
+				String value = c.getValue();
+				
+				if("boardCookie".equals(name)) {
+					boardCookieVal = value;
+					if(boardCookieVal.contains("|"+no+"|")) {
+						hasRead = true;
+						break;
+					}
+					
+				}
+			}
+		}
+		//게시글 읽음여부 
+		if(!hasRead) {
+			//조회수 증가
+			int result = boardService.increaseRegionCount(no);
+			
+			//쿠키생성
+			Cookie boardCookie = new Cookie("boardCookie", boardCookieVal+"|"+no+"|");
+//					boardCookie.setPath("/mvc/board");//작성안하면, 자동으로 현재경로로 셋팅됨.
+			//boardCookie.setMaxAge(60*60*24);//작성안하면, 브라우져에서 영구저장.
+			response.addCookie(boardCookie);
+			
+			
+		}
+		
+		RegionBoard board = boardService.selectRegionBoardOne(no);
+		
 		request.setAttribute("param", "board");
 		request.setAttribute("board", board);
 		request.setAttribute("regionList", regionList);
-		
 		String view = "";
 		if(board!=null) {
 			view = "/WEB-INF/views/board/regionBoardView.jsp";

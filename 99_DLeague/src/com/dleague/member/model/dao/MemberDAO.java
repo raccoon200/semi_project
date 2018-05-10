@@ -153,7 +153,7 @@ private Properties prop = new Properties();
 	      String query = prop.getProperty("memberInfoUpdate");
 	      PreparedStatement pstmt = null;
 	      try {
-	         //sssssss
+	         //ssssssssss
 	         pstmt = conn.prepareStatement(query);
 	         pstmt.setString(1, member.getPassword());
 	         pstmt.setString(2, member.getUserName());
@@ -165,7 +165,7 @@ private Properties prop = new Properties();
 	         pstmt.setString(8, member.getProfile());
 	         pstmt.setString(9, member.getGrade());
 	         SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd"); 
-	         //연경이 바보
+	         //연경이 바보sdsdsdsdsssdssssss
 	         pstmt.setDate(10, sdf.parse(member.getEnrolldate()));
 	         pstmt.setString(11, member.getPhoto());
 	         pstmt.setString(12, member.getUserId());
