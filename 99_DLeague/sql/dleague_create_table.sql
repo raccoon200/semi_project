@@ -6,7 +6,7 @@ CREATE TABLE TBL_USER (
 	REGIONCODE VARCHAR2(6) NOT NULL, /* ���� */
 	PHONE NVARCHAR2(11) NOT NULL, /* ��ȭ��ȣ */
 	EMAIL VARCHAR2(50), /* �̸��� */
-	BIRTHDAY DATE NOT NULL, /* ������� */
+	BIRTHDAY VARCHAR2(30) NOT NULL, /* ������� */
 	TEAMNAME NVARCHAR2(15), /* ���̸� */
 	PROFILE VARCHAR2(4000), /* ������ */
 	GRADE NVARCHAR2(5) NOT NULL, /* ��� */
@@ -14,7 +14,7 @@ CREATE TABLE TBL_USER (
 	ENROLLDATE DATE DEFAULT SYSDATE NOT NULL /* ���Գ�¥ */
 );
 alter table tbl_user modify photo default 'default.jpg';
-alter table tbl_user modify class default '선수';
+alter table tbl_user modify grade default '선수';
 
 CREATE UNIQUE INDEX PK_TBL_USER
 	ON TBL_USER (
