@@ -292,5 +292,23 @@ public class BoardDAO {
 		}
 		return count;
 	}
+
+
+	public int increaseRegionCount(Connection conn, int no) {
+		int result = -1;
+		PreparedStatement pstmt= null;
+		String query = prop.getProperty("increaseRegionCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 }

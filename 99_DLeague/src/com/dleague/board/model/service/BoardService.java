@@ -61,8 +61,11 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
-	public void increaseCount(int no) {
-		// TODO Auto-generated method stub
+	public int increaseRegionCount(int no) {
+		Connection conn= getConnection();
+		int result = new BoardDAO().increaseRegionCount(conn, no);
+		close(conn);
+		return result;
 		
 	}
 

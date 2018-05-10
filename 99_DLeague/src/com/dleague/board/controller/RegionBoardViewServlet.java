@@ -65,13 +65,12 @@ public class RegionBoardViewServlet extends HttpServlet {
 		//게시글 읽음여부 
 		if(!hasRead) {
 			//조회수 증가
-			boardService.increaseCount(no);
+			int result = boardService.increaseRegionCount(no);
 			
 			//쿠키생성
 			Cookie boardCookie = new Cookie("boardCookie", boardCookieVal+"|"+no+"|");
 //					boardCookie.setPath("/mvc/board");//작성안하면, 자동으로 현재경로로 셋팅됨.
 			//boardCookie.setMaxAge(60*60*24);//작성안하면, 브라우져에서 영구저장.
-			System.out.println("boardCookie생성 : "+boardCookie.getValue());
 			response.addCookie(boardCookie);
 			
 			

@@ -6,13 +6,14 @@
 <%
 	RegionBoard board = (RegionBoard)request.getAttribute("board");	
 	List<Region> regionList = (List<Region>)request.getAttribute("regionList");
-	System.out.println(board.getBoard_region_content());
+	List<RegionBoardComment> regionbcList = (List<RegionBoardComment>)request.getAttribute("regionbcList");
 	
 	HashMap<String,String> regionMap = new HashMap<String,String>();
 	for(int i=0; i<regionList.size(); i++) {
 		Region region = regionList.get(i);
 		regionMap.put(region.getRegionCode(), region.getRegionName());
 	}
+	
 %>
 <style>
 table.board-table{
@@ -84,4 +85,64 @@ td.view-content{
 <input type="button" class="updateBtn" value="수정">
 <input type="button" class="deleteBtn" value="삭제" />
 <%} %>
+<div id="comment-container">
+	<div class="comment-editor">
+		<form name="boardCommentFrm" action="<%=request.getContextPath()%>/board/boardCommentInsert" method="post">
+			<textarea name="boardCommentContent" cols="60" rows="3"></textarea>
+			<button type="submit" id="btn-insert">등록</button>
+			<input type="hidden" name="boardCommentWriter" value="<%=memberLoggedIn!=null?memberLoggedIn.getUserId():""%>" />
+			<input type="hidden" name="boardRef" value="<%=board.getBoard_region_no()%>" />
+			<input type="hidden" name="boardCommentRef" value="0" />
+			<input type="hidden" name="boardCommentLevel" value="1" />
+		</form>
+	</div> <!-- end of div.comment-editor -->
+	
+	<% if(regionbcList != null){ %>
+	<!-- 댓글목록테이블 -->
+	<table id="tbl-comment">
+	<%for(RegionBoardComment bc : regionbcList) { 
+		if(bc.getBoard_region_comment_level()==1){
+	%>
+		<tr class="level1">
+			<td>
+				<sub class="comment-writer"><%=bc.getBoard_region_comment_writer() %></sub>
+				<sub class="comment-date"><%=bc.getBoard_region_comment_date() %></sub>
+				<br />
+				<%=bc.getBoard_region_comment_content() %>
+			</td>
+			<td>
+				<button class="btn-reply" value="<%=bc.getBoard_region_comment_no()%>">답글</button>
+				<!-- 삭제버튼추가 -->
+				<%if(memberLoggedIn != null &&
+					("admin".equals(memberLoggedIn.getUserId())
+					|| bc.getBoard_region_comment_writer().equals(memberLoggedIn.getUserId()))
+						){ %>
+					<button class="btn-delete" value="<%=bc.getBoard_region_comment_no()%>">삭제</button>
+				<%} %>
+			</td>
+		</tr>
+	<% } else { %>
+		<tr class="level2">
+			<td>
+				<sub class="comment-writer"><%=bc.getBoard_region_comment_writer() %></sub>
+				<sub class="comment-date"><%=bc.getBoard_region_comment_date() %></sub>
+				<br />
+				<%=bc.getBoard_region_comment_content() %>
+			</td>
+			<td>
+				<!-- 삭제버튼추가 -->
+				<%if(memberLoggedIn != null &&
+					("admin".equals(memberLoggedIn.getUserId())
+					|| bc.getBoard_region_comment_writer().equals(memberLoggedIn.getUserId()))
+						){ %>
+					<button class="btn-delete" value="<%=bc.getBoard_region_comment_no()%>">삭제</button>
+				<%} %>
+			</td>
+		</tr>
+	
+	<% } //end of if
+	  } %>
+	</table>
+	<%} %>	
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		
