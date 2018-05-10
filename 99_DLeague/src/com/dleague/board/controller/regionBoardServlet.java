@@ -46,12 +46,25 @@ public class regionBoardServlet extends HttpServlet {
 			cPage =1;
 		}
 		
+		/*String regionCode  = "";
+		if(request.getParameter("region")!=null) {
+			regionCode = request.getParameter("region");
+		}*/
+		String regionCode = request.getParameter("region");
+		if(regionCode == null) {
+			regionCode = "G1";
+		}
+		
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		
 		//2. 업무로직처리
 		//2.1 현재페이지의 회원구하기
-		List<RegionBoard> regionBoardList = new BoardService().selectAll(cPage, numPerPage);
+		
+		List<RegionBoard> regionBoardList = new BoardService().selectAll(cPage, numPerPage, regionCode, searchType, searchValue);
 		
 		//2.2 전체게시글수, 전체페이지수 구하기
-		int totalBoardCount = new BoardService().selectRegionBoardCount();
+		int totalBoardCount = new BoardService().selectRegionBoardCount(regionCode, searchType, searchValue);
 		
 		//(공식2)전체페이지수구하기
 		int totalPage = (int)Math.ceil((double)totalBoardCount/numPerPage);
@@ -70,7 +83,7 @@ public class regionBoardServlet extends HttpServlet {
 		if(pageNo == 1) {
 			
 		}else {
-			pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?cPage="+(pageNo-1)+"'>[이전]</a> ";
+			pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+(pageNo-1)+"'>[이전]</a> ";
 		}
 		
 		// pageNo section
@@ -82,7 +95,7 @@ public class regionBoardServlet extends HttpServlet {
 				pageBar += "<span class='cPage'>"+pageNo+"</span> ";
 			} 
 			else {
-				pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?cPage="+pageNo+"'>"+pageNo+"</a> ";
+				pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+pageNo+"'>"+pageNo+"</a> ";
 			}
 			pageNo++;
 		}
@@ -91,7 +104,7 @@ public class regionBoardServlet extends HttpServlet {
 		if(pageNo > totalPage){
 			//pageBar += "<span>[다음]</span>";
 		} else {
-			pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?cPage="+pageNo+"'>[다음]</a>";
+			pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+pageNo+"'>[다음]</a>";
 		}
 		
 		if(regionBoardList!=null && !regionBoardList.isEmpty()) {
@@ -99,11 +112,13 @@ public class regionBoardServlet extends HttpServlet {
 			request.setAttribute("regionBoard", regionBoardList);
 			request.setAttribute("regionList", regionList);
 			request.setAttribute("pageBar", pageBar);
+			request.setAttribute("regionCode", regionCode);
 			request.getRequestDispatcher("/WEB-INF/views/board/regionBoard.jsp").forward(request,response);
 		}else {
 			//region_board테이블에 값이 없을 경우
 			request.setAttribute("param", "board");
 			request.setAttribute("regionList", regionList);
+			request.setAttribute("regionCode", regionCode);
 			request.getRequestDispatcher("/WEB-INF/views/board/regionBoard.jsp").forward(request,response);
 		}
 		

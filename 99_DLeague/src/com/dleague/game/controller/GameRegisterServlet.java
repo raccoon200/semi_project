@@ -33,11 +33,14 @@ public class GameRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(false);
-		String view = "";
+		String view = "/WEB-INF/views/game/gameRegister.jsp";
 		String msg = "";
 		String loc ="/";
-		if(session != null) {			
-			Member m = (Member)session.getAttribute("memberLoggedIn");
+		Member m = null;
+		if(session != null) {
+			m = (Member)session.getAttribute("memberLoggedIn");
+		}
+		if(m != null) {			
 			int cnt = new GameService().getGameCountByTeamName(m.getTeamname());
 			System.out.println(cnt);
 			if(cnt > 0) {

@@ -6,7 +6,7 @@
 <% 
 	List<RegionBoard> boardList = (ArrayList<RegionBoard>)request.getAttribute("regionBoard");
 	List<Region> regionList = (ArrayList<Region>)request.getAttribute("regionList");
-	
+	String selectRegionCode = (String)request.getAttribute("regionCode");
 	HashMap<String,String> regionMap = new HashMap<String,String>();
 	for(int i=0; i<regionList.size(); i++) {
 		Region region = regionList.get(i);
@@ -80,23 +80,48 @@ $(function() {
 	})
 	
 });
-
+function fn_changeRegion() {
+	location.href="<%=request.getContextPath()%>/board/regionBoard?region="+$("[name=regionSelect]").val();
+	
+	
+}
+function fn_search() {
+	
+	if($("#searchValue").val().trim().length==0) {
+		if($("[name=searchType]").val()=="title")
+			alert("검색할 제목을 입력하세요");
+		else
+			alert("검색할 아이디를 입력하세요");
+		return false;
+	}
+	var searchValue = $("#searchValue").val().trim();
+	var searchType = $("[name=searchType]").val();
+<%-- 	location.href='<%=request.getContextPath()%>/board/regionBoard?region=<%=selectRegionCode%>&searchType="+searchType+"&searchValue="+searchValue+'; --%>
+	return true;
+	
+}
 </script>
 <h2>지역게시판</h2>
 <section id="region-board-area">
-	<select name="regionSelect" id="region-select">
+	<select name="regionSelect" id="region-select" onchange="fn_changeRegion()">
 		<%if(regionList!=null && !regionList.isEmpty()){
 			for(int i=0; i<regionList.size(); i++) {
 				Region region = regionList.get(i);
 		%>
-			<option value="<%=region.getRegionCode()%>"><%= region.getRegionName()%></option>
+			<option value="<%=region.getRegionCode()%>" <%=region.getRegionCode().equals(selectRegionCode)?"selected":"" %>><%= region.getRegionName()%></option>
 		<%
 			}
 		} %>
 	</select>
 	<span class="search-area">
-		<input type="text" />
-		<input type="submit" value="검색" />
+		<form action="<%=request.getContextPath() %>/board/regionBoard" method="get">
+			<select name="searchType" id="">
+				<option value="title">제목</option>
+				<option value="name">아이디</option>
+			</select>
+			<input type="text" id="searchValue" name="searchValue"/>
+			<input type="submit" value="검색" onclick="fn_search()"/>
+		</form>
 	</span>
 	
 	<table class="board-table">

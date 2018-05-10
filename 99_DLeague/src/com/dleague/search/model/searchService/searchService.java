@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.dleague.search.model.dao.TeamDAO;
 import com.dleague.search.model.vo.Team;
+import com.dleague.search.model.vo.TeamMember;
 
 
 public class searchService {
@@ -66,6 +67,12 @@ public class searchService {
 		List<Team> list = new TeamDAO().teaSearch(conn,teamName);
 		close(conn);
 		return list;
+	}
+
+	public List<TeamMember> teamMemberSearch(String teamName) {
+		Connection conn = getConnection();
+		List<TeamMember> memberList = new TeamDAO().teamMemberSearch(conn, teamName);
+		return memberList;
 	}
 
 

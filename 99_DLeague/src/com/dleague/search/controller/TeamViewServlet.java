@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dleague.search.model.searchService.searchService;
 import com.dleague.search.model.vo.Team;
+import com.dleague.search.model.vo.TeamMember;
 
 
 /**
@@ -38,8 +39,11 @@ public class TeamViewServlet extends HttpServlet {
 		//2. 업무로직 요청
 		List<Team> list = new searchService().teamSearch(teamName);
 		
+		List<TeamMember> memberList = new searchService().teamMemberSearch(teamName);
+		
 		//3. view단 처리위임
-		request.setAttribute("list", list);	//팀토탈수	
+		request.setAttribute("list", list);
+		request.setAttribute("memberList", memberList);
 		request.setAttribute("param", "teamSearch");
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamSearchView.jsp");
 		reqDispatcher.forward(request, response);

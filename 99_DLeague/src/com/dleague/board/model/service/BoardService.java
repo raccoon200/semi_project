@@ -10,15 +10,31 @@ import static com.dleague.common.JDBCTemplate.*;
 
 public class BoardService {
 
-	public List<RegionBoard> selectAll(int cPage, int numPerPage) {;
+	public List<RegionBoard> selectAll(int cPage, int numPerPage, String regionCode, String searchType, String searchValue) {;
 		Connection conn = getConnection();
-		List<RegionBoard> list = new BoardDAO().selectAll(conn, cPage, numPerPage);
+		List<RegionBoard> list= null;
+		if(searchValue==null) {
+			list = new BoardDAO().selectAll(conn, cPage, numPerPage, regionCode);
+		}else {
+			if(searchType.equals("title"))
+				list = new BoardDAO().selectSearchTitle(conn, cPage, numPerPage, regionCode, searchValue);
+			else
+				list= new BoardDAO().selectSearchId(conn, cPage, numPerPage, regionCode, searchValue);
+		}
 		close(conn);
 		return list;
 	}
-	public int selectRegionBoardCount() {
+	public int selectRegionBoardCount(String regionCode, String searchType, String searchValue) {
 		Connection conn = getConnection();
-		int count = new BoardDAO().selectRegionBoardCount(conn);
+		int count = -1;
+		if(searchValue==null) {
+			count = new BoardDAO().selectRegionBoardCount(conn, regionCode);
+		}else {
+			if(searchType.equals("title"))
+				count = new BoardDAO().selectRegionBoardCountByTitle(conn, regionCode, searchValue);
+			else
+				count = new BoardDAO().selectRegionBoardCountById(conn, regionCode, searchValue);
+		}
 		close(conn);
 		return count;
 	}
