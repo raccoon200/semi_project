@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dleague.board.model.service.BoardService;
 import com.dleague.board.model.vo.RegionBoard;
+import com.dleague.board.model.vo.RegionBoardComment;
 import com.dleague.region.model.service.RegionService;
 import com.dleague.region.model.vo.Region;
 
@@ -36,7 +37,10 @@ public class RegionBoardViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		
 		int no = Integer.parseInt(request.getParameter("no"));
+		
+		System.out.println("no : "+no);
 		BoardService boardService = new BoardService();
 		
 		List<Region> regionList = new RegionService().selectRegionList();
@@ -78,9 +82,13 @@ public class RegionBoardViewServlet extends HttpServlet {
 		
 		RegionBoard board = boardService.selectRegionBoardOne(no);
 		
+		//댓글 받아오는부분
+		List<RegionBoardComment> regionbcList = boardService.selectRegionCommentAll(no);
+		
 		request.setAttribute("param", "board");
 		request.setAttribute("board", board);
 		request.setAttribute("regionList", regionList);
+		request.setAttribute("regionbcList", regionbcList);
 		String view = "";
 		if(board!=null) {
 			view = "/WEB-INF/views/board/regionBoardView.jsp";
