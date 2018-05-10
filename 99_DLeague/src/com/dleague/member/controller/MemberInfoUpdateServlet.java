@@ -45,8 +45,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		
 		//1.b saveDirectory
 		String saveDirectory = getServletContext().getRealPath("upload/member"); 
-				/*"C:\\Users\\user1\\git\\semi_project\\99_DLeague\\WebContent\\upload\\member";*/
-		
+				
 		System.out.println("saveDirectory="+saveDirectory);
 		
 		//1.c maxPostSize
