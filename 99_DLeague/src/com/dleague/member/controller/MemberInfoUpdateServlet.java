@@ -71,7 +71,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		String enrolldate = multiReq.getParameter("enrolldate");
 		String photo = multiReq.getFilesystemName("up_file");//실제시스템에 저장된 파일명
 		Member member = new Member(userId, password, userName, regioncode, phone, email, birthday, teamname
-				, profile, grade, photo, null);
+				, profile, grade, photo, enrolldate);
 		int result = new MemberService().memberInfoUpdate(member);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
