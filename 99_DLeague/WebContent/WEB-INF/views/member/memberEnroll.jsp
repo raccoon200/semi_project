@@ -87,7 +87,7 @@ placeholder="(-없이)01012345678" maxlength="11"/>
 <th>이메일</th>
 
 <td>
-<input type="email" name="email"  id="email_" >@
+<input type="text" name="email"  id="email_" >@
 <input type="text" name = "email" id="email_1" disabled value="naver.com">
 <select name="selectEmail" id="selectEmail">
 <option value="1">직접입력</option>
