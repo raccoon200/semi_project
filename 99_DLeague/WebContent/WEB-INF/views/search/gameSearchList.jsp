@@ -14,7 +14,7 @@
 table {
 	text-align: center;
 }
-div.center{
+div.center{ 
 	margin-top: 30px;
 }
 </style>
