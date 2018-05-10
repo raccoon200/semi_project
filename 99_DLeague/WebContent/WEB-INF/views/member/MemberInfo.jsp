@@ -89,24 +89,16 @@ table{border:1px solid;}
 <input type="image" <%-- src="<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>" --%> id="profileImg"/>
 <br /> 
 <div style="position:relative;">
-<input type="file" name="up_file" id="up_file" accept="image/*" onchange="fn_fileUpload(this);" />
-<span id="fname"><%=member.getPhoto() %></span>
+<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" />
+<span id="fname">프로필 사진 변경</span>
 </div>
 </section>
 </form>
 <script>
 $(function (){
-	$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>");
+
+$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/board/<%=member.getPhoto()%>");
 });
-function fn_fileUpload(value){
-	 if(value.files && value.files[0]) {
-         var reader = new FileReader();
-         reader.onload = function (e) {
-              $('#profileImg').attr('src', e.target.result);
-         }
-         reader.readAsDataURL(value.files[0]);
-	}
-}
 $("[name=up_file]").change(function(){ 
 	//$(this).val()은 선택한 파일명임.
 	if($(this).val()==""){
@@ -116,8 +108,18 @@ $("[name=up_file]").change(function(){
 		$("#fname").hide();
 	}
 });	
+function fn_fileUpload(value){
+	 if(value.files && value.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+             $('#profileImg').attr('src', e.target.result);
+			}
+        }
+        reader.readAsDataURL(value.files[0]);
+	}
 </script>
 <style>
+/* SS */
 span#fname{
 	position:absolute;
 	left:76px;

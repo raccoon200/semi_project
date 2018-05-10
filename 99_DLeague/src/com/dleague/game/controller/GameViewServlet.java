@@ -39,7 +39,19 @@ public class GameViewServlet extends HttpServlet {
 		}else {
 			o = new GameService().selectOneGame(no);
 		}
-		
+		String msg = "";
+		String loc = "";
+		String view = "/WEB-INF/views/game/myGameView.jsp";
+		if(o == null) {
+			msg = "잘못된 경로입니다.";
+			loc = "/game/myGameList";
+			view = "/WEB-INF/views/common/msg.jsp";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+		}
+		request.setAttribute("obj", o);
+		request.setAttribute("param", "myGameList");
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**
