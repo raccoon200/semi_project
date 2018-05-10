@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.dleague.game.model.service.GameService;
 import com.dleague.game.model.vo.Game;
 import com.dleague.member.model.vo.Member;
+import com.dleague.search.model.searchService.searchService;
 
 /**
  * Servlet implementation class GameSearchListServlet
@@ -35,11 +36,9 @@ public class GameSearchListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(false);
-		Member m = null;
-		String msg = "";
-		String loc = "/";
-		String view = "/WEB-INF/views/search/gameSearchList.jsp";
-		List<Game> list = null;
+		
+		List<Game> list = new searchService().gameSearchList();
+		
 		/*if(session != null) {
 			m = (Member)session.getAttribute("memberLoggedIn");
 		}
@@ -53,6 +52,12 @@ public class GameSearchListServlet extends HttpServlet {
 			list = new GameService().selectListByTeamName(m.getTeamname());
 		}*/
 		/*list = new GameService().selectListByTeamName(m.getTeamname());*/
+		
+		Member m = null;
+		String msg = "";
+		String loc = "/";
+		String view = "/WEB-INF/views/search/gameSearchList.jsp";
+		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.setAttribute("param", "teamSearchList");

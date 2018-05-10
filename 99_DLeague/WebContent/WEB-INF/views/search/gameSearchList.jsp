@@ -5,8 +5,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 <%
-/* 	List<Game> list = (List<Game>)request.getAttribute("list");
-	System.out.println(list); */
+	List<Game> list = (List<Game>)request.getAttribute("list");
+
 %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
