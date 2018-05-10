@@ -353,6 +353,7 @@ public class BoardDAO {
 				bc.setBoard_region_comment_no(rset.getInt("board_region_comment_no"));
 				bc.setBoard_region_comment_level(rset.getInt("board_region_comment_level"));
 				bc.setBoard_region_comment_writer(rset.getString("board_region_comment_writer"));
+				bc.setBoard_region_comment_content(rset.getString("board_region_comment_content"));
 				bc.setBoard_region_ref(rset.getInt("board_region_ref"));
 				bc.setBoard_region_comment_ref(rset.getInt("board_region_comment_ref"));
 				bc.setBoard_region_comment_date(rset.getDate("board_region_comment_date"));
