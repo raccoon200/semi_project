@@ -59,9 +59,9 @@
     
     /* 버튼 */
     .button {
-    margin:0 0 0 295px;
-    position:absolute;
-      height:33px;
+		margin:0 0 0 295px;
+    	position:absolute;
+      	height:33px;
 	  display: inline;
 	  vertical-align: top;
 	 /*  position: relative; */

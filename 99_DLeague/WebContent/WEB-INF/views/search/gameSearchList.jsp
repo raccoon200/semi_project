@@ -17,18 +17,21 @@ table {
 div.center{ 
 	margin-top: 30px;
 }
+span.sp{font-size:20px;font-weight: bold;}
+div#allDiv{text-align:center;}
+div#allDiv2{text-align:left; padding: 5px 20px 0 10px;}
+table td#td1{text-aling:center; padding:50px 0 0 0;}
 </style>
-<script>
-function fn_MemberList(gameNo){
-	location.href= "<%=request.getContextPath()%>/game/gameView?no="+gameNo;
-}
-</script>
+<div id="allDiv">
+<div id="allDiv2">
 <h2>경기검색</h2>
+<hr />
 <table class="table table-hover">
 <%-- <%if(!list.isEmpty()){ %>
 	<%for(Game g : list){ %> --%>
-	<tr onclick="fn_MemberList('');">
-		<td><h4>2018-09-01</h4></td>
+	<pre>  <span class="sp" id="sp1">경기날짜</span>                        <span class="sp" id="sp2">경기팀</span>                    <span class="sp" id="sp3">게임시간<span/>   <span class="sp" id="sp4">상제정보</span></pre>
+	<tr>
+		<td id="td1"><h3>2018-09-01</h3></td>
 		<td>
 			<table style="display: inline-block;">
 				<tr>
@@ -56,25 +59,12 @@ function fn_MemberList(gameNo){
 				</tr>
 			</table>			
 		</td>
-		<td><h4>게임시간</h4></td>
+		<td id="td1"><h3 >16:00</h3></td>
 		<td>
 			<%-- <%if (g.getAway() == null){ %> --%>
 			<div class="alert alert-warning center">
-				상대 찾는중
+				상세정보
 			</div>
-			<%-- <%} else if(g.getStatus() == null){ %> --%>
-			<div class="alert alert-info center">
-				경기 예정
-			</div>
-			<%-- <%} else if(g.getStatus().equals("Y")){ %> --%>
-			<div class="alert alert-success center">
-				경기 완료
-			</div>
-			<%-- <%} else {%> --%>
-			<div class="alert alert-danger center">
-				경기 미실시
-			</div>
-			<%-- <%} %> --%>
 		</td>
 	</tr>
 <%-- 	<%} %>
@@ -87,4 +77,6 @@ function fn_MemberList(gameNo){
 	</tr>
 <%-- <%} %> --%>
 </table>
+</div>
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>	
