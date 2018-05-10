@@ -47,7 +47,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			
 		String saveDirectory = getServletContext().getRealPath("upload/member");
 		System.out.println("saveDirectory="+saveDirectory);
-		
+		//1
 		int maxPostSize = 1024*1024*10;
 		
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, "UTF-8", new MyFileRenamePolicy());
