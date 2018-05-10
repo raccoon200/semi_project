@@ -18,17 +18,20 @@ table {
 div.center{
 	margin-top: 30px;
 }
+tr :hover{
+	cursor: pointer;
+}
 </style>
 <script>
-function fn_MemberList(gameNo){
-	location.href= "<%=request.getContextPath()%>/game/gameView?no="+gameNo;
+function fn_MemberList(gameNo,status){
+	location.href= "<%=request.getContextPath()%>/game/gameView?no="+gameNo+"&status="+status;
 }
 </script>
 <h2>내 팀 경기 일정</h2>
 <table class="table table-hover">
 <%if(!list.isEmpty()){ %>
 	<%for(Game g : list){ %>
-	<tr onclick="fn_MemberList('<%=g.getGameNo()%>');">
+	<tr onclick="fn_MemberList('<%=g.getGameNo()%>','<%=g.getStatus()%>');">
 		<td><h4><%=g.getGameDate() %></h4></td>
 		<td>
 			<table style="display: inline-block;">
