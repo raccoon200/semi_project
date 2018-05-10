@@ -32,7 +32,7 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("userid");
+		String userId = request.getParameter("userId");
 		Member m = new MemberService().selectOne(userId);
 		boolean isUsable = m==null?true:false;
 		System.out.println(userId+" : isUsable? => "+isUsable);
