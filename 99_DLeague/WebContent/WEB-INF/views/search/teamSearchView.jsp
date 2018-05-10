@@ -62,7 +62,13 @@
 </style>
     <div id="bu">
     	<div id="imgDiv">
-        	<img id="logoimg" src="<%=request.getContextPath() %>/images/team/default.jpg" alt="첨부파일" style="display:<%=rogo==null?"inline":"none" %>;"/>
+        	<img id="logoimg" src=
+        	<%if(rogo!=null){ %>
+        		"<%=request.getContextPath() %>/images/team/<%=rogo %>"
+        	<%}else{ %>
+        	 	"<%=request.getContextPath() %>/images/team/default.jpg"
+        	<%} %>
+        	 alt="첨부파일" style="display:<%=rogo==null?"inline":"none" %>;"/>
         </div>
         <div id="a">
             <h1 id="bb">팀이름</h1>

@@ -73,7 +73,14 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		Member member = new Member(userId, password, userName, regioncode, phone, email, birthday, teamname
 				, profile, grade, photo, enrolldate);
 		int result = new MemberService().memberInfoUpdate(member);
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String msg = "";
+		String loc = "/";
+		
+		if(result>0) msg = "성공적으로 수정되었습니다!";
+		else msg = "수정오류! 관리자에게 문의하시오!";
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
