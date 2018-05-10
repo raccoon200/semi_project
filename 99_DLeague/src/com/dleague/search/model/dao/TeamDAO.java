@@ -14,6 +14,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
 
+import com.dleague.search.model.vo.Activity;
 import com.dleague.search.model.vo.Team;
 import com.dleague.search.model.vo.TeamMember;
 import com.dleague.search.model.dao.TeamDAO;
@@ -150,7 +151,7 @@ public class TeamDAO {
 		return list;
 	}
 
-	public List<String> selectByName(Connection conn, String searchName) {
+	public List<String> selectByName(Connection conn, String searchName, String selectCode) {
 		List<String> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -159,6 +160,7 @@ public class TeamDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%"+searchName+"%");
+			pstmt.setString(2, selectCode);
 			
 			rset = pstmt.executeQuery();
 			
@@ -314,6 +316,42 @@ public class TeamDAO {
 		}
 		
 		return memberList;
+	}
+
+	public List<Activity> activityListSearch(Connection conn, String teamName) {
+		List<Activity> activityList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("activityListSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			pstmt.setString(2, teamName);
+			
+			rset = pstmt.executeQuery();
+			
+			activityList = new ArrayList<>();
+			
+			while(rset.next()) {
+				Activity a = new Activity();
+				a.setActivity_No(rset.getInt("activity_no"));
+				a.setHome(rset.getString("home"));
+				a.setAway(rset.getString("away"));
+				a.setPlace(rset.getString("place"));
+				a.setActivityDate(rset.getDate("activitydate"));
+				a.setResult(rset.getString("result"));
+				
+				activityList.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return activityList;
 	}
 
 }

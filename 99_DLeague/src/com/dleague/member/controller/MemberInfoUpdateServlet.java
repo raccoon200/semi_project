@@ -44,8 +44,8 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		}
 		
 		//1.b saveDirectory
-		String saveDirectory = "C:\\Users\\user1\\git\\semi_project\\99_DLeague\\WebContent\\upload\\member";
-		
+		String saveDirectory = getServletContext().getRealPath("upload/member"); 
+				
 		System.out.println("saveDirectory="+saveDirectory);
 		
 		//1.c maxPostSize
@@ -70,6 +70,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		String grade = multiReq.getParameter("grade");
 		String enrolldate = multiReq.getParameter("enrolldate");
 		String photo = multiReq.getFilesystemName("up_file");//실제시스템에 저장된 파일명
+		
 		Member member = new Member(userId, password, userName, regioncode, phone, email, birthday, teamname
 				, profile, grade, photo, enrolldate);
 		int result = new MemberService().memberInfoUpdate(member);

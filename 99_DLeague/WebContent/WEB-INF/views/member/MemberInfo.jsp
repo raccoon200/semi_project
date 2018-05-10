@@ -86,16 +86,24 @@ table{border:1px solid;}
 <input type="submit" value="수정" />
 <input type="reset" value="초기화" />
 <section id="imgsection">
-<input type="image" src="" id="profileImg"/>
+<input type="image" <%-- src="<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>" --%> id="profileImg"/>
 <br />
-<input type="file" name="up_file" id="up_file" accept="image/*" onchange="fn_fileUpload()"/>
+<input type="file" name="up_file" id="up_file" accept="image/*" onchange="fn_fileUpload(this);" value="<%=member.getPhoto()%>"/>
 </section>
 
 </form>
 <script>
-
-function fn_fileUpload(){
-	$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/fileImage.png");
+$(function (){
+	$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>");
+});
+function fn_fileUpload(value){
+	 if(value.files && value.files[0]) {
+         var reader = new FileReader();
+         reader.onload = function (e) {
+              $('#profileImg').attr('src', e.target.result);
+         }
+         reader.readAsDataURL(value.files[0]);
+	}
 }
 
 </script>
