@@ -110,7 +110,6 @@ $("#selectEmail").change(function() {
 				$("#email_1").attr("disabled",true);
 			}
 		
-	console.log("안녕");
 	});
 });
 
