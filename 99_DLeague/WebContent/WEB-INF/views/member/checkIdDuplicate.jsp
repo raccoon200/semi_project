@@ -15,7 +15,7 @@ function fn_checkIdDuplicate(){
 	if(userId.length<4){
 		alert('아이디는 4글자이상 가능합니다.');
 		return false;
-	}
+	} 
 	$("#userId").val(userId);
 	return true;
 	}
