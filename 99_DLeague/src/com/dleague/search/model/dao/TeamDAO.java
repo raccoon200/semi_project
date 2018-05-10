@@ -380,6 +380,8 @@ public class TeamDAO {
 				g.setStartTime(rset.getString("start_time"));
 				g.setGameContent(rset.getString("game_content"));
 				g.setStatus(rset.getString("status"));
+				g.setHomeLogo(rset.getString("homelogo"));
+				g.setAwayLogo(rset.getString("awaylogo"));
 				
 				gameSearchList.add(g);
 			}
