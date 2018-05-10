@@ -61,5 +61,9 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	public void increaseCount(int no) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
