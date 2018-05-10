@@ -90,14 +90,14 @@ table{border:1px solid;}
 <br /> 
 <div style="position:relative;">
 <input type="file" name="up_file" id="up_file" accept="image/*" onchange="fn_fileUpload(this);" />
-<span id="fname"><%=member.getPhoto() %></span>
+<span id="fname">프로필 사진 변경</span>
 </div>
 </section>
 </form>
 <script>
 $(function (){
 
-$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>");
+$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/board/<%=member.getPhoto()%>");
 });
 $("[name=up_file]").change(function(){ 
 	//$(this).val()은 선택한 파일명임.
