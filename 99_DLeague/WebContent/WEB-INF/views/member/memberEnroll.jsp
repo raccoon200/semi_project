@@ -23,25 +23,14 @@ function fn_checkIdDuplicate(){
 	var popup = window.open("",title,status);
 	
 	var checkIdDuplicateFrm = document.checkIdDuplicateFrm;
-	checkIdDuplicateFrm.userid.value=userid;
+	checkIdDuplicateFrm.userId.value=userId;
 	
 	checkIdDuplicateFrm.target = title;
 	checkIdDuplicateFrm.action = url;
 	checkIdDuplicateFrm.submit();
 	
 }
-$('#selectEmail').change(function() {
-	$("#selectEmail option:selected").each(function() {
-		if($(this).val() =='1') {
-			$("#email_1").val('');
-			$("#email_1").attr("disabled",false);
-			}else {
-				$("#email_1").val($(this).text());
-				$("#email_1").attr("disabled",true);
-			}
-		
-	});
-});
+
 </script>
 <section id = "enroll-container">
 <h2>회원가입 정보입력</h2>
@@ -98,7 +87,7 @@ placeholder="(-없이)01012345678" maxlength="11"/>
 <th>이메일</th>
 
 <td>
-<input type="email" name="email"  id="email_" >@
+<input type="text" name="email"  id="email_" >@
 <input type="text" name = "email" id="email_1" disabled value="naver.com">
 <select name="selectEmail" id="selectEmail">
 <option value="1">직접입력</option>
@@ -109,10 +98,26 @@ placeholder="(-없이)01012345678" maxlength="11"/>
 <option value="gmail.com">gmail.com</option>
 
 </select>
+<script>
+//자동완성 함수
+$("#selectEmail").change(function() {
+	$("#selectEmail option:selected").each(function() {
+		if($(this).val() =='1') {
+			$("#email_1").val("");
+			$("#email_1").attr("disabled",false);
+			}else {
+				$("#email_1").val($(this).text());
+				$("#email_1").attr("disabled",true);
+			}
+		
+	});
+});
+
+</script>
 </td>
 </tr>
 <tr>
-<th>거주지역</th>
+<th>거주지역</th>   
 <td>
 <input type="radio" id="regioncode1" name="regioncode"/>
 <label for = "regioncode1">서울</label>

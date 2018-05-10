@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import com.dleague.member.model.vo.Member;
@@ -152,7 +153,7 @@ private Properties prop = new Properties();
 	      String query = prop.getProperty("memberInfoUpdate");
 	      PreparedStatement pstmt = null;
 	      try {
-	         //sssssss
+	         //ssssssssss
 	         pstmt = conn.prepareStatement(query);
 	         pstmt.setString(1, member.getPassword());
 	         pstmt.setString(2, member.getUserName());
@@ -163,7 +164,9 @@ private Properties prop = new Properties();
 	         pstmt.setString(7, member.getTeamname());
 	         pstmt.setString(8, member.getProfile());
 	         pstmt.setString(9, member.getGrade());
-	         pstmt.setString(10, member.getEnrolldate());
+	         SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd"); 
+	         //연경이 바보sdsdsdsdsssdssssss
+	         pstmt.setDate(10, sdf.parse(member.getEnrolldate()));
 	         pstmt.setString(11, member.getPhoto());
 	         pstmt.setString(12, member.getUserId());
 	         result = pstmt.executeUpdate();
