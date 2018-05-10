@@ -39,8 +39,7 @@ public class RegionBoardViewServlet extends HttpServlet {
 		
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		
-		System.out.println("no : "+no);
+
 		BoardService boardService = new BoardService();
 		
 		List<Region> regionList = new RegionService().selectRegionList();
