@@ -1,6 +1,7 @@
 package com.dleague.board.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -87,5 +88,39 @@ public class BoardService {
 		close(conn);
 		return regionbcList;
 	}
+	public int updateRegionBoard(RegionBoard board) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().updateRegionBoard(conn, board);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int deleteRegionBoard(int no) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().deleteRegionBoard(conn, no);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int deleteRegionBoardComment(int no, int del) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().deleteRegionBoardComment(conn, no, del);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 
 }

@@ -171,7 +171,7 @@ $(function(){
     $(".btn-delete").click(function(){
         if(!confirm("정말 삭제하시겠습니까?")) return;
         //삭제처리후 돌아올 현재게시판번호도 함께 전송함.
-        location.href="<%=request.getContextPath()%>/board/boardCommentDelete?no=<%=board.getBoard_region_no() %>&del="+$(this).val();
+        location.href="<%=request.getContextPath()%>/board/regionBoardCommentDelete?no=<%=board.getBoard_region_no() %>&del="+$(this).val();
     });
 	
 	
@@ -230,9 +230,12 @@ function fn_fileDowload(oName, rName){
 		<td colspan="6" class="view-content"><%=board.getBoard_region_content() %></td>
 	</tr>
 </table>
-<% if(memberLoggedIn!=null && board.getBoard_region_writer().equals(memberLoggedIn.getUserId())){ %>
-<input type="button" class="updateBtn" value="수정">
-<input type="button" class="deleteBtn" value="삭제" />
+<% if(memberLoggedIn!=null && (board.getBoard_region_writer().equals(memberLoggedIn.getUserId())) ){ %>
+<input type="button" class="updateBtn" value="수정" onclick="location.href='<%=request.getContextPath()%>/board/regionBoardUpdate?no=<%=board.getBoard_region_no()%>'">
+<input type="button" class="deleteBtn" value="삭제" onclick="location.href='<%=request.getContextPath() %>/board/regionBoardDelete?no=<%=board.getBoard_region_no() %>'"/>
+<%} %>
+<% if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getUserId())){ %>
+<input type="button" class="deleteBtn" value="삭제" onclick="location.href='<%=request.getContextPath() %>/board/regionBoardDelete?no=<%=board.getBoard_region_no() %>'"/>
 <%} %>
 <div id="comment-container">
 	<div class="comment-editor">
@@ -284,7 +287,7 @@ function fn_fileDowload(oName, rName){
 					("admin".equals(memberLoggedIn.getUserId())
 					|| bc.getBoard_region_comment_writer().equals(memberLoggedIn.getUserId()))
 						){ %>
-					<button class="btn-delete" value="<%=bc.getBoard_region_comment_no()%>">삭제</button>
+					<button class="btn-delete" value="<%=bc.getBoard_region_comment_no()%>" >삭제</button>
 				<%} %>
 			</td>
 		</tr>
