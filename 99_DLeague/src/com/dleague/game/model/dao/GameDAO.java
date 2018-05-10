@@ -142,6 +142,7 @@ public class GameDAO {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
+				a = new Activity();
 				a.setActivity_No(rset.getInt("activity_no"));
 				a.setHome(rset.getString("home"));
 				a.setHomeLogo(rset.getString("homelogo"));

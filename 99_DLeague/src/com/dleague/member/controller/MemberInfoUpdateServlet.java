@@ -53,7 +53,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		//1.c maxPostSize
 		int maxPostSize = 1024*1024*10;
 	
-		//1.d MultipartRequest객체생성 ==> 파일rename정책 커스터마이징
+		//1.d MultipartRequest객체생성 ==> 파일rename정책 커스터마이징s
 		MultipartRequest multiReq = new MultipartRequest(request, 
 												   saveDirectory, 
 												   maxPostSize, 

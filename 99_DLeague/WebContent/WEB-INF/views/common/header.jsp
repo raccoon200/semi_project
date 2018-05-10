@@ -274,7 +274,7 @@ $(function() {
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-								<li><a href="#">내 팀 정보</a></li>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage">내 팀 정보</a></li>
 								<li><a href="#">내 팀 관리</a></li>
 							</ul>
 						</div>

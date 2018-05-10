@@ -26,7 +26,7 @@ public class TeamOneSearchServlet extends HttpServlet {
      */
     public TeamOneSearchServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stubs
     }
 
 	/**
