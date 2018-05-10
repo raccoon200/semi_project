@@ -22,6 +22,15 @@ nomaxvalue
 nocycle
 nocache;
 
+create sequence seq_board_free_comment_no
+start with 1
+increment by 1
+nominvalue
+nomaxvalue
+nocycle
+nocache;
+
+
 create sequence seq_board_free_no
 start with 1
 increment by 1
@@ -37,6 +46,16 @@ nominvalue
 nomaxvalue
 nocycle
 nocache;
+
+create sequence seq_board_region_comment_no
+start with 1
+increment by 1
+nominvalue
+nomaxvalue
+nocycle
+nocache;
+
+
 
 create sequence seq_complain_no
 start with 1

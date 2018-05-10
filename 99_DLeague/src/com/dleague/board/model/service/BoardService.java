@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.dleague.board.model.dao.BoardDAO;
 import com.dleague.board.model.vo.RegionBoard;
+import com.dleague.board.model.vo.RegionBoardComment;
+
 import static com.dleague.common.JDBCTemplate.*;
 
 public class BoardService {
@@ -67,6 +69,12 @@ public class BoardService {
 		close(conn);
 		return result;
 		
+	}
+	public int insertRegionBoardComment(RegionBoardComment regionBoardComment) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().insertRegionBoardComment(conn, regionBoardComment);
+		close(conn);
+		return result;
 	}
 
 }

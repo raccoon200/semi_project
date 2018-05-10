@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.board.model.vo.RegionBoard;
+import com.dleague.board.model.vo.RegionBoardComment;
+
 import static com.dleague.common.JDBCTemplate.*;
 
 
@@ -303,6 +305,29 @@ public class BoardDAO {
 			pstmt.setInt(1, no);
 			result = pstmt.executeUpdate();
 			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int insertRegionBoardComment(Connection conn, RegionBoardComment regionBoardComment) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertRegionBoardComment");
+		
+		try {
+			pstmt= conn.prepareStatement(query);
+			pstmt.setInt(1, regionBoardComment.getBoard_region_comment_level());
+			pstmt.setString(2, regionBoardComment.getBoard_region_comment_writer());
+			pstmt.setString(1, regionBoardComment.getBoard_region_comment_content());
+			pstmt.setInt(3, regionBoardComment.getBoard_region_ref());
+			pstmt.setInt(4, regionBoardComment.getBoard_region_comment_ref());
+			
+			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
