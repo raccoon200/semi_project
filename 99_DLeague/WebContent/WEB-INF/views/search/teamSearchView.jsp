@@ -61,13 +61,14 @@
     div#teamTable{width: 350px; display: inline-block;}
     /*teamTable*/
 </style>
+	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
         	<img id="logoimg" src=
         	<%if(rogo!=null){ %>
         		"<%=request.getContextPath() %>/images/team/<%=rogo %>"
         	<%}else{ %>
-        	 	"<%=request.getContextPath() %>/images/team/default.jpg"
+        	 	"<%=request.getContextPath() %>/images/team/default.png"
         	<%} %>
         	 alt="첨부파일" style="display:<%=rogo==null?"inline":"none" %>;"/>
         </div>
@@ -227,5 +228,5 @@
             </table>
             <!--//ui object -->
         </div>
-
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
