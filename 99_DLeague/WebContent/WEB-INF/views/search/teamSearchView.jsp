@@ -68,7 +68,7 @@
         	<%if(rogo!=null){ %>
         		"<%=request.getContextPath() %>/images/team/<%=rogo %>"
         	<%}else{ %>
-        	 	"<%=request.getContextPath() %>/images/team/default.png"
+        	 	"<%=request.getContextPath() %>/images/team/default.png" 
         	<%} %>
         	 alt="첨부파일" style="display:<%=rogo==null?"inline":"none" %>;"/>
         </div>
