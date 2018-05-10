@@ -24,10 +24,11 @@ console.log("<%=param%>");
 			</ul>
 			<%} %>
 			<!-- 로그인/회원가입 -->
-			<%if(param=="login") {%>
+			<%if(param=="login" || param=="enroll") {%>
 			<h2 id="nav-header"></h2>
 			<ul class="nav-list">
-				<li><a href="<%=request.getContextPath() %>/member/loginPage" id="nav-selected">로그인</a></li>
+				
+				<li><a href="<%=request.getContextPath() %>/member/loginPage" id=id=<%=param=="login"?"nav-selected":""%>>로그인</a></li>
 				
 				<li><a href="#" id=<%=param=="enroll"?"nav-selected":""%>>회원가입</a></li>
 			</ul>

@@ -1,7 +1,9 @@
 package com.dleague.member.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.dleague.member.model.service.MemberService;
 import com.dleague.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -33,6 +36,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(!ServletFileUpload.isMultipartContent(request)) {
+			request.setCharacterEncoding("UTF-8");
 			request.setAttribute("msg", "첨부파일오류[form:enctype]");
 			request.setAttribute("loc", "/member/memberEnroll");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
@@ -40,7 +44,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			return;
 		}
 			
-		String saveDirectory = getServletContext().getRealPath("/upload/memberEnroll");
+		String saveDirectory = "C:\\Users\\user1\\git\\semi_project\\99_DLeague\\WebContent\\upload\\member";
 		System.out.println("saveDirectory="+saveDirectory);
 		
 		int maxPostSize = 1024*1024*10;
@@ -48,11 +52,10 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, "UTF-8", new MyFileRenamePolicy());
 		
 		
-		}
 		
 		
 		
-		request.setCharacterEncoding("UTF-8");
+		
 	
 		String userId  = request.getParameter("userId");
 		String password = request.getParameter("password");
@@ -60,13 +63,44 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String regioncode = request.getParameter("regioncode");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email"); 
-		String birthday =request.getParameter("birthday");
-		String profile = request.getParameter("profile"); 
-		String photo = 
+		Date birthday =request.getParameter("birthday");
+		String profile = request.getParameter("profile");
+		String photo = multiReq.getParameter("Photo");
 		
-				Member member = new Member(userId, password, userName, regioncode, phone, email, birthday, null );
+	
 		
+		Member member = new Member();
+		member.setUserId(userId);
+		member.setPassword(password);
+		member.setUserName(userName);
+		member.setRegioncode(regioncode);
+		member.setPhone(phone);
+		member.setEmail(email);
+		member.setBirthday(birthday);
+		member.setProfile(profile);
+		member.setPhoto(photo);
+		System.out.println("입력한 회원정보 : "+member);
+		
+		int result = new MemberService().insertMember(member);
+		
+		String view = "/WEB-INF/views/common/msg.jsp";
+		String msg = "";
+		
+		String loc = "/";
+		
+		if(result>0)
+			msg = "회원가입 성공!";
+		else 
+			msg = "회원가입 실패 !!";
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
+		reqDispatcher.forward(request, response);
 	}
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <%@ include file="/WEB-INF/views/common/nav.jsp" %>
     <%@ page import="com.dleague.member.model.vo.*, java.util.*" %>
     <%
     Member m = (Member)request.getAttribute("member");
     %>
+    <style>
+    table{align:center;}
+    </style>
 <script>
 function fn_checkIdDuplicate(){
-	var userid = $("#userid_").val().trim();
+	var userid = $("#userId_").val().trim();
 	if(userid.length<4){
 		alert('아이디는 4글자 이상부터 가능합니다.');
 		return;
@@ -27,7 +32,8 @@ function fn_checkIdDuplicate(){
 </script>
 <section id = "enroll-container">
 <h2>회원가입 정보입력</h2>
-<form name="memberEnrollFrm" action="<%=request.getContextPath() %>/member/memberEnrollEnd" method="post" onsubmit="return fn_enrollValidate();">
+<form name="memberEnrollFrm" action="<%=request.getContextPath() %>/member/memberEnrollEnd" method="post" enctype="multipart/form-data">
+<!-- onsubmit="return fn_enrollValidate(); -->
 <table>
 <tr>
 <th>아이디</th>
@@ -57,9 +63,9 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 </td>
 </tr>
 <tr>
-<th>첨부파일</th>
+<th>Photo</th>
 <td>
-<input type="file" name="up_file"/>
+<input type="file" name="up_file" id="photo"/>
  </td>
  </tr>
 <tr>
@@ -77,9 +83,15 @@ placeholder="(-없이)01012345678" maxlength="11"/>
 </tr>
 <tr>
 <th>이메일</th>
+
 <td>
 <input type="email" id="email" name="email_"
-placeholder="abc@email.com" />
+placeholder="abc@email.com" />@<select name = "email1">
+<option value="naver.com">네이버
+<option value="daum.net">다음
+<option value="nate.com">네이트
+<option value="gamil.com">구글
+</select>
 </td>
 </tr>
 <tr>
@@ -101,6 +113,9 @@ placeholder="abc@email.com" />
 <label for = "regioncode7">경북</label>
 <input type="radio" id="regioncode8" name="regioncode"/>
 <label for = "regioncode8">경남</label>
+</td>
+</tr>
+<tr>
 <th>프로필</th>
 <td>
 <textarea id="profile" name="profile" maxlength="2048" style="height:180px;"></textarea>
@@ -113,5 +128,6 @@ placeholder="abc@email.com" />
 <input type="hidden" name="userid"/>
 </form>
 </section>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 
