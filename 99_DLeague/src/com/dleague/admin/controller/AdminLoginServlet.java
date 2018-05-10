@@ -1,4 +1,4 @@
-package com.dleague.admin;
+package com.dleague.admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
