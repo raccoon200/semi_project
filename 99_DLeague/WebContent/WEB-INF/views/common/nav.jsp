@@ -52,7 +52,7 @@ console.log("<%=param%>");
 			<h2 id="nav-header">검색</h2>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/search/teamSearch" id='<%=param=="teamSearch"?"nav-selected":""%>'>팀검색</a></li>
-				<li><a href="#">경기검색</a></li>
+				<li><a href="<%=request.getContextPath() %>/search/gameSearchList" id='<%=param=="teamSearchList"?"nav-selected":""%>'>경기검색</a></li>
 			</ul>
 			<%} %>
 			
