@@ -99,7 +99,7 @@ placeholder="(-없이)01012345678" maxlength="11"/>
 
 </select>
 <script>
-
+//자동완성 함수
 $("#selectEmail").change(function() {
 	$("#selectEmail option:selected").each(function() {
 		if($(this).val() =='1') {
