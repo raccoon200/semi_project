@@ -73,8 +73,19 @@ public class BoardService {
 	public int insertRegionBoardComment(RegionBoardComment regionBoardComment) {
 		Connection conn = getConnection();
 		int result = new BoardDAO().insertRegionBoardComment(conn, regionBoardComment);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
+	}
+	public List<RegionBoardComment> selectRegionCommentAll(int no) {
+		Connection conn = getConnection();
+		List<RegionBoardComment> regionbcList = new BoardDAO().selectRegionCommentAll(conn, no);
+		close(conn);
+		return regionbcList;
 	}
 
 }

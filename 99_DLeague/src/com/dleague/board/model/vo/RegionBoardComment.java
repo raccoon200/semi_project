@@ -64,6 +64,14 @@ public class RegionBoardComment {
 	public void setBoard_region_comment_date(Date board_region_comment_date) {
 		this.board_region_comment_date = board_region_comment_date;
 	}
+	@Override
+	public String toString() {
+		return "RegionBoardComment [board_region_comment_no=" + board_region_comment_no
+				+ ", board_region_comment_level=" + board_region_comment_level + ", board_region_comment_writer="
+				+ board_region_comment_writer + ", board_region_comment_content=" + board_region_comment_content
+				+ ", board_region_ref=" + board_region_ref + ", board_region_comment_ref=" + board_region_comment_ref
+				+ ", board_region_comment_date=" + board_region_comment_date + "]";
+	}
 	
 	
 	
