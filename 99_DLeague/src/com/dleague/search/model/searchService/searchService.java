@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 import com.dleague.search.model.dao.TeamDAO;
+import com.dleague.search.model.vo.Activity;
 import com.dleague.search.model.vo.Team;
 import com.dleague.search.model.vo.TeamMember;
 
@@ -73,6 +74,12 @@ public class searchService {
 		Connection conn = getConnection();
 		List<TeamMember> memberList = new TeamDAO().teamMemberSearch(conn, teamName);
 		return memberList;
+	}
+
+	public List<Activity> activityListSearch(String teamName) {
+		Connection conn = getConnection();
+		List<Activity> activityList = new TeamDAO().activityListSearch(conn,teamName);
+		return activityList;
 	}
 
 
