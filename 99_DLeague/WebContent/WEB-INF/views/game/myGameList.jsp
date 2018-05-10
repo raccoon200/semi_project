@@ -21,47 +21,66 @@ div.center{
 </style>
 <h2>내 팀 경기 일정</h2>
 <table class="table table-hover">
+<%if(!list.isEmpty()){ %>
+	<%for(Game g : list){ %>
 	<tr>
-		<td>2018/12/12일</td>
+		<td><h4><%=g.getGameDate() %></h4></td>
 		<td>
-			<img src="<%=request.getContextPath() %>/images/team/tigers.png" alt="home" style="width: 150px;"/>
+			<table style="display: inline-block;">
+				<tr>
+					<td>
+						<img src="<%=request.getContextPath() %>/images/team/<%=g.getHomeLogo() %>" alt="home" style="height: 112.188px;"/>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center">
+						<%=g.getHome() %>			
+					</td>
+				</tr>
+			</table>
 			<h2 style="display: inline-block;">VS</h2>
-			<img src="<%=request.getContextPath() %>/images/team/tigers.png" alt="home" style="width: 150px;"/>			
+			<table style="display: inline-block;">
+				<tr>
+					<td>
+						<img src='<%=request.getContextPath() %>/images/team/<%=g.getAwayLogo()==null?"awayNull.png":g.getAwayLogo() %>' alt="home" style="height: 112.188px;"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%=g.getAway()==null?"&nbsp;":g.getAway() %>					
+					</td>
+				</tr>
+			</table>			
 		</td>
-		<td>18 : 30</td>
+		<td><h4><%= g.getStartTime() %></h4></td>
 		<td>
-			<div class="alert alert-success center">
-				경기 완료
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td>2018/12/12일</td>
-		<td>
-			<img src="<%=request.getContextPath() %>/images/team/tigers.png" alt="home" style="width: 150px;"/>
-			<h2 style="display: inline-block;">VS</h2>
-			<img src="<%=request.getContextPath() %>/images/team/tigers.png" alt="home" style="width: 150px;"/>			
-		</td>
-		<td> 18 : 30</td>
-		<td>
-			<div class="alert alert-danger center">
-				경기 미실시
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td>2018/12/12일</td>
-		<td>
-			<img src="<%=request.getContextPath() %>/images/team/tigers.png" alt="home" style="width: 150px;"/>
-			<h2 style="display: inline-block;">VS</h2>
-			<img src="<%=request.getContextPath() %>/images/team/tigers.png" alt="home" style="width: 150px;"/>			
-		</td>
-		<td> 18 : 30</td>
-		<td>
+			<%if (g.getAway() == null){ %>
 			<div class="alert alert-warning center">
 				상대 찾는중
 			</div>
+			<%} else if(g.getStatus() == null){ %>
+			<div class="alert alert-info center">
+				경기 예정
+			</div>
+			<%} else if(g.getStatus().equals("Y")){ %>
+			<div class="alert alert-success center">
+				경기 완료
+			</div>
+			<%} else {%>
+			<div class="alert alert-danger center">
+				경기 미실시
+			</div>
+			<%} %>
 		</td>
 	</tr>
+	<%} %>
+<%} else{ %>
+	<tr>
+		<td colspan="4"><br />
+		<br />
+		<br /><h4>내팀 경기 일정이 없습니다.</h4><br />
+		<br /></td>
+	</tr>
+<%} %>
 </table>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>	
