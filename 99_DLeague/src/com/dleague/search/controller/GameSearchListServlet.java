@@ -40,7 +40,7 @@ public class GameSearchListServlet extends HttpServlet {
 		String loc = "/";
 		String view = "/WEB-INF/views/search/gameSearchList.jsp";
 		List<Game> list = null;
-		if(session != null) {
+		/*if(session != null) {
 			m = (Member)session.getAttribute("memberLoggedIn");
 		}
 		if(m == null) {
@@ -51,7 +51,8 @@ public class GameSearchListServlet extends HttpServlet {
 			view = "/WEB-INF/views/common/msg.jsp";
 		}else {
 			list = new GameService().selectListByTeamName(m.getTeamname());
-		}
+		}*/
+		/*list = new GameService().selectListByTeamName(m.getTeamname());*/
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.setAttribute("param", "teamSearchList");
