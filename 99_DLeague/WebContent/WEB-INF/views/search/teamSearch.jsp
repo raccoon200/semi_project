@@ -17,6 +17,7 @@
     #teamDiv2{text-align:left; padding:0px 10px 0px 0px;}
     
     /* table Object */
+    th{text-align:center} /* 부트스트랩으로 센터로안옴 */
    	legend{margin:30px 0 0 0;}
     .tbl_type{margin:auto;}
     .tbl_type,.tbl_type th,.tbl_type td{border:0}
