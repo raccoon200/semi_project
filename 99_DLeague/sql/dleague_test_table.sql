@@ -169,6 +169,14 @@ update tbl_user set teamname='testTeam28' where userid='test40';
 update tbl_user set teamname='testTeam29' where userid='test41';
 update tbl_user set teamname='testTeam30' where userid='test42';
 
+/*게임활동내역*/
+insert into activity values(seq_activity_no.nextval,'testTeam1','testTeam2','잠실 종합 운동장','2018/05/09','60:55');
+insert into activity values(seq_activity_no.nextval,'testTeam2','testTeam1','영일고등학교 체육관','2018/05/09','60:61');
+insert into activity values(seq_activity_no.nextval,'testTeam6','testTeam2','잠실 종합 운동장','2018/05/10','20:31');
+insert into activity values(seq_activity_no.nextval,'testTeam1','testTeam2','잠실 종합 운동장','2018/05/11','55:32');
+insert into activity values(seq_activity_no.nextval,'testTeam6','testTeam1','일산 고양체육관','2018/05/12','30:66');
+
+
 commit;
 
 

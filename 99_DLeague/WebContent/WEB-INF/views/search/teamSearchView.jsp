@@ -4,6 +4,7 @@
 <%
 	List<Team> list = (List<Team>)request.getAttribute("list");
 	List<TeamMember> memberList = (List<TeamMember>)request.getAttribute("memberList");
+	List<Activity> activityList = (List<Activity>)request.getAttribute("activityList");
 	
 	//team정보
 	String teamName="";
@@ -189,76 +190,38 @@
                 <col width="10%"> 
                 <col width="10%">
                 <col width="10%">
-                <col width="10%">
-                <col width="10%">
+                <col width="25%">
                 <col width="10%">
             </colgroup>
             <thead>
             <tr>
-                <th scope="col">순번</th>
-                <th scope="col">팀명</th>
-                <th scope="col">지역</th>
-                <th scope="col">소속선수</th>
-                <th scope="col">창단일</th>
-                <th scope="col">경기수</th>
+                <th scope="col">게임번호</th>
+                <th scope="col">HomeTeam</th>
+                <th scope="col">AwayTeam</th>
+                <th scope="col">게임날짜</th>
+                <th scope="col">결과</th>
             </tr>
             </thead>
             <tbody>
-                <tr>
-                <td class="ranking" scope="row">1</td>
-                <td>콜로라도</td>
-                <td>서울</td>
-                <td>90</td>
-                <td>1991-05-01</td>
-                <td>120</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">2</td>
-                <td>샌디에이고</td>
-                <td>부산</td>
-                <td>24</td>
-                <td>2007-05-01</td>
-                <td>100</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">3</td>
-                <td>뉴욕m</td>
-                <td>경기도</td>
-                <td>23</td>
-                <td>2015-05-01</td>
-                <td>23</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">4</td>
-                <td>애틀랜타</td>
-                <td>강원도</td>
-                <td>5</td>
-                <td>2008-05-01</td>
-                <td>1</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">5</td>
-                <td>밀워키</td>
-                <td>전라남도</td>
-                <td>83</td>
-                <td>2002-02-02</td>
-                <td>10</td>
-                </tr>
-                <tr>
-                <td class="ranking" scope="row">6</td>
-                <td>lad</td>
-                <td>경상북도</td>
-                <td>30</td>
-                <td>2001-05-01</td>
-                <td>30</td>
+            <%if(activityList==null){ %>
+            <tr>
+                <td colspan="5">데이터가 없습니다.</td>
             </tr>
+            <%} %>
+            <%for(Activity a: activityList){ %>
+            <tr>
+                <td class="ranking" scope="row"><%=a.getActivity_No() %></td>
+                <td style="color:<%=((a.getHome().equals(teamName))?"red":"black" )%>"><%=a.getHome() %></td>
+                <td style="color:<%=((a.getAway().equals(teamName))?"red":"black" )%>"><%=a.getAway() %></td>
+                <td><%=a.getActivityDate() %></td>
+                <td><%=a.getResult() %></td>
+                </tr>
+            </tr>
+            <%} %>
             </tbody>
             <tfoot>
                 <tr>
-                <td>종합</td>
-                <td>총 팀수</td>
-                <td>서울</td>
-                <td colspan="3">6개팀</td>
+                <td colspan="5">활동내역</td>
                 </tr>
                 </tfoot>
             </table>

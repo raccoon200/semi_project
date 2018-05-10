@@ -43,7 +43,7 @@ public class RegionBoardFormEndServlet extends HttpServlet {
 		}
 		
 		String saveDirectory = getServletContext().getRealPath("upload/board");
-		
+		System.out.println(saveDirectory);
 		int maxPostSize = 1024*1024*10; //10MB
 		
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, "UTF-8", new MyFileRenamePolicy());
