@@ -18,12 +18,20 @@ table {
 div.center{
 	margin-top: 30px;
 }
+tr :hover{
+	cursor: pointer;
+}
 </style>
+<script>
+function fn_MemberList(gameNo,status){
+	location.href= "<%=request.getContextPath()%>/game/gameView?no="+gameNo+"&status="+status;
+}
+</script>
 <h2>내 팀 경기 일정</h2>
 <table class="table table-hover">
 <%if(!list.isEmpty()){ %>
 	<%for(Game g : list){ %>
-	<tr>
+	<tr onclick="fn_MemberList('<%=g.getGameNo()%>','<%=g.getStatus()%>');">
 		<td><h4><%=g.getGameDate() %></h4></td>
 		<td>
 			<table style="display: inline-block;">
@@ -33,7 +41,7 @@ div.center{
 					</td>
 				</tr>
 				<tr>
-					<td style="text-align: center">
+					<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getHome())?"red":""%>'>
 						<%=g.getHome() %>			
 					</td>
 				</tr>
@@ -46,7 +54,7 @@ div.center{
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getAway())?"red":""%>'>
 						<%=g.getAway()==null?"&nbsp;":g.getAway() %>					
 					</td>
 				</tr>

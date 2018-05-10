@@ -88,7 +88,7 @@ table{border:1px solid;}
 <section id="imgsection">
 <input type="image" <%-- src="<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>" --%> id="profileImg"/>
 <br />
-<input type="file" name="up_file" id="up_file" accept="image/*" onchange="fn_fileUpload()"/>
+<input type="file" name="up_file" id="up_file" accept="image/*" onchange="fn_fileUpload(this);" value="<%=member.getPhoto()%>"/>
 </section>
 
 </form>
@@ -96,9 +96,14 @@ table{border:1px solid;}
 $(function (){
 	$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>");
 });
-function fn_fileUpload(){
-	alert($("#up_file").val());
-	$("#profileImg").attr("src", $("#up_file").val());
+function fn_fileUpload(value){
+	 if(value.files && value.files[0]) {
+         var reader = new FileReader();
+         reader.onload = function (e) {
+              $('#profileImg').attr('src', e.target.result);
+         }
+         reader.readAsDataURL(value.files[0]);
+	}
 }
 
 </script>

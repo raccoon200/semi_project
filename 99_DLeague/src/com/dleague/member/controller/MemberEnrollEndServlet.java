@@ -45,9 +45,9 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			return;
 		}
 			
-		String saveDirectory = "C:\\Users\\user1\\git\\semi_project\\99_DLeague\\WebContent\\upload\\member";
+		String saveDirectory = getServletContext().getRealPath("upload/member");
 		System.out.println("saveDirectory="+saveDirectory);
-		
+		//`121`2
 		int maxPostSize = 1024*1024*10;
 		
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, "UTF-8", new MyFileRenamePolicy());

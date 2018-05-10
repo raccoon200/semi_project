@@ -1,28 +1,25 @@
-package com.dleague.member.controller;
+package com.dleague.game.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dleague.member.model.service.MemberService;
-import com.dleague.member.model.vo.Member;
+import com.dleague.game.model.service.GameService;
 
 /**
- * Servlet implementation class CheckIdDuplicateServlet
+ * Servlet implementation class GameViewServlet
  */
-@WebServlet("/member/checkIdDuplicate")
-public class CheckIdDuplicateServlet extends HttpServlet {
+@WebServlet("/game/gameView")
+public class GameViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckIdDuplicateServlet() {
+    public GameViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +28,17 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("userId");
-		Member m = new MemberService().selectOne(userId);
-		boolean isUsable = m==null?true:false;
-		System.out.println(userId+" : isUsable? => "+isUsable);
-		request.setAttribute("userId", userId);
-		request.setAttribute("isUsable", isUsable);
-		RequestDispatcher reqDispatcher
-		=request.getRequestDispatcher("/WEB-INF/views/member/checkIdDuplicate.jsp");
-		reqDispatcher.forward(request, response);
-		
+		int no = Integer.parseInt(request.getParameter("no"));
+		String status = request.getParameter("status");
+		System.out.println(no);
+		System.out.println(status);
+//		Game g = null;
+//		if("Y".equals(status)) {			
+//			g = new GameService().selectOneWithResult();
+//		}else {
+//			g = new GameService().selectOneGame();
+//		}
 	}
-		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
