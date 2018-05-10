@@ -173,7 +173,7 @@ return 0;
 		String query = prop.getProperty("memberInfoUpdate");
 		PreparedStatement pstmt = null;
 		try {
-			//sss
+			//sssssss
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, member.getPassword());
 			pstmt.setString(2, member.getUserName());
