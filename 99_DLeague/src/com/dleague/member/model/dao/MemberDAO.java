@@ -6,9 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 
@@ -88,7 +90,8 @@ private Properties prop = new Properties();
 				m.setProfile(rset.getString("profile"));
 				m.setGrade(rset.getString("grade"));
 				m.setPhoto(rset.getString("photo"));
-				m.setEnrolldate(rset.getString("enrolldate"));
+				m.setEnrolldate(rset.getDate("enrolldate"));
+				
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -164,16 +167,16 @@ private Properties prop = new Properties();
 	         pstmt.setString(7, member.getTeamname());
 	         pstmt.setString(8, member.getProfile());
 	         pstmt.setString(9, member.getGrade());
-	         SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd"); 
-	         //연경이 바보sdsdsdsdsssdssssss
-	         pstmt.setDate(10, sdf.parse(member.getEnrolldate()));
+	         
+	         pstmt.setDate(10, member.getEnrolldate());
 	         pstmt.setString(11, member.getPhoto());
 	         pstmt.setString(12, member.getUserId());
 	         result = pstmt.executeUpdate();
 	         System.out.println(result);
 	      } catch (SQLException e) {
 	         e.printStackTrace();
-	      } finally {
+	      } 
+		 finally {
 	         close(pstmt);
 	      }
 	      return result;
@@ -190,11 +193,11 @@ try {
 	pstmt.setString(1,  member.getUserId());
 	pstmt.setString(2,  member.getPassword());
 	pstmt.setString(3,  member.getBirthday());
-pstmt.setString(4,  member.getPhone());
-pstmt.setString(5,  member.getEmail());
-pstmt.setString(6,  member.getRegioncode());
-pstmt.setString(7,  member.getProfile());
-
+	pstmt.setString(4,  member.getPhone());
+	pstmt.setString(5,  member.getEmail());
+	pstmt.setString(6,  member.getRegioncode());
+	
+	pstmt.setString(7,  member.getProfile());
 result = pstmt.executeUpdate();
 
 	} catch (SQLException e) {

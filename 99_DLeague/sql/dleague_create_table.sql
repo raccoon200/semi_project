@@ -14,7 +14,7 @@ CREATE TABLE TBL_USER (
 	ENROLLDATE DATE DEFAULT SYSDATE NOT NULL /* ���Գ�¥ */
 );
 alter table tbl_user modify photo default 'default.jpg';
-alter table tbl_user modify class default '선수';
+alter table tbl_user modify grade default '선수';
 
 CREATE UNIQUE INDEX PK_TBL_USER
 	ON TBL_USER (
