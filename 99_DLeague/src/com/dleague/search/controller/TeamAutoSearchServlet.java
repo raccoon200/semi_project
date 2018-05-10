@@ -37,13 +37,14 @@ public class TeamAutoSearchServlet extends HttpServlet {
 		
 		//2.파라미터 핸들링
 		String searchName = request.getParameter("searchName");
-		System.out.println("searchName="+searchName);
+		String selectCode = request.getParameter("selectCode");
+		/*System.out.println("searchName="+searchName);*/
 		
 		//3.업무로직
 		List<String> list = null;
 		String csv= "";
 		if(!searchName.trim().isEmpty()) {
-			list = new searchService().selectByName(searchName);
+			list = new searchService().selectByName(searchName,selectCode);
 			//리턴된 값이 있는 경우만, csv처리
 			if(!list.isEmpty()) {
 				for(int i=0; i<list.size(); i++) {

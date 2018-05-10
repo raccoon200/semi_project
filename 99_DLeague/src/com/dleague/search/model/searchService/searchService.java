@@ -42,9 +42,9 @@ public class searchService {
 		return list;
 	}
 
-	public List<String> selectByName(String searchName) {
+	public List<String> selectByName(String searchName, String selectCode) {
 		Connection conn = getConnection();
-		List<String> list = new TeamDAO().selectByName(conn, searchName);
+		List<String> list = new TeamDAO().selectByName(conn, searchName,selectCode);
 		close(conn);
 		return list;
 	}

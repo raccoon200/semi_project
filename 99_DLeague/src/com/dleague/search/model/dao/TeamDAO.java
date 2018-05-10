@@ -151,7 +151,7 @@ public class TeamDAO {
 		return list;
 	}
 
-	public List<String> selectByName(Connection conn, String searchName) {
+	public List<String> selectByName(Connection conn, String searchName, String selectCode) {
 		List<String> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -160,6 +160,7 @@ public class TeamDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%"+searchName+"%");
+			pstmt.setString(2, selectCode);
 			
 			rset = pstmt.executeQuery();
 			

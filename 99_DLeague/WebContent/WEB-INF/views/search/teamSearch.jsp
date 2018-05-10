@@ -206,7 +206,6 @@
 			location.href="<%=request.getContextPath()%>/search/teamAutoSearch";
 		}); --%>
 		$("#autoComplete").hide();
-		
 		$("#searchName").keyup(function(e){
 			//console.log(e.key+", "+$(this).val());
 			//방향키(ArrowUp, ArrowDown), 엔터(Enter)일 경우, 선택효과 및 선택처리함
@@ -244,12 +243,12 @@
 				$("#autoComplete").hide().children().remove();
 			}else{
 				var searchName = $(this).val();
-				
+				var selectCode = $("#selectCode").val();
 				$.ajax({
 					<%-- url:"<%=request.getContextPath()%>/jq/autoComplete.do?searchName="+searchName, get방식일때--%>
 					url:"<%=request.getContextPath()%>/search/teamAutoSearch",
 					type:"post",
-					data:"searchName="+searchName,/* +"&age=" 두개이상일떄*/
+					data:"searchName="+searchName+"&selectCode="+selectCode,/* +"&age=" 두개이상일떄*/
 					success:function(data){
 						//console.log(data);
 						//아무값도 넘어오지 않는 경우, data.split(",")의 길이가 1임.
