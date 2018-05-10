@@ -13,14 +13,14 @@ import com.dleague.member.model.vo.Member;
 /**
  * Servlet implementation class MemberInfoServlet
  */
-@WebServlet("/member/memberInfo")
-public class MemberInfoServlet extends HttpServlet {
+@WebServlet("/member/memberInfoPage")
+public class MemberInfoPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInfoServlet() {
+    public MemberInfoPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

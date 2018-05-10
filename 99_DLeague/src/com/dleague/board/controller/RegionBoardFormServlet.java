@@ -1,31 +1,28 @@
-package com.dleague.search.controller;
+package com.dleague.board.controller;
 
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dleague.search.model.searchService.searchService;
-import com.dleague.search.model.vo.Team;
-import com.dleague.search.model.vo.TeamMember;
-
+import com.dleague.region.model.service.RegionService;
+import com.dleague.region.model.vo.Region;
 
 /**
- * Servlet implementation class TeamViewServlet
+ * Servlet implementation class RegionBoardFormServlet
  */
-@WebServlet("/search/searchView")
-public class TeamViewServlet extends HttpServlet {
+@WebServlet("/board/regionBoardForm")
+public class RegionBoardFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TeamViewServlet() {
+    public RegionBoardFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +31,11 @@ public class TeamViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 파라미터 변수에 담기
-		String teamName = request.getParameter("teamName");
-		//2. 업무로직 요청
-		List<Team> list = new searchService().teamSearch(teamName);
+		request.setCharacterEncoding("utf-8");
+		List<Region> regionList = new RegionService().selectRegionList();
+		request.setAttribute("regionList", regionList);
 		
-		List<TeamMember> memberList = new searchService().teamMemberSearch(teamName);
-		
-		//3. view단 처리위임
-		request.setAttribute("list", list);
-		request.setAttribute("memberList", memberList);
-		request.setAttribute("param", "teamSearch");
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamSearchView.jsp");
-		reqDispatcher.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/board/regionBoardForm.jsp").forward(request, response);
 	}
 
 	/**

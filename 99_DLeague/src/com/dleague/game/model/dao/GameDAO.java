@@ -1,14 +1,18 @@
 package com.dleague.game.model.dao;
 
+import static com.dleague.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.dleague.game.model.vo.Game;
-import static com.dleague.common.JDBCTemplate.*;
 public class GameDAO {
 	Properties prop = new Properties();
 	
@@ -41,6 +45,56 @@ public class GameDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+	public int getGameCountByTeamName(Connection conn, String teamname) {
+		int cnt = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("getGameCountByTeamName");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamname);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				cnt = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+	public List<Game> selectListByTeamName(Connection conn, String teamname) {
+		List<Game> list = new ArrayList<Game>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectListByTeamName");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamname);
+			pstmt.setString(2, teamname);			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Game g = new Game();
+				g.setGameNo(rset.getInt("game_no"));
+				g.setHome(rset.getString("home"));
+				g.setAway(rset.getString("away"));
+				g.setGameDate(rset.getDate("gamedate"));
+				g.setGameRegDate(rset.getDate("game_reg_date"));
+				g.setPlace(rset.getString("place"));
+				g.setStartTime(rset.getString("start_time"));
+				g.setGameContent(rset.getString("game_content"));
+				g.setStatus(rset.getString("status"));
+				
+				list.add(g);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 }

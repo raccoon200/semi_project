@@ -1,7 +1,5 @@
 package com.dleague.member.model.vo;
 
-import java.sql.Date;
-
 public class Member {
 	String userId;   
 	String password; 
@@ -9,6 +7,7 @@ public class Member {
 	String regioncode; 
 	String phone; 
 	String email; 
+<<<<<<< HEAD
 	Date birthday;
 	String birthdayString;
 	public String getBirthdayString() {
@@ -19,20 +18,31 @@ public class Member {
 		this.birthdayString = birthdayString;
 	}
 
+=======
+	String birthday;
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 	String teamname; 
 	String profile; 
 	String grade; 
 	String photo; 
+<<<<<<< HEAD
 	String originalFileName;
 	String renamedFileName;
 	Date enrolldate;
+=======
+	String enrolldate;
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 	
 	public Member() {
 		
 	}
-
+//sas
 	public Member(String userId, String password, String userName, String regioncode, String phone, String email,
+<<<<<<< HEAD
 			Date birthday, String teamname, String profile, String grade, String photo, String originalFileName, String renamedFileName, Date enrolldate) {
+=======
+			String birthday, String teamname, String profile, String grade, String photo, String enrolldate) {
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -98,11 +108,11 @@ public class Member {
 		this.email = email;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
@@ -137,6 +147,7 @@ public class Member {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+<<<<<<< HEAD
 	public String getOriginalFileName() {
 		return originalFileName;
 	}
@@ -145,10 +156,14 @@ public class Member {
 		
 	}
 	public Date getEnrolldate() {
+=======
+
+	public String getEnrolldate() {
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 		return enrolldate;
 	}
 
-	public void setEnrolldate(Date enrolldate) {
+	public void setEnrolldate(String enrolldate) {
 		this.enrolldate = enrolldate;
 	}
 

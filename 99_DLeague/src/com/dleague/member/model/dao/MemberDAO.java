@@ -82,12 +82,12 @@ private Properties prop = new Properties();
 				m.setRegioncode(rset.getString("regioncode"));
 				m.setPhone(rset.getString("phone"));
 				m.setEmail(rset.getString("email"));
-				m.setBirthday(rset.getDate("birthday"));
+				m.setBirthday(rset.getString("birthday"));
 				m.setTeamname(rset.getString("teamname"));
 				m.setProfile(rset.getString("profile"));
 				m.setGrade(rset.getString("grade"));
 				m.setPhoto(rset.getString("photo"));
-				m.setEnrolldate(rset.getDate("enrolldate"));
+				m.setEnrolldate(rset.getString("enrolldate"));
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -148,6 +148,7 @@ private Properties prop = new Properties();
 		return result;
 	}
 
+<<<<<<< HEAD
 	public int insertMember(Connection conn, Member member) {
 int result = 0;
 PreparedStatement pstmt = null;
@@ -166,3 +167,19 @@ pstmt.setString(7,  member.getProfile());
 return 0;
 	}
 	}
+=======
+	public int memberInfoUpdate(Connection conn, Member member) {
+		int result = 0;
+		String query = prop.getProperty("memberInfoUpdate");
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+}
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
