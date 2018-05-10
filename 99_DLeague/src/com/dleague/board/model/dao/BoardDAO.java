@@ -320,12 +320,14 @@ public class BoardDAO {
 		String query = prop.getProperty("insertRegionBoardComment");
 		
 		try {
+			String boardRegionCommentRef = regionBoardComment.getBoard_region_comment_ref()==0?null:String.valueOf(regionBoardComment.getBoard_region_comment_ref());
+			
 			pstmt= conn.prepareStatement(query);
 			pstmt.setInt(1, regionBoardComment.getBoard_region_comment_level());
 			pstmt.setString(2, regionBoardComment.getBoard_region_comment_writer());
-			pstmt.setString(1, regionBoardComment.getBoard_region_comment_content());
-			pstmt.setInt(3, regionBoardComment.getBoard_region_ref());
-			pstmt.setInt(4, regionBoardComment.getBoard_region_comment_ref());
+			pstmt.setString(3, regionBoardComment.getBoard_region_comment_content());
+			pstmt.setInt(4, regionBoardComment.getBoard_region_ref());
+			pstmt.setInt(5, regionBoardComment.getBoard_region_comment_ref());
 			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {

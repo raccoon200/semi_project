@@ -12,6 +12,8 @@
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
     #teamDiv{background:white; padding:10px 10px 10px 10px;}
     #teamDiv2{text-align:left; padding:0px 10px 0px 0px;}
@@ -107,8 +109,8 @@
 	
 	/*페이지*/
 	.pagination {
-	    width: 625px;
-	    margin: 0 auto;
+	    width: 645px;
+	    margin: 0 0 0 36px;
 	    text-align:center;
 	} 
 	.btn {
@@ -182,6 +184,8 @@
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
+    <h2>팀 검색</h2>
+    <hr />
     	<div id="test">
 		    <select id="selectCode">
 		        <option value="G1">서울</option>
@@ -201,6 +205,7 @@
 			</div>
 			<button class="button" id="teamOneSearch">팀검색</button>
 		</div>
+		<br />
 	<script>
 	<!-- 서치텍스트스 이벤트 -->
 	$(function(){
