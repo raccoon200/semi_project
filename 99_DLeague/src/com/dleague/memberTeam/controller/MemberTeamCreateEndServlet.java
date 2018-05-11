@@ -27,6 +27,12 @@ public class MemberTeamCreateEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String teamName = request.getParameter("teamName");
+		String t_register_writer = request.getParameter("t_register_writer");
+		String regionCode = request.getParameter("regionCode");
+		String introduce = request.getParameter("introduce");
+		String register_msg = request.getParameter("register_msg");
+		
 	}
 
 	/**

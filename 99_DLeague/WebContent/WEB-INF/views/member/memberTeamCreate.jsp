@@ -73,7 +73,7 @@ function fn_validate(){
 		</tr>
 		<tr>
 			<th>신청자(팀장)</th>
-			<td class="left"><input type="text" name="board_region_writer" id="" value='<%=memberLoggedIn!=null?memberLoggedIn.getUserId():"" %>' readonly/></td>
+			<td class="left"><input type="text" name="t_register_writer" id="" value='<%=memberLoggedIn!=null?memberLoggedIn.getUserId():"" %>' readonly/></td>
 			<td rowspan="2">
 			<img src="<%=request.getContextPath() %>/images/profile/default.jpg" id="profileImg" width="60px" height="60px" alt="" />
 			<input type="file" name="up_file" id="" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
@@ -83,7 +83,7 @@ function fn_validate(){
 		<tr>
 			<th>지역</th>
 			<td>
-				<select name="regionSelect" id="">
+				<select name="regionCode" id="">
 				<%if(regionList!=null && !regionList.isEmpty()){
 				for(int i=0; i<regionList.size(); i++) {
 					Region region = regionList.get(i);
