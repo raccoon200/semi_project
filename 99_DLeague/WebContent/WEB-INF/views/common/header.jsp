@@ -269,12 +269,15 @@ $(function() {
 							</ul>
 						</div>
 					</li>
-					<li id="main-nav-mypage" class="main-nav-list"><a href="#">마이페이지</a>
+					<li id="main-nav-mypage" class="main-nav-list"><a href="<%=request.getContextPath() %>/member/memberInfoPage" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
 						<!-- 마이페이지 -->
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage">내 팀 정보</a></li>
+								<%if(memberLoggedIn!=null) {%>
+									<%if(memberLoggedIn.getUserId().equals("")) %>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li>
+								<%} %>
 								<li><a href="#">내 팀 관리</a></li>
 							</ul>
 						</div>

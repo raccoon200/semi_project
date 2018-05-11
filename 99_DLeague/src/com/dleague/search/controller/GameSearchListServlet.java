@@ -38,6 +38,8 @@ public class GameSearchListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(false);
 		
+		String gameDate = request.getParameter("gameDate");
+		System.out.println("gameDate="+gameDate);
 		/*List<Game> list = new searchService().gameSearchList();//게임 및 로고 리스트*/
 		
 		/*Member m = null;
@@ -72,8 +74,14 @@ public class GameSearchListServlet extends HttpServlet {
 		// (공식1) totalPage
 		int totalPage = (int)(Math.ceil(totalGame/(double)numPerPage));
 		
-		//2.2 페이징된 회원리스트 가져오기
-		List<Game> list = new searchService().selectGameList(cPage, numPerPage);
+		List<Game> list = null;
+		if(gameDate==null) {
+			//2.2 페이징된 회원리스트 가져오기
+			list = new searchService().selectGameList(cPage, numPerPage);
+		}else {
+			//2.3 날짜 게임검색 리스트 가져오기
+			list = new searchService().selectGameList(cPage, numPerPage,gameDate);
+		}
 		//2.3 페이징바 만들기
 		String pageBar ="";
 		int pageBarSize = 5;

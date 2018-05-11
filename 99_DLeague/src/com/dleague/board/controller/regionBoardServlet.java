@@ -1,6 +1,7 @@
 package com.dleague.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -106,6 +107,11 @@ public class regionBoardServlet extends HttpServlet {
 		} else {
 			pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+pageNo+"'>[다음]</a>";
 		}
+		ArrayList<Integer> boardNo = new ArrayList<>();
+		for(int i=0; i<regionBoardList.size(); i++) {
+			boardNo.add(regionBoardList.get(i).getBoard_region_no());
+		}
+		
 		
 		if(regionBoardList!=null && !regionBoardList.isEmpty()) {
 			request.setAttribute("param", "board");

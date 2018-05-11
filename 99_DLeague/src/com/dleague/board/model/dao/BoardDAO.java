@@ -353,6 +353,7 @@ public class BoardDAO {
 				bc.setBoard_region_comment_no(rset.getInt("board_region_comment_no"));
 				bc.setBoard_region_comment_level(rset.getInt("board_region_comment_level"));
 				bc.setBoard_region_comment_writer(rset.getString("board_region_comment_writer"));
+				bc.setBoard_region_comment_content(rset.getString("board_region_comment_content"));
 				bc.setBoard_region_ref(rset.getInt("board_region_ref"));
 				bc.setBoard_region_comment_ref(rset.getInt("board_region_comment_ref"));
 				bc.setBoard_region_comment_date(rset.getDate("board_region_comment_date"));
@@ -366,5 +367,71 @@ public class BoardDAO {
 		}
 		return regionbcList;
 	}
+
+
+	public int updateRegionBoard(Connection conn, RegionBoard board) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateRegionBoard");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, board.getBoard_region_title());
+			pstmt.setString(2, board.getBoard_regioncode());
+			pstmt.setString(3, board.getBoard_region_content());
+			pstmt.setString(4, board.getOriginal_file_name());
+			pstmt.setString(5, board.getRenamed_file_name());
+			pstmt.setInt(6, board.getBoard_region_no());
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteRegionBoard(Connection conn, int no) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteRegionBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int deleteRegionBoardComment(Connection conn, int no, int del) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteRegionBoardComment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			pstmt.setInt(2, del);
+			result = pstmt.executeUpdate();	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
 	
 }

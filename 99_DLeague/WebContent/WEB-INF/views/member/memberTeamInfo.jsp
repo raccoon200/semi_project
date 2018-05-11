@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.*, com.dleague.search.model.vo.*"%>
+<%@page import="java.util.*, com.dleague.memberTeam.model.vo.*"%>
 <%
 	List<Team> list = (List<Team>)request.getAttribute("list");
 	List<TeamMember> memberList = (List<TeamMember>)request.getAttribute("memberList");
@@ -13,6 +13,7 @@
 	String introduce="";
 	Date foundInDate=null;
 	int rnum=0;
+	
 	String rogo="";
 	//팀정보
 	for(Team t : list){
@@ -26,6 +27,7 @@
 	//팀원수
 	for(TeamMember tm2 : memberList){
 		rnum = tm2.getRnum();
+		
 	}
 	//활동내역 경기 유/무확인
 	int num=0;
@@ -48,6 +50,7 @@
 	div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
 	div#b{border-radius: 10px;background:lightgreen;height: 80px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
 	div#c{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;  text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#e{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;  text-align: center; display: inline-block; margin:10px 0 0 0;}
 	div#d{height: 80px; width: 200px; text-align: center; display: inline-block;}
 	/*글자색깔*/
 	h2#aa{color:#2828CD;}
@@ -70,12 +73,48 @@
     /*teamTable*/
     div#teamTable{width: 350px; display: inline-block;}
     /*teamTable*/
+    .btn {
+	  display: inline-block;
+	  background: transparent;
+	  text-transform: uppercase;
+	  font-weight: 500;
+	  font-style: normal;
+	  font-size: 1rem;
+	  letter-spacing: 0.3em;
+	  color:lightgreen;
+	  border-radius: 0;
+	  padding: 18px 80px 20px;
+	  transition: all 0.7s ease-out;
+	  background: linear-gradient(270deg, lightgreen, lightgreen, rgba(34,34,34,0), rgba(34,34,34,0));
+	  background-position: 1% 50%;
+	  background-size: 300% 300%;
+	  text-decoration: none;
+	  margin: 0.625rem;
+	  border: none;
+	  border: 1px solid lightgreen;
+	}
+	
+	.btn:hover {
+	  color: #fff;
+	  border: 1px solid rgba(223,190,106,0);
+	  color: $white;
+	  background-position: 99% 50%;
+	} 
+    /* 버튼 디자인 */
 </style>
-	<h2>팀상세정보</h2>
+<script>
+function fn_teamOut() {
+	if(confirm("정말 탈퇴하시겠습니까?")) {
+	<%memberLoggedIn.setTeamname("");%>;
+	}
+}
+</script>
+	<h2>내 팀 정보</h2>
 	<hr />
 	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
+    		<input type="button" value="팀 탈퇴" style="position:relative; " class="btn" onclick="fn_teamOut();"/> 
         	<img id="logoimg" src=
         	<%if(rogo!=null){ %>
         		"<%=request.getContextPath() %>/images/team/<%=rogo %>"
@@ -97,6 +136,11 @@
         <div id="c">
             <h3 id="bb">팀원수</h3>
             <h4> <%=rnum %>명</h4>
+        </div>
+        <div id="e">
+        	<h3 id="bb">내 직책</h3>
+        	<h4> <%=memberLoggedIn.getUserId().equals(capTain)?"팀장":"팀원"%></h4>
+        	
         </div>
         <br /> <br /><br />
         <div id="d">
