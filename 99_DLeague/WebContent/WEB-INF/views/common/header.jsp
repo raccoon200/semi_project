@@ -283,9 +283,7 @@ $(function() {
 						<!-- 마이페이지 -->
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
-<<<<<<< HEAD
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-=======
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
