@@ -1,29 +1,26 @@
-package com.dleague.member.controller;
+package com.dleague.memberTeam.controller;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dleague.region.model.service.RegionService;
-import com.dleague.region.model.vo.Region;
+import com.dleague.memberTeam.model.service.MemberTeamService;
 
 /**
- * Servlet implementation class MemberEnrollServlet
+ * Servlet implementation class MemberTeamOut
  */
-@WebServlet("/member/memberEnroll")
-public class MemberEnrollServlet extends HttpServlet {
+@WebServlet("/member/memberTeamOut")
+public class MemberTeamOut extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberEnrollServlet() {
+    public MemberTeamOut() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +29,18 @@ public class MemberEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("param", "enroll");
+		String userId = request.getParameter("userId");
+		System.out.println("servlet@"+userId);
+		int result = new MemberTeamService().memberTeamOut(userId);
+		String msg = "";
+		String loc = "/";
 		
-		List<Region> regionList = new RegionService().selectRegionList();
-		request.setAttribute("regionList", regionList);
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/member/memberEnroll.jsp");
-		reqDispatcher.forward(request, response);
+		if(result>0) msg = "성공적으로 탈퇴했습니다! 재로그인시 반영됩니다.";
+		else msg = "탈퇴오류! 관리자에게 문의하시오!";
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/member/logout");
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		
-		//request.getRequestDispatcher("/WEB-INF/views/member/memberEnroll.jsp").forward(request, response);
 	}
 
 	/**

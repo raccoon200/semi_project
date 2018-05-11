@@ -119,7 +119,7 @@ function fn_fileUpload(value){
 	}
 </script>
 <style>
-/* SS */
+
 span#fname{
 	position:absolute;
 	left:76px;
