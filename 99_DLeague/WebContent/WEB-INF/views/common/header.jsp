@@ -307,6 +307,7 @@ $(function() {
          <!-- 메인메뉴 끝 -->
       </header>
       
+<<<<<<< HEAD
       <section id="center">
       
       <div id="container">
@@ -379,3 +380,6 @@ $(function() {
 		</header>
 		
 		<section id="center">
+=======
+      <section id="center">
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
