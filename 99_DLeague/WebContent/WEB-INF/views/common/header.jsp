@@ -274,7 +274,7 @@ $(function() {
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-								<%if(memberLoggedIn!=null) {%>
+								<%if(memberLoggedIn!=null && memberLoggedIn.getUserId().equals("")) {%>
 									<%if(memberLoggedIn.getUserId().equals("")) %>
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li>
 								<%} %>
