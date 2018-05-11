@@ -200,15 +200,23 @@ function fn_loginAlert(){
 		</td>
 		<td id="td2" class="td1"><h3 ><%=g.getStartTime() %></h3></td>
 		<td>
-			<%if(g.getStatus()==null){ %>
-			<div class="alert alert-warning center" id="result">
-				상세보기
+			<%if (g.getAway() == null){ %>
+			<div class="alert alert-warning center">
+				상대 찾는중
 			</div>
-			<%}else if((g.getStatus()).equals("Y")){ %>
-			<div class="alert alert-success center" id="result">
-				초청완료
+			<%} else if(g.getStatus() == null){ %>
+			<div class="alert alert-info center">
+				경기 예정
 			</div>
-			<%} %> 
+			<%} else if(g.getStatus().equals("Y")){ %>
+			<div class="alert alert-success center">
+				경기 완료
+			</div>
+			<%} else {%>
+			<div class="alert alert-danger center">
+				경기 미실시
+			</div>
+			<%} %>
 		</td>
 	</tr>
 <%} %>

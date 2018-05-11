@@ -127,6 +127,7 @@ div#main-nav-sub-mypage{
 	left:730px;
 }
 
+
 /*section-center*/
 section#center{
 	height:700px;
@@ -239,12 +240,13 @@ $(function() {
 				<%if(memberLoggedIn==null) {%>
 					<li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
 					<li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
-					<!-- <li><a href="#">관리자페이지</a></li> -->
 				<%} else { %>
 					<li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
 					<li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
-					
-				<%} %>
+					<%if(memberLoggedIn!=null&&"admin".equals(memberLoggedIn.getUserId())){ %>
+					<br /><li style="float:right;"><a href="<%=request.getContextPath() %>/admin/adminPage">관리자페이지</a></li>
+				<% 	} 
+				  } %>
 			</ul>
 			
 			</div>
@@ -284,37 +286,29 @@ $(function() {
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
+							<ul class="nav-list">
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-
-
+								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 								<%if(memberLoggedIn!=null && memberLoggedIn.getUserId().equals("")) {%>
-
-									
-
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li>
-
 								<%} %>
+<<<<<<< HEAD
 
 					
 
 
+=======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 								 <%if(memberLoggedIn!=null) {%> 
 								<%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
-
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
-
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
-
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
 								<li><a href="#">내 팀 관리</a></li>
 								 <%} %> 
 							</ul>
 						</div>
 					</li>
-					<!-- <li id="board"><a href="#">관리자페이지</a></li> -->
-					<%-- 관리자메뉴 --%>
-				<%-- 	<%if(memberLoggedIn!=null&&"admin".equals(memberLoggedIn.getUserId())){ %>
-					<li id="admin"><a href="<%=request.getContextPath()%>/admin/memberList">회원관리</a></li>
-					<%} %> --%>
 				</ul>
 				
 			</nav>
