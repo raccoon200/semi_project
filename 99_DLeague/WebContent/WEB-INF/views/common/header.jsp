@@ -115,11 +115,8 @@ div.main-nav-sub {
    
 }
 div#main-nav-sub-boardss{
-<<<<<<< HEAD
    left:180px;
-=======
 	left:180px;
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 }
 div#main-nav-sub-register{
    left:400px;
