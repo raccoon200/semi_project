@@ -203,6 +203,7 @@ nav#nav ul.nav-list li a#nav-selected{
 }
 </style>
 <script>
+
 $(function() {
 	$(".main-nav-list").hover(function() {
 		$(this).children("div").show();
@@ -216,10 +217,17 @@ $(function() {
 			$(this).children("a").css("color","black");
 		}
 	})
-	
+
 });
-
-
+<%if(memberLoggedIn!=null) { %> 
+	function fn_validate() {
+		if(<%=memberLoggedIn.getTeamname()%>!=null) {
+			return true;	
+		}
+		if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="/member/memberTeamCreateEnd";
+		return false;
+	}
+<%} %>
 </script>
 </head>
 <body>
