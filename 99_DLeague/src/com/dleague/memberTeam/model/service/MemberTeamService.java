@@ -24,13 +24,22 @@ public class MemberTeamService {
 	public List<TeamMember> teamMemberSearch(String teamName) {
 		Connection conn = getConnection();
 		List<TeamMember> memberList = new MemberTeamDAO().teamMemberSearch(conn, teamName);
+		close(conn);
 		return memberList;
 	}
 
 	public List<Activity> activityListSearch(String teamName) {
 		Connection conn = getConnection();
 		List<Activity> activityList = new MemberTeamDAO().activityListSearch(conn,teamName);
+		close(conn);
 		return activityList;
+	}
+
+	public int memberTeamOut(String userId) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().memberTeamOut(conn, userId);
+		close(conn);
+		return result;
 	}
 	
 	

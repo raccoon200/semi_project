@@ -6,7 +6,7 @@
     <%
     Member m = (Member)request.getAttribute("member");
 	List<Region> regionList = (List<Region>)request.getAttribute("regionList");
-	System.out.println("list="+regionList);
+
     %>
     <style>
     table{align:center;}

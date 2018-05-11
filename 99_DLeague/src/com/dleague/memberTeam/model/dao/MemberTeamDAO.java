@@ -132,4 +132,19 @@ public class MemberTeamDAO {
 		
 		return activityList;
 	}
+	public int memberTeamOut(Connection conn, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamOut");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

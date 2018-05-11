@@ -12,6 +12,7 @@
 <title>DLeague</title>
 
 <script src="<%=request.getContextPath()%>/js/jquery-3.3.1.js"></script>
+
 <style>
 /* 전체컨테이너 */
 div#container	{width:960px; margin:0 auto;}
@@ -218,6 +219,7 @@ $(function() {
 	
 });
 
+
 </script>
 </head>
 <body>
@@ -274,11 +276,18 @@ $(function() {
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-								<%if(memberLoggedIn!=null) {%>
-									<%if(memberLoggedIn.getUserId().equals("")) %>
+
+								<%if(memberLoggedIn!=null && memberLoggedIn.getUserId().equals("")) {%>
+									
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li>
 								<%} %>
+
+								 <%if(memberLoggedIn!=null) {%> 
+								<%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+
 								<li><a href="#">내 팀 관리</a></li>
+								 <%} %> 
 							</ul>
 						</div>
 					</li>
