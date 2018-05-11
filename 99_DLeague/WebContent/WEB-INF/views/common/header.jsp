@@ -286,27 +286,25 @@ $(function() {
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+
 								<%if(memberLoggedIn!=null && memberLoggedIn.getUserId().equals("")) {%>
-<<<<<<< HEAD
-=======
+
 									
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li>
-<<<<<<< HEAD
-								<%} %>
-=======
+
 								<%} %>
 
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+								<%} %>
+
+
 								 <%if(memberLoggedIn!=null) {%> 
 								<%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
-<<<<<<< HEAD
-								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
-=======
+
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
 
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+
 								<li><a href="#">내 팀 관리</a></li>
 								 <%} %> 
 							</ul>
