@@ -8,16 +8,21 @@
 	Object o = request.getAttribute("obj");
 	Activity a = null;
 	Game g = null;
-	if(o instanceof Game){
+	String place[] = null;
+	boolean gameStatus = o instanceof Game;
+	if(gameStatus){
 		g = (Game)o;
-	}else if (o instanceof Activity){
+		place = g.getPlace().split("#");
+	}else{
 		a = (Activity)a;
+		place = a.getPlace().split("#");
 	}
 %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=f3nKBZeo1DvNZrIIPMNu&submodules=geocoder"></script><style>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=f3nKBZeo1DvNZrIIPMNu&submodules=geocoder"></script>
+<style>
 /* body{
   margin-top: 100px;
   line-height: 1.6
@@ -58,41 +63,83 @@ div#score{
 	width: 80%;
 	margin : 0 auto;
 }
+div.center{
+	margin-top: 30px;
+	text-align: center;
+}
 </style>
 <h2>경기 상세 정보</h2>
 <hr />
 <div id="score">
-	<table style="display: inline-block; margin-right: 100px">
+	<table style="display: inline-block;">
 		<tr>
 			<td>
-				<img src="<%=request.getContextPath() %>/images/team/tigers.png" alt="home" style="height: 112.188px;"/>
+				<img src="<%=request.getContextPath() %>/images/team/<%=gameStatus?g.getHomeLogo():a.getHomeLogo() %>" alt="home" style="width: 150px; height: 112.188px;"/>
+			</td>
+			<td rowspan="2">
+				<h1 style= "display: inline-block; font-weight: 700; font-size: 70px; margin-left : 20px; margin-right : 60px;"><%=gameStatus?"&nbsp;":a.getResult().substring(0, a.getResult().indexOf(":"))%></h1>
+			</td>
+			<td rowspan="2">
+				<h2 style="display: inline-block;">VS</h2>
+			</td>
+			<td rowspan="2">
+				<h1 style= "display: inline-block; font-weight: 700; font-size: 70px; margin-left : 60px; margin-right : 20px;"><%=gameStatus?"&nbsp;":a.getResult().substring(a.getResult().indexOf(":")+1, a.getResult().length())%></h1>
 			</td>
 		</tr>
 		<tr style=" text-aline : center;">
 			<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getHome())?"red":""%>; font-size : 18px;'>
-				기아 타이거즈		
+				<%=gameStatus?g.getHome():a.getHome()%>
 			</td>
+			<td></td>
 		</tr>
 	</table>
-	<h2 style="display: inline-block;">VS</h2>
-	<table style="display: inline-block; margin-left: 90px;">
+	<table style="display: inline-block;">
 		<tr>
+		<%if (gameStatus&&g.getAway()!= null) {%>
 			<td>
-				<img src="<%=request.getContextPath() %>/images/team/tigers.png" alt="home" style="height: 112.188px;"/>
+				<img src="<%=request.getContextPath() %>/images/team/<%=g.getAwayLogo()%>" alt="home" style="width: 150px; height: 112.188px;"/>
 			</td>
+		<%} else if (gameStatus && g.getAway() == null) {%>
+			<td>
+				<img src="<%=request.getContextPath() %>/images/team/awayNull.png" alt="home" style="width: 150px; height: 112.188px;"/>
+			</td>
+		<%} else{%>
+			<td>
+				<img src="<%=request.getContextPath() %>/images/team/<%=a.getAwayLogo()%>" alt="home" style="width: 150px; height: 112.188px;"/>
+			</td>
+		<%} %>
+			
 		</tr>
 		<tr style=" text-aline : center;">
-			<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getHome())?"red":""%>; font-size : 18px;'>
-				기아 타이거즈	
+			<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getAway())?"red":""%>; font-size : 18px;'>
+				<%if (gameStatus){ %>
+					<%=g.getAway() !=null?g.getAway():"&npsp;" %>	
+				<% }else{%>
+					<%=a.getAway() %>
+				<%}%>
 			</td>
 		</tr>
 	</table>
 </div>
 
 <div class="container">
-<div class="alert alert-success" style="text-align: center;">
-  <strong style="font-size: 17px;">17-10-11 18:10 경기 ㄱㄱ</strong>
-</div>
+<%if (gameStatus && g.getAway() == null){ %>
+	<div class="alert alert-warning center">
+		<strong style="font-size: 17px;"><%=g.getGameDate() %> <%=g.getStartTime() %> 상대 찾는중</strong>
+	</div>
+<%} else if(gameStatus && g.getAway() != null){ %>
+	<div class="alert alert-info center">
+		<strong style="font-size: 17px;"><%=g.getGameDate() %> <%=g.getStartTime() %> 경기 예정</strong>
+	</div>
+<%} else if(gameStatus && g.getStatus().equals("N")){ %>
+	<div class="alert alert-danger center">
+		<strong style="font-size: 17px;"><%=g.getGameDate() %> <%=g.getStartTime() %> 경기 미실시</strong>
+	</div>
+<%} else {%>
+	<div class="alert alert-success center">
+		<strong style="font-size: 17px;"><%=a.getActivityDate() %> 경기 완료</strong>
+	</div>
+<%} %>
 	<ul class="tabs">
 	  <li class="tab-link current" data-tab="tab-1">경기 정보</li>
 	  <li class="tab-link" data-tab="tab-2">홈팀 정보</li>
@@ -102,21 +149,19 @@ div#score{
 	<div id="tab-1" class="tab-content current">
 		<h3>경기 장소</h3>
 		<hr style="background: white;"/>
-		경기도 안산시 광덕동로 25 레이크타운 105동 1604호
+		
+		<%=place[0]%> <%=place[1] %>
 		<br /><br />
 		<div id="map" style="width:100%;height:350px;"></div>
 		<br /><br />
+		<%if (gameStatus){ %>
 		<h3>경기 내용</h3>
 		<hr style="background: white;"/>
-		<hr style="background: white;"/>
-		<textarea class="form-control" cols="60" rows="10" readonly>
-가치를 꾸며 열락의 것이 청춘에서만 웅대한 그들은 천하를 철환하였는가? 피가 바이며, 들어 있는가? 붙잡아 석가는 있는 사라지지 커다란 부패뿐이다. 그들의 그들에게 옷을 사는가 청춘의 무엇을 위하여 대고, 쓸쓸하랴? 살 그들에게 가지에 남는 커다란 그들의 영원히 인간이 때문이다. 기쁘며, 오아이스도 원대하고, 주는 듣는다. 그들의 있는 찾아 가는 맺어, 그들의 것이다.
-
-간에 속에서 풍부하게 보배를 할지라도 군영과 수 이상의 긴지라 것이다. 이상의 곧 안고, 실현에 싶이 이상 있으랴? 사는가 인간에 소담스러운 것이다. 뜨거운지라, 그들에게 싹이 같은 봄바람이다. 실현에 가진 동산에는 있으랴?
-
-가슴에 그들은 이상 있는 가진 그러므로 얼음에 구하기 듣는다. 가치를 이상 온갖 있는 피에 아니더면, 웅대한 바이며, 이상, 말이다. 불러 가는 크고 군영과 청춘이 것은 전인 돋고, 보이는 봄바람이다. 가슴에 역사를 같이, 설레는 동산에는 만천하의 수 두손을 그들은 있다. 실로 있는 바이며, 우는 이상을 이것을 방황하여도, 말이다.
-		</textarea>
 		
+		<textarea class="form-control" cols="60" rows="10" readonly>
+<%=g.getGameContent() %>
+		</textarea>
+		<% }%>
   	</div>
   	<div id="tab-2" class="tab-content">
 		---- ---- ★------ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ★-- ---- ---- ------★ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- ★------ ---- ---- ---- ----
@@ -139,7 +184,7 @@ $(document).ready(function(){
 	});
 });
 var map = new naver.maps.Map("map", {
-    center: new naver.maps.LatLng(126.8319882,37.3068984),
+    center: new naver.maps.LatLng(<%=place[2]%>,<%=place[3]%>),
     zoom: 10,
     mapTypeControl: true
 });
@@ -209,7 +254,7 @@ function searchAddressToCoordinate(address) {
 }
 
 function initGeocoder() {
-    searchAddressToCoordinate('광덕동로 25');
+    searchAddressToCoordinate('<%=place[0]%>');
 }
 naver.maps.onJSContentLoaded = initGeocoder;
 </script>
