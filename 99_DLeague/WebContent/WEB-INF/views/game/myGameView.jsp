@@ -112,7 +112,11 @@ div.center{
 		</tr>
 		<tr style=" text-aline : center;">
 			<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getAway())?"red":""%>; font-size : 18px;'>
-				<%=gameStatus?g.getAway():a.getAway() %>	
+				<%if (gameStatus){ %>
+					<%=g.getAway() !=null?g.getAway():"&npsp;" %>	
+				<% }else{%>
+					<%=a.getAway() %>
+				<%}%>
 			</td>
 		</tr>
 	</table>
