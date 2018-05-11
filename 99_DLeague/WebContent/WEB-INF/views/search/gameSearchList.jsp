@@ -6,6 +6,7 @@
 <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 <%
 	List<Game> list = (List<Game>)request.getAttribute("list");
+
 %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -149,8 +150,16 @@ $(function(){
 		location.href="<%=request.getContextPath()%>/search/gameSearchList?gameDate="+gameDate;
 	});
 });
-function fn_MemberList(gameNo,status){
-	location.href= "<%=request.getContextPath()%>/game/gameView?no="+gameNo+"&status="+status;
+function fn_MemberList(gameNo,status){//경기상세보기이동
+	<%if(memberLoggedIn != null){%>
+		location.href= "<%=request.getContextPath()%>/game/gameView?no="+gameNo+"&status="+status;
+	<%}else{%>
+		fn_loginAlert();
+	<%}%>
+}
+function fn_loginAlert(){
+	alert("로그인후 이용하실 수 있습니다.");
+	$("#userId").focus();
 }
 </script>
 <div id="allDiv">
