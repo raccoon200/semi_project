@@ -10,7 +10,7 @@
     %>
     <style>
     table{align:center;}
-    #profileImg{width:150px; height:150px;}
+    #profileImg{width:150px; height:150px;} 
 #imgsection{position: relative; left:400px; top:-450px;}
     </style>
 <script>
