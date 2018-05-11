@@ -295,7 +295,7 @@ $(function() {
 
 								<%} %>
 
-								<%} %>
+					
 
 
 								 <%if(memberLoggedIn!=null) {%> 
