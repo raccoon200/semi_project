@@ -203,6 +203,7 @@ nav#nav ul.nav-list li a#nav-selected{
 }
 </style>
 <script>
+
 $(function() {
 	$(".main-nav-list").hover(function() {
 		$(this).children("div").show();
@@ -216,10 +217,17 @@ $(function() {
 			$(this).children("a").css("color","black");
 		}
 	})
-	
+
 });
-
-
+<%if(memberLoggedIn!=null) { %> 
+	function fn_validate() {
+		if(<%=memberLoggedIn.getTeamname()%>!=null) {
+			return true;	
+		}
+		if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="/member/memberTeamCreateEnd";
+		return false;
+	}
+<%} %>
 </script>
 </head>
 <body>
@@ -276,15 +284,28 @@ $(function() {
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-<<<<<<< HEAD
+								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
+
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 								<%if(memberLoggedIn!=null && memberLoggedIn.getUserId().equals("")) {%>
-									<%if(memberLoggedIn.getUserId().equals("")) %>
+<<<<<<< HEAD
+=======
+									
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li>
+<<<<<<< HEAD
 								<%} %>
 =======
+								<%} %>
+
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 								 <%if(memberLoggedIn!=null) {%> 
 								<%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
+<<<<<<< HEAD
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+=======
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 								<li><a href="#">내 팀 관리</a></li>
 								 <%} %> 
