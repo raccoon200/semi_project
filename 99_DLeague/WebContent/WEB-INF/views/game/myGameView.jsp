@@ -68,6 +68,14 @@ div.center{
 	text-align: center;
 }
 </style>
+<script>
+$(function() {
+	if(<%=memberLoggedIn == null%>){
+		alert("잘못된 경로입니다.");
+		location.href="/";
+	};
+});
+</script>
 <h2>경기 상세 정보</h2>
 <hr />
 <div id="score">
@@ -258,5 +266,5 @@ function initGeocoder() {
 }
 naver.maps.onJSContentLoaded = initGeocoder;
 </script>
-
+<br /><br />
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>	
