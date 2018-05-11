@@ -247,7 +247,7 @@ public class TeamDAO {
 		return totalMember;
 	}
 
-	public List<Team> teaSearch(Connection conn, String teamName) {
+	public List<Team> teamSearch(Connection conn, String teamName) {
 		List<Team> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

@@ -1,3 +1,6 @@
+<%@page import="com.dleague.search.model.vo.TeamMember"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dleague.search.model.vo.Team"%>
 <%@page import="com.dleague.search.model.vo.Activity"%>
 <%@page import="com.dleague.game.model.vo.Game"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,7 +20,16 @@
 		a = (Activity)a;
 		place = a.getPlace().split("#");
 	}
+	Team tHome = (Team)request.getAttribute("tHome");
+	Team tAway = (Team)request.getAttribute("tAway");
+	
+	List <TeamMember> hMemberList = (List<TeamMember>)request.getAttribute("hMemberList");
+	List <TeamMember> aMemberList = (List<TeamMember>)request.getAttribute("aMemberList");
+	
+	List <Activity> hActivityList = (List<Activity>)request.getAttribute("hActivityList");
+	List <Activity> aActivityList = (List<Activity>)request.getAttribute("aActivityList");
 %>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,7 +40,7 @@
   line-height: 1.6
 } */
 .container{
-	width: 90%;
+	width: 95%;
 	margin: 0 auto;
 }
 ul.tabs{
@@ -67,6 +79,40 @@ div.center{
 	margin-top: 30px;
 	text-align: center;
 }
+</style>
+<style>
+	img#logoimg{width: 250px;height: 200px;display: inline-block;margin: 50px 0 0 0;}
+	img#logo{width: 200px;height: 80px;display: inline-block;}
+	div#logoDiv{width: 200px;height: 80px;display: inline-block;}
+	div#imgDiv{width: 366px;height: 315px;display: inline-block;float: left;text-align:center;}
+	/* div#bu,#a,#b,#c,#d{border: 1px solid black;} */
+	div#bu{height: 590px; width: 644px; display: inline-block;}
+	div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#b{border-radius: 10px;background:lightgreen;height: 80px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#c{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;  text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#d{height: 80px; width: 200px; text-align: center; display: inline-block;}
+	/*글자색깔*/
+	h2#aa{color:#2828CD;}
+	h2#bb{color:#DB631F;}
+	h3#bb{color:#DB631F;}
+	
+    /* 테이블 공통 UI Object */
+    th{text-align:center} /* 부트스트랩으로 센터로안옴 */
+    .tbl_type,.tbl_type th,.tbl_type td{border:0}
+    .tbl_type{border:1px;width:90%;border-bottom:2px solid #dcdcdc;font-family:'돋움',dotum;font-size:12px;text-align:center;border-collapse:collapse}
+    .tbl_type caption{display:none}
+    .tbl_type tfoot{background-color:#f5f7f9;font-weight:bold}
+    .tbl_type th{padding:7px 0 4px;border-top:2px solid #dcdcdc;border-right:1px solid #dcdcdc;border-left:1px solid #dcdcdc;background-color:#f5f7f9;color:#666;font-family:'돋움',dotum;font-size:12px;font-weight:bold}
+    .tbl_type td{padding:6px 0 4px;border:1px solid #e5e5e5;color:#4c4c4c}
+    .tbl_type td.ranking{font-weight:bold}
+    /* //테이블 공통 UI Object */
+
+    /*memberTable*/
+    div#memberTable{width: 100%; display: inline-block;}
+    /*memberTable*/
+    /*teamTable*/
+    div#teamTable{width: 100%; display: inline-block;}
+    /*teamTable*/
 </style>
 <script>
 $(function() {
@@ -121,7 +167,7 @@ $(function() {
 		<tr style=" text-aline : center;">
 			<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getAway())?"red":""%>; font-size : 18px;'>
 				<%if (gameStatus){ %>
-					<%=g.getAway() !=null?g.getAway():"&npsp;" %>	
+					<%=g.getAway() !=null?g.getAway():"&nbsp;" %>	
 				<% }else{%>
 					<%=a.getAway() %>
 				<%}%>
@@ -172,7 +218,177 @@ $(function() {
 		<% }%>
   	</div>
   	<div id="tab-2" class="tab-content">
-		---- ---- ★------ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ★-- ---- ---- ------★ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- ★------ ---- ---- ---- ----
+		<hr />
+		<div>
+	    <div id="bu">
+	    	<div id="imgDiv">
+	        	<img id="logoimg" src=
+	        	<%if(tHome.getTeamLogo()!=null){ %>
+	        		"<%=request.getContextPath() %>/images/team/<%=tHome.getTeamLogo() %>"
+	        	<%}else{ %>
+	        	 	"<%=request.getContextPath() %>/images/team/default.png" 
+	        	<%} %>
+	        	 alt="첨부파일"/>
+	        </div>
+	        <div id="a">
+	            <h2 id="bb">팀이름</h2>
+	            <h4><%=tHome.getTeamName() %></h4>
+	        </div>
+	        <br>
+	        <div id="b">
+	            <h3 id="bb">팀장</h3>
+	            <h4><%=tHome.getCapTain()  %></h4>
+	        </div>
+	        <br>
+	        <div id="c">
+	            <h3 id="bb">팀원수</h3>
+	            <h4> <%=hMemberList.size() %>명</h4>
+	        </div>
+	        <br /> <br /><br />
+	        <div id="d">
+	            <h2 id="aa">활동지역</h2>
+	            <h3>
+	            	<%if("G1".equals(tHome.getRegionCode()) ) {%>
+	        			서울
+	        		<%}else if("G2".equals(tHome.getRegionCode()) ) { %>
+	        			경기
+	        		<%}else if("G3".equals(tHome.getRegionCode()) ) { %>
+	        			강원
+	        		<%}else if("G4".equals(tHome.getRegionCode()) ) { %>
+	        			충북
+	        		<%}else if("G5".equals(tHome.getRegionCode()) ) { %>
+	        			충남
+	        		<%}else if("G6".equals(tHome.getRegionCode()) ) { %>
+	        			경북
+	        		<%}else if("G7".equals(tHome.getRegionCode()) ) { %>
+	        			전북
+	        		<%}else if("G8".equals(tHome.getRegionCode()) ) { %>
+	        			전남
+	        		<%}else if("G9".equals(tHome.getRegionCode()) ) { %>
+	        			제주					
+		        	<%} %>
+	            </h3>
+	         </div>
+	         <div id="logoDiv">
+	        	<img id="logo" src="<%=request.getContextPath() %>/images/headerImage.jpg" alt="첨부파일"/>
+	        </div>
+	         <div id="d">
+	            <h2 id="aa">창단일</h2>
+	            <h3><%=tHome.getFoundingDate() %></h3>
+	        </div>
+	        <br><br>
+	        <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=tHome.getIntroduce() %></textarea>
+	    </div>
+	    <br>
+	    <br />
+	    <div id="memberTable">
+	    <!--ui object -->
+	    <table class="tbl_type"  cellspacing="0">
+	        <legend>◎팀원정보</legend>
+	        <colgroup>
+	            <col width="10%"> 
+	            <col width="15%">
+	            <col width="10%">
+	            <col width="10%">
+	            <col width="15%">
+	        </colgroup>
+	        <thead>
+	        <tr>
+	            <th scope="col">순번</th>
+	            <th scope="col">팀원</th>
+	            <th scope="col">지역</th>
+	            <th scope="col">등급</th>
+	            <th scope="col">입단일</th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <%for(TeamMember tm : hMemberList){ %>
+	            <tr>
+		            <td class="ranking" scope="row"><%=tm.getRnum() %></td>
+		            <td><%=tm.getUserId() %></td>
+		            <td>
+		            	<%if("G1".equals(tm.getRegionCode()) ) {%>
+		        			서울
+		        		<%}else if("G2".equals(tm.getRegionCode()) ) { %>
+		        			경기
+		        		<%}else if("G3".equals(tm.getRegionCode()) ) { %>
+		        			강원
+		        		<%}else if("G4".equals(tm.getRegionCode()) ) { %>
+		        			충북
+		        		<%}else if("G5".equals(tm.getRegionCode()) ) { %>
+		        			충남
+		        		<%}else if("G6".equals(tm.getRegionCode()) ) { %>
+		        			경북
+		        		<%}else if("G7".equals(tm.getRegionCode()) ) { %>
+		        			전북
+		        		<%}else if("G8".equals(tm.getRegionCode()) ) { %>
+		        			전남
+		        		<%}else if("G9".equals(tm.getRegionCode()) ) { %>
+		        			제주					
+		        		<%} %>
+		            </td>
+		            <td><%=tm.getGrade() %></td>
+		            <td><%=tm.getT_EnrollDate() %></td>
+	            </tr>
+	        <%} %>
+	        </tbody>
+	        <tfoot>
+	            <tr>
+	            <td>종합</td>
+	            <td colspan="2">총 팀원수</td>
+	            <td colspan="3"><%=hMemberList.size()%>명</td>
+	            </tr>
+	            </tfoot>
+	        </table>
+	        <!--//ui object -->
+	    </div >
+	    <br /><br />
+	<div id="teamTable">
+	        <!--ui object -->
+	        <table class="tbl_type"  cellspacing="0">
+	                <legend>◎팀활동내역</legend>
+	            <colgroup>
+	                <col width="10%"> 
+	                <col width="10%">
+	                <col width="10%">
+	                <col width="25%">
+	                <col width="10%">
+	            </colgroup>
+	            <thead>
+	            <tr>
+	                <th scope="col">게임번호</th>
+	                <th scope="col">HomeTeam</th>
+	                <th scope="col">AwayTeam</th>
+	                <th scope="col">게임날짜</th>
+	                <th scope="col">결과</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	            <%if(hActivityList.size()==0||hActivityList == null){ %>
+	            <tr>
+	                <td colspan="5">데이터가 없습니다.</td>
+	            </tr>
+	            <%}else{ %>
+	            <%for(Activity act: hActivityList){ %>
+	            <tr>
+	                <td class="ranking" scope="row"><%=act.getActivity_No() %></td>
+	                <td style="color:<%=((act.getHome().equals(tHome))?"red":"black" )%>"><%=a.getHome() %></td>
+	                <td style="color:<%=((act.getAway().equals(tHome))?"red":"black" )%>"><%=a.getAway() %></td>
+	                <td><%=act.getActivityDate() %></td>
+	                <td><%=act.getResult() %></td>
+	                </tr>
+	            </tr>
+	            <%}} %>
+	            </tbody>
+	            <tfoot>
+	                <tr>
+	                <td colspan="5">활동내역</td>
+	                </tr>
+	                </tfoot>
+	            </table>
+	            <!--//ui object -->
+	        </div>
+	</div>
   	</div>
   	<div id="tab-3" class="tab-content">
 		---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★

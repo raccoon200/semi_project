@@ -38,6 +38,8 @@ public class MemberTeamService {
 	public int memberTeamOut(String userId) {
 		Connection conn = getConnection();
 		int result = new MemberTeamDAO().memberTeamOut(conn, userId);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}
