@@ -105,7 +105,7 @@
 <script>
 function fn_teamOut() {
 	if(confirm("정말 탈퇴하시겠습니까?")) {
-	<%memberLoggedIn.setTeamname("");%>;
+		location.href="<%=request.getContextPath()%>/member/memberTeamOut?userId=<%=memberLoggedIn.getUserId()%>";
 	}
 }
 </script>
