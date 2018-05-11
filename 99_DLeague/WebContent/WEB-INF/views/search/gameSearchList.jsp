@@ -6,6 +6,7 @@
 <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 <%
 	List<Game> list = (List<Game>)request.getAttribute("list");
+
 %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -94,16 +95,85 @@ div#result{margin: 50px 10px 0 0;}
 	    background: -moz-linear-gradient(0% 0% 270deg,#565b5f, #3e4347);
 	}
 /*페이지끝*/
+
+	/* 버튼 */
+    .button {
+    	position:absolute;
+      	height:33px;
+	  display: inline;
+	  vertical-align: top;
+	 /*  position: relative; */
+	  padding: 0 15px 0 15px;
+	  line-height: 35px;
+	  font-size: 15px;
+	  font-weight: bold;
+	  color: white;
+	  text-align: center;
+	  text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+	  background: #576dce;
+	  background-clip: padding-box;
+	  border: 1px solid;
+	  border-color: #374fbb #344cb3 #2b3e94;
+	  border-radius: 2px;
+	  background-image: -webkit-linear-gradient(top, #92a0df, #576dce 50%, #3f58c7 80%, #576dce);
+	  box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
+	}
+	.button:hover, .button.hover {
+	  background-color: #5f74d0;
+	  border-color: #2d429c #2d429c #253680;
+	  box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 1px 5px #576dce;
+	}
+	.button:active, .button.active {
+	  border-color: #253680 #2b3e94 #3147a8;
+	  background: #475fc9;
+	  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.8);
+	}
+	.button:after {
+	  content: '>';
+	  float: right;
+	  /* position: relative; */
+	  margin-left: 15px;
+	  font: bold 18px/33px 'Comic Sans MS';
+	  /* I tried everything but couldn't get the vertical alignment to be
+	     consistent in IE, so this is a hack targeting IE8-9-10. */
+	  line-height: 31px\0;
+	  color: white;
+	  text-shadow: 0 -1px #8696dc, 0 1px 1px rgba(0, 0, 0, 0.3);
+	  -webkit-font-smoothing: subpixel-antialiased;
+	}
+	/*버튼끝*/
 </style>
+<script>
+$(function(){
+	$("#teamOneSearch").click(function(){
+		var gameDate = $("#gameDate").val();
+		location.href="<%=request.getContextPath()%>/search/gameSearchList?gameDate="+gameDate;
+	});
+});
+function fn_MemberList(gameNo,status){//경기상세보기이동
+	<%if(memberLoggedIn != null){%>
+		location.href= "<%=request.getContextPath()%>/game/gameView?no="+gameNo+"&status="+status;
+	<%}else{%>
+		fn_loginAlert();
+	<%}%>
+}
+function fn_loginAlert(){
+	alert("로그인후 이용하실 수 있습니다.");
+	$("#userId").focus();
+}
+</script>
 <div id="allDiv">
 <div id="allDiv2">
 <h2>경기검색</h2>
 <hr />
+<div>
+<input type="date" id="gameDate"  style="height:33px;" /><button class="button" id="teamOneSearch">검색</button>
+</div><br />
 <table class="table table-hover">
-	<pre>  <span class="sp" id="sp1">경기날짜</span>                        <span class="sp" id="sp2">경기팀</span>                       <span class="sp" id="sp3">게임시간<span/> <span class="sp" id="sp4">상제정보</span></pre>
+	<pre>  <span class="sp" id="sp1">경기날짜</span>                        <span class="sp" id="sp2">경기팀</span>                      <span class="sp" id="sp3">게임시간<span/> <span class="sp" id="sp4">상제정보</span></pre>
 	<%if(list != null || list.isEmpty()){ %>
 	<%for(Game g : list){ %>
-	<tr>
+	<tr onclick="fn_MemberList('<%=g.getGameNo()%>','<%=g.getStatus()%>');">
 		<td id="td1" class="td1"><h4><%=g.getGameDate() %></h4></td>
 		<td>
 			<table style="display: inline-block;">
@@ -131,11 +201,11 @@ div#result{margin: 50px 10px 0 0;}
 		<td id="td2" class="td1"><h3 ><%=g.getStartTime() %></h3></td>
 		<td>
 			<%if(g.getStatus()==null){ %>
-			<div class="alert alert-info center" id="result">
+			<div class="alert alert-warning center" id="result">
 				상세보기
 			</div>
 			<%}else if((g.getStatus()).equals("Y")){ %>
-			<div class="alert alert-warning center" id="result">
+			<div class="alert alert-success center" id="result">
 				초청완료
 			</div>
 			<%} %> 

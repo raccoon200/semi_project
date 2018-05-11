@@ -430,6 +430,50 @@ public class TeamDAO {
 			//공식2 시작 rownum과 마지막 rownum을 구하는 공식
 			pstmt.setInt(1, numPerPage*(cPage-1)+1);
 			pstmt.setInt(2, numPerPage*cPage);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
+			rset=pstmt.executeQuery();
+			
+			gameList = new ArrayList<Game>();
+			while(rset.next()) {
+				Game g = new Game();
+				g.setGameNo(rset.getInt("game_no"));
+				g.setHome(rset.getString("home"));
+				g.setAway(rset.getString("away"));
+				g.setGameDate(rset.getDate("gamedate"));
+				g.setGameRegDate(rset.getDate("game_reg_date"));
+				g.setPlace(rset.getString("place"));
+				g.setStartTime(rset.getString("start_time"));
+				g.setGameContent(rset.getString("game_content"));
+				g.setStatus(rset.getString("status"));
+				g.setHomeLogo(rset.getString("homelogo"));
+				g.setAwayLogo(rset.getString("awaylogo"));
+				
+				gameList.add(g);
+			}
+//			System.out.println("list@AdminDAO.selectMemberList="+list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return gameList;
+	}
+
+	public List<Game> selectGameList(Connection conn, int cPage, int numPerPage, String gameDate) {
+		List<Game> gameList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectGameDateListByPaging");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			//공식2 시작 rownum과 마지막 rownum을 구하는 공식
+			pstmt.setString(1, gameDate);
+			pstmt.setInt(2, numPerPage*(cPage-1)+1);
+			pstmt.setInt(3, numPerPage*cPage);
 			System.out.println(numPerPage*(cPage-1)+1);
 			System.out.println(numPerPage*cPage);
 			rset=pstmt.executeQuery();

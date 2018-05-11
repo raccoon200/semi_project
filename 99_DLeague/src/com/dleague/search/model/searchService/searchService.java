@@ -103,5 +103,12 @@ public class searchService {
 		return gameList;
 	}
 
+	public List<Game> selectGameList(int cPage, int numPerPage, String gameDate) {
+		Connection conn = getConnection();
+		List<Game> gameList = new TeamDAO().selectGameList(conn, cPage, numPerPage,gameDate);
+		close(conn);
+		return gameList;
+	}
+
 
 }
