@@ -115,7 +115,11 @@ div.main-nav-sub {
    
 }
 div#main-nav-sub-boardss{
+<<<<<<< HEAD
    left:180px;
+=======
+	left:180px;
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 }
 div#main-nav-sub-register{
    left:400px;
@@ -126,6 +130,7 @@ div#main-nav-sub-search{
 div#main-nav-sub-mypage{
    left:730px;
 }
+
 
 /*section-center*/
 section#center{
@@ -220,6 +225,7 @@ $(function() {
 
 });
 <%if(memberLoggedIn!=null) { %> 
+<<<<<<< HEAD
    function fn_validate() {
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
@@ -227,10 +233,20 @@ $(function() {
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
       return false;
    }
+=======
+	function fn_validate() {
+		if(<%=memberLoggedIn.getTeamname()%>!=null) {
+			return true;	
+		}
+		if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
+		return false;
+	}
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 <%} %>
 </script>
 </head>
 <body>
+<<<<<<< HEAD
    <div id="container">
       <header id="header">
          <div id="header-div">
@@ -307,3 +323,100 @@ $(function() {
       
       <section id="center">
       
+=======
+	<div id="container">
+		<header id="header">
+			<div id="header-div">
+			<a href="<%=request.getContextPath() %>/"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" /></a>
+			<ul id="header-list">
+				<%if(memberLoggedIn==null) {%>
+					<li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
+					<li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
+				<%} else { %>
+					<li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
+					<li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
+					<%if(memberLoggedIn!=null&&"admin".equals(memberLoggedIn.getUserId())){ %>
+					<br /><li style="float:right;"><a href="<%=request.getContextPath() %>/admin/adminPage">관리자페이지</a></li>
+				<% 	} 
+				  } %>
+			</ul>
+			
+			</div>
+			<nav>
+				<ul class="main-nav">
+					<li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
+					<li id="main-nav-board" class="main-nav-list"><a href="#">게시판</a>
+						<!-- 게시판 -->
+						<div class="main-nav-sub" id="main-nav-sub-board">
+							<ul class="main-nav-sub-ul">
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/freeBoard" >자유게시판</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/regionBoard" >지역게시판</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
+							</ul>
+						</div>
+					</li>
+					<li id="main-nav-register" class='main-nav-list'><a href="<%=request.getContextPath() %>/game/gameRegister" id='<%=param=="gameRegister"||param=="myGameList"?"header-selected":""%>'>경기등록</a>
+						<!-- 경기등록  -->
+						<div class="main-nav-sub" id="main-nav-sub-register">
+							<ul class="main-nav-sub-ul">
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/game/gameRegister">경기등록</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/game/myGameList">내팀경기일정</a></li>
+							</ul>
+						</div>
+					</li>
+					<li id="main-nav-search" class="main-nav-list"><a href="<%=request.getContextPath() %>/search/teamSearch" id='<%=param=="teamSearch"?"header-selected":""%>'>검색</a>
+						<!-- 검색 -->
+						<div class="main-nav-sub" id="main-nav-sub-search">
+							<ul class="main-nav-sub-ul">
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/search/teamSearch" >팀 검색</a></li>
+								<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/search/gameSearchList">경기 검색</a></li>
+							</ul>
+						</div>
+					</li>
+					<li id="main-nav-mypage" class="main-nav-list"><a href="<%=request.getContextPath() %>/member/memberInfoPage" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
+						<!-- 마이페이지 -->
+						<div class="main-nav-sub" id="main-nav-sub-mypage">
+							<ul class="nav-list">
+<<<<<<< HEAD
+=======
+								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
+							<ul class="nav-list">
+								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
+								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
+								<%if(memberLoggedIn!=null && memberLoggedIn.getUserId().equals("")) {%>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li>
+								<%} %>
+<<<<<<< HEAD
+
+					
+
+
+=======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+								 <%if(memberLoggedIn!=null) {%> 
+<<<<<<< HEAD
+								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
+								<%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
+=======
+								<%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+								<li><a href="#">내 팀 관리</a></li>
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+								 <%} %> 
+							</ul>
+						</div>
+					</li>
+				</ul>
+				
+			</nav>
+			<!-- 메인메뉴 끝 -->
+		</header>
+		
+		<section id="center">
+		
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
