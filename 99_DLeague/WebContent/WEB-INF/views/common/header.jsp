@@ -285,36 +285,12 @@ $(function() {
 						<!-- 마이페이지 -->
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
-<<<<<<< HEAD
-=======
-								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-							<ul class="nav-list">
-								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-								<%if(memberLoggedIn!=null && memberLoggedIn.getUserId().equals("")) {%>
-								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li>
-								<%} %>
-<<<<<<< HEAD
 
-					
-
-
-=======
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 								 <%if(memberLoggedIn!=null) {%> 
-<<<<<<< HEAD
 								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 								<%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
-=======
-								<%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
-								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
-								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
-								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
-								<li><a href="#">내 팀 관리</a></li>
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 								 <%} %> 
 							</ul>
 						</div>
