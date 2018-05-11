@@ -155,6 +155,13 @@
 	    background: -moz-linear-gradient(0% 0% 270deg,#565b5f, #3e4347);
 	}
 	/*페이지끝*/
+	
+	table.tbl_type tr:hover{
+		background:lightgray;
+	}
+	table.tbl_type tfoot tr:hover:last-of-type{
+		background:none;
+	}
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
@@ -173,7 +180,7 @@
 	<br />
 
     <!--ui object -->
-    <table class="tbl_type"  cellspacing="0">
+    <table class="tbl_type"  cellspacing="0" >
         <legend>◎회원리스트</legend>
     <colgroup>
         <col width="10%"> 
@@ -209,21 +216,44 @@
 			<td class="ranking" scope="row">1</td>
 			<td><%=m.getUserId() %></td>
         	<td><%=m.getUserName() %></td>
-	        <td><%=m.getRegioncode() %></td>
-	        <td><%=m.getTeamname() %></td>
+	        <td>
+	        <%if("G1".equals(m.getRegioncode()) ) {%>
+       			서울
+       		<%}else if("G2".equals(m.getRegioncode()) ) { %>
+       			경기
+       		<%}else if("G3".equals(m.getRegioncode()) ) { %>
+       			강원
+       		<%}else if("G4".equals(m.getRegioncode()) ) { %>
+       			충북
+       		<%}else if("G5".equals(m.getRegioncode()) ) { %>
+       			충남
+       		<%}else if("G6".equals(m.getRegioncode()) ) { %>
+       			경북
+       		<%}else if("G7".equals(m.getRegioncode()) ) { %>
+       			전북
+       		<%}else if("G8".equals(m.getRegioncode()) ) { %>
+       			전남
+       		<%}else if("G9".equals(m.getRegioncode()) ) { %>
+       			제주					
+       		<%} %>
+	        </td>
+	        <td>
+	        <%if(m.getTeamname()!=null){ %>
+	        	<%=m.getTeamname() %>
+	        <%}else{ %>
+	        	-
+	        <%} %>
+	        </td>
         	<td><%=m.getGrade() %></td>
-        	<tr><%=m.getEnrolldate() %></tr>
-			<tr>관리</tr>
+        	<td><%=m.getEnrolldate() %></td>
+			<td><button>상세보기</button></td>
 		</tr>
 	<% 		} 
  	 	}%>
     </tbody>
     <tfoot>
         <tr>
-        <td>종합</td>
-        <td>총 팀수</td>
-        <td>전체</td>
-        <td colspan="5">개팀</td>
+        <td colspan="8">회원리스트</td>
         </tr>
         </tfoot>
     </table>
