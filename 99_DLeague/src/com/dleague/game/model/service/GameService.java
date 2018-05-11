@@ -11,6 +11,7 @@ import java.util.List;
 import com.dleague.game.model.dao.GameDAO;
 import com.dleague.game.model.vo.Game;
 import com.dleague.search.model.vo.Activity;
+import com.dleague.search.model.vo.Team;
 
 public class GameService {
 	public int insertGame(Game g) {
@@ -48,5 +49,12 @@ public class GameService {
 		Activity a = new GameDAO().selectOneWithResult(conn, no);
 		close(conn);
 		return a;
+	}
+
+	public Team selectTeamByTeamName(String teamname) {
+		Connection conn = getConnection();
+		Team t = new GameDAO().selectTeamByTeamName(conn, teamname);
+		close(conn);
+		return t;
 	}
 }
