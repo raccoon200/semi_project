@@ -2,6 +2,7 @@ package com.dleague.member.model.dao;
 
 import static com.dleague.common.JDBCTemplate.*;
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -172,7 +173,7 @@ private Properties prop = new Properties();
 	         pstmt.setString(11, member.getPhoto());
 	         pstmt.setString(12, member.getUserId());
 	         result = pstmt.executeUpdate();
-	         System.out.println(result);
+	         System.out.println("MemberDAO@memberinfoUpdate"+member);
 	      } catch (SQLException e) {
 	         e.printStackTrace();
 	      } 
@@ -187,12 +188,11 @@ private Properties prop = new Properties();
 int result = 0;
 PreparedStatement pstmt = null;
 String query = prop.getProperty("insertMember");
-System.out.println();
+System.out.println(member);
 try {
 	pstmt = conn.prepareStatement(query);
 	pstmt.setString(1,  member.getUserId());
 	pstmt.setString(2,  member.getPassword());
-<<<<<<< HEAD
 	pstmt.setString(3, member.getUserName());
 	pstmt.setString(4,  member.getRegioncode());
 	pstmt.setString(5,  member.getPhone());
@@ -201,14 +201,7 @@ try {
 	pstmt.setString(8,  member.getProfile());
 	pstmt.setString(9, member.getPhoto());
 
-=======
-	pstmt.setString(3,  member.getBirthday());
-	pstmt.setString(4,  member.getPhone());
-	pstmt.setString(5,  member.getEmail());
-	pstmt.setString(6,  member.getRegioncode());
 	
-	pstmt.setString(7,  member.getProfile());
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 result = pstmt.executeUpdate();
 
 	} catch (SQLException e) {

@@ -59,7 +59,7 @@ table{border:1px solid;}
 <tr><td>
 <label for="teamname">팀이름</label></td>
 <td>
-<input type="text" name="teamname" id="teamname" readonly value="<%=member.getTeamname()%>"/></td>
+<input type="text" name="teamName" id="teamName" readonly value="<%=member.getTeamname()%>"/></td>
 </tr>
 
 <tr><td>

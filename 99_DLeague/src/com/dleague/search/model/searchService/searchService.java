@@ -83,10 +83,24 @@ public class searchService {
 		return activityList;
 	}
 
-	public List<Game> gameSearchList() {
+	/*public List<Game> gameSearchList() {
 		Connection conn = getConnection();
 		List<Game> gameSearchList = new TeamDAO().gameSearchList(conn);
 		return gameSearchList;
+	}*/
+
+	public int selectGameCount() {
+		Connection conn = getConnection();
+		int totalGame = new TeamDAO().selectGameCount(conn);
+		close(conn);
+		return totalGame;
+	}
+
+	public List<Game> selectGameList(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Game> gameList = new TeamDAO().selectGameList(conn, cPage, numPerPage);
+		close(conn);
+		return gameList;
 	}
 
 

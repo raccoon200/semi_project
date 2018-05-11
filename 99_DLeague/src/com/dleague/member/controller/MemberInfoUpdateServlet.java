@@ -53,7 +53,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		//1.c maxPostSize
 		int maxPostSize = 1024*1024*10;
 	
-		//1.d MultipartRequest객체생성 ==> 파일rename정책 커스터마이징
+		//1.d MultipartRequest객체생성 ==> 파일rename정책 커스터마이징s
 		MultipartRequest multiReq = new MultipartRequest(request, 
 												   saveDirectory, 
 												   maxPostSize, 
@@ -77,11 +77,12 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		String photo = multiReq.getFilesystemName("up_file");//실제시스템에 저장된 파일명
 		System.out.println(birthday);
 		System.out.println(enrolldate);
+		System.out.println("servlet@"+teamname);
 		Member member = new Member(userId, password, userName, regioncode, phone, email, birthday, teamname
 				, profile, grade, photo, enrolldate);
 		int result = new MemberService().memberInfoUpdate(member);
 		String msg = "";
-		String loc = "/";
+		String loc = "/member/logout";
 		if(result>0) msg = "성공적으로 수정되었습니다! 프로필 사진은 재로그인 시에 변경됩니다!";
 		else msg = "수정오류! 관리자에게 문의하시오!";
 		request.setAttribute("msg", msg);

@@ -58,17 +58,18 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		
 	
-		String userId  = request.getParameter("userId");
-		String password = request.getParameter("password");
-		String userName = request.getParameter("userName"); 
-		String regioncode = request.getParameter("regioncode");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email"); 
-		String birthday =request.getParameter("birthday");
-		String profile = request.getParameter("profile");
-		String photo = multiReq.getParameter("Photo");
-		
-	
+		String userId  = multiReq.getParameter("userId");
+		String password = multiReq.getParameter("password");
+		String userName = multiReq.getParameter("userName"); 
+		String regioncode = multiReq.getParameter("regioncode");
+		String phone = multiReq.getParameter("phone");
+		String email = multiReq.getParameter("email"); 
+		String birthday =multiReq.getParameter("birthday");
+		String profile = multiReq.getParameter("profile");
+		String photo = multiReq.getFilesystemName("photo");
+		System.out.println("userid ="+userId);
+
+		System.out.println("password@MemberEnrollEndServlet="+password);
 		
 		Member member = new Member();
 		member.setUserId(userId);
@@ -81,6 +82,14 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		member.setProfile(profile);
 		member.setPhoto(photo);
 		System.out.println("입력한 회원정보 : "+member);
+		
+		
+		
+		
+		
+		
+		
+
 		
 		int result = new MemberService().insertMember(member);
 		
