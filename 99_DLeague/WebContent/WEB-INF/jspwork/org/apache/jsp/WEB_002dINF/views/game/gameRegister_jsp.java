@@ -3,12 +3,19 @@
  * Version: Apache Tomcat/8.0.50
 <<<<<<< HEAD
 <<<<<<< HEAD
+ * Generated at: 2018-05-11 01:43:01 UTC
+=======
+<<<<<<< HEAD
  * Generated at: 2018-05-11 01:18:57 UTC
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 =======
  * Generated at: 2018-05-11 01:03:28 UTC
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+<<<<<<< HEAD
+=======
 =======
  * Generated at: 2018-05-11 01:47:23 UTC
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
  * Note: The last modified time of this file was set to
  *       the last modified time of the source file after
@@ -34,9 +41,15 @@ public final class gameRegister_jsp extends org.apache.jasper.runtime.HttpJspBas
     _jspx_dependants = new java.util.HashMap<java.lang.String,java.lang.Long>(3);
 <<<<<<< HEAD
 <<<<<<< HEAD
+    _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526002955880L));
+    _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1525997310941L));
+    _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1525916454116L));
+=======
+<<<<<<< HEAD
     _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1525997593507L));
     _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1525997593444L));
     _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1525739378072L));
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 =======
     _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1525997156373L));
 =======
@@ -342,6 +355,8 @@ return;
       out.write("}\r\n");
       out.write("</style>\r\n");
       out.write("<script>\r\n");
+      out.write("\r\n");
+      out.write("}\r\n");
       out.write("$(function() {\r\n");
       out.write("\t$(\".main-nav-list\").hover(function() {\r\n");
       out.write("\t\t$(this).children(\"div\").show();\r\n");
@@ -355,8 +370,20 @@ return;
       out.write("\t\t\t$(this).children(\"a\").css(\"color\",\"black\");\r\n");
       out.write("\t\t}\r\n");
       out.write("\t})\r\n");
-      out.write("\t\r\n");
+      out.write("\r\n");
       out.write("});\r\n");
+if(memberLoggedIn!=null) { 
+      out.write(" \r\n");
+      out.write("\tfunction fn_validate() {\r\n");
+      out.write("\t\tif(");
+      out.print(memberLoggedIn.getTeamname());
+      out.write("!=null) {\r\n");
+      out.write("\t\t\treturn true;\t\r\n");
+      out.write("\t\t}\r\n");
+      out.write("\t\tif(confirm(\"팀이 없습니다. 팀 생성 하시겠습니까??\")) location.href=\"/member/memberTeamCreateEnd\";\r\n");
+      out.write("\t\treturn false;\r\n");
+      out.write("\t}\r\n");
+} 
       out.write("\r\n");
       out.write("\r\n");
       out.write("</script>\r\n");
@@ -461,9 +488,16 @@ if(memberLoggedIn==null) {
       out.write("\t\t\t\t\t\t\t\t<li><a href=\"");
       out.print(request.getContextPath() );
       out.write("/member/memberInfoPage\">내 정보</a></li>\r\n");
+<<<<<<< HEAD
+      out.write("\t\t\t\t\t\t\t\t ");
+if(memberLoggedIn!=null) {
+      out.write(" \r\n");
+      out.write("\t\t\t\t\t\t\t\t");
+=======
       out.write("<<<<<<< HEAD\n");
       out.write("\t\t\t\t\t\t\t\t");
 if(memberLoggedIn!=null && memberLoggedIn.getUserId().equals("")) {
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       out.write("\r\n");
       out.write("\t\t\t\t\t\t\t\t\t");
 if(memberLoggedIn.getUserId().equals("")) 
@@ -472,6 +506,9 @@ if(memberLoggedIn.getUserId().equals(""))
       out.print(request.getContextPath() );
       out.write("/member/memberTeamInfoPage?teamName=");
       out.print(memberLoggedIn.getTeamname());
+<<<<<<< HEAD
+      out.write("\" onclick=\"return fn_validate();\">내 팀 정보</a></li>\r\n");
+=======
       out.write("\">내 팀 정보</a></li>\r\n");
       out.write("\t\t\t\t\t\t\t\t");
 } 
@@ -488,6 +525,7 @@ if(memberLoggedIn!=null) {
       out.print(memberLoggedIn.getTeamname());
       out.write("\" onclick=\"return fn_validate();\">내 팀 정보</a></li>\r\n");
       out.write(">>>>>>> branch 'master' of https://github.com/raccoon200/semi_project\n");
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       out.write("\t\t\t\t\t\t\t\t<li><a href=\"#\">내 팀 관리</a></li>\r\n");
       out.write("\t\t\t\t\t\t\t\t ");
 } 
