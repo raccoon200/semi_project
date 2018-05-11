@@ -167,7 +167,7 @@ $(function() {
 		<tr style=" text-aline : center;">
 			<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getAway())?"red":""%>; font-size : 18px;'>
 				<%if (gameStatus){ %>
-					<%=g.getAway() !=null?g.getAway():"&npsp;" %>	
+					<%=g.getAway() !=null?g.getAway():"&nbsp;" %>	
 				<% }else{%>
 					<%=a.getAway() %>
 				<%}%>
