@@ -11,7 +11,7 @@
     <style>
     table{align:center;}
     #profileImg{width:150px; height:150px;} 
-#imgsection{position: relative; left:400px; top:-450px;}
+#imgsection{position: relative; left:400px; top:-425px;}
     </style>
 <script>
 function fn_checkIdDuplicate(){
@@ -34,11 +34,101 @@ function fn_checkIdDuplicate(){
 	checkIdDuplicateFrm.submit();
 	
 }
-
+function checked() {
+	var idtext = document.getElementById("userId");
+	var patext = document.getElementById("password");
+	var cpatext = document.getElementById("password_chk");
+	var mtext = document.getElementById("email");
+	var nametext = document.getElementById("userName");
+	var intro = document.getElementBYId("profile");
+	
+	var userId = idtext.value;
+	var password = patext.value;
+	var password_chk = cpatext.value;
+	var email = mtext.value;
+	var userName = nametext.value;
+	
+	var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
+	//id와 비밀번호의 유효성 검사
+	var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i;
+	//email 유효성검사
+	var regname = /^[가-힝]{2,}$/;
+	// 이름 유효성 검사
+	
+	if(!regExp1.test(userId))
+		//아이디 유효성 검사 후 4~12자의 영문 대소문자와 숫자의 유효성이 안맞다면
+		//공백을 주고 알람을 띄운다.
+		//밑에 동일한 유효성 검사
+	{
+		alert("Id를 제대로 입력해주세요.");
+		idtext.value = "";
+		idtext.focus();
+		return false;
+	}
+	else if(!regExp1.test(password))
+		{
+		alert("비밀번호를 제대로 입력해주세요.");
+		patext.value="";
+		patext.focus();
+		return false;
+		}
+	else if(!(password_chk.slice(0, password_chk.length) === password.slice(0,password.length)))
+		{
+		alert("비밀번호가 동일하지 않습니다.");
+		cpatext.value = "";
+		cpatext.focus();
+		return false;
+		}
+	else if ((password_chk.slice(0, password_chk.length) === id.slice(0, id.length)))
+		{
+		alert("비밀번호가 ID와 동일하면 안됩니다.");
+		patext.value= "";
+		patext.focus();
+		cpatext.value= "";
+		cpatext.focus();
+		return false;
+		}
+	else if (!regExp2.test(email))
+		{
+		alert("올바른 이메일 형식이 아닙니다.");
+		mtext.value= "";
+		mtext.focus();
+		return false;
+		}
+	else if(!regname.test(userName))
+		{
+		alert("이름을 제대로 입력해주세요.");
+		nametext.value ="";
+		nametext.focus();
+		return false;
+		}
+	else if (intro.value ==""){
+		alert("자기 소개란을 100자 내외로 입력해주세요.");
+		return false;
+	}
+	else {
+		if(checks())
+			{
+			alert("회원가입중입니다.");
+			return true;
+			}
+		else {
+			return false;
+		}
+	}
+	}
+		//http://bitjava.tistory.com/35 <-참조
+		
+		}
+		}
+	}
+		
+}
 </script>
 <section id = "enroll-container">
 <h2>회원가입 정보입력</h2>
 <form name="memberEnrollFrm" action="<%=request.getContextPath() %>/member/memberEnrollEnd" method="post" enctype="multipart/form-data">
+ <!--  -->
 <!-- onsubmit="return fn_enrollValidate(); -->
 <table>
 <tr>
@@ -53,7 +143,7 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <tr>
 <th>비밀번호</th>
 <td>
-<input type="password" name="password" id="password_" />
+<input type="password" name="password" id="password" />
 </td>
 </tr>
 <tr>
@@ -89,6 +179,21 @@ placeholder="(-없이)01012345678" maxlength="11"/>
 </td>
 </tr>
 <tr>
+<th>거주지역</th>   
+<td>
+				<select name="regioncode" id="">
+				<%if(regionList!=null && !regionList.isEmpty()){
+				for(int i=0; i<regionList.size(); i++) {
+					Region region = regionList.get(i);
+				%>
+					<option value="<%=region.getRegionCode()%>"><%= region.getRegionName()%></option>
+				<%
+					}
+				} %>
+				</select>
+				</td>
+				</tr>
+<tr>
 <th>이메일</th>
 
 <td>
@@ -122,21 +227,6 @@ $("#selectEmail").change(function() {
 </td>
 </tr>
 <tr>
-<th>거주지역</th>   
-<td>
-				<select name="regioncode" id="">
-				<%if(regionList!=null && !regionList.isEmpty()){
-				for(int i=0; i<regionList.size(); i++) {
-					Region region = regionList.get(i);
-				%>
-					<option value="<%=region.getRegionCode()%>"><%= region.getRegionName()%></option>
-				<%
-					}
-				} %>
-				</select>
-				</td>
-				</tr>
-<tr>
 <th>프로필</th>
 <td>
 <textarea id="profile" name="profile" maxlength="2048" style="height:180px;"></textarea>
@@ -148,7 +238,7 @@ $("#selectEmail").change(function() {
 <input type="image" src="<%=request.getContextPath() %>/images/profile/default.jpg" id="profileImg"/>
 <br /> 
 <div style="position:relative;">
-<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" />
+ <input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" /> 
 <!-- <span id="fname">프로필 사진 변경</span>
  --></div>
 </section>

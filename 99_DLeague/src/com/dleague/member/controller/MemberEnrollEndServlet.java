@@ -20,7 +20,7 @@ import com.oreilly.servlet.MultipartRequest;
 /**
  * Servlet implementation class MemberEnrollEndServlet
  */
-@WebServlet("/member/memberEnrollEnd")
+@WebServlet(name="MemberEnrollEndServlet", urlPatterns="/member/memberEnrollEnd")
 public class MemberEnrollEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,7 +44,6 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			.forward(request, response);
 			return;
 		}
-			
 		String saveDirectory = getServletContext().getRealPath("upload/member");
 		System.out.println("saveDirectory="+saveDirectory);
 		
@@ -58,9 +57,10 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		
 	
+		
+		String userName = multiReq.getParameter("userName"); 
 		String userId  = multiReq.getParameter("userId");
 		String password = multiReq.getParameter("password");
-		String userName = multiReq.getParameter("userName"); 
 		String regioncode = multiReq.getParameter("regioncode");
 		String phone = multiReq.getParameter("phone");
 		String email = multiReq.getParameter("email"); 
