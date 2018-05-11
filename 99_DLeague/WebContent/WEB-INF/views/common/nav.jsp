@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.dleague.member.model.vo.*" %>
 
 <script>
 console.log("<%=param%>");
@@ -56,12 +57,12 @@ console.log("<%=param%>");
 			</ul>
 			<%} %>
 			
-			<%if(param=="memberInfo" || param=="memberTeamInfo") {%>
+			<%if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagement") {%>
 			<h2 id="nav-header">마이페이지</h2>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/member/memberInfo" id="<%=param=="memberInfo"?"nav-selected":"" %>" >내 정보</a></li>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamInfo" id="<%=param=="memberTeamInfo"?"nav-selected":"" %>">내 팀 정보</a></li>
-				<li><a href="#">내 팀 관리</a></li>
+				<li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName="<%=memberLoggedIn.getTeamname()%>" id="<%=param=="memberTeamManagement"?"nav-selected":"" %>">내 팀 관리</a></li>
 			</ul>
 			<%} %>
 			<%if(param=="adminPage" || param=="adminPage") {%>
