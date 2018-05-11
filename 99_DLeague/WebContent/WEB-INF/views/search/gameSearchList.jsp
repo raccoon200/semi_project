@@ -99,6 +99,9 @@ div#result{margin: 50px 10px 0 0;}
 <div id="allDiv2">
 <h2>경기검색</h2>
 <hr />
+<div>
+<input type="date" /><button>검색</button>
+</div>
 <table class="table table-hover">
 	<pre>  <span class="sp" id="sp1">경기날짜</span>                        <span class="sp" id="sp2">경기팀</span>                       <span class="sp" id="sp3">게임시간<span/> <span class="sp" id="sp4">상제정보</span></pre>
 	<%if(list != null || list.isEmpty()){ %>
@@ -131,11 +134,11 @@ div#result{margin: 50px 10px 0 0;}
 		<td id="td2" class="td1"><h3 ><%=g.getStartTime() %></h3></td>
 		<td>
 			<%if(g.getStatus()==null){ %>
-			<div class="alert alert-info center" id="result">
+			<div class="alert alert-warning center" id="result">
 				상세보기
 			</div>
 			<%}else if((g.getStatus()).equals("Y")){ %>
-			<div class="alert alert-warning center" id="result">
+			<div class="alert alert-success center" id="result">
 				초청완료
 			</div>
 			<%} %> 
