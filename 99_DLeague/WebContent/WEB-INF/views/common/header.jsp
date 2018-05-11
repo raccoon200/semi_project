@@ -308,6 +308,7 @@ $(function() {
       </header>
       
       <section id="center">
+      
       <div id="container">
 		<header id="header">
 			<div id="header-div">
