@@ -1,6 +1,8 @@
 package com.dleague.memberTeam.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +34,18 @@ public class MemberTeamCreateEndServlet extends HttpServlet {
 		String regionCode = request.getParameter("regionCode");
 		String introduce = request.getParameter("introduce");
 		String register_msg = request.getParameter("register_msg");
+		
+		Team team = new Team();
+		
+		
+		package com.dleague.memberTeam.model.vo;
+		private String teamName;
+		private String regionCode;
+		private String capTain;
+		private String teamLogo;
+		private String introduce;
+		private Date foundingDate;
+		private String status;
 		
 	}
 
