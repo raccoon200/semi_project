@@ -224,7 +224,7 @@ $(function() {
 		if(<%=memberLoggedIn.getTeamname()%>!=null) {
 			return true;	
 		}
-		if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="/member/memberTeamCreateEnd";
+		if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
 		return false;
 	}
 <%} %>
@@ -283,18 +283,11 @@ $(function() {
 						<!-- 마이페이지 -->
 						<div class="main-nav-sub" id="main-nav-sub-mypage">
 							<ul class="nav-list">
-								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
-
-								<%if(memberLoggedIn!=null && memberLoggedIn.getUserId().equals("")) {%>
-									
-								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li>
-								<%} %>
-
 								 <%if(memberLoggedIn!=null) {%> 
+								<li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 								<%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
 								<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
-
-								<li><a href="#">내 팀 관리</a></li>
+								<li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
 								 <%} %> 
 							</ul>
 						</div>
