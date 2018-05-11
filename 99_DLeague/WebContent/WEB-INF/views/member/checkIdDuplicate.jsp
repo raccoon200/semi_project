@@ -37,7 +37,7 @@ span#duplicated{color:red; font-weight:bold;}
 <%if(isUsable==true){ %>
 [<span><%=userId %></span>]는 사용 가능합니다.
 <br /><br />
-<button type="button" onclick="setUserId('<%=userId%> %>')">닫기</button>
+<button type="button" onclick="setUserId('<%=userId%> ')">닫기</button>
 <%} else { %>
 [<span id="duplicated"><%=userId %></span>]는 이미 사용중입니다.
 <br /><br />

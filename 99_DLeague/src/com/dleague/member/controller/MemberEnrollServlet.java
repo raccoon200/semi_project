@@ -33,15 +33,12 @@ public class MemberEnrollServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("param", "enroll");
-		
 		List<Region> regionList = new RegionService().selectRegionList();
 		request.setAttribute("regionList", regionList);
+	
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/member/memberEnroll.jsp");
 		reqDispatcher.forward(request, response);
-		
-		//request.getRequestDispatcher("/WEB-INF/views/member/memberEnroll.jsp").forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

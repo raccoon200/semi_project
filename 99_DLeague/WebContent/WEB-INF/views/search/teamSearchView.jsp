@@ -55,6 +55,7 @@
 	h3#bb{color:#DB631F;}
 	
     /* 테이블 공통 UI Object */
+    th{text-align:center} /* 부트스트랩으로 센터로안옴 */
     .tbl_type,.tbl_type th,.tbl_type td{border:0}
     .tbl_type{border:1px;width:90%;border-bottom:2px solid #dcdcdc;font-family:'돋움',dotum;font-size:12px;text-align:center;border-collapse:collapse}
     .tbl_type caption{display:none}

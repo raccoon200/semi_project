@@ -38,22 +38,9 @@ public class GameSearchListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(false);
 		
+		String gameDate = request.getParameter("gameDate");
+
 		/*List<Game> list = new searchService().gameSearchList();//게임 및 로고 리스트*/
-		
-		/*Member m = null;
-		 * if(session != null) {
-			m = (Member)session.getAttribute("memberLoggedIn");
-		}
-		if(m == null) {
-			msg = "로그인이 필요한 서비스 입니다.\\n\\n로그인을 해주새요.";
-			view = "/WEB-INF/views/common/msg.jsp";
-		}else if(m.getTeamname() == null){
-			msg = "팀이 필요한 서비스입니다.\\n\\n팀을 생성하거나 팀가입을 해주세요.";
-			view = "/WEB-INF/views/common/msg.jsp";
-		}else {
-			list = new GameService().selectListByTeamName(m.getTeamname());
-		}*/
-		/*list = new GameService().selectListByTeamName(m.getTeamname());*/
 		
 		//1. 파라미터 변수에 담기
 		int cPage; 
@@ -72,8 +59,14 @@ public class GameSearchListServlet extends HttpServlet {
 		// (공식1) totalPage
 		int totalPage = (int)(Math.ceil(totalGame/(double)numPerPage));
 		
-		//2.2 페이징된 회원리스트 가져오기
-		List<Game> list = new searchService().selectGameList(cPage, numPerPage);
+		List<Game> list = null;
+		if(gameDate==null) {
+			//2.2 페이징된 회원리스트 가져오기
+			list = new searchService().selectGameList(cPage, numPerPage);
+		}else {
+			//2.3 날짜 게임검색 리스트 가져오기
+			list = new searchService().selectGameList(cPage, numPerPage,gameDate);
+		}
 		//2.3 페이징바 만들기
 		String pageBar ="";
 		int pageBarSize = 5;
