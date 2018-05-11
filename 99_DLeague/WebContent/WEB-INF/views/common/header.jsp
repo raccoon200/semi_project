@@ -114,7 +114,7 @@ div.main-nav-sub {
 	display:none;
 	
 }
-div#main-nav-sub-board{
+div#main-nav-sub-boardss{
 	left:180px;
 }
 div#main-nav-sub-register{
