@@ -34,8 +34,10 @@ public class AdminUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Member> list = null;/*new adminService().MemberList();*/
 		HttpSession session = request.getSession(false);
+		List<Member> list = null;/*new adminService().MemberList();*/
+		String searchName = request.getParameter("searchName");
+		String selectCode = request.getParameter("selectCode");
 		Member m = null;
 		String msg = "";
 		String loc = "/";
@@ -43,6 +45,7 @@ public class AdminUserServlet extends HttpServlet {
 		int cPage=0; 
 		String pageBar ="";
 		int totalMember=0;
+		int totalPage=0;
 		
 		if(session != null) {
 			m = (Member)session.getAttribute("memberLoggedIn");
@@ -59,13 +62,15 @@ public class AdminUserServlet extends HttpServlet {
 			
 			//1.비지니스 로직 처리
 			int numPerPage = 5;
-			//전체 게시물 수 
-			totalMember = new adminService().selectMemberCount();	//팀토탈카운트
-			// (공식1) totalPage
-			int totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
-			
-			//2.2 페이징된 회원리스트 가져오기
-			list = new adminService().selectMemberList(cPage, numPerPage);
+			if(selectCode!=null && "userId".equals(selectCode)) {
+				//전체 게시물 수 
+				totalMember = new adminService().selectUserIdMemberCount(searchName);	//팀토탈카운트
+				// (공식1) totalPage
+				totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
+				
+				//2.2 페이징된 회원리스트 가져오기
+				list = new adminService().selectUserIdMemberList(cPage, numPerPage,searchName);
+			}
 			//2.3 페이징바 만들기
 			int pageBarSize = 5;
 			//공식3 시작페이지 구하기
