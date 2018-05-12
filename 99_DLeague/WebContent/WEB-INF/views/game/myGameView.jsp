@@ -391,7 +391,195 @@ $(function() {
 	</div>
   	</div>
   	<div id="tab-3" class="tab-content">
-		---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
+  	<%if(tAway != null){ %>
+		<hr />
+		<div>
+	    <div id="bu">
+	    	<div id="imgDiv">
+	        	<img id="logoimg" src=
+	        	<%if(tAway.getTeamLogo()!=null){ %>
+	        		"<%=request.getContextPath() %>/images/team/<%=tAway.getTeamLogo() %>"
+	        	<%}else{ %>
+	        	 	"<%=request.getContextPath() %>/images/team/default.png" 
+	        	<%} %>
+	        	 alt="첨부파일"/>
+	        </div>
+	        <div id="a">
+	            <h2 id="bb">팀이름</h2>
+	            <h4><%=tAway.getTeamName() %></h4>
+	        </div>
+	        <br>
+	        <div id="b">
+	            <h3 id="bb">팀장</h3>
+	            <h4><%=tAway.getCapTain()  %></h4>
+	        </div>
+	        <br>
+	        <div id="c">
+	            <h3 id="bb">팀원수</h3>
+	            <h4> <%=aMemberList.size() %>명</h4>
+	        </div>
+	        <br /> <br /><br />
+	        <div id="d">
+	            <h2 id="aa">활동지역</h2>
+	            <h3>
+	            	<%if("G1".equals(tAway.getRegionCode()) ) {%>
+	        			서울
+	        		<%}else if("G2".equals(tAway.getRegionCode()) ) { %>
+	        			경기
+	        		<%}else if("G3".equals(tAway.getRegionCode()) ) { %>
+	        			강원
+	        		<%}else if("G4".equals(tAway.getRegionCode()) ) { %>
+	        			충북
+	        		<%}else if("G5".equals(tAway.getRegionCode()) ) { %>
+	        			충남
+	        		<%}else if("G6".equals(tAway.getRegionCode()) ) { %>
+	        			경북
+	        		<%}else if("G7".equals(tAway.getRegionCode()) ) { %>
+	        			전북
+	        		<%}else if("G8".equals(tAway.getRegionCode()) ) { %>
+	        			전남
+	        		<%}else if("G9".equals(tAway.getRegionCode()) ) { %>
+	        			제주					
+		        	<%} %>
+	            </h3>
+	         </div>
+	         <div id="logoDiv">
+	        	<img id="logo" src="<%=request.getContextPath() %>/images/headerImage.jpg" alt="첨부파일"/>
+	        </div>
+	         <div id="d">
+	            <h2 id="aa">창단일</h2>
+	            <h3><%=tAway.getFoundingDate() %></h3>
+	        </div>
+	        <br><br>
+	        <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=tAway.getIntroduce() %></textarea>
+	    </div>
+	    <br>
+	    <br />
+	    <div id="memberTable">
+	    <!--ui object -->
+	    <table class="tbl_type"  cellspacing="0">
+	        <legend>◎팀원정보</legend>
+	        <colgroup>
+	            <col width="10%"> 
+	            <col width="15%">
+	            <col width="10%">
+	            <col width="10%">
+	            <col width="15%">
+	        </colgroup>
+	        <thead>
+	        <tr>
+	            <th scope="col">순번</th>
+	            <th scope="col">팀원</th>
+	            <th scope="col">지역</th>
+	            <th scope="col">등급</th>
+	            <th scope="col">입단일</th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <%for(TeamMember tm : aMemberList){ %>
+	            <tr>
+		            <td class="ranking" scope="row"><%=tm.getRnum() %></td>
+		            <td><%=tm.getUserId() %></td>
+		            <td>
+		            	<%if("G1".equals(tm.getRegionCode()) ) {%>
+		        			서울
+		        		<%}else if("G2".equals(tm.getRegionCode()) ) { %>
+		        			경기
+		        		<%}else if("G3".equals(tm.getRegionCode()) ) { %>
+		        			강원
+		        		<%}else if("G4".equals(tm.getRegionCode()) ) { %>
+		        			충북
+		        		<%}else if("G5".equals(tm.getRegionCode()) ) { %>
+		        			충남
+		        		<%}else if("G6".equals(tm.getRegionCode()) ) { %>
+		        			경북
+		        		<%}else if("G7".equals(tm.getRegionCode()) ) { %>
+		        			전북
+		        		<%}else if("G8".equals(tm.getRegionCode()) ) { %>
+		        			전남
+		        		<%}else if("G9".equals(tm.getRegionCode()) ) { %>
+		        			제주					
+		        		<%} %>
+		            </td>
+		            <td><%=tm.getGrade() %></td>
+		            <td><%=tm.getT_EnrollDate() %></td>
+	            </tr>
+	        <%} %>
+	        </tbody>
+	        <tfoot>
+	            <tr>
+	            <td>종합</td>
+	            <td colspan="2">총 팀원수</td>
+	            <td colspan="3"><%=aMemberList.size()%>명</td>
+	            </tr>
+	            </tfoot>
+	        </table>
+	        <!--//ui object -->
+	    </div >
+	    <br /><br />
+	<div id="teamTable">
+	        <!--ui object -->
+	        <table class="tbl_type"  cellspacing="0">
+	                <legend>◎팀활동내역</legend>
+	            <colgroup>
+	                <col width="10%"> 
+	                <col width="10%">
+	                <col width="10%">
+	                <col width="25%">
+	                <col width="10%">
+	            </colgroup>
+	            <thead>
+	            <tr>
+	                <th scope="col">게임번호</th>
+	                <th scope="col">HomeTeam</th>
+	                <th scope="col">AwayTeam</th>
+	                <th scope="col">게임날짜</th>
+	                <th scope="col">결과</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	            <%if(aActivityList.size()==0||aActivityList == null){ %>
+	            <tr>
+	                <td colspan="5">데이터가 없습니다.</td>
+	            </tr>
+	            <%}else{ %>
+	            <%for(Activity act: hActivityList){ %>
+	            <tr>
+	                <td class="ranking" scope="row"><%=act.getActivity_No() %></td>
+	                <td style="color:<%=((act.getHome().equals(tHome))?"red":"black" )%>"><%=a.getHome() %></td>
+	                <td style="color:<%=((act.getAway().equals(tHome))?"red":"black" )%>"><%=a.getAway() %></td>
+	                <td><%=act.getActivityDate() %></td>
+	                <td><%=act.getResult() %></td>
+	                </tr>
+	            </tr>
+	            <%}} %>
+	            </tbody>
+	            <tfoot>
+	                <tr>
+	                <td colspan="5">활동내역</td>
+	                </tr>
+	                </tfoot>
+	            </table>
+	            <!--//ui object -->
+	        </div>
+	</div>
+	<%} else{%>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div style="text-align: center;">
+어웨이팀이 결정되지 않았습니다.
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+	<%} %>
   	</div>
  
 </div>
