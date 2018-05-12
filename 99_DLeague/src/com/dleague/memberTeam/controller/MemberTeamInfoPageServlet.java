@@ -28,7 +28,7 @@ public class MemberTeamInfoPageServlet extends HttpServlet {
      */
     public MemberTeamInfoPageServlet() {
         super();
-        // TODO Auto-generated constructor stubss
+        // TODO Auto-generated constructor stubssㄴ
     }
 
 	/**
