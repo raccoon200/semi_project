@@ -1,6 +1,7 @@
 package com.dleague.admin.controller;
 
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,17 +14,18 @@ import javax.servlet.http.HttpSession;
 
 import com.dleague.admin.model.service.adminService;
 import com.dleague.member.model.vo.Member;
+
 /**
- * Servlet implementation class AdminPageServlet
+ * Servlet implementation class AdminUserServlet
  */
-@WebServlet("/admin/adminPage")
-public class AdminPageServlet extends HttpServlet {
+@WebServlet("/admin/userOneSearch")
+public class AdminUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPageServlet() {
+    public AdminUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
