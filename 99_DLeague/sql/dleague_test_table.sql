@@ -43,8 +43,6 @@ insert into tbl_user values('test40', '1234', 'test7', 'G2', '01027809071', 'rac
 insert into tbl_user values('test41', '1234', 'test7', 'G2', '01027809071', 'raccoon200@naver.com', '930322', null, 'test7', '팀장', default, sysdate);
 insert into tbl_user values('test42', '1234', 'test7', 'G2', '01027809071', 'raccoon200@naver.com', '930322', null, 'test7', '팀장', default, sysdate);
 
-
-
 /*팀*/
 insert into team values('투톱체제','G1','deayeon',null,'연경이가 부팀장이에요!','2018/05/01','Y');
 insert into team values('testTeam1','G1','test1',null,'testTeam1이에요!!!!!',sysdate,'Y');

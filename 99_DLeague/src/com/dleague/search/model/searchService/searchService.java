@@ -66,7 +66,7 @@ public class searchService {
 
 	public List<Team> teamSearch(String teamName) {
 		Connection conn = getConnection();
-		List<Team> list = new TeamDAO().teaSearch(conn,teamName);
+		List<Team> list = new TeamDAO().teamSearch(conn,teamName);
 		close(conn);
 		return list;
 	}
@@ -99,6 +99,13 @@ public class searchService {
 	public List<Game> selectGameList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Game> gameList = new TeamDAO().selectGameList(conn, cPage, numPerPage);
+		close(conn);
+		return gameList;
+	}
+
+	public List<Game> selectGameList(int cPage, int numPerPage, String gameDate) {
+		Connection conn = getConnection();
+		List<Game> gameList = new TeamDAO().selectGameList(conn, cPage, numPerPage,gameDate);
 		close(conn);
 		return gameList;
 	}

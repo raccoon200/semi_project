@@ -66,7 +66,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String email = multiReq.getParameter("email"); 
 		String birthday =multiReq.getParameter("birthday");
 		String profile = multiReq.getParameter("profile");
-		String photo = multiReq.getFilesystemName("photo");
+		String photo = multiReq.getFilesystemName("up_file");
 		System.out.println("userid ="+userId);
 
 		System.out.println("password@MemberEnrollEndServlet="+password);
@@ -105,7 +105,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		
+		request.setAttribute("imgPath", photo);
+
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
 	}

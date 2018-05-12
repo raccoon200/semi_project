@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.dleague.game.model.vo.Game;
 import com.dleague.search.model.vo.Activity;
+import com.dleague.search.model.vo.Team;
 public class GameDAO {
 	Properties prop = new Properties();
 	
@@ -158,6 +159,38 @@ public class GameDAO {
 		}
 
 		return a;
+	}
+	public Team selectTeamByTeamName(Connection conn, String teamname) {
+		Team t = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTeamByTeamName");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamname);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				t = new Team();
+				t.setTeamName(rset.getString("teamName"));
+				t.setRegionCode(rset.getString("regionCode"));
+				t.setCapTain(rset.getString("capTain"));
+				t.setTeamLogo(rset.getString("teamLogo"));
+				t.setIntroduce(rset.getString("introduce"));
+				t.setFoundingDate(rset.getDate("foundingDate"));
+				t.setStatus(rset.getString("status"));
+			}
+			/*System.out.println("DAO="+list);*/
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return t;
 	}
 
 }

@@ -58,7 +58,7 @@ td.view-content{
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td colspan="5"><input type="text" name="board_region_writer" id="" value="<%=memberLoggedIn.getUserId() %>" readonly/></td>
+			<td colspan="5"><input type="text" name="board_region_writer" id="" value='<%=memberLoggedIn!=null?memberLoggedIn.getUserId():"" %>' readonly/></td>
 		</tr>
 		<tr>
 			<th>지역</th>

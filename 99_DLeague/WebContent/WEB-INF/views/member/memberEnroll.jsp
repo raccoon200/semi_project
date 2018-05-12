@@ -6,10 +6,12 @@
     <%
     Member m = (Member)request.getAttribute("member");
 	List<Region> regionList = (List<Region>)request.getAttribute("regionList");
-	System.out.println("list="+regionList);
+
     %>
     <style>
     table{align:center;}
+    #profileImg{width:150px; height:150px;} 
+#imgsection{position: relative; left:400px; top:-450px;}
     </style>
 <script>
 function fn_checkIdDuplicate(){
@@ -67,11 +69,12 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 </td>
 </tr>
 <tr>
-<th>Photo</th>
+<!-- <th>Photo</th>
 <td>
 <input type="file" name="photo" id="photo"/>
  </td>
- </tr>
+ </tr> -->
+ 
 <tr>
 <th>생년월일</th>
 <td>
@@ -121,7 +124,7 @@ $("#selectEmail").change(function() {
 <tr>
 <th>거주지역</th>   
 <td>
-				<select name="regionSelect" id="">
+				<select name="regioncode" id="">
 				<%if(regionList!=null && !regionList.isEmpty()){
 				for(int i=0; i<regionList.size(); i++) {
 					Region region = regionList.get(i);
@@ -141,11 +144,42 @@ $("#selectEmail").change(function() {
 </table>
 <input type="submit" value="가입" />
 <input type="reset" value="취소" />
+ <section id="imgsection">
+<input type="image" src="<%=request.getContextPath() %>/images/profile/default.jpg" id="profileImg"/>
+<br /> 
+<div style="position:relative;">
+<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" />
+<!-- <span id="fname">프로필 사진 변경</span>
+ --></div>
+</section>
 </form>
 <form name="checkIdDuplicateFrm" method="post">
 <input type="hidden" name="userId"/>
 </form>
 </section>
+<script>
+$(function (){
+
+});
+$("[name=up_file]").change(function(){ 
+	//$(this).val()은 선택한 파일명임.
+	if($(this).val()==""){
+		$("#fname").show();
+	}	
+	else{
+		$("#fname").hide();
+	}
+});	
+function fn_fileUpload(value){
+	 if(value.files && value.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+             $('#profileImg').attr('src', e.target.result);
+			}
+        }
+        reader.readAsDataURL(value.files[0]);
+	}
+</script> 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 
