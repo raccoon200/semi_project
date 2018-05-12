@@ -241,10 +241,10 @@ $(function() {
             <%if(memberLoggedIn==null) {%>
                <li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
                <li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
-               <!-- <li><a href="#">관리자페이지</a></li> ㄴㄴ-->
             <%} else { %>
                <li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
                <li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
+               <li><a href="<%=request.getContextPath()%>/admin/adminPage">관리자페이지</a></li>
                
             <%} %>
          </ul>
