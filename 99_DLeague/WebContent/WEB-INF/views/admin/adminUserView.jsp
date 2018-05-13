@@ -98,19 +98,19 @@ table{border:1px solid;}
 </form>
 <script>
 $(function (){
-
-$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/board/<%=member.getPhoto()%>");
-});
-$("[name=up_file]").change(function(){ 
-	//$(this).val()은 선택한 파일명임.
-	if($(this).val()==""){
-		$("#fname").show();
-	}	
-	else{
-		$("#fname").hide();
-	}
-});	
-function fn_fileUpload(value){
+	
+	$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/board/<%=member.getPhoto()%>");
+	});
+	$("[name=up_file]").change(function(){ 
+		//$(this).val()은 선택한 파일명임.
+		if($(this).val()==""){
+			$("#fname").show();
+		}	
+		else{
+			$("#fname").hide();
+		}
+	});	
+	function fn_fileUpload(value){
 	 if(value.files && value.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -122,7 +122,6 @@ function fn_fileUpload(value){
 </script>
 <%} %>
 <style>
-
 span#fname{
 	position:absolute;
 	left:76px;
