@@ -56,7 +56,7 @@ public class AdminPageServlet extends HttpServlet {
 			/*System.out.println("cPage="+cPage);*/
 			
 			//1.비지니스 로직 처리
-			int numPerPage = 5;
+			int numPerPage = 10;
 			//전체 게시물 수 
 			totalMember = new adminService().selectMemberCount();	//팀토탈카운트
 			// (공식1) totalPage

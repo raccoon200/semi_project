@@ -29,7 +29,7 @@
     
     /* 검색옵션 */ 
     #test{height: 100px; width: 500px; position:absolute; margin:0 0 0 30px;}
-    #select1{height: 31px; width: 80px;}
+    #selectCode{height: 31px; width: 80px;}
     #searchName{height: 31px; width: 150px;}
     /* 검색옵션 끝*/
     
@@ -179,16 +179,16 @@
 	</div>
 	<br />
 	<script>
-	<!-- 검색 이벤트 -->
 	$(function(){
+		<!-- 검색 이벤트 -->
 		$("#teamOneSearch").click(function(){
 			var searchName = $("#searchName").val();
 			var selectCode = $("#selectCode").val();
 			
 			location.href="<%=request.getContextPath()%>/admin/userOneSearch?searchName="+searchName+"&selectCode="+selectCode;
 		});
+		<!-- 검색 이벤트 끝 -->
 	});
-	<!-- 검색 이벤트 끝-->
 	</script>
 
     <!--ui object -->
@@ -258,11 +258,21 @@
 	        </td>
         	<td><%=m.getGrade() %></td>
         	<td><%=m.getEnrolldate() %></td>
-			<td><button>상세보기</button></td>
+			<td><button  onclick="fn_userView('<%=m.getUserId()%>');">상세보기</button></td>
 		</tr>
 	<% 		} 
  	 	}%>
     </tbody>
+    <script>
+	<!-- 상세보기버튼 -->
+	function fn_userView(userId){
+		/* console.log(userId); */
+		location.href="<%=request.getContextPath()%>/admin/adminView";
+	}
+	<!-- 상세보기버튼끝 -->
+    </script>
+    
+    
     <tfoot>
         <tr>
         <td colspan="1">총</td>

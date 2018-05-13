@@ -61,7 +61,7 @@ public class AdminUserServlet extends HttpServlet {
 			/*System.out.println("cPage="+cPage);*/
 			
 			//1.비지니스 로직 처리
-			int numPerPage = 5;
+			int numPerPage = 10;
 			if(selectCode!=null && "userId".equals(selectCode)) {
 				//전체 게시물 수 
 				totalMember = new adminService().selectUserIdMemberCount(searchName);	//팀토탈카운트
@@ -70,6 +70,14 @@ public class AdminUserServlet extends HttpServlet {
 				
 				//2.2 페이징된 회원리스트 가져오기
 				list = new adminService().selectUserIdMemberList(cPage, numPerPage,searchName);
+			}else if(selectCode!=null && "userName".equals(selectCode)) {
+				//전체 게시물 수 
+				totalMember = new adminService().selectUserNameMemberCount(searchName);	//팀토탈카운트
+				// (공식1) totalPage
+				totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
+				
+				//2.2 페이징된 회원리스트 가져오기
+				list = new adminService().selectUserNameMemberList(cPage, numPerPage,searchName);
 			}
 			//2.3 페이징바 만들기
 			int pageBarSize = 5;
