@@ -33,4 +33,39 @@ public class adminService {
 		return list;
 	}
 
+	public int selectUserIdMemberCount(String searchName) {
+		Connection conn = getConnection();
+		int totalMember = new adminDAO().selectUserIdMemberCount(conn,searchName);
+		close(conn);
+		return totalMember;
+	}
+
+	public List<Member> selectUserIdMemberList(int cPage, int numPerPage, String searchName) {
+		Connection conn = getConnection();
+		List<Member> list = new adminDAO().selectUserIdMemberList(conn, cPage, numPerPage,searchName);
+		close(conn);
+		return list;
+	}
+
+	public int selectUserNameMemberCount(String searchName) {
+		Connection conn = getConnection();
+		int totalMember = new adminDAO().selectUserNameMemberCount(conn,searchName);
+		close(conn);
+		return totalMember;
+	}
+
+	public List<Member> selectUserNameMemberList(int cPage, int numPerPage, String searchName) {
+		Connection conn = getConnection();
+		List<Member> list = new adminDAO().selectUserNameMemberList(conn, cPage, numPerPage,searchName);
+		close(conn);
+		return list;
+	}
+
+	public List<Member> userView(String userId) {
+		Connection conn = getConnection();
+		List<Member> list = new adminDAO().userView(conn,userId);
+		close(conn);
+		return list;
+	}
+
 }
