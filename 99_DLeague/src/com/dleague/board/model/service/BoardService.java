@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.dleague.board.model.dao.BoardDAO;
+import com.dleague.board.model.vo.FreeBoard;
+import com.dleague.board.model.vo.FreeBoardComment;
 import com.dleague.board.model.vo.RegionBoard;
 import com.dleague.board.model.vo.RegionBoardComment;
 
@@ -60,7 +62,7 @@ public class BoardService {
 	}
 	public int selectRecentRegionBoardNo() {
 		Connection conn = getConnection();
-		int result = new BoardDAO().selectRegionBoardNo(conn);
+		int result = new BoardDAO().selectRecentRegionBoardNo(conn);
 		close(conn);
 		return result;
 	}
@@ -113,6 +115,113 @@ public class BoardService {
 	public int deleteRegionBoardComment(int no, int del) {
 		Connection conn = getConnection();
 		int result = new BoardDAO().deleteRegionBoardComment(conn, no, del);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public List<FreeBoard> selectFreeAll(int cPage, int numPerPage, String searchType, String searchValue) {
+		Connection conn = getConnection();
+		List<FreeBoard> list= null;
+		if(searchValue==null) {
+			list = new BoardDAO().selectFreeAll(conn, cPage, numPerPage);
+		}else {
+			if(searchType.equals("title"))
+				list = new BoardDAO().selectSearchFreeTitle(conn, cPage, numPerPage, searchValue);
+			else
+				list= new BoardDAO().selectSearchFreeId(conn, cPage, numPerPage, searchValue);
+		}
+		close(conn);
+		return list;
+	}
+	public int selectFreeBoardCount(String searchType, String searchValue) {
+		Connection conn = getConnection();
+		int count = -1;
+		if(searchValue==null) {
+			count = new BoardDAO().selectFreeBoardCount(conn);
+		}else {
+			if(searchType.equals("title"))
+				count = new BoardDAO().selectFreeBoardCountByTitle(conn, searchValue);
+			else
+				count = new BoardDAO().selectFreeBoardCountById(conn, searchValue);
+		}
+		close(conn);
+		return count;
+	}
+	public int insertFreeBoard(FreeBoard board) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().insertFreeBoard(conn, board);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int selectRecentFreeBoardNo() {
+		Connection conn = getConnection();
+		int result = new BoardDAO().selectFreeBoardNo(conn);
+		close(conn);
+		return result;
+	}
+	public int increaseFreeCount(int no) {
+		Connection conn= getConnection();
+		int result = new BoardDAO().increaseFreeCount(conn, no);
+		close(conn);
+		return result;
+	}
+	public FreeBoard selectFreeBoardOne(int no) {
+		Connection conn = getConnection();
+		FreeBoard board = new BoardDAO().selectFreeBoardOne(conn, no);
+		close(conn);
+		return board;
+	}
+	public List<FreeBoardComment> selectFreeCommentAll(int no) {
+		Connection conn = getConnection();
+		List<FreeBoardComment> freebcList = new BoardDAO().selectFreeCommentAll(conn, no);
+		close(conn);
+		return freebcList;
+	}
+	public int updateFreeBoard(FreeBoard board) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().updateFreeBoard(conn, board);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int deleteFreeBoard(int no) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().deleteFreeBoard(conn, no);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int insertFreeBoardComment(FreeBoardComment freeBoardComment) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().insertFreeBoardComment(conn, freeBoardComment);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int deleteFreeBoardComment(int no, int del) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().deleteFreeBoardComment(conn, no, del);
 		if(result>0) {
 			commit(conn);
 		}else {

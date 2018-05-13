@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dleague.board.model.service.BoardService;
-import com.dleague.board.model.vo.RegionBoard;
 import com.dleague.region.model.service.RegionService;
 import com.dleague.region.model.vo.Region;
 
 /**
- * Servlet implementation class RegionBoardUpdateServlet
+ * Servlet implementation class FreeBoardFormServlet
  */
-@WebServlet("/board/regionBoardUpdate")
-public class RegionBoardUpdateServlet extends HttpServlet {
+@WebServlet("/board/freeBoardForm")
+public class FreeBoardFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegionBoardUpdateServlet() {
+    public FreeBoardFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +32,8 @@ public class RegionBoardUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
-		int no = Integer.parseInt(request.getParameter("no"));
-		
-		RegionBoard board = new BoardService().selectRegionBoardOne(no);
-		List<Region> regionList = new RegionService().selectRegionList();
-		request.setAttribute("board", board);
-		request.setAttribute("param", "regionBoard");
-		request.setAttribute("regionList", regionList);
-		request.getRequestDispatcher("/WEB-INF/views/board/regionBoardUpdate.jsp").forward(request, response);
-		
+		request.setAttribute("param", "freeBoard");
+		request.getRequestDispatcher("/WEB-INF/views/board/freeBoardForm.jsp").forward(request, response);
 	}
 
 	/**
