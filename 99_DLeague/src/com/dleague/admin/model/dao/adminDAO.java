@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.member.model.vo.Member;
+import com.dleague.search.model.vo.Team;
 
 import static com.dleague.common.JDBCTemplate.close;
 
@@ -34,6 +35,253 @@ public class adminDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member m = new Member();
+				m.setUserId(rset.getString("userid"));
+				m.setPassword(rset.getString("password"));
+				m.setUserName(rset.getString("username"));
+				m.setRegioncode(rset.getString("regioncode"));
+				m.setPhone(rset.getString("phone"));
+				m.setEmail(rset.getString("email"));
+				m.setTeamname(rset.getString("teamname"));
+				m.setProfile(rset.getString("profile"));
+				m.setGrade(rset.getString("grade"));
+				m.setPhoto(rset.getString("photo"));
+				m.setEnrolldate(rset.getDate("enrolldate"));
+				m.setBirthday(rset.getString("birthday"));
+
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return list;
+	}
+
+	public int selectMemberCount(Connection conn) {
+		int totalMember = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectMemberCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalMember = rset.getInt("cnt");
+			}
+//			System.out.println("totalMember@AdminDAO="+totalMember);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMember;
+	}
+
+	public List<Member> selectMemberList(Connection conn, int cPage, int numPerPage) {
+		List<Member> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectMemberListByPaging");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			//공식2 시작 rownum과 마지막 rownum을 구하는 공식
+			pstmt.setInt(1, numPerPage*(cPage-1)+1);
+			pstmt.setInt(2, numPerPage*cPage);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
+			rset=pstmt.executeQuery();
+			
+			list = new ArrayList<Member>();
+			while(rset.next()) {
+				Member m = new Member();
+				m.setUserId(rset.getString("userid"));
+				m.setPassword(rset.getString("password"));
+				m.setUserName(rset.getString("username"));
+				m.setRegioncode(rset.getString("regioncode"));
+				m.setPhone(rset.getString("phone"));
+				m.setEmail(rset.getString("email"));
+				m.setTeamname(rset.getString("teamname"));
+				m.setProfile(rset.getString("profile"));
+				m.setGrade(rset.getString("grade"));
+				m.setPhoto(rset.getString("photo"));
+				m.setEnrolldate(rset.getDate("enrolldate"));
+				m.setBirthday(rset.getString("birthday"));
+				m.setRnum(rset.getInt("rnum"));
+
+				list.add(m);
+			}
+//			System.out.println("list@AdminDAO.selectMemberList="+list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int selectUserIdMemberCount(Connection conn, String searchName) {
+		int totalMember = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectUserIdMemberCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchName+"%");
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalMember = rset.getInt("cnt");
+			}
+//			System.out.println("totalMember@AdminDAO="+totalMember);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMember;
+	}
+
+	public List<Member> selectUserIdMemberList(Connection conn, int cPage, int numPerPage, String searchName) {
+		List<Member> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectUserIdMemberListByPaging");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			//공식2 시작 rownum과 마지막 rownum을 구하는 공식
+			pstmt.setString(1, "%"+searchName+"%");
+			pstmt.setInt(2, numPerPage*(cPage-1)+1);
+			pstmt.setInt(3, numPerPage*cPage);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
+			rset=pstmt.executeQuery();
+			
+			list = new ArrayList<Member>();
+			while(rset.next()) {
+				Member m = new Member();
+				m.setUserId(rset.getString("userid"));
+				m.setPassword(rset.getString("password"));
+				m.setUserName(rset.getString("username"));
+				m.setRegioncode(rset.getString("regioncode"));
+				m.setPhone(rset.getString("phone"));
+				m.setEmail(rset.getString("email"));
+				m.setTeamname(rset.getString("teamname"));
+				m.setProfile(rset.getString("profile"));
+				m.setGrade(rset.getString("grade"));
+				m.setPhoto(rset.getString("photo"));
+				m.setEnrolldate(rset.getDate("enrolldate"));
+				m.setBirthday(rset.getString("birthday"));
+				m.setRnum(rset.getInt("rnum"));
+
+				list.add(m);
+			}
+//			System.out.println("list@AdminDAO.selectMemberList="+list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int selectUserNameMemberCount(Connection conn, String searchName) {
+		int totalMember = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectUserNameMemberCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchName+"%");
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalMember = rset.getInt("cnt");
+			}
+//			System.out.println("totalMember@AdminDAO="+totalMember);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMember;
+	}
+
+	public List<Member> selectUserNameMemberList(Connection conn, int cPage, int numPerPage, String searchName) {
+		List<Member> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectUserNameMemberListByPaging");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			//공식2 시작 rownum과 마지막 rownum을 구하는 공식
+			pstmt.setString(1, "%"+searchName+"%");
+			pstmt.setInt(2, numPerPage*(cPage-1)+1);
+			pstmt.setInt(3, numPerPage*cPage);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
+			rset=pstmt.executeQuery();
+			
+			list = new ArrayList<Member>();
+			while(rset.next()) {
+				Member m = new Member();
+				m.setUserId(rset.getString("userid"));
+				m.setPassword(rset.getString("password"));
+				m.setUserName(rset.getString("username"));
+				m.setRegioncode(rset.getString("regioncode"));
+				m.setPhone(rset.getString("phone"));
+				m.setEmail(rset.getString("email"));
+				m.setTeamname(rset.getString("teamname"));
+				m.setProfile(rset.getString("profile"));
+				m.setGrade(rset.getString("grade"));
+				m.setPhoto(rset.getString("photo"));
+				m.setEnrolldate(rset.getDate("enrolldate"));
+				m.setBirthday(rset.getString("birthday"));
+				m.setRnum(rset.getInt("rnum"));
+
+				list.add(m);
+			}
+//			System.out.println("list@AdminDAO.selectMemberList="+list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<Member> userView(Connection conn, String userId) {
+		List<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("userView");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

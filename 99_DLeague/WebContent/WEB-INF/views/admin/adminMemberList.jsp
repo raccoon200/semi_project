@@ -3,7 +3,7 @@
 <%@page import="java.util.*, com.dleague.member.model.vo.*"%>
 <%
 	List<Member> list = (List<Member>)request.getAttribute("list");
-
+	int totalMember = (int)request.getAttribute("totalMember");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
@@ -29,7 +29,7 @@
     
     /* 검색옵션 */ 
     #test{height: 100px; width: 500px; position:absolute; margin:0 0 0 30px;}
-    #select1{height: 31px; width: 80px;}
+    #selectCode{height: 31px; width: 80px;}
     #searchName{height: 31px; width: 150px;}
     /* 검색옵션 끝*/
     
@@ -168,7 +168,7 @@
     <h2>회원 관리</h2>
     <hr />
     	<div id="test">
-    		<select id="select1">
+    		<select id="selectCode">
     		<option value="userId">회원ID</option>
     		<option value="userName">회원명</option>
     		</select>
@@ -178,6 +178,18 @@
 		<button class="button" id="teamOneSearch">검색</button>
 	</div>
 	<br />
+	<script>
+	$(function(){
+		<!-- 검색 이벤트 -->
+		$("#teamOneSearch").click(function(){
+			var searchName = $("#searchName").val();
+			var selectCode = $("#selectCode").val();
+			
+			location.href="<%=request.getContextPath()%>/admin/userOneSearch?searchName="+searchName+"&selectCode="+selectCode;
+		});
+		<!-- 검색 이벤트 끝 -->
+	});
+	</script>
 
     <!--ui object -->
     <table class="tbl_type"  cellspacing="0" >
@@ -213,7 +225,7 @@
 	<%} else { %>
 		<%for(Member m : list){ %>
 		<tr>
-			<td class="ranking" scope="row">1</td>
+			<td class="ranking" scope="row"><%=m.getRnum() %></td>
 			<td><%=m.getUserId() %></td>
         	<td><%=m.getUserName() %></td>
 	        <td>
@@ -246,14 +258,25 @@
 	        </td>
         	<td><%=m.getGrade() %></td>
         	<td><%=m.getEnrolldate() %></td>
-			<td><button>상세보기</button></td>
+			<td><button  onclick="fn_userView('<%=m.getUserId()%>');">상세보기</button></td>
 		</tr>
 	<% 		} 
  	 	}%>
     </tbody>
+    <script>
+	<!-- 상세보기버튼 -->
+	function fn_userView(userId){
+		/* console.log(userId); */
+		location.href="<%=request.getContextPath()%>/admin/adminView?userId="+userId;
+	};
+	<!-- 상세보기버튼끝 -->
+    </script>
+    
     <tfoot>
         <tr>
-        <td colspan="8">회원리스트</td>
+        <td colspan="1">총</td>
+        <td colspan="3">회원리스트</td>
+        <td colspan="4"><%=totalMember %>명</td>
         </tr>
         </tfoot>
     </table>

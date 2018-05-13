@@ -116,6 +116,7 @@ div.main-nav-sub {
 }
 div#main-nav-sub-boardss{
    left:180px;
+	left:180px;
 }
 div#main-nav-sub-register{
    left:400px;
@@ -220,14 +221,23 @@ $(function() {
    })
 
 });
+<<<<<<< HEAD
 <%if(memberLoggedIn!=null) { %> 
    function fn_validate_team_info() {
+=======
+<%if(memberLoggedIn!=null) { %> 
+   function fn_validate() {
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
       return false;
+<<<<<<< HEAD
    }
+=======
+   }
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 <%} %>
 </script>
 </head>
@@ -240,10 +250,10 @@ $(function() {
             <%if(memberLoggedIn==null) {%>
                <li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
                <li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
-               <!-- <li><a href="#">관리자페이지</a></li> ㄴㄴ-->
             <%} else { %>
                <li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
                <li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
+               <li><a href="<%=request.getContextPath()%>/admin/adminPage">관리자페이지</a></li>
                
             <%} %>
          </ul>
@@ -305,6 +315,5 @@ $(function() {
          </nav>
          <!-- 메인메뉴 끝 -->
       </header>
-      
+
       <section id="center">
-  

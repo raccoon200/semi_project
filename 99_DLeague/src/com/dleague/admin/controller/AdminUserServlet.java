@@ -1,6 +1,7 @@
 package com.dleague.admin.controller;
 
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,17 +14,18 @@ import javax.servlet.http.HttpSession;
 
 import com.dleague.admin.model.service.adminService;
 import com.dleague.member.model.vo.Member;
+
 /**
- * Servlet implementation class AdminPageServlet
+ * Servlet implementation class AdminUserServlet
  */
-@WebServlet("/admin/adminPage")
-public class AdminPageServlet extends HttpServlet {
+@WebServlet("/admin/userOneSearch")
+public class AdminUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPageServlet() {
+    public AdminUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +34,10 @@ public class AdminPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Member> list = null;/*new adminService().MemberList();*/
 		HttpSession session = request.getSession(false);
+		List<Member> list = null;/*new adminService().MemberList();*/
+		String searchName = request.getParameter("searchName");
+		String selectCode = request.getParameter("selectCode");
 		Member m = null;
 		String msg = "";
 		String loc = "/";
@@ -41,6 +45,7 @@ public class AdminPageServlet extends HttpServlet {
 		int cPage=0; 
 		String pageBar ="";
 		int totalMember=0;
+		int totalPage=0;
 		
 		if(session != null) {
 			m = (Member)session.getAttribute("memberLoggedIn");
@@ -57,13 +62,23 @@ public class AdminPageServlet extends HttpServlet {
 			
 			//1.비지니스 로직 처리
 			int numPerPage = 10;
-			//전체 게시물 수 
-			totalMember = new adminService().selectMemberCount();	//팀토탈카운트
-			// (공식1) totalPage
-			int totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
-			
-			//2.2 페이징된 회원리스트 가져오기
-			list = new adminService().selectMemberList(cPage, numPerPage);
+			if(selectCode!=null && "userId".equals(selectCode)) {
+				//전체 게시물 수 
+				totalMember = new adminService().selectUserIdMemberCount(searchName);	//팀토탈카운트
+				// (공식1) totalPage
+				totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
+				
+				//2.2 페이징된 회원리스트 가져오기
+				list = new adminService().selectUserIdMemberList(cPage, numPerPage,searchName);
+			}else if(selectCode!=null && "userName".equals(selectCode)) {
+				//전체 게시물 수 
+				totalMember = new adminService().selectUserNameMemberCount(searchName);	//팀토탈카운트
+				// (공식1) totalPage
+				totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
+				
+				//2.2 페이징된 회원리스트 가져오기
+				list = new adminService().selectUserNameMemberList(cPage, numPerPage,searchName);
+			}
 			//2.3 페이징바 만들기
 			int pageBarSize = 5;
 			//공식3 시작페이지 구하기

@@ -15,6 +15,7 @@ public class Member {
    String grade; 
    String photo; 
    Date enrolldate;
+   int rnum;
    
    public Member() {
       
@@ -133,12 +134,20 @@ public class Member {
       this.enrolldate = enrolldate;
    }
 
-   @Override
-   public String toString() {
-      return "Member [userId=" + userId + ", password=" + password + ", userName=" + userName + ", regioncode="
-            + regioncode + ", phone=" + phone + ", email=" + email + ", birthday=" + birthday + ", teamname="
-            + teamname + ", profile=" + profile + ", grade=" + grade + ", photo=" + photo + ", enrolldate="
-            + enrolldate + "]";
-   }
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	
+@Override
+public String toString() {
+	return "[userId=" + userId + ", password=" + password + ", userName=" + userName + ", regioncode="
+			+ regioncode + ", phone=" + phone + ", email=" + email + ", birthday=" + birthday + ", teamname=" + teamname
+			+ ", profile=" + profile + ", grade=" + grade + ", photo=" + photo + ", enrolldate=" + enrolldate
+			+ ", rnum=" + rnum + "]";
+}
+
    
 }
