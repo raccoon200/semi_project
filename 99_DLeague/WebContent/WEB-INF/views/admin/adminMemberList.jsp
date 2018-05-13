@@ -267,11 +267,10 @@
 	<!-- 상세보기버튼 -->
 	function fn_userView(userId){
 		/* console.log(userId); */
-		location.href="<%=request.getContextPath()%>/admin/adminView";
-	}
+		location.href="<%=request.getContextPath()%>/admin/adminView?userId="+userId;
+	};
 	<!-- 상세보기버튼끝 -->
     </script>
-    
     
     <tfoot>
         <tr>

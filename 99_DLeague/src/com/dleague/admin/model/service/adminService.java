@@ -61,4 +61,11 @@ public class adminService {
 		return list;
 	}
 
+	public List<Member> userView(String userId) {
+		Connection conn = getConnection();
+		List<Member> list = new adminDAO().userView(conn,userId);
+		close(conn);
+		return list;
+	}
+
 }

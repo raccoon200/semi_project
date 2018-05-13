@@ -272,4 +272,43 @@ public class adminDAO {
 		return list;
 	}
 
+	public List<Member> userView(Connection conn, String userId) {
+		List<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("userView");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member m = new Member();
+				m.setUserId(rset.getString("userid"));
+				m.setPassword(rset.getString("password"));
+				m.setUserName(rset.getString("username"));
+				m.setRegioncode(rset.getString("regioncode"));
+				m.setPhone(rset.getString("phone"));
+				m.setEmail(rset.getString("email"));
+				m.setTeamname(rset.getString("teamname"));
+				m.setProfile(rset.getString("profile"));
+				m.setGrade(rset.getString("grade"));
+				m.setPhoto(rset.getString("photo"));
+				m.setEnrolldate(rset.getDate("enrolldate"));
+				m.setBirthday(rset.getString("birthday"));
+
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return list;
+	}
+
 }
