@@ -39,7 +39,7 @@ public class MemberTeamManagementPageServlet extends HttpServlet {
 		String msg = "";
 		String loc = "/";
 		
-		if(teamName!=null) {
+		if(teamName.equals("null")) {
 			System.out.println("안녕!");
 			msg = "팀이 없습니다! 가입 또는 생성해주세요!";
 			request.setAttribute("msg", msg);
@@ -70,14 +70,14 @@ public class MemberTeamManagementPageServlet extends HttpServlet {
 			loc = "/";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
-			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);;
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		} 
 		else {
 		request.setAttribute("list", list);					//팀리스트
 		request.setAttribute("memberList", memberList);		//팀멤버 리스트
 		request.setAttribute("activityList", activityList);	//활동내역 리스트
 		request.setAttribute("param", "memberTeamManagement");
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/member/memberTeamInfo.jsp");
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/member/memberTeamManagement.jsp");
 		reqDispatcher.forward(request, response);
 		}
 	}

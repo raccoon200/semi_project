@@ -38,8 +38,11 @@ public class MemberTeamService {
 
 	public int memberTeamOut(String userId) {
 		Connection conn = getConnection();
-		int result = new MemberTeamDAO().memberTeamOut(conn, userId);
-		new MemberTeamDAO().updateGrade(conn, userId);
+		MemberTeamDAO memberDAO = new MemberTeamDAO();
+		int result = memberDAO.memberTeamOut(conn, userId);
+		memberDAO.updateGrade(conn, userId);
+		memberDAO.memberTeamDelete(conn, userId);
+		
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
