@@ -186,7 +186,9 @@ try {
 	pstmt = conn.prepareStatement(query);
 	pstmt.setString(1,  member.getUserId());
 	pstmt.setString(2,  member.getPassword());
-	pstmt.setString(3,  member.getBirthday());
+	pstmt.setString(3, member.getUserName());
+	pstmt.setString(4, member.getPhoto());
+	pstmt.setString(5,  member.getBirthday());
 pstmt.setString(4,  member.getPhone());
 pstmt.setString(5,  member.getEmail());
 pstmt.setString(6,  member.getRegioncode());
