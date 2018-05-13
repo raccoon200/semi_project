@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.game.model.vo.Game;
+import com.dleague.search.model.vo.Activity;
+import com.dleague.search.model.vo.Team;
 public class GameDAO {
 	Properties prop = new Properties();
 	
@@ -97,6 +99,98 @@ public class GameDAO {
 		}
 		
 		return list;
+	}
+	public Game selectOneGame(Connection conn, int no) {
+		Game g = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOneGame");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				g = new Game();
+				g.setGameNo(rset.getInt("game_no"));
+				g.setHome(rset.getString("home"));
+				g.setAway(rset.getString("away"));
+				g.setGameDate(rset.getDate("gamedate"));
+				g.setGameRegDate(rset.getDate("game_reg_date"));
+				g.setPlace(rset.getString("place"));
+				g.setStartTime(rset.getString("start_time"));
+				g.setGameContent(rset.getString("game_content"));
+				g.setStatus(rset.getString("status"));
+				g.setHomeLogo(rset.getString("homelogo"));
+				g.setAwayLogo(rset.getString("awaylogo"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return g;
+	}
+	public Activity selectOneWithResult(Connection conn, int no) {
+		Activity a = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOneWithResult");
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				a = new Activity();
+				a.setActivity_No(rset.getInt("activity_no"));
+				a.setHome(rset.getString("home"));
+				a.setHomeLogo(rset.getString("homelogo"));
+				a.setAway(rset.getString("away"));
+				a.setAwayLogo(rset.getString("awaylogo"));
+				a.setPlace(rset.getString("place"));
+				a.setActivityDate(rset.getDate("activitydate"));
+				a.setResult(rset.getString("result"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return a;
+	}
+	public Team selectTeamByTeamName(Connection conn, String teamname) {
+		Team t = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTeamByTeamName");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamname);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				t = new Team();
+				t.setTeamName(rset.getString("teamName"));
+				t.setRegionCode(rset.getString("regionCode"));
+				t.setCapTain(rset.getString("capTain"));
+				t.setTeamLogo(rset.getString("teamLogo"));
+				t.setIntroduce(rset.getString("introduce"));
+				t.setFoundingDate(rset.getDate("foundingDate"));
+				t.setStatus(rset.getString("status"));
+			}
+			/*System.out.println("DAO="+list);*/
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return t;
 	}
 
 }

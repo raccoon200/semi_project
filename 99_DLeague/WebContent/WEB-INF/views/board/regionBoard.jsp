@@ -73,11 +73,17 @@ function fn_writeAuthorityCheck() {
 	
 }
 $(function() {
+	
 	$("tr").click(function() {
+		<% if(memberLoggedIn!=null) {%>
 		if($(this).attr("id")!=null){
 			location.href="<%=request.getContextPath()%>/board/regionBoardView?no="+$(this).attr("id");
 		}
+		<%} else {%>
+		alert("로그인 후 이용할 수 있습니다");
+		<%}%>
 	})
+	
 	
 });
 function fn_changeRegion() {

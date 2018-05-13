@@ -12,11 +12,14 @@
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
     #teamDiv{background:white; padding:10px 10px 10px 10px;}
     #teamDiv2{text-align:left; padding:0px 10px 0px 0px;}
     
     /* table Object */
+    th{text-align:center} /* 부트스트랩으로 센터로안옴 */
    	legend{margin:30px 0 0 0;}
     .tbl_type{margin:auto;}
     .tbl_type,.tbl_type th,.tbl_type td{border:0}
@@ -54,7 +57,7 @@
 	span.srchval{
 		color:red;
 	}
-    #searchName{height: 25px; width: 150px;}
+    #searchName{height: 31px; width: 150px;}
     /* 검색옵션 끝*/
     
     /* 버튼 */
@@ -107,8 +110,8 @@
 	
 	/*페이지*/
 	.pagination {
-	    width: 625px;
-	    margin: 0 auto;
+	    width: 645px;
+	    margin: 0 0 0 36px;
 	    text-align:center;
 	} 
 	.btn {
@@ -182,6 +185,8 @@
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
+    <h2>팀 검색</h2>
+    <hr />
     	<div id="test">
 		    <select id="selectCode">
 		        <option value="G1">서울</option>
@@ -201,6 +206,7 @@
 			</div>
 			<button class="button" id="teamOneSearch">팀검색</button>
 		</div>
+		<br />
 	<script>
 	<!-- 서치텍스트스 이벤트 -->
 	$(function(){

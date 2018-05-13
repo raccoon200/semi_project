@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.dleague.member.model.vo.*" %>
 
 <script>
 console.log("<%=param%>");
@@ -47,31 +48,32 @@ console.log("<%=param%>");
 				<li><a href="<%=request.getContextPath() %>/game/myGameList" id='<%=param=="myGameList"?"nav-selected":""%>'>내팀경기일정</a></li>
 			</ul>
 			<%} %>
-			<%if(param=="teamSearch") {%>
+			<%if(param=="teamSearch"||param=="teamSearchList") {%>
 			<!-- 검색 -->
 			<h2 id="nav-header">검색</h2>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/search/teamSearch" id='<%=param=="teamSearch"?"nav-selected":""%>'>팀검색</a></li>
-				<li><a href="#">경기검색</a></li>
+				<li><a href="<%=request.getContextPath() %>/search/gameSearchList" id='<%=param=="teamSearchList"?"nav-selected":""%>'>경기검색</a></li>
 			</ul>
 			<%} %>
 			
-			<%if(param=="memberInfo") {%>
+			<%if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagement") {%>
 			<h2 id="nav-header">마이페이지</h2>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/member/memberInfo" id="<%=param=="memberInfo"?"nav-selected":"" %>" >내 정보</a></li>
-				<li><a href="#">내 팀 정보</a></li>
-				<li><a href="#">내 팀 관리</a></li>
+				<li><a href="<%=request.getContextPath() %>/member/memberTeamInfo" id="<%=param=="memberTeamInfo"?"nav-selected":"" %>">내 팀 정보</a></li>
+				<li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName="<%=memberLoggedIn.getTeamname()%>" id="<%=param=="memberTeamManagement"?"nav-selected":"" %>">내 팀 관리</a></li>
 			</ul>
 			<%} %>
-			
-			<!-- 관리자페이지 
+			<%if(param=="adminPage" || param=="adminPage") {%>
+			<!-- 관리자페이지 -->
 			<h2 id="nav-header">관리자페이지</h2>
 			<ul class="nav-list">
-				<li><a href="#">회원 관리</a></li>
+				<li><a href="<%=request.getContextPath() %>/admin/adminPage" id="<%=param=="adminPage"?"nav-selected":"" %>" >회원 관리</a></li>
 				<li><a href="#">팀 관리</a></li>
 				<li><a href="#">팀 수락</a></li>
 				<li><a href="#">접속 통계</a></li>
-			</ul>  -->
+			</ul>  
+			<%} %>
 		</nav>
 		<section id="content">

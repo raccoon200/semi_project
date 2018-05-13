@@ -14,6 +14,7 @@
 	Date foundInDate=null;
 	int rnum=0;
 	String rogo="";
+	//팀정보
 	for(Team t : list){
 		teamName = t.getTeamName();
 		capTain = t.getCapTain();
@@ -22,29 +23,39 @@
 		introduce=t.getIntroduce();
 		rogo=t.getTeamLogo();
 	}
+	//팀원수
 	for(TeamMember tm2 : memberList){
 		rnum = tm2.getRnum();
+	}
+	//활동내역 경기 유/무확인
+	int num=0;
+	for(Activity a2: activityList){
+		num = a2.getActivity_No();	
 	}
 %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 	img#logoimg{width: 250px;height: 200px;display: inline-block;margin: 50px 0 0 0;}
 	img#logo{width: 200px;height: 80px;display: inline-block;}
-	div#logoDiv{width: 200px;height: 80px;display: inline-block; }
+	div#logoDiv{width: 200px;height: 80px;display: inline-block;}
 	div#imgDiv{width: 410px;height: 315px;display: inline-block;float: left;text-align:center;}
 	/* div#bu,#a,#b,#c,#d{border: 1px solid black;} */
 	div#bu{height: 590px; width: 700px; display: inline-block;}
-	div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; line-height: 20px; text-align: center; display: inline-block; margin:10px 0 0 0;}
-	div#b{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;line-height: 10px; text-align: center; display: inline-block; margin:10px 0 0 0;}
-	div#c{border-radius: 10px;background:lightgreen;height: 80px; width: 200px; line-height: 10px; text-align: center; display: inline-block; margin:10px 0 0 0;}
-	div#d{height: 80px; width: 200px;line-height: 10px; text-align: center; display: inline-block;}
-	
-	h1#aa{color:#2828CD;}
-	h1#bb{color:#DB631F;}
+	div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#b{border-radius: 10px;background:lightgreen;height: 80px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#c{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;  text-align: center; display: inline-block; margin:10px 0 0 0;}
+	div#d{height: 80px; width: 200px; text-align: center; display: inline-block;}
+	/*글자색깔*/
+	h2#aa{color:#2828CD;}
+	h2#bb{color:#DB631F;}
+	h3#bb{color:#DB631F;}
 	
     /* 테이블 공통 UI Object */
+    th{text-align:center} /* 부트스트랩으로 센터로안옴 */
     .tbl_type,.tbl_type th,.tbl_type td{border:0}
     .tbl_type{border:1px;width:90%;border-bottom:2px solid #dcdcdc;font-family:'돋움',dotum;font-size:12px;text-align:center;border-collapse:collapse}
     .tbl_type caption{display:none}
@@ -61,6 +72,8 @@
     div#teamTable{width: 350px; display: inline-block;}
     /*teamTable*/
 </style>
+	<h2>팀상세정보</h2>
+	<hr />
 	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
@@ -70,26 +83,26 @@
         	<%}else{ %>
         	 	"<%=request.getContextPath() %>/images/team/default.png" 
         	<%} %>
-        	 alt="첨부파일" style="display:<%=rogo==null?"inline":"none" %>;"/>
+        	 alt="첨부파일"/>
         </div>
         <div id="a">
-            <h1 id="bb">팀이름</h1>
-            <h2><%=teamName %></h2>
+            <h2 id="bb">팀이름</h2>
+            <h4><%=teamName %></h4>
         </div>
         <br>
         <div id="b">
-            <h1 id="bb">팀장</h1>
-            <h2><%=capTain %></h2>
+            <h3 id="bb">팀장</h3>
+            <h4><%=capTain %></h4>
         </div>
         <br>
         <div id="c">
-            <h1 id="bb">팀원수</h1>
-            <h2> <%=rnum %>명</h2>
+            <h3 id="bb">팀원수</h3>
+            <h4> <%=rnum %>명</h4>
         </div>
         <br /> <br /><br />
         <div id="d">
-            <h1 id="aa">활동지역</h1>
-            <h2>
+            <h2 id="aa">활동지역</h2>
+            <h3>
             	<%if("G1".equals(rCode) ) {%>
         			서울
         		<%}else if("G2".equals(rCode) ) { %>
@@ -109,17 +122,17 @@
         		<%}else if("G9".equals(rCode) ) { %>
         			제주					
 	        	<%} %>
-            </h2>
+            </h3>
          </div>
-         <div id="d">
-            <h1 id="aa">창단일</h1>
-            <h2><%=foundInDate %></h2>
-        </div>
-        <div id="logoDiv">
+         <div id="logoDiv">
         	<img id="logo" src="<%=request.getContextPath() %>/images/headerImage.jpg" alt="첨부파일"/>
         </div>
+         <div id="d">
+            <h2 id="aa">창단일</h2>
+            <h3><%=foundInDate %></h3>
+        </div>
         <br><br>
-        <textarea name="" id="" cols="93" rows="7" readonly style="resize: none"><%=introduce %></textarea>
+        <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
     <div id="memberTable">
@@ -204,11 +217,11 @@
             </tr>
             </thead>
             <tbody>
-            <%if(activityList==null){ %>
+            <%if(num==0){ %>
             <tr>
                 <td colspan="5">데이터가 없습니다.</td>
             </tr>
-            <%} %>
+            <%}else{ %>
             <%for(Activity a: activityList){ %>
             <tr>
                 <td class="ranking" scope="row"><%=a.getActivity_No() %></td>
@@ -218,7 +231,7 @@
                 <td><%=a.getResult() %></td>
                 </tr>
             </tr>
-            <%} %>
+            <%}} %>
             </tbody>
             <tfoot>
                 <tr>
