@@ -197,10 +197,10 @@ try {
 	pstmt.setString(4,  member.getRegioncode());
 	pstmt.setString(5,  member.getPhone());
 	pstmt.setString(6,  member.getEmail());
-	pstmt.setString(7,  member.getBirthday());
-	pstmt.setString(8,  member.getProfile());
-	pstmt.setString(9, member.getPhoto());
-
+	
+	pstmt.setString(7,  member.getProfile());
+	pstmt.setString(8, member.getPhoto());
+	pstmt.setString(9,  member.getBirthday());
 	
 result = pstmt.executeUpdate();
 

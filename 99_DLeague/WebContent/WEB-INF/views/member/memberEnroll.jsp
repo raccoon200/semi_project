@@ -8,15 +8,20 @@
 	List<Region> regionList = (List<Region>)request.getAttribute("regionList");
 
     %>
+        <!-- Bootstrap -->
+    <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
+    <!-- font awesome -->
+    <link href="<%=request.getContextPath()%>/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Style -->
     <style>
     table{align:center;}
-    #profileImg{width:150px; height:150px;} 
-#imgsection{position: relative; left:500px; top:-655px;}
+    #profileImg{width:100px; height:150px;} 
+#imgsection{position: relative; left:635px; top:-605px;}
 
     </style>
 <script>
 function fn_checkIdDuplicate(){
-	console.log("aa");
+	
 	var userId = $("#userId_").val().trim();
 	if(userId.length<4){
 		alert('아이디는 4글자 이상부터 가능합니다.');
@@ -36,20 +41,25 @@ function fn_checkIdDuplicate(){
 	checkIdDuplicateFrm.submit();
 	
 }
-function checked() {
-	var idtext = document.getElementById("userId");
-	var patext = document.getElementById("password");
+function fn_checked() {
+	console.log("안녕");
+	var idtext = document.getElementById("userId_");
+	var patext = document.getElementById("password_");
 	var cpatext = document.getElementById("password_chk");
-	var mtext = document.getElementById("email");
+	var mtext = document.getElementById("email_");
 	var nametext = document.getElementById("userName");
-	var intro = document.getElementBYId("profile");
+	var intro = document.getElementById("profile");
 	
 	var userId = idtext.value;
 	var password = patext.value;
 	var password_chk = cpatext.value;
 	var email = mtext.value;
 	var userName = nametext.value;
-	
+	console.log(userId);
+	console.log(password);
+	console.log(password_chk);
+	console.log(email);
+	console.log(userName);
 	var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
 	//id와 비밀번호의 유효성 검사
 	var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i;
@@ -64,6 +74,11 @@ function checked() {
 	{
 		alert("Id를 제대로 입력해주세요.");
 		idtext.value = "";
+		idtext.focus();
+		return false;
+	}else if($("[name=idValid]").val() != 1){
+		
+		alert("아이디체크를 해주세요.")
 		idtext.focus();
 		return false;
 	}
@@ -108,28 +123,13 @@ function checked() {
 		alert("자기 소개란을 100자 내외로 입력해주세요.");
 		return false;
 	}
-	else {
-		if(checks())
-			{
-			alert("회원가입중입니다.");
-			return true;
-			}
-		else {
-			return false;
-		}
-	}
+	return true;
 }
-	
 		//http://bitjava.tistory.com/35 <-참조
-		
-		
-	
-		
-
 </script>
 <section id = "enroll-container">
-<h2>회원가입 정보입력</h2>
-<form name="memberEnrollFrm" action="<%=request.getContextPath() %>/member/memberEnrollEnd" method="post" enctype="multipart/form-data">
+
+<form name="memberEnrollFrm" action="<%=request.getContextPath() %>/member/memberEnrollEnd" onsubmit="return fn_checked();" method="post" enctype="multipart/form-data">
  <!--  -->
 <!-- onsubmit="return fn_enrollValidate(); -->
 <table class = "table table-bordered table-hover" style="text-align: center; border : 1px solid #dddddd">
@@ -139,13 +139,11 @@ function checked() {
 </thead>
 <tbody>
 <tr>
-
-
 <tr>
 <td style ="width:110px;"><h5>아이디</h5></td>
 <td>
-<input class="form-control" type="text" name="userId" id="userId_" required/>
-<td style="width:110p;"> <input type="button" value="아이디체크"
+<input class="form-control" type="text" name="userId" id="userId_" placeholder = "아이디를 입력하세요 ." value ="" required/>
+<td style="width:110px;"> <input type="button" value="아이디체크"
 id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <input type = "hidden" name="idValid" value="0" />
 </td>
@@ -153,19 +151,19 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <tr>
 <td style ="width:110px;"><h5>비밀번호</h5></td>
 <td>
-<input class="form-control" type="password" name="password" id="password_" />
+<input class="form-control" type="password" name="password" id="password_" placeholder ="비밀번호를 입력하세요." value =""/>
 </td>
 </tr>
 <tr>
 <td style ="width:110px;"><h5>비밀번호 확인</h5></td>
 <td>
-<input class="form-control" type="password" id="password_chk" />
+<input class="form-control" type="password" id="password_chk" placeholder ="위와 동일한 비밀번호를 입력하세요." value ="" />
 </td>
 </tr>
 <tr>
 <td style ="width:110px;"><h5>이름</h5></td>
 <td>
-<input class="form-control" type="text" name="userName" id="userName"/>
+<input class="form-control" type="text" name="userName" id="userName" value =""/>
 </td>
 </tr>
 <tr>
@@ -178,22 +176,22 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <tr>
 <td style ="width:110px;"><h5>생년월일</h5></td>
 <td>
-<input class="form-control" type="date" name="birthday" id="birthday"/>
+<input class="form-control" type="date" name="birthday" id="birthday" value =""/>
 </td>
 </tr>
 <tr>
 <td style ="width:110px;"><h5>휴대폰</h5></td>
 <td>
 <input class="form-control" type="tel" id="phone" name="phone"
-placeholder="(-없이)01012345678" maxlength="11"/>
+placeholder="(-없이)01012345678" maxlength="11" value =""/>
 </td>
 </tr>
 <tr>
 <td style ="width:110px;"><h5>이메일</h5></td>
 
 <td>
-<input type="text" name="email"  id="email_" >@
-<input type="text" name = "email" id="email_1" disabled value="naver.com">
+<input type="text" name="email1"  id="email_" value ="" >@
+<input type="text" name = "email2" id="email_1" disabled value="naver.com" value = "">
 <select name="selectEmail" id="selectEmail">
 <option value="1">직접입력</option>
 
@@ -239,7 +237,7 @@ $("#selectEmail").change(function() {
 <tr>
 <td style ="width:110px;"><h5>프로필</h5></td>
 <td>
-<textarea id="profile" name="profile" maxlength="2048" style="height:180px;"></textarea>
+<textarea id="profile" name="profile" maxlength="2048" style="height:180px;" placeholder = "자기소개란"></textarea>
 </td></tr>
 </table>
 <input type="submit" value="가입" />
@@ -280,7 +278,7 @@ function fn_fileUpload(value){
         reader.readAsDataURL(value.files[0]);
 	}
 </script> 
-<%
+ <%-- <%
 String messageContent = null;
 if(session.getAttribute("messageContent") != null) {
 messageContent = (String) session.getAttribute("messageContent");}
@@ -315,10 +313,10 @@ if(messageContent != null) {
    session.removeAttribute("messageType");
 }
    %>
-   
+    --%>
  
 
-
+  <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 
