@@ -5,7 +5,7 @@
 <%@ page import="com.dleague.search.model.vo.*, java.util.*" %>
 <%
 	List<Team> list = (List<Team>)request.getAttribute("list");
-
+	List<TeamMember> memberList = (List<TeamMember>)request.getAttribute("memberList");
 	//team정보
 	String teamName="";
 	String capTain="";
@@ -24,7 +24,8 @@
 		logo=t.getTeamLogo();
 	}
 %>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 table.team-register-table{
 	border:1px solid black;
@@ -71,14 +72,16 @@ function fn_fileUpload(value){
 }
 function fn_validate(){
 	if($("[name=introduce]").val().trim().length==0) {
-		alert("팀이름을 입력해주세요");
+		alert("팀소개를 입력해주세요");
 		return false;
 	}
 	return true;
 }
 </script>
+<div>
 <h2>팀 정보수정</h2>
-<form action="<%=request.getContextPath() %>/member/memberTeamCreateEnd" method="post" onsubmit="return fn_validate();" enctype="multipart/form-data">
+<hr />
+<form action="<%=request.getContextPath() %>/search/TeamUpdateServletEnd" method="post" onsubmit="return fn_validate();" enctype="multipart/form-data">
 	<table class="team-register-table">
 		<tr>
 			<th>팀이름</th>
@@ -91,9 +94,17 @@ function fn_validate(){
 		</tr>
 		<tr>
 			<th>팀장</th>
-			<td class="left"><input type="text" name="t_register_writer" id="" value='<%=capTain %>' readonly/></td>
+			<td class="left">
+				<%-- <input type="text" name="t_register_writer" id="" value='<%=capTain %>' readonly/> --%>
+				<select name="t_register_writer" id="">
+				<%for(TeamMember tm : memberList){ %>
+					<option value="<%=tm.getUserId() %>"><%=capTain.equals(tm.getUserId())==true?tm.getUserId()+"(현재팀장)":tm.getUserId() %></option>
+				<%} %>
+				</select>
+			</td>
+			
 			<td rowspan="2">
-			<img src="<%=request.getContextPath() %>/images/team/<%=logo!=null?logo:"default.jpg"%>" id="profileImg" width="60px" height="60px" alt="" />
+			<img src="<%=request.getContextPath() %>/images/team/<%=logo!=null?logo:"default.png"%>" id="profileImg" width="60px" height="60px" alt="" />
 			<input type="file" name="up_file" id="" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" value="<%=logo!=null?request.getContextPath()+"/images/team/"+logo:""%>"/>
 			</td>
 			
@@ -102,7 +113,7 @@ function fn_validate(){
 			<th>지역</th>
 			<td>
 				<select name="regionCode" id="">
-					<option value="rCode">
+					<option value="<%=rCode%>">
 						<%if("G1".equals(rCode)){ %>
 							서울(현재활동지역)
 						<%}else if("G2".equals(rCode)){ %>
@@ -140,10 +151,11 @@ function fn_validate(){
 			<th colspan="3">팀소개</th>
 		</tr>
 		<tr>
-			<td colspan="3" class="view-content"><textarea name="introduce" id="" cols="100" rows="8" ><%=introduce %></textarea></td>
+			<td colspan="3" class="view-content"><textarea name="introduce" id="" cols="100" rows="8" style="resize: none" ><%=introduce %></textarea></td>
 		</tr>
 	</table>
 	<input type="submit" value="신청" />
 	<input type="reset" value="초기화" />
 </form>
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		
