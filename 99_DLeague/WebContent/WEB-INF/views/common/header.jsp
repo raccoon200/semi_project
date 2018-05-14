@@ -296,7 +296,7 @@ $(function() {
                         <%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
                         <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
 
-                        <li><a href="#">내 팀 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
                          <%} %> 
                      </ul>
                   </div>

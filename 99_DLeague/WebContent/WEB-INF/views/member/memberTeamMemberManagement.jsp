@@ -28,7 +28,7 @@ legend{padding:10px 0px 0px 40px;}
 
 /*페이지*/
 	.pagination {
-	    width: 645px;
+	    width: 665px;
 	    margin: 0 0 0 36px;
 	    text-align:center;
 	} 
@@ -130,9 +130,18 @@ legend{padding:10px 0px 0px 40px;}
     /* 버튼 디자인 */
 </style>
 <script>
-function fn_teamMemberOut() {
-	
+function fn_teamMemberGetOut() {
+	alert($("#choose").val());
+	if($("#choose").val()!=null) {
+		if(confirm("해당 회원을 제명하시겠습니까?")) {
+			location.href = "<%=request.getContextPath()%>/member/teamMemberGetOut";
+		}
+	}
 }
+function fn_choose_change(var choose) {
+	alert(choose.val());
+}
+
 </script>
  <!--ui object -->
     <table class="tbl_type"  cellspacing="0">
@@ -167,7 +176,7 @@ function fn_teamMemberOut() {
 		<%}else{ 
 			for(Member m : list){%>
 			<tr>
-				<td><input type="radio" name="choose" id="choose" value="<%=m.getUserId()%>"/></td>
+				<td><input type="radio" name="choose" id="choose" value="<%=m.getUserId()%>" onchange="fn_choose_change(this)"/></td>
 				<td class="ranking" scope="row"><%=m.getRnum() %></td>
 				<td><%=m.getUserId() %></td>
 	        	<td><%=m.getUserName() %></td>
@@ -190,7 +199,7 @@ function fn_teamMemberOut() {
         <td colspan="6"><%= totalMember%>명</td>
         </tr>
         <tr>
-        <input type="button" value="제명" class="btn" onclick="fn_teamMemberOut();"/>
+        <input type="button" value="제명" class="btn" onclick="fn_teamMemberGetOut();"/>
         </tr>
         </tfoot>
     </table>
