@@ -65,7 +65,6 @@ public class NoticeFormEndServlet extends HttpServlet {
 				String notice_title = multiReq.getParameter("notice_title");
 				String notice_writer = multiReq.getParameter("notice_writer");
 				String notice_content = multiReq.getParameter("notice_content");
-				
 				String renamed_file_name = multiReq.getFilesystemName("up_file");//실제시스템에 저장된 파일명
 				String original_file_name = multiReq.getOriginalFileName("up_file");//사용자가 업로드한 파일명
 				

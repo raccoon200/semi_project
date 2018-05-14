@@ -204,4 +204,43 @@ public class NoticeDAO {
 		}
 		return result;
 	}
+	public int deleteNotice(Connection conn, int no) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int updateNotice(Connection conn, Notice notice) {
+		int result = -1;
+		PreparedStatement pstmt =null;
+		String query = prop.getProperty("updateNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, notice.getNotice_title());
+			pstmt.setString(2,notice.getNotice_content());
+			pstmt.setString(3, notice.getOriginal_file_name());
+			pstmt.setString(4, notice.getRenamed_file_name());
+			pstmt.setInt(5,notice.getNotice_no());
+			
+			result = pstmt.executeUpdate();
+			System.out.println("notice : "+notice.getNotice_no()+", "+notice.getNotice_title());
+			System.out.println("result : "+result);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

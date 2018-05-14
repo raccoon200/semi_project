@@ -1,4 +1,4 @@
-package com.dleague.board.controller;
+package com.dleague.notice.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -17,14 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class NoticeFileDownloadServlet
  */
-@WebServlet("/board/boardFileDownload")
-public class BoardFileDownloadServlet extends HttpServlet {
+@WebServlet("/notice/noticeFileDownload")
+public class NoticeFileDownloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardFileDownloadServlet() {
+    public NoticeFileDownloadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +34,7 @@ public class BoardFileDownloadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.실제파일저장경로를 절대경로로 가져오기
-        String saveDirectory = getServletContext().getRealPath("/upload/board");
+        String saveDirectory = getServletContext().getRealPath("/upload/notice");
 		String rName = request.getParameter("rName");
 		String oName = request.getParameter("oName");
 		System.out.printf("oName=%s, rName=%s\n",oName, rName);
