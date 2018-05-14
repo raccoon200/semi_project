@@ -129,6 +129,11 @@ legend{padding:10px 0px 0px 40px;}
 	} 
     /* 버튼 디자인 */
 </style>
+<script>
+function fn_teamMemberOut() {
+	
+}
+</script>
  <!--ui object -->
     <table class="tbl_type"  cellspacing="0">
         <legend>◎회원관리</legend>
@@ -185,7 +190,7 @@ legend{padding:10px 0px 0px 40px;}
         <td colspan="6"><%= totalMember%>명</td>
         </tr>
         <tr>
-        <input type="button" value="제명" class="btn" />
+        <input type="button" value="제명" class="btn" onclick="fn_teamMemberOut();"/>
         </tr>
         </tfoot>
     </table>
