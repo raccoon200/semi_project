@@ -1,26 +1,26 @@
-package com.dleague.memberTeam.controller;
+package com.dleague.notice.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dleague.memberTeam.model.service.MemberTeamService;
+import com.dleague.notice.model.service.NoticeService;
+import com.dleague.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class MemberTeamOut
+ * Servlet implementation class NoticeViewServlet
  */
-@WebServlet("/member/memberTeamOut")
-public class MemberTeamOut extends HttpServlet {
+@WebServlet("/notice/noticeView")
+public class NoticeViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberTeamOut() {
+    public NoticeViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,18 +29,12 @@ public class MemberTeamOut extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		System.out.println("servlet@"+userId);
-		int result = new MemberTeamService().memberTeamOut(userId);
-		String msg = "";
-		String loc = "/member/logout";
-		
-		if(result>0) msg = "성공적으로 탈퇴했습니다! 재로그인시 반영됩니다.";
-		else msg = "탈퇴오류! 관리자에게 문의하시오!";
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
-		
+		request.setCharacterEncoding("utf-8");
+		int no = Integer.parseInt(request.getParameter("no"));
+		Notice notice = new NoticeService().selectNoticeOne(no);
+		request.setAttribute("notice", notice);
+		request.setAttribute("param", "notice");
+		request.getRequestDispatcher("/WEB-INF/views/notice/noticeView.jsp").forward(request, response);
 	}
 
 	/**
