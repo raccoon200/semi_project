@@ -39,10 +39,14 @@ public class TeamUpdateServlet extends HttpServlet {
 
 		//2. 업무로직 요청
 		List<Team> list = new searchService().teamSearch(teamName);
+		List<TeamMember> memberList = new searchService().teamMemberSearch(teamName);
+		
+		
 		
 		/*System.out.println("activityList="+activityList);*/
 		//3. view단 처리위임
 		request.setAttribute("list", list);							
+		request.setAttribute("memberList", memberList);							
 
 		request.setAttribute("param", "teamSearch");
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamUpdate.jsp");
