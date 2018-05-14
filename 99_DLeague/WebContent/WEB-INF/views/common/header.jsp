@@ -255,13 +255,8 @@ $(function() {
          </div>
          <nav>
             <ul class="main-nav">
-<<<<<<< HEAD
-               <li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
-               <li id="main-nav-board" class="main-nav-list"><a href="#" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
-=======
                <li id="main-nav-notice" class="main-nav-list"><a href="<%=request.getContextPath()%>/notice/noticeList">공지사항</a></li>
                <li id="main-nav-board" class="main-nav-list"><a href="<%=request.getContextPath() %>/board/freeBoard" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
                   <!-- 게시판 -->
                   <div class="main-nav-sub" id="main-nav-sub-board">
                      <ul class="main-nav-sub-ul">
