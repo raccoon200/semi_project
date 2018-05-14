@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dleague.search.model.searchService.searchService;
+import com.dleague.admin.model.service.adminService;
 
 /**
  * Servlet implementation class AdminAutoSearchServlet
@@ -45,9 +45,11 @@ public class AdminAutoSearchServlet extends HttpServlet {
 				String csv= "";
 				if(!searchName.trim().isEmpty()) {
 					
-					if("")
-						list = new searchService().selectByName(searchName,selectCode);
-					
+					if("userId".equals(selectCode)) {
+						list = new adminService().selectByUserId(searchName);
+					}else if("userName".equals(selectCode)) {
+						list = new adminService().selectByUserName(searchName);
+					}
 					
 					//리턴된 값이 있는 경우만, csv처리
 					if(!list.isEmpty()) {

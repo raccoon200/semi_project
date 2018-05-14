@@ -31,6 +31,28 @@
     #test{height: 100px; width: 500px; position:absolute; margin:0 0 0 30px;}
     #selectCode{height: 31px; width: 80px;}
     #searchName{height: 31px; width: 150px;}
+    
+    ul#autoComplete{
+    background:white;
+	min-width:152px;
+	border:1px solid gray;
+	display:inline-block;
+	padding:0;
+	margin:0 0 0 82px;
+	}
+	ul#autoComplete li{
+		padding:0 10px;
+		list-style:none;
+		cursor:pointer;
+	}
+	ul#autoComplete li.sel{
+		background:lightseagreen;
+		color:white;
+	}
+	span.srchval{
+		color:red;
+	}
+    #searchName{height: 31px; width: 150px;}
     /* 검색옵션 끝*/
     
     /* 버튼 */
