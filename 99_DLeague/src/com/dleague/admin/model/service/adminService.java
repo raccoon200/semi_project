@@ -68,4 +68,18 @@ public class adminService {
 		return list;
 	}
 
+	public List<String> selectByUserId(String searchName) {
+		Connection conn = getConnection();
+		List<String> list = new adminDAO().selectByUserId(conn, searchName);
+		close(conn);
+		return list;
+	}
+
+	public List<String> selectByUserName(String searchName) {
+		Connection conn = getConnection();
+		List<String> list = new adminDAO().selectByUserName(conn, searchName);
+		close(conn);
+		return list;
+	}
+
 }

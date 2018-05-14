@@ -110,5 +110,4 @@ public class searchService {
 		return gameList;
 	}
 
-
 }

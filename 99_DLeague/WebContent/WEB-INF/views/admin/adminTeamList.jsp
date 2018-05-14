@@ -187,12 +187,11 @@
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
-    <h2>회원 관리</h2>
+    <h2>팀 관리</h2>
     <hr />
     	<div id="test">
     		<select id="selectCode">
-    		<option value="userId">회원ID</option>
-    		<option value="userName">회원명</option>
+    		<option value="userId">팀명</option>
     		</select>
 		    <input type="text" id="searchName" />
 		    <br/>
