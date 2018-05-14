@@ -84,7 +84,7 @@ public class RegionBoardViewServlet extends HttpServlet {
 		//댓글 받아오는부분
 		List<RegionBoardComment> regionbcList = boardService.selectRegionCommentAll(no);
 		
-		request.setAttribute("param", "board");
+		request.setAttribute("param", "regionBoard");
 		request.setAttribute("board", board);
 		request.setAttribute("regionList", regionList);
 		request.setAttribute("regionbcList", regionbcList);

@@ -220,15 +220,37 @@ $(function() {
       }
    })
 
+<<<<<<< HEAD
 });
+
+
+
+=======
+});
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 <%if(memberLoggedIn!=null) { %> 
-   function fn_validate() {
+<<<<<<< HEAD
+
+   function fn_validate_team_info() {
+
+=======
+   function fn_validate_team_info() {
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
+<<<<<<< HEAD
       return false;
+
+=======
+      return false;
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 <%} %>
 </script>
 </head>
@@ -253,7 +275,7 @@ $(function() {
          <nav>
             <ul class="main-nav">
                <li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
-               <li id="main-nav-board" class="main-nav-list"><a href="#">게시판</a>
+               <li id="main-nav-board" class="main-nav-list"><a href="#" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
                   <!-- 게시판 -->
                   <div class="main-nav-sub" id="main-nav-sub-board">
                      <ul class="main-nav-sub-ul">
@@ -281,7 +303,7 @@ $(function() {
                      </ul>
                   </div>
                </li>
-               <li id="main-nav-mypage" class="main-nav-list"><a href="<%=request.getContextPath() %>/member/memberInfoPage" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
+               <li id="main-nav-mypage" class="main-nav-list"><a href="<%-- <%=request.getContextPath() %>/member/memberInfoPage --%>" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
                   <!-- 마이페이지 -->
                   <div class="main-nav-sub" id="main-nav-sub-mypage">
                      <ul class="nav-list">
@@ -289,9 +311,9 @@ $(function() {
                         <li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 
                         <%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
-                        <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+                        <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
 
-                        <li><a href="#">내 팀 관리</a></li>
+                        <li><a href="<%=request.getContextPath()%>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
                          <%} %> 
                      </ul>
                   </div>
