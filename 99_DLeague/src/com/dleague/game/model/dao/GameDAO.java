@@ -231,4 +231,21 @@ public class GameDAO {
 		}
 		return result;
 	}
+	public int deleteGame(Connection conn, int gameNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteGame");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, gameNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

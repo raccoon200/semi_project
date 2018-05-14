@@ -1,13 +1,18 @@
 package com.dleague.search.model.searchService;
 
 import static com.dleague.common.JDBCTemplate.close;
+import static com.dleague.common.JDBCTemplate.commit;
 import static com.dleague.common.JDBCTemplate.getConnection;
+import static com.dleague.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.Hashtable;
 import java.util.List;
 
 import com.dleague.game.model.vo.Game;
+import com.dleague.member.model.vo.Member;
+import com.dleague.memberTeam.model.dao.MemberTeamDAO;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 import com.dleague.search.model.dao.TeamDAO;
 import com.dleague.search.model.vo.Activity;
 import com.dleague.search.model.vo.Team;
@@ -108,6 +113,58 @@ public class searchService {
 		List<Game> gameList = new TeamDAO().selectGameList(conn, cPage, numPerPage,gameDate);
 		close(conn);
 		return gameList;
+	}
+
+	public int teamUpdate(Team team) {
+		Connection conn = getConnection();
+		int result = new TeamDAO().teamUpdate(conn, team);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int teamMemberUpdate(String userId) {
+		Connection conn = getConnection();
+		int result = new TeamDAO().teamMemberUpdate(conn, userId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int teamMemberUpdate2(String userId) {
+		Connection conn = getConnection();
+		int result = new TeamDAO().teamMemberUpdate2(conn, userId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public List<Member> userMemberSearch(String teamName) {
+		Connection conn = getConnection();
+		List<Member> memberList = new TeamDAO().userMemberSearch(conn, teamName);
+		close(conn);
+		return memberList;
+	}
+
+	public int userUpdate(String userId) {
+		Connection conn = getConnection();
+		int result = new TeamDAO().userUpdate(conn, userId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int userUpdate2(String userId) {
+		Connection conn = getConnection();
+		int result = new TeamDAO().userUpdate2(conn, userId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 
 }

@@ -220,26 +220,31 @@ $(function() {
       }
    })
 
+<<<<<<< HEAD
+});
+<%if(memberLoggedIn!=null) { %> 
+=======
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 <%if(memberLoggedIn!=null) { %> 
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
    function fn_validate_team_info() {
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
+<<<<<<< HEAD
+      if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
+=======
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
 
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
       return false;
+<<<<<<< HEAD
+   }
+=======
    }
 
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 <%} %>
 </script>
 </head>
@@ -252,24 +257,22 @@ $(function() {
             <%if(memberLoggedIn==null) {%>
                <li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
                <li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
-            <%} else { %>
+            <%} else if("admin".equals(memberLoggedIn.getUserId())) { %>
                <li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
                <li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
                <li><a href="<%=request.getContextPath()%>/admin/adminPage">관리자페이지</a></li>
                
+            <%}else{ %>
+            	<li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
+               	<li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
             <%} %>
          </ul>
          
          </div>
          <nav>
             <ul class="main-nav">
-<<<<<<< HEAD
-               <li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
-               <li id="main-nav-board" class="main-nav-list"><a href="#" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
-=======
                <li id="main-nav-notice" class="main-nav-list"><a href="<%=request.getContextPath()%>/notice/noticeList">공지사항</a></li>
                <li id="main-nav-board" class="main-nav-list"><a href="<%=request.getContextPath() %>/board/freeBoard" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
                   <!-- 게시판 -->
                   <div class="main-nav-sub" id="main-nav-sub-board">
                      <ul class="main-nav-sub-ul">

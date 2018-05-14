@@ -71,4 +71,12 @@ public class GameService {
 		else rollback(conn);
 		return result;
 	}
+
+	public int deleteGame(int gameNo) {
+		Connection conn = getConnection();
+		int result = new GameDAO().deleteGame(conn, gameNo);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }

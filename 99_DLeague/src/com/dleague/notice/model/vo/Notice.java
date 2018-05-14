@@ -90,5 +90,12 @@ public class Notice {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "Notice [notice_no=" + notice_no + ", notice_title=" + notice_title + ", notice_writer=" + notice_writer
+				+ ", notice_content=" + notice_content + ", notice_date=" + notice_date + ", original_file_name="
+				+ original_file_name + ", renamed_file_name=" + renamed_file_name + ", status=" + status + "]";
+	}
 	
 }
