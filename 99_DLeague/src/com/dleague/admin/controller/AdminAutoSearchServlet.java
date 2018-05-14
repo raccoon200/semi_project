@@ -49,6 +49,8 @@ public class AdminAutoSearchServlet extends HttpServlet {
 						list = new adminService().selectByUserId(searchName);
 					}else if("userName".equals(selectCode)) {
 						list = new adminService().selectByUserName(searchName);
+					}else if("teamName".equals(selectCode)) {
+						list = new adminService().selectByTeamName(searchName);
 					}
 					
 					//리턴된 값이 있는 경우만, csv처리
@@ -59,7 +61,7 @@ public class AdminAutoSearchServlet extends HttpServlet {
 						}
 					}
 				}
-				System.out.println("csv="+csv);
+				/*System.out.println("csv="+csv);*/
 				
 				//4.응답객체 출력
 				PrintWriter out = response.getWriter();
