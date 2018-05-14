@@ -75,7 +75,7 @@ function fn_validate(){
 			<th>신청자(팀장)</th>
 			<td class="left"><input type="text" name="t_register_writer" id="" value='<%=memberLoggedIn!=null?memberLoggedIn.getUserId():"" %>' readonly/></td>
 			<td rowspan="2">
-			<img src="<%=request.getContextPath() %>/images/profile/default.jpg" id="profileImg" width="60px" height="60px" alt="" />
+			<img src="<%=request.getContextPath() %>/images/team/default.png" id="profileImg" width="60px" height="60px" alt="" />
 			<input type="file" name="up_file" id="" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
 			</td>
 			

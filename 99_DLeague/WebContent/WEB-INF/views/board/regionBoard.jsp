@@ -34,6 +34,7 @@ table.board-table tr th, td{
 }
 table.board-table tr:hover{
 	background:rgb(240,240,240);
+	cursor:pointer;
 }
 span.search-area{
 	
