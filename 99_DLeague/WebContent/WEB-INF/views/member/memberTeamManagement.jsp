@@ -113,7 +113,7 @@ function fn_teamManagement() {
 	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
-    		<input type="button" value="팀 관리" style="position:relative; " class="btn" onclick="fn_teamManagement();"/> 
+    		<input type="button" value="팀 관리" style="position:relative; " class="btn" onclick="fn_teamManagement()"/> 
         	<img id="logoimg" src=
         	<%if(rogo!=null){ %>
         		"<%=request.getContextPath() %>/images/team/<%=rogo %>"
