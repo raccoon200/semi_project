@@ -130,18 +130,33 @@ legend{padding:10px 0px 0px 40px;}
     /* 버튼 디자인 */
 </style>
 <script>
-function fn_teamMemberGetOut() {
-	alert($("#choose").val());
-	if($("#choose").val()!=null) {
+var choose = "";
+function fn_choose_change(choose) {
+	this.choose = choose.value;
+	
+}
+
+function fn_memberTeamGetOut() {
+	if (choose=="") {
+		alert("대상을 선택해주세요!");
+	}
+	else{
 		if(confirm("해당 회원을 제명하시겠습니까?")) {
-			location.href = "<%=request.getContextPath()%>/member/teamMemberGetOut";
+			location.href = "<%=request.getContextPath()%>/member/memberTeamGetOut?choose="+choose;
 		}
 	}
 }
-function fn_choose_change(var choose) {
-	alert(choose.val());
-}
 
+function fn_memberTeamMandate() {
+	if (choose=="") {
+		alert("대상을 선택해주세요!");
+	}
+	else {
+		if(confirm("해당 회원에게 팀장 위임하시겠습니까?")) {
+			location.href = "<%=request.getContextPath()%>/member/memberTeamMandate?leader=<%=memberLoggedIn.getUserId()%>&choose="+choose;
+		}
+	}
+}
 </script>
  <!--ui object -->
     <table class="tbl_type"  cellspacing="0">
@@ -199,7 +214,8 @@ function fn_choose_change(var choose) {
         <td colspan="6"><%= totalMember%>명</td>
         </tr>
         <tr>
-        <input type="button" value="제명" class="btn" onclick="fn_teamMemberGetOut();"/>
+        <input type="button" value="제명하기" class="btn" onclick="fn_memberTeamGetOut()"/>
+        <input type="button" value="팀장 위임하기" class="btn" onclick="fn_memberTeamMandate()"/>
         </tr>
         </tfoot>
     </table>
