@@ -86,7 +86,7 @@ function fn_validate(){
 		<tr>
 			<th>팀이름</th>
 			<td>
-			<input type="text" name="teamName" id="" value="<%=teamName%>" disabled/>
+			<input type="text" name="teamName" id="" value="<%=teamName%>" readonly/>
 			</td>
 			
 			<th>팀로고</th>
@@ -105,7 +105,7 @@ function fn_validate(){
 			
 			<td rowspan="2">
 			<img src="<%=request.getContextPath() %>/images/team/<%=logo!=null?logo:"default.png"%>" id="profileImg" width="60px" height="60px" alt="" />
-			<input type="file" name="up_file" id="" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" value="<%=logo!=null?request.getContextPath()+"/images/team/"+logo:""%>"/>
+			<input type="file" name="up_file" id="" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" value='<%=logo!=null?logo:"default.png"%>'/>
 			</td>
 			
 		</tr>
@@ -154,7 +154,8 @@ function fn_validate(){
 			<td colspan="3" class="view-content"><textarea name="introduce" id="" cols="100" rows="8" style="resize: none" ><%=introduce %></textarea></td>
 		</tr>
 	</table>
-	<input type="submit" value="신청" />
+	<input type="submit" value="정보수정" />
+	<input type="submit" value="팀해체" />
 	<input type="reset" value="초기화" />
 </form>
 </div>

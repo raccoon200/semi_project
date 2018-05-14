@@ -3,6 +3,7 @@
 <%@page import="java.util.*, com.dleague.search.model.vo.*"%>
 <%
 	List<Team> list = (List<Team>)request.getAttribute("list");
+	Hashtable<String,Integer> ht = (Hashtable<String,Integer>)request.getAttribute("ht");
 	int totalMember = (int)request.getAttribute("totalMember");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -357,7 +358,7 @@
        			제주					
        		<%} %>
 	        </td>
-	        <td>팀원수</td>
+	        <td><%= ht.get(t.getTeamName())%></td>
         	<td><%=t.getFoundingDate() %></td>
 			<td><button  onclick="fn_teamView('<%=t.getTeamName()%>');">상세보기</button></td>
 		</tr>
