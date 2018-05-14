@@ -220,15 +220,79 @@ $(function() {
       }
    })
 
+<<<<<<< HEAD
 });
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+});
+
+
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+<%if(memberLoggedIn!=null) { %> 
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+
+<<<<<<< HEAD
+=======
+<%if(memberLoggedIn!=null) { %> 
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+   function fn_validate_team_info() {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+=======
+
 <%if(memberLoggedIn!=null) { %> 
    function fn_validate_team_info() {
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+=======
+
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
+<<<<<<< HEAD
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
+=======
+      
+      if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+=======
+
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       return false;
    }
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+=======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+      return false;
+<<<<<<< HEAD
+   }
+=======
+   }
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+=======
+
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 <%} %>
 </script>
 </head>

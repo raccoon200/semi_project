@@ -1,13 +1,16 @@
 package com.dleague.memberTeam.controller;
 
 import java.io.IOException;
+
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dleague.member.model.service.MemberService;
 import com.dleague.member.model.vo.Member;
@@ -36,7 +39,11 @@ public class MemberTeamManagementServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//0. 해당 팀 이름
-		String teamName = request.getParameter("teamName");
+		HttpSession session = request.getSession(); 
+		Member m = (Member) session.getAttribute("memberLoggedIn");
+		String teamName = m.getTeamname();
+		System.out.println(teamName);
+		//String teamName = request.getParameter("teamName");
 		//1. 파라미터 변수에 담기
 		int cPage; 
 		try {
@@ -52,9 +59,10 @@ public class MemberTeamManagementServlet extends HttpServlet {
 		
 		//전체 게시물 수 
 		int totalMember = new MemberService().selectMemberCount(teamName);	//팀토탈카운트
+		System.out.println("total ="+totalMember);
 		// (공식1) totalPage
 		int totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
-		
+		System.out.println("totalPage ="+totalPage);
 		//2.2 페이징된 회원리스트 가져오기
 		List<Member> list = new MemberService().selectMemberList(cPage, numPerPage, teamName);
 		
@@ -87,7 +95,13 @@ public class MemberTeamManagementServlet extends HttpServlet {
 			pageBar += "<a href= '"+request.getContextPath()+"/member/memberTeamManagement?cPage="+(pageNo)+"'><span class='page gradient'>다음</span></a>";
 		}
 		/*System.out.println("list@AdminMemberListServlet="+list);*/
-		//여까지!!!
+		request.setAttribute("list", list);
+		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("cPage", cPage);
+		request.setAttribute("param", "teamSearch");	//검색파라미터
+		request.setAttribute("totalMember", totalMember);	//팀토탈수
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/member/memberTeamMemberManagement.jsp");
+		reqDispatcher.forward(request, response);
 	}
 
 	/**

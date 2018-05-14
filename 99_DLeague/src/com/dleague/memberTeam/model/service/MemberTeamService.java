@@ -40,7 +40,6 @@ public class MemberTeamService {
 		Connection conn = getConnection();
 		MemberTeamDAO memberDAO = new MemberTeamDAO();
 		int result = memberDAO.memberTeamOut(conn, userId);
-		memberDAO.updateGrade(conn, userId);
 		memberDAO.memberTeamDelete(conn, userId);
 		
 		if(result>0) commit(conn);

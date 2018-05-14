@@ -582,13 +582,13 @@ $(function() {
 	<%} %>
   	</div>
   	<br />
-<button type="button" class="btn btn-primary btn-block disabled" id="btn_game_register" onclick="fn_game_register();">경기 신청</button>
+<button type="button" class="btn btn-primary btn-block disabled" id="btn_game_register" onclick="fn_game_register();" disabled>경기 신청</button>
 <script>
 $(function(){
 	if(<%=memberLoggedIn.getTeamname() == null%>){
-		$("#btn_game_register").removeClass('disabled');	
+		$("#btn_game_register").removeClass('disabled').removeAttr("disabled");
 	}else if(<%=!tHome.getTeamName().equals(memberLoggedIn.getTeamname()) && tAway == null%>){
-		$("#btn_game_register").removeClass('disabled');	
+		$("#btn_game_register").removeClass('disabled').removeAttr("disabled");	
 	}
 });
 <%if(gameStatus){%>

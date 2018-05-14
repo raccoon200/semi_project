@@ -61,8 +61,11 @@ public class GameService {
 	public int waitTeam(String teamName, int gameNo) {
 		Connection conn = getConnection();
 		int result = 0;
-		if(new GameDAO().waitTeamCheck(conn, teamName, gameNo) == 0) {
+		int check = new GameDAO().waitTeamCheck(conn, teamName, gameNo);
+		if(check == 0) {
 			result = new GameDAO().insertWaitTeam(conn, teamName, gameNo);
+		}else if(check < 0){
+			result = check;
 		}
 		if(result > 0) commit(conn);
 		else rollback(conn);

@@ -52,9 +52,12 @@ public class WaitTeamServlet extends HttpServlet {
 		
 		if(result > 0) {
 			msg = "경기가 신청되었습니다.";
+		}else if(result == -1){
+			msg = "오류! 관리자에게 문의하세요.";
 		}else {
 			msg = "이미 신청되어있습니다.";
 		}
+		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		
