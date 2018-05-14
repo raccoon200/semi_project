@@ -220,79 +220,20 @@ $(function() {
       }
    })
 
-<<<<<<< HEAD
-});
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 });
 
 
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
-<%if(memberLoggedIn!=null) { %> 
-=======
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
-
-<<<<<<< HEAD
-=======
-<%if(memberLoggedIn!=null) { %> 
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
-   function fn_validate_team_info() {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
-
 <%if(memberLoggedIn!=null) { %> 
    function fn_validate_team_info() {
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
-=======
 
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
-<<<<<<< HEAD
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
-=======
-      
-      if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
-=======
-
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       return false;
    }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-=======
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
-      return false;
-<<<<<<< HEAD
-   }
-=======
-   }
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
-=======
-
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 <%} %>
 </script>
 </head>
@@ -316,8 +257,8 @@ $(function() {
          </div>
          <nav>
             <ul class="main-nav">
-               <li id="main-nav-notice" class="main-nav-list"><a href="<%=request.getContextPath()%>/notice/noticeList">공지사항</a></li>
-               <li id="main-nav-board" class="main-nav-list"><a href="<%=request.getContextPath() %>/board/freeBoard" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
+               <li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
+               <li id="main-nav-board" class="main-nav-list"><a href="#" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
                   <!-- 게시판 -->
                   <div class="main-nav-sub" id="main-nav-sub-board">
                      <ul class="main-nav-sub-ul">
