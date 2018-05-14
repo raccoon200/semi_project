@@ -34,7 +34,7 @@ public class RegionBoardFormServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		List<Region> regionList = new RegionService().selectRegionList();
 		request.setAttribute("regionList", regionList);
-		
+		request.setAttribute("param", "regionBoard");
 		request.getRequestDispatcher("/WEB-INF/views/board/regionBoardForm.jsp").forward(request, response);
 	}
 

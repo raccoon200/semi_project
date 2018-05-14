@@ -142,6 +142,7 @@ div#result{margin: 50px 10px 0 0;}
 	  -webkit-font-smoothing: subpixel-antialiased;
 	}
 	/*버튼끝*/
+
 </style>
 <script>
 $(function(){

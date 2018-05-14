@@ -40,7 +40,7 @@ public class RegionBoardUpdateServlet extends HttpServlet {
 		RegionBoard board = new BoardService().selectRegionBoardOne(no);
 		List<Region> regionList = new RegionService().selectRegionList();
 		request.setAttribute("board", board);
-		request.setAttribute("param", "board");
+		request.setAttribute("param", "regionBoard");
 		request.setAttribute("regionList", regionList);
 		request.getRequestDispatcher("/WEB-INF/views/board/regionBoardUpdate.jsp").forward(request, response);
 		

@@ -81,10 +81,11 @@
 	  font-style: normal;
 	  font-size: 1rem;
 	  letter-spacing: 0.3em;
-	  color:lightgreen;
+	  color: lightgreen;
 	  border-radius: 0;
 	  padding: 18px 80px 20px;
 	  transition: all 0.7s ease-out;
+	  
 	  background: linear-gradient(270deg, lightgreen, lightgreen, rgba(34,34,34,0), rgba(34,34,34,0));
 	  background-position: 1% 50%;
 	  background-size: 300% 300%;
@@ -103,6 +104,7 @@
     /* 버튼 디자인 */
 </style>
 <script>
+
 function fn_teamOut() {
 	if(confirm("정말 탈퇴하시겠습니까?")) {
 		location.href="<%=request.getContextPath()%>/member/memberTeamOut?userId=<%=memberLoggedIn.getUserId()%>";

@@ -222,14 +222,24 @@ $(function() {
 
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 <%if(memberLoggedIn!=null) { %> 
    function fn_validate_team_info() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
+
       return false;
    }
+
 <%} %>
 </script>
 </head>
@@ -253,8 +263,13 @@ $(function() {
          </div>
          <nav>
             <ul class="main-nav">
+<<<<<<< HEAD
                <li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
                <li id="main-nav-board" class="main-nav-list"><a href="#" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
+=======
+               <li id="main-nav-notice" class="main-nav-list"><a href="<%=request.getContextPath()%>/notice/noticeList">공지사항</a></li>
+               <li id="main-nav-board" class="main-nav-list"><a href="<%=request.getContextPath() %>/board/freeBoard" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
                   <!-- 게시판 -->
                   <div class="main-nav-sub" id="main-nav-sub-board">
                      <ul class="main-nav-sub-ul">
@@ -292,7 +307,7 @@ $(function() {
                         <%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
                         <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
 
-                        <li><a href="#">내 팀 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
                          <%} %> 
                      </ul>
                   </div>

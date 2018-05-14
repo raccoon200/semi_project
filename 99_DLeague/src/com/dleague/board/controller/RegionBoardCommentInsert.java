@@ -57,7 +57,7 @@ public class RegionBoardCommentInsert extends HttpServlet {
 			request.setAttribute("msg", "댓글 등록 실패!");
 			request.setAttribute("loc", "/board/regionBoardView?no="+regionBoardRef);
 		}
-		
+		request.setAttribute("param", "regionBoard");
 		
 		request.getRequestDispatcher(view).forward(request, response);
 	}

@@ -7,12 +7,52 @@
 table{border:1px solid;}
 #profileImg{width:150px; height:150px;}
 #imgsection{position: relative; left:350px; top:-250px;}
+.btn {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color:rgba(223,190,106,0.8);
+  border-radius: 0;
+  padding: 18px 80px 20px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0.625rem;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.8);
+}
+
+.btn:hover {
+  cursor:pointer;
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+} 
+/* 버튼 디자인 */
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
-
+<script>
+function fn_memberOut() {
+	
+	if(confirm("정말 탈퇴하시겠습니까?")) {
+		if("팀원"=="<%=memberLoggedIn.getGrade()%>") alert("팀을 먼저 탈퇴해주세요!");
+		else if("팀장"=="<%=memberLoggedIn.getGrade()%>") alert("팀을 먼저 삭제해주세요!"); 
+		else
+		location.href="<%=request.getContextPath()%>/member/memberOut?userId=<%=memberLoggedIn.getUserId()%>";
+	}
+}
+</script>
 <section>
 <form action="<%=request.getContextPath()%>/member/MemberInfoUpdate" method="post" enctype="multipart/form-data">
+<input type="button" value="회원 탈퇴" style="position:relative; " class="btn" onclick="fn_memberOut();"/>
 <table>
 <tr>
 <td>
@@ -33,9 +73,20 @@ table{border:1px solid;}
 </tr>
 
 <tr><td>
-<label for="regioncode">지역코드</label></td>
+<label for="regioncode">지역명</label></td>
 <td>
-<input type="text" name="regioncode" id="regioncode" value="<%=member.getRegioncode()%>" required/></td>
+<input type="text" name="regioncode" id="regioncode" value= "
+<%if("G1".equals(member.getRegioncode()) ) {%>서울
+<%}else if("G2".equals(member.getRegioncode()) ) { %>경기
+<%}else if("G3".equals(member.getRegioncode()) ) { %>강원
+<%}else if("G4".equals(member.getRegioncode()) ) { %>충북
+<%}else if("G5".equals(member.getRegioncode()) ) { %>충남
+<%}else if("G6".equals(member.getRegioncode()) ) { %>경북
+<%}else if("G7".equals(member.getRegioncode()) ) { %>전북
+<%}else if("G8".equals(member.getRegioncode()) ) { %>전남
+<%}else if("G9".equals(member.getRegioncode()) ) { %>제주					
+<%} %>
+" required/></td>
 </tr>
 
 <tr><td>

@@ -71,6 +71,10 @@
     /*teamTable*/
     div#teamTable{width: 350px; display: inline-block;}
     /*teamTable*/
+    /*수정삭제버튼*/
+    div#btDiv{padding:30px; display: inline-block;}
+    button#bt1, #bt2{padding:5px;}
+    /*수정삭제버튼*/
 </style>
 	<h2>팀상세정보</h2>
 	<hr />
@@ -240,6 +244,22 @@
                 </tfoot>
             </table>
             <!--//ui object -->
+        
+            
+        </div>
+        
+        <div id="btDiv">
+           	<button id="bt1" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
+        </div>
+        <div id="btDiv">
+        	<button id="bt2">팀해체</button>
         </div>
 </div>
+<script>
+	function fn_teamUpdate(teamName){
+		location.href="<%=request.getContextPath()%>/search/teamUpdate?teamName="+teamName;
+		<%-- ,'<%=rCode%>','<%=capTain%>','<%=foundInDate%>','<%=introduce%>','<%=rogo%>'
+				+"&rCode"+rCode+"&capTain"+capTain+"&foundInDate"+foundInDate+"&introduce"+introduce+"&logo"+logo; --%>
+	}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

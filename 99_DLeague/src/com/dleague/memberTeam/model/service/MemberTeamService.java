@@ -9,6 +9,7 @@ import com.dleague.memberTeam.model.dao.MemberTeamDAO;
 import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.Team;
 import com.dleague.memberTeam.model.vo.TeamMember;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 
 
 
@@ -37,7 +38,19 @@ public class MemberTeamService {
 
 	public int memberTeamOut(String userId) {
 		Connection conn = getConnection();
-		int result = new MemberTeamDAO().memberTeamOut(conn, userId);
+		MemberTeamDAO memberDAO = new MemberTeamDAO();
+		int result = memberDAO.memberTeamOut(conn, userId);
+		memberDAO.memberTeamDelete(conn, userId);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int insertTeamRegist(TeamRegister team) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().insertTeamRegist(conn, team);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

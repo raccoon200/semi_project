@@ -8,20 +8,22 @@ console.log("<%=param%>");
 			<nav id="nav">
 			
 			
-			<!-- 공지사항 
+			<!-- 공지사항 -->
+			<% if(param=="notice"){ %>
 			<h2 id="nav-header">공지사항</h2>
 			<ul class="nav-list">
-				<li><a href="#">공지사항</a></li>
-			</ul> --> 
+				<li><a id="nav-selected" href="<%=request.getContextPath() %>/notice/noticeList">공지사항</a></li>
+			</ul>
+			<%} %>
 			
 			<!-- 게시판 -->
-			<% if(param=="board") {%>
+			<% if(param=="freeBoard" || param=="regionBoard" || param=="complainBoard") {%>
 			<h2 id="nav-header">게시판</h2>
 			<hr style="border:0;height:2px;background: rgb(244,244,244);"/>
 			<ul class="nav-list">
-				<li><a href="<%=request.getContextPath() %>/board/freeBoard">자유게시판</a></li>
-				<li><a href="<%=request.getContextPath() %>/board/regionBoard" id="nav-selected">지역게시판</a></li>
-				<li><a href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
+				<li><a id='<%=param=="freeBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/freeBoard">자유게시판</a></li>
+				<li><a id='<%=param=="regionBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/regionBoard">지역게시판</a></li>
+				<li><a id='<%=param=="complainBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
 			</ul>
 			<%} %>
 			<!-- 로그인/회원가입 -->
@@ -65,12 +67,12 @@ console.log("<%=param%>");
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName="<%=memberLoggedIn.getTeamname()%>" id="<%=param=="memberTeamManagement"?"nav-selected":"" %>">내 팀 관리</a></li>
 			</ul>
 			<%} %>
-			<%if(param=="adminPage" || param=="adminPage") {%>
+			<%if(param=="adminPage" || param=="adminPageTeam") {%>
 			<!-- 관리자페이지 -->
 			<h2 id="nav-header">관리자페이지</h2>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/admin/adminPage" id="<%=param=="adminPage"?"nav-selected":"" %>" >회원 관리</a></li>
-				<li><a href="#">팀 관리</a></li>
+				<li><a href="<%=request.getContextPath() %>/admin/adminPageTeam" id="<%=param=="adminPageTeam"?"nav-selected":"" %>">팀 관리</a></li>
 				<li><a href="#">팀 수락</a></li>
 				<li><a href="#">접속 통계</a></li>
 			</ul>  

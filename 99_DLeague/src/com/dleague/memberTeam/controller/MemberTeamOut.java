@@ -33,12 +33,12 @@ public class MemberTeamOut extends HttpServlet {
 		System.out.println("servlet@"+userId);
 		int result = new MemberTeamService().memberTeamOut(userId);
 		String msg = "";
-		String loc = "/";
+		String loc = "/member/logout";
 		
 		if(result>0) msg = "성공적으로 탈퇴했습니다! 재로그인시 반영됩니다.";
 		else msg = "탈퇴오류! 관리자에게 문의하시오!";
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/member/logout");
+		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		
 	}

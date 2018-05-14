@@ -114,7 +114,7 @@ public class regionBoardServlet extends HttpServlet {
 		
 		
 		if(regionBoardList!=null && !regionBoardList.isEmpty()) {
-			request.setAttribute("param", "board");
+			request.setAttribute("param", "regionBoard");
 			request.setAttribute("regionBoard", regionBoardList);
 			request.setAttribute("regionList", regionList);
 			request.setAttribute("pageBar", pageBar);
@@ -122,7 +122,7 @@ public class regionBoardServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/board/regionBoard.jsp").forward(request,response);
 		}else {
 			//region_board테이블에 값이 없을 경우
-			request.setAttribute("param", "board");
+			request.setAttribute("param", "regionBoard");
 			request.setAttribute("regionList", regionList);
 			request.setAttribute("regionCode", regionCode);
 			request.getRequestDispatcher("/WEB-INF/views/board/regionBoard.jsp").forward(request,response);
