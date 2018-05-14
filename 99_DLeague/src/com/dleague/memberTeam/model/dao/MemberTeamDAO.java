@@ -168,4 +168,30 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
+	public void updateGrade(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateGrade");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	}
+	public void memberTeamDelete(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamDelete");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	}
 }

@@ -57,4 +57,15 @@ public class GameService {
 		close(conn);
 		return t;
 	}
+
+	public int waitTeam(String teamName, int gameNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		if(new GameDAO().waitTeamCheck(conn, teamName, gameNo) == 0) {
+			result = new GameDAO().insertWaitTeam(conn, teamName, gameNo);
+		}
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }

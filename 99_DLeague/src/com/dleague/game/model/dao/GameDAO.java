@@ -192,5 +192,43 @@ public class GameDAO {
 		
 		return t;
 	}
-
+	public int waitTeamCheck(Connection conn, String teamName, int gameNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("waitTeamCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			pstmt.setInt(2, gameNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int insertWaitTeam(Connection conn, String teamName, int gameNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertWaitTeam");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			pstmt.setInt(2, gameNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

@@ -116,7 +116,7 @@ div.main-nav-sub {
 }
 div#main-nav-sub-boardss{
    left:180px;
-	left:180px;
+   left:180px;
 }
 div#main-nav-sub-register{
    left:400px;
@@ -221,15 +221,26 @@ $(function() {
    })
 
 });
+<<<<<<< HEAD
 
 <%if(memberLoggedIn!=null) { %> 
    function fn_validate_team_info() {
+=======
+
+<%if(memberLoggedIn!=null) { %> 
+   function fn_validate_team_info() {
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
+<<<<<<< HEAD
       return false;
    }
+=======
+      return false;
+   }
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 <%} %>
 </script>
 </head>
