@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-<%@ page import="java.util.*, com.dleague.board.model.vo.*, com.dleague.region.model.vo.*" %>
+<%@ page import="java.util.*, com.dleague.notice.model.vo.*" %>
 <% 
-	List<FreeBoard> boardList = (ArrayList<FreeBoard>)request.getAttribute("freeBoard");
+	List<Notice> noticeList = (ArrayList<Notice>)request.getAttribute("noticeList");
 
 %>
 <style>
@@ -28,7 +28,6 @@ table.board-table tr th, td{
 }
 table.board-table tr:hover{
 	background:rgb(240,240,240);
-	cursor:pointer;
 }
 span.search-area{
 	
@@ -113,28 +112,27 @@ function fn_search() {
 	
 	<table class="board-table">
 		<tr>
-			<th width="40">번호</th>
-			<th width="210">제목</th>
-			<th width="60">작성자</th>
+			<th width="50">번호</th>
+			<th width="220">제목</th>
+			<th width="70">작성자</th>
 			<th>첨부파일</th>
-			<th width="100">작성일</th>
-			<th width="70">조회수</th>
+			<th width="110">작성일</th>
 		</tr>
-		<%if(boardList!=null && !boardList.isEmpty()) { 
-			for(int i=0; i<boardList.size(); i++) {
-				FreeBoard board = boardList.get(i);	
+		<%if(noticeList!=null && !noticeList.isEmpty()) { 
+			for(int i=0; i<noticeList.size(); i++) {
+				Notice notice = noticeList.get(i);	
 		%>
-		<tr id="<%=board.getBoard_free_no()%>">
-			<td><%=board.getBoard_free_no()%></td>
-			<td style="text-align:left"><%=board.getBoard_free_title() %></td>
-			<td><%=board.getBoard_free_writer() %></td>
-			<td><%if(board.getOriginal_file_name()!=null){%>
+		<tr id="<%=notice.getNotice_no()%>">
+			<td><%=notice.getNotice_no()%></td>
+			<td style="text-align:left"><%=notice.getNotice_title() %></td>
+			<td><%=notice.getNotice_writer() %></td>
+			<td><%if(notice.getOriginal_file_name()!=null){%>
 				<img id="file-image" src="<%=request.getContextPath() %>/images/fileImage.png" alt="파일이미지" />
 				<%} %>
 				
 			</td>
-			<td><%=board.getBoard_free_date() %></td>
-			<td><%=board.getCount() %></td>
+			<td><%=notice.getNotice_date() %></td>
+			
 		</tr>
 		<%}
 		}else { %>
@@ -146,7 +144,7 @@ function fn_search() {
 	<div id="pageBar">
 		<%=(request.getAttribute("pageBar")!=null)?request.getAttribute("pageBar"):"" %>
 		<%if(memberLoggedIn!=null) { %>
-			<input type="button" class="write-btn" value="글쓰기" onclick="location.href='<%=request.getContextPath()%>/board/freeBoardForm'"/>
+			<input type="button" class="write-btn" value="글쓰기" onclick="location.href='<%=request.getContextPath()%>/board/noticeForm'"/>
 		<%} %>
 	</div>
 </section>

@@ -116,7 +116,7 @@ div.main-nav-sub {
 }
 div#main-nav-sub-boardss{
    left:180px;
-	left:180px;
+   left:180px;
 }
 div#main-nav-sub-register{
    left:400px;
@@ -220,22 +220,52 @@ $(function() {
       }
    })
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 });
+<<<<<<< HEAD
 
 <%if(memberLoggedIn!=null) { %> 
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 
+<<<<<<< HEAD
+=======
+<%if(memberLoggedIn!=null) { %> 
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
    function fn_validate_team_info() {
+<<<<<<< HEAD
 
+=======
+=======
+
+<%if(memberLoggedIn!=null) { %> 
+   function fn_validate_team_info() {
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
       
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       return false;
    }
+<<<<<<< HEAD
 
+=======
+=======
+      return false;
+   }
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 <%} %>
 </script>
 </head>
@@ -288,7 +318,7 @@ $(function() {
                      </ul>
                   </div>
                </li>
-               <li id="main-nav-mypage" class="main-nav-list"><a href="<%-- <%=request.getContextPath() %>/member/memberInfoPage --%>" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
+               <li id="main-nav-mypage" class="main-nav-list"><a href="<%=request.getContextPath() %>/member/memberInfoPage" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
                   <!-- 마이페이지 -->
                   <div class="main-nav-sub" id="main-nav-sub-mypage">
                      <ul class="nav-list">
@@ -298,7 +328,7 @@ $(function() {
                         <%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
                         <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
 
-                        <li><a href="<%=request.getContextPath()%>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
+                        <li><a href="#">내 팀 관리</a></li>
                          <%} %> 
                      </ul>
                   </div>

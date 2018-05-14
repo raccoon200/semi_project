@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.game.model.service.GameService;
+
 /**
  * Servlet implementation class WaitTeamServlet
  */
@@ -31,6 +33,35 @@ public class WaitTeamServlet extends HttpServlet {
 		
 		//System.out.println("teamName@WaitTeamServlet = "+teamName);
 		//System.out.println("gameNo@WaitTeamServlet = "+gameNo);
+		
+		int result = new GameService().waitTeam(teamName, gameNo);
+		
+		String msg = "";
+		String loc = "";
+		String view = "/WEB-INF/views/common/msg.jsp";
+		String referer = request.getHeader("Referer");
+		String origin = request.getHeader("Origin");
+		String url = request.getRequestURL().toString();
+		String uri = request.getRequestURI();
+		//크롬 외 다른 브라우저 용
+		if(origin == null) {
+			origin = url.replace(uri, "");
+		}
+		
+		loc = referer.replace(origin+request.getContextPath(),"");
+		
+		if(result > 0) {
+			msg = "경기가 신청되었습니다.";
+		}else if(result == -1){
+			msg = "오류! 관리자에게 문의하세요.";
+		}else {
+			msg = "이미 신청되어있습니다.";
+		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**
