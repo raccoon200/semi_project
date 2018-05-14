@@ -209,7 +209,7 @@ public class GameDAO {
 				result = rset.getInt("cnt");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			result = -1;
 			e.printStackTrace();
 		}
 		return result;

@@ -266,10 +266,10 @@ public class MemberDAO {
 				m.setBirthday(rset.getString("birthday"));
 				m.setProfile(rset.getString("profile"));
 				m.setGrade(rset.getString("grade"));
-							
+				m.setRnum(rset.getInt("rnum"));			
 				list.add(m);
 			}
-//			System.out.println("list@AdminDAO.selectMemberList="+list);
+			System.out.println("list@MemberDAO.selectMemberList="+list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -277,6 +277,22 @@ public class MemberDAO {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int memberOut(Connection conn, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberOut");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }
 		

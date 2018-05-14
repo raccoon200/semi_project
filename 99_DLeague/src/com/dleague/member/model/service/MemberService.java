@@ -10,7 +10,6 @@ import com.dleague.member.model.dao.MemberDAO;
 import com.dleague.member.model.vo.Member;
 import com.dleague.memberTeam.model.vo.Team;
 
-
 public class MemberService {
 	//로그인처리를 위한 상수선언
 	public static final int LOGIN_OK = 1;
@@ -58,7 +57,6 @@ public class MemberService {
 		return result;
 	}
 	
-		
 	public int memberInfoUpdate(Member member) {
 		Connection conn = getConnection();
 		int result = new MemberDAO().memberInfoUpdate(conn, member);
@@ -80,6 +78,13 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
-	
+	public int memberOut(String userId) {
+		int result = 0;
+		Connection conn = getConnection();
+		result = new MemberDAO().memberOut(conn, userId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	
 }
