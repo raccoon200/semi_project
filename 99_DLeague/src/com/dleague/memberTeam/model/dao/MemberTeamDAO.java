@@ -168,7 +168,7 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
-	public void updateGrade(Connection conn, String userId) {
+	/*public void updateGrade(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("updateGrade");
 		try {
@@ -180,7 +180,7 @@ public class MemberTeamDAO {
 		} finally {
 			close(pstmt);
 		}
-	}
+	}*/
 	public void memberTeamDelete(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("memberTeamDelete");
