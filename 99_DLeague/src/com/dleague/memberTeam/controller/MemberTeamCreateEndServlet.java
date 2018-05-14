@@ -47,7 +47,7 @@ public class MemberTeamCreateEndServlet extends HttpServlet {
 		}
 		
 		//1.b saveDirectory
-		String saveDirectory = getServletContext().getRealPath("/upload/member");
+		String saveDirectory = getServletContext().getRealPath("/images/team");
 		
 		
 		//1.c maxPostSize
