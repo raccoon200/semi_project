@@ -12,11 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import com.dleague.admin.model.service.adminService;
 import com.dleague.member.model.vo.Member;
+import com.dleague.search.model.vo.Team;
 
 /**
  * Servlet implementation class AdminTeamServlet
  */
-@WebServlet("/admin/TeamOneSearch")
+@WebServlet("/admin/adminPageTeam")
 public class AdminTeamServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,16 +34,17 @@ public class AdminTeamServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		List<Member> list = null;/*new adminService().MemberList();*/
+		List<Team> list = null;/*new adminService().MemberList();*/
 		String searchName = request.getParameter("searchName");
-		String selectCode = request.getParameter("selectCode");
+
 		Member m = null;
 		String msg = "";
 		String loc = "/";
-		String view = "/WEB-INF/views/admin/adminMemberList.jsp";
+		String view = "/WEB-INF/views/admin/adminTeamList.jsp";
+		int totalMember=0;
 		int cPage=0; 
 		String pageBar ="";
-		int totalMember=0;
+		
 		int totalPage=0;
 		
 		if(session != null) {
@@ -60,23 +62,15 @@ public class AdminTeamServlet extends HttpServlet {
 			
 			//1.비지니스 로직 처리
 			int numPerPage = 10;
-			if(selectCode!=null && "userId".equals(selectCode)) {
-				//전체 게시물 수 
-				totalMember = new adminService().selectUserIdMemberCount(searchName);	//팀토탈카운트
-				// (공식1) totalPage
-				totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
-				
-				//2.2 페이징된 회원리스트 가져오기
-				list = new adminService().selectUserIdMemberList(cPage, numPerPage,searchName);
-			}else if(selectCode!=null && "userName".equals(selectCode)) {
-				//전체 게시물 수 
-				totalMember = new adminService().selectUserNameMemberCount(searchName);	//팀토탈카운트
-				// (공식1) totalPage
-				totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
-				
-				//2.2 페이징된 회원리스트 가져오기
-				list = new adminService().selectUserNameMemberList(cPage, numPerPage,searchName);
-			}
+			//전체 게시물 수 
+			totalMember = new adminService().selectTeamCount(searchName);	//팀토탈카운트
+
+			// (공식1) totalPage
+			totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
+			
+			//2.2 페이징된 회원리스트 가져오기
+			list = new adminService().selectTeamList(cPage, numPerPage,searchName);
+			
 			//2.3 페이징바 만들기
 			int pageBarSize = 5;
 			//공식3 시작페이지 구하기
@@ -87,14 +81,14 @@ public class AdminTeamServlet extends HttpServlet {
 			if(pageNo == 1) {
 				
 			} else {
-				pageBar += "<a href= '"+request.getContextPath()+"/admin/adminPage?cPage="+(pageNo-1)+"'><span class='page gradient'>이전</span></a>";
+				pageBar += "<a href= '"+request.getContextPath()+"/admin/adminPageTeam?cPage="+(pageNo-1)+"'><span class='page gradient'>이전</span></a>";
 			}
 			//[pageNo]
 			while(pageNo <= pageEnd && pageNo <= totalPage){
 				if(pageNo==cPage) {
 					pageBar += "<span class='page active'>"+pageNo+"</span>";				
 				}else {
-					pageBar+="<a href='"+request.getContextPath()+"/admin/adminPage?cPage="+pageNo+"'><span class='page gradient'>"+pageNo+"</span></a>";	
+					pageBar+="<a href='"+request.getContextPath()+"/admin/adminPageTeam?cPage="+pageNo+"'><span class='page gradient'>"+pageNo+"</span></a>";	
 				}
 				pageNo++;
 			}
@@ -102,9 +96,10 @@ public class AdminTeamServlet extends HttpServlet {
 			if(pageNo > totalPage) {
 				
 			}else {
-				pageBar += "<a href= '"+request.getContextPath()+"/admin/adminPage?cPage="+(pageNo)+"'><span class='page gradient'>다음</span></a>";
+				pageBar += "<a href= '"+request.getContextPath()+"/admin/adminPageTeam?cPage="+(pageNo)+"'><span class='page gradient'>다음</span></a>";
 			}
-			/*System.out.println("list@AdminMemberListServlet="+list);*/
+//			System.out.println("list@AdminMemberListServlet="+list);
+//			System.out.println("totalMember@AdminMemberListServlet="+totalMember);
 		}else {
 			msg = "관리자 로그인이 필요한 서비스입니다.\\n\\n로그인을 해주세요.";
 			view = "/WEB-INF/views/common/msg.jsp";
@@ -113,8 +108,8 @@ public class AdminTeamServlet extends HttpServlet {
 		request.setAttribute("list", list);					//회원리스트
 		request.setAttribute("pageBar", pageBar);			//페이지바
 		request.setAttribute("cPage", cPage);				//페이지바
-		request.setAttribute("totalMember", totalMember);	//회원총수
 		request.setAttribute("param", "adminPageTeam");			//네비게이터 변수
+		request.setAttribute("totalMember", totalMember);	//회원총수
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher(view).forward(request, response);

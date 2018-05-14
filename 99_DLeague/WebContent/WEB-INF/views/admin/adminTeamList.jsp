@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.*, com.dleague.member.model.vo.*"%>
+<%@page import="java.util.*, com.dleague.search.model.vo.*"%>
 <%
-	List<Member> list = (List<Member>)request.getAttribute("list");
+	List<Team> list = (List<Team>)request.getAttribute("list");
 	int totalMember = (int)request.getAttribute("totalMember");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -191,7 +191,7 @@
     <hr />
     	<div id="test">
     		<select id="selectCode">
-    		<option value="userId">팀명</option>
+    		<option value="teamName">팀명</option>
     		</select>
 		    <input type="text" id="searchName" />
 		    <br/>
@@ -292,8 +292,11 @@
 		$("#teamOneSearch").click(function(){
 			var searchName = $("#searchName").val();
 			var selectCode = $("#selectCode").val();
-			
-			location.href="<%=request.getContextPath()%>/admin/userOneSearch?searchName="+searchName+"&selectCode="+selectCode;
+			if("teamName"==selectCode ){
+				location.href="<%=request.getContextPath()%>/admin/adminPageTeam?searchName="+searchName;
+			}else{
+				location.href="<%=request.getContextPath()%>/admin/userOneSearch?searchName="+searchName+"&selectCode="+selectCode;
+			}
 		});
 		<!-- 검색 이벤트 끝 -->
 	});
@@ -310,18 +313,15 @@
         <col width="10%">
         <col width="10%">
         <col width="10%">
-        <col width="10%">
-        <col width="10%">
     </colgroup>
     <thead>
     <tr>
         <th scope="col">순번</th>
-        <th scope="col">회원ID</th>
-        <th scope="col">회원명</th>
-        <th scope="col">지역</th>
         <th scope="col">팀명</th>
-        <th scope="col">등급</th>
-        <th scope="col">가입일</th>
+        <th scope="col">팀장</th>
+        <th scope="col">지역</th>
+        <th scope="col">팀원수</th>
+        <th scope="col">창단일</th>
         <th scope="col">관리</th>
     </tr>
     </thead>
@@ -331,51 +331,45 @@
 			<td colspan="8" align="center">데이터가 존재하지 않습니다.</td>
 		</tr>
 	<%} else { %>
-		<%for(Member m : list){ %>
+		<%for(Team t : list){ %>
 		<tr>
-			<td class="ranking" scope="row"><%=m.getRnum() %></td>
-			<td><%=m.getUserId() %></td>
-        	<td><%=m.getUserName() %></td>
+			<td class="ranking" scope="row"><%=t.getRnum() %></td>
+			<td><%=t.getTeamName() %></td>
+        	<td><%=t.getCapTain() %></td>
 	        <td>
-	        <%if("G1".equals(m.getRegioncode()) ) {%>
+	        <%if("G1".equals(t.getRegionCode()) ) {%>
        			서울
-       		<%}else if("G2".equals(m.getRegioncode()) ) { %>
+       		<%}else if("G2".equals(t.getRegionCode()) ) { %>
        			경기
-       		<%}else if("G3".equals(m.getRegioncode()) ) { %>
+       		<%}else if("G3".equals(t.getRegionCode()) ) { %>
        			강원
-       		<%}else if("G4".equals(m.getRegioncode()) ) { %>
+       		<%}else if("G4".equals(t.getRegionCode()) ) { %>
        			충북
-       		<%}else if("G5".equals(m.getRegioncode()) ) { %>
+       		<%}else if("G5".equals(t.getRegionCode()) ) { %>
        			충남
-       		<%}else if("G6".equals(m.getRegioncode()) ) { %>
+       		<%}else if("G6".equals(t.getRegionCode()) ) { %>
        			경북
-       		<%}else if("G7".equals(m.getRegioncode()) ) { %>
+       		<%}else if("G7".equals(t.getRegionCode()) ) { %>
        			전북
-       		<%}else if("G8".equals(m.getRegioncode()) ) { %>
+       		<%}else if("G8".equals(t.getRegionCode()) ) { %>
        			전남
-       		<%}else if("G9".equals(m.getRegioncode()) ) { %>
+       		<%}else if("G9".equals(t.getRegionCode()) ) { %>
        			제주					
        		<%} %>
 	        </td>
-	        <td>
-	        <%if(m.getTeamname()!=null){ %>
-	        	<%=m.getTeamname() %>
-	        <%}else{ %>
-	        	-
-	        <%} %>
-	        </td>
-        	<td><%=m.getGrade() %></td>
-        	<td><%=m.getEnrolldate() %></td>
-			<td><button  onclick="fn_userView('<%=m.getUserId()%>');">상세보기</button></td>
+	        <td>팀원수</td>
+        	<td><%=t.getFoundingDate() %></td>
+			<td><button  onclick="fn_teamView('<%=t.getTeamName()%>');">상세보기</button></td>
 		</tr>
 	<% 		} 
  	 	}%>
     </tbody>
+    
     <script>
 	<!-- 상세보기버튼 -->
-	function fn_userView(userId){
+	function fn_teamView(teamName){
 		/* console.log(userId); */
-		location.href="<%=request.getContextPath()%>/admin/adminView?userId="+userId;
+		location.href="<%=request.getContextPath()%>/search/searchView?teamName="+teamName;
 	};
 	<!-- 상세보기버튼끝 -->
     </script>
@@ -383,8 +377,8 @@
     <tfoot>
         <tr>
         <td colspan="1">총</td>
-        <td colspan="3">회원리스트</td>
-        <td colspan="4"><%=totalMember %>명</td>
+        <td colspan="3">팀리스트</td>
+        <td colspan="3"><%=totalMember %>개 팀</td>
         </tr>
         </tfoot>
     </table>
