@@ -225,7 +225,7 @@ $(function() {
 =======
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 });
-<<<<<<< HEAD
+
 
 <%if(memberLoggedIn!=null) { %> 
 =======
@@ -237,6 +237,7 @@ $(function() {
 <%if(memberLoggedIn!=null) { %> 
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
    function fn_validate_team_info() {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
@@ -245,6 +246,9 @@ $(function() {
 <%if(memberLoggedIn!=null) { %> 
    function fn_validate_team_info() {
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+=======
+
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
@@ -252,12 +256,17 @@ $(function() {
       
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+=======
+
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       return false;
    }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
@@ -265,6 +274,9 @@ $(function() {
       return false;
    }
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+=======
+
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 <%} %>
 </script>
