@@ -28,7 +28,7 @@ legend{padding:10px 0px 0px 40px;}
 
 /*페이지*/
 	.pagination {
-	    width: 645px;
+	    width: 665px;
 	    margin: 0 0 0 36px;
 	    text-align:center;
 	} 
@@ -129,6 +129,35 @@ legend{padding:10px 0px 0px 40px;}
 	} 
     /* 버튼 디자인 */
 </style>
+<script>
+var choose = "";
+function fn_choose_change(choose) {
+	this.choose = choose.value;
+	
+}
+
+function fn_memberTeamGetOut() {
+	if (choose=="") {
+		alert("대상을 선택해주세요!");
+	}
+	else{
+		if(confirm("해당 회원을 제명하시겠습니까?")) {
+			location.href = "<%=request.getContextPath()%>/member/memberTeamGetOut?choose="+choose;
+		}
+	}
+}
+
+function fn_memberTeamMandate() {
+	if (choose=="") {
+		alert("대상을 선택해주세요!");
+	}
+	else {
+		if(confirm("해당 회원에게 팀장 위임하시겠습니까?")) {
+			location.href = "<%=request.getContextPath()%>/member/memberTeamMandate?leader=<%=memberLoggedIn.getUserId()%>&choose="+choose;
+		}
+	}
+}
+</script>
  <!--ui object -->
     <table class="tbl_type"  cellspacing="0">
         <legend>◎회원관리</legend>
@@ -162,7 +191,7 @@ legend{padding:10px 0px 0px 40px;}
 		<%}else{ 
 			for(Member m : list){%>
 			<tr>
-				<td><input type="radio" name="choose" id="choose" value="<%=m.getUserId()%>"/></td>
+				<td><input type="radio" name="choose" id="choose" value="<%=m.getUserId()%>" onchange="fn_choose_change(this)"/></td>
 				<td class="ranking" scope="row"><%=m.getRnum() %></td>
 				<td><%=m.getUserId() %></td>
 	        	<td><%=m.getUserName() %></td>
@@ -185,7 +214,8 @@ legend{padding:10px 0px 0px 40px;}
         <td colspan="6"><%= totalMember%>명</td>
         </tr>
         <tr>
-        <input type="button" value="제명" class="btn" />
+        <input type="button" value="제명하기" class="btn" onclick="fn_memberTeamGetOut()"/>
+        <input type="button" value="팀장 위임하기" class="btn" onclick="fn_memberTeamMandate()"/>
         </tr>
         </tfoot>
     </table>

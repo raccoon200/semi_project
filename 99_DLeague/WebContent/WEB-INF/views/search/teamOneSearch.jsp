@@ -182,6 +182,12 @@
 	    background: -moz-linear-gradient(0% 0% 270deg,#565b5f, #3e4347);
 	}
 	/*페이지끝*/
+	table.tbl_type tr:hover{
+		background:lightgray;
+	}
+	table.tbl_type tfoot tr:hover:last-of-type{
+		background:none;
+	}
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
