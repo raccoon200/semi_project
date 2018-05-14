@@ -55,7 +55,7 @@
 	span.srchval{
 		color:red;
 	}
-    #searchName{height: 25px; width: 150px;}
+    #searchName{height: 31px; width: 150px;}
     /* 검색옵션 끝*/
     
     /* 버튼 */

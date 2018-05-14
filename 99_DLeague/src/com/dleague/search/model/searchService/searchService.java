@@ -66,7 +66,7 @@ public class searchService {
 
 	public List<Team> teamSearch(String teamName) {
 		Connection conn = getConnection();
-		List<Team> list = new TeamDAO().teaSearch(conn,teamName);
+		List<Team> list = new TeamDAO().teamSearch(conn,teamName);
 		close(conn);
 		return list;
 	}

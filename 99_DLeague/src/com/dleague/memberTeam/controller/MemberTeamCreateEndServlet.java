@@ -1,7 +1,7 @@
 package com.dleague.memberTeam.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dleague.region.model.service.RegionService;
-import com.dleague.region.model.vo.Region;
-
 /**
- * Servlet implementation class MemberTeamCreateServlet
+ * Servlet implementation class MemberTeamCreateEndServlet
  */
-@WebServlet("/member/memberTeamCreate")
-public class MemberTeamCreateServlet extends HttpServlet {
+@WebServlet("/member/memberTeamCreateEnd")
+public class MemberTeamCreateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberTeamCreateServlet() {
+    public MemberTeamCreateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +29,24 @@ public class MemberTeamCreateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String teamName = request.getParameter("teamName");
+		String t_register_writer = request.getParameter("t_register_writer");
+		String regionCode = request.getParameter("regionCode");
+		String introduce = request.getParameter("introduce");
+		String register_msg = request.getParameter("register_msg");
 		
-		List<Region> regionList = new RegionService().selectRegionList();
-		request.setAttribute("param", "team");
-		request.setAttribute("regionList", regionList);
-		request.getRequestDispatcher("/WEB-INF/views/member/memberTeamCreate.jsp").forward(request, response);;
+		Team team = new Team();
+		
+		
+		package com.dleague.memberTeam.model.vo;
+		private String teamName;
+		private String regionCode;
+		private String capTain;
+		private String teamLogo;
+		private String introduce;
+		private Date foundingDate;
+		private String status;
+		
 	}
 
 	/**
