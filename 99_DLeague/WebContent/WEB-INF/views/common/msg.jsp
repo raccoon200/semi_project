@@ -6,7 +6,7 @@
 	String script = (String)request.getAttribute("script");
 	
 	//System.out.println("msg@msg.jsp="+msg);
-	//System.out.println("loc@msg.jsp="+loc);
+	//System.out.println("loc@msg.jsp="+loc);s
 %>
 
 <script>
