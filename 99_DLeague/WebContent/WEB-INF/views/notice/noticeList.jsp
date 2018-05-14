@@ -28,6 +28,7 @@ table.board-table tr th, td{
 }
 table.board-table tr:hover{
 	background:rgb(240,240,240);
+	cursor:pointer;
 }
 span.search-area{
 	
@@ -71,7 +72,7 @@ $(function() {
 	$("tr").click(function() {
 		<% if(memberLoggedIn!=null) {%>
 		if($(this).attr("id")!=null){
-			location.href="<%=request.getContextPath()%>/board/freeBoardView?no="+$(this).attr("id");
+			location.href="<%=request.getContextPath()%>/notice/noticeView?no="+$(this).attr("id");
 		}
 		<%} else {%>
 		alert("로그인 후 이용할 수 있습니다");
@@ -86,8 +87,6 @@ function fn_search() {
 	if($("#searchValue").val().trim().length==0) {
 		if($("[name=searchType]").val()=="title")
 			alert("검색할 제목을 입력하세요");
-		else
-			alert("검색할 아이디를 입력하세요");
 		return false;
 	}
 	var searchValue = $("#searchValue").val().trim();
@@ -97,13 +96,12 @@ function fn_search() {
 	
 }
 </script>
-<h2>자유게시판</h2>
-<section id="free-board-area">
+<h2>공지사항</h2>
+<section id="notice-area">
 	<span class="search-area">
-		<form action="<%=request.getContextPath() %>/board/freeBoard" method="get">
+		<form action="<%=request.getContextPath() %>/notice/noticeList" method="get">
 			<select name="searchType" id="">
 				<option value="title">제목</option>
-				<option value="name">아이디</option>
 			</select>
 			<input type="text" id="searchValue" name="searchValue"/>
 			<input type="submit" value="검색" onclick="fn_search()"/>
@@ -144,7 +142,7 @@ function fn_search() {
 	<div id="pageBar">
 		<%=(request.getAttribute("pageBar")!=null)?request.getAttribute("pageBar"):"" %>
 		<%if(memberLoggedIn!=null) { %>
-			<input type="button" class="write-btn" value="글쓰기" onclick="location.href='<%=request.getContextPath()%>/board/noticeForm'"/>
+			<input type="button" class="write-btn" value="글쓰기" onclick="location.href='<%=request.getContextPath()%>/notice/noticeForm'"/>
 		<%} %>
 	</div>
 </section>

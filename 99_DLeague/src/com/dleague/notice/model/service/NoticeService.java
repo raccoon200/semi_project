@@ -1,7 +1,6 @@
 package com.dleague.notice.model.service;
 
-import static com.dleague.common.JDBCTemplate.close;
-import static com.dleague.common.JDBCTemplate.getConnection;
+import static com.dleague.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -33,6 +32,32 @@ public class NoticeService {
 			result = new NoticeDAO().selectNoticeCountBySearch(conn, searchValue);
 		else
 			result = new NoticeDAO().selectNoticeCount(conn);
+		return result;
+	}
+
+	public Notice selectNoticeOne(int no) {
+		Connection conn = getConnection();
+		Notice notice = new NoticeDAO().selectNoticeOne(conn, no);
+		close(conn);
+		return notice;
+	}
+
+	public int insertNotice(Notice notice) {
+		Connection conn = getConnection();
+		int result = new NoticeDAO().insertNotice(conn, notice);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int selectRecentNoticeNo() {
+		Connection conn = getConnection();
+		int result = new NoticeDAO().selectRecentNoticeNo(conn);
+		close(conn);
 		return result;
 	}
 

@@ -34,7 +34,7 @@ public class BoardFileDownloadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.실제파일저장경로를 절대경로로 가져오기
-        String saveDirectory = getServletContext().getRealPath("/upload/board");
+        String saveDirectory = getServletContext().getRealPath("/upload/notice");
 		String rName = request.getParameter("rName");
 		String oName = request.getParameter("oName");
 		System.out.printf("oName=%s, rName=%s\n",oName, rName);

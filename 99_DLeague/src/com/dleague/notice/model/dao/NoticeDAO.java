@@ -136,4 +136,72 @@ public class NoticeDAO {
 		}
 		return result;
 	}
+	public Notice selectNoticeOne(Connection conn, int no) {
+		Notice notice = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectNoticeOne");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				notice = new Notice();
+				notice.setNotice_no(rset.getInt("notice_no"));
+				notice.setNotice_title(rset.getString("notice_title"));
+				notice.setNotice_writer(rset.getString("notice_writer"));
+				notice.setNotice_content(rset.getString("notice_content"));
+				notice.setNotice_date(rset.getDate("notice_date"));
+				notice.setOriginal_file_name(rset.getString("original_file_name"));
+				notice.setRenamed_file_name(rset.getString("renamed_file_name"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return notice;
+	}
+	public int insertNotice(Connection conn, Notice notice) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, notice.getNotice_title());
+			pstmt.setString(2, notice.getNotice_writer());
+			pstmt.setString(3, notice.getNotice_content());
+			pstmt.setString(4, notice.getOriginal_file_name());
+			pstmt.setString(5, notice.getRenamed_file_name());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int selectRecentNoticeNo(Connection conn) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectRecentNoticeNo");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("no");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
 }

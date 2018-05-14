@@ -8,11 +8,13 @@ console.log("<%=param%>");
 			<nav id="nav">
 			
 			
-			<!-- 공지사항 
+			<!-- 공지사항 -->
+			<% if(param=="notice"){ %>
 			<h2 id="nav-header">공지사항</h2>
 			<ul class="nav-list">
-				<li><a href="#">공지사항</a></li>
-			</ul> --> 
+				<li><a id="nav-selected" href="<%=request.getContextPath() %>/notice/noticeList">공지사항</a></li>
+			</ul>
+			<%} %>
 			
 			<!-- 게시판 -->
 			<% if(param=="freeBoard" || param=="regionBoard" || param=="complainBoard") {%>
