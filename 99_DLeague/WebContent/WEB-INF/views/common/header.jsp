@@ -222,16 +222,8 @@ $(function() {
 
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 <%if(memberLoggedIn!=null) { %> 
    function fn_validate_team_info() {
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
