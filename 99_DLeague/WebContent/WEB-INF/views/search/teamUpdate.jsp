@@ -63,9 +63,13 @@ button#delbt{width:132px;}
 </style>
 <script>
 $(function (){
-
+	
 	$("#profileImg").attr("src", "<%=request.getContextPath() %>/images/team/<%=logo!=null?logo:"default.png"%>");
 	});
+	$("#up_file").value = "<%=logo%>";
+	$("#up_file").val("<%=logo%>");
+	console.log("<%=logo%>");
+	console.log($("#up_file").val("<%=logo%>"));
 	$("[name=up_file]").change(function(){ 
 		//$(this).val()은 선택한 파일명임.
 		if($(this).val()==""){
@@ -112,7 +116,7 @@ $(function (){
 			
 			<td rowspan="2">
 			<img src="<%=request.getContextPath() %>/images/team/<%=logo!=null?logo:"default.png"%>" id="profileImg" width="60px" height="60px" alt="" />
-			<input type="file" name="up_file" id="" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
+			<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
 			<span id="fname">프로필 사진 변경</span>
 			</td>
 			
