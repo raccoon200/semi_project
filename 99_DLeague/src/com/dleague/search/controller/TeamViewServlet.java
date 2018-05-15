@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.dleague.member.model.vo.Member;
 import com.dleague.search.model.searchService.searchService;
 import com.dleague.search.model.vo.Activity;
 import com.dleague.search.model.vo.Team;
@@ -37,6 +39,10 @@ public class TeamViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 변수에 담기
 		String teamName = request.getParameter("teamName");
+		
+		/*HttpSession session = request.getSession(false);*/
+		/*Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");*/
+		
 		//2. 업무로직 요청
 		List<Team> list = new searchService().teamSearch(teamName);
 		
@@ -48,6 +54,7 @@ public class TeamViewServlet extends HttpServlet {
 		request.setAttribute("list", list);					//팀리스트
 		request.setAttribute("memberList", memberList);		//팀멤버 리스트
 		request.setAttribute("activityList", activityList);	//활동내역 리스트
+		/*request.setAttribute("memberLoggedIn", memberLoggedIn);	*/
 		request.setAttribute("param", "teamSearch");
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamSearchView.jsp");
 		reqDispatcher.forward(request, response);

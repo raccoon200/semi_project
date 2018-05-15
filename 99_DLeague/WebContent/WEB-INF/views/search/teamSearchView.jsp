@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.*, com.dleague.search.model.vo.*"%>
+<%@page import="java.util.*, com.dleague.search.model.vo.*,com.dleague.member.model.vo.*"%>
 <%
 	List<Team> list = (List<Team>)request.getAttribute("list");
 	List<TeamMember> memberList = (List<TeamMember>)request.getAttribute("memberList");
 	List<Activity> activityList = (List<Activity>)request.getAttribute("activityList");
+	/* Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn"); */
 	
 	//team정보
 	String teamName="";
@@ -235,7 +236,8 @@
                 <td><%=a.getResult() %></td>
                 </tr>
             </tr>
-            <%}} %>
+            <%} 
+            } %>
             </tbody>
             <tfoot>
                 <tr>
@@ -247,13 +249,13 @@
         
             
         </div>
-        
+        <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) )  {%>
         <div id="btDiv">
            	<button id="bt1" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
         </div>
-        <div id="btDiv">
-        	<button id="bt2">팀해체</button>
-        </div>
+        <%}else{ %>
+        <div id="btDiv"></div>
+        <%} %>
 </div>
 <script>
 	function fn_teamUpdate(teamName){

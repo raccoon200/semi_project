@@ -120,7 +120,6 @@ public class TeamUpdateServletEnd extends HttpServlet {
 			
 		}
 		
-		System.out.println("list="+list);
 		//4.view단 처리위임.
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
