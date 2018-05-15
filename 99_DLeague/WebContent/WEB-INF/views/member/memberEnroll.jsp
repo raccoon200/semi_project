@@ -15,8 +15,9 @@
     <!-- Custom Style -->
     <style>
     table{align:center;}
+    #profile{position: relative; left:-120px; top:0px;}
     #profileImg{width:100px; height:150px;} 
-#imgsection{position: relative; left:635px; top:-605px;}
+#imgsection{position: relative; left:400px; top:-265px;}
 
     </style>
 <script>
@@ -24,7 +25,7 @@ function fn_checkIdDuplicate(){
 	
 	var userId = $("#userId_").val().trim();
 	if(userId.length<4){
-		alert('아이디는 4글자 이상부터 가능합니다.');
+		alert('아이디는 4글자 이상부터 가능합니다. \n (영대소문자와 숫자포함 4~12자)');
 		return;
 	}
 	
@@ -47,38 +48,52 @@ function fn_checked() {
 	var patext = document.getElementById("password_");
 	var cpatext = document.getElementById("password_chk");
 	var mtext = document.getElementById("email_");
+	var m1text = document.getElementById("email_1");
 	var nametext = document.getElementById("userName");
+	var bitext = document.getElementById("birthday");
+	var phtext = document.getElementById("phone");
 	var intro = document.getElementById("profile");
 	
 	var userId = idtext.value;
 	var password = patext.value;
 	var password_chk = cpatext.value;
-	var email = mtext.value;
+	var email_ = mtext.value;
+	var email_1 = m1text.value;
 	var userName = nametext.value;
+	var birthday = bitext.value;
+	var phone = phtext.value;
 	console.log(userId);
 	console.log(password);
 	console.log(password_chk);
-	console.log(email);
+	console.log("email ="+email_+"@"+email_1);
 	console.log(userName);
+	console.log(birthday);
+	console.log(phone);
+	var regExp0 = /^[a-zA-Z0-9]{4,12}$/;
 	var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
 	//id와 비밀번호의 유효성 검사
-	var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i;
+/* 	var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i; */
+	var regExp2 = /[a-z0-9]{2,}$/;
+	var regExp3 = /[a-z0-9]{2,}\.[a-z0-9]{2,}$/;
 	//email 유효성검사
-	var regname = /^[가-힝]{2,}$/;
+	var regname = /^[가-힝]{2,4}$/;
 	// 이름 유효성 검사
-	
-	if(!regExp1.test(userId))
+ 	var regExp4 = /[0-9]{6,6}$/;
+	// 폰유효성 검사
+	var regph = /^01[0-9]{8,9}$/s;
+	console.log("userid ="+userId);
+	if(!regExp0.test(userId))
 		//아이디 유효성 검사 후 4~12자의 영문 대소문자와 숫자의 유효성이 안맞다면
 		//공백을 주고 알람을 띄운다.
 		//밑에 동일한 유효성 검사
 	{
 		alert("Id를 제대로 입력해주세요.");
-		idtext.value = "";
+	/* 	idtext.value = ""; */
 		idtext.focus();
 		return false;
 	}else if($("[name=idValid]").val() != 1){
 		
-		alert("아이디체크를 해주세요.")
+		alert("ID중복체크를 해주세요.")
 		idtext.focus();
 		return false;
 	}
@@ -89,14 +104,14 @@ function fn_checked() {
 		patext.focus();
 		return false;
 		}
-	else if(!(password_chk.slice(0, password_chk.length) === password.slice(0,password.length)))
+	else if(!(password_chk.slice(0,password_chk.length) === password.slice(0,password.length)))
 		{
 		alert("비밀번호가 동일하지 않습니다.");
 		cpatext.value = "";
 		cpatext.focus();
 		return false;
 		}
-	else if ((password_chk.slice(0, password_chk.length) === id.slice(0, id.length)))
+	else if ((password_chk.slice(0, password_chk.length) === userId.slice(0, userId.length)))
 		{
 		alert("비밀번호가 ID와 동일하면 안됩니다.");
 		patext.value= "";
@@ -105,18 +120,39 @@ function fn_checked() {
 		cpatext.focus();
 		return false;
 		}
-	else if (!regExp2.test(email))
+	else if(!regname.test(userName))
 		{
-		alert("올바른 이메일 형식이 아닙니다.");
+			alert("이름을 제대로 입력해주세요.");
+			nametext.value ="";
+			nametext.focus();
+			return false;
+			}
+	else if(!regExp4.test(birthday))
+		{
+		alert("생년월일을 확인해주세요.");
+		bitext.value="";
+		bitext.focus();
+		return false;
+		}
+	else if(!regph.test(phone))
+		{
+		alert("전화번호를 확인해주세요.");
+		phtext.value="";
+		phtext.focus();
+		return false;
+		}
+	else if (!regExp2.test(email_))
+		{
+		alert("이메일을 확인해주세요.");
 		mtext.value= "";
 		mtext.focus();
 		return false;
 		}
-	else if(!regname.test(userName))
+	else if (!regExp3.text(email_1))
 		{
-		alert("이름을 제대로 입력해주세요.");
-		nametext.value ="";
-		nametext.focus();
+		alert("직접입력부분을 확인해주세요.");
+		m1text.value="";
+		m1text.focus();
 		return false;
 		}
 	else if (intro.value ==""){
@@ -125,6 +161,7 @@ function fn_checked() {
 	}
 	return true;
 }
+
 		//http://bitjava.tistory.com/35 <-참조
 </script>
 <section id = "enroll-container">
@@ -142,8 +179,8 @@ function fn_checked() {
 <tr>
 <td style ="width:110px;"><h5>아이디</h5></td>
 <td>
-<input class="form-control" type="text" name="userId" id="userId_" placeholder = "아이디를 입력하세요 ." value ="" required/>
-<td style="width:110px;"> <input type="button" value="아이디체크"
+<input class="form-control" type="text" name="userId" id="userId_" placeholder = "아이디를 입력하세요 . (영대소문자와 숫자포함 4~12자)" value ="" required/>
+<td style="width:110px;"> <input type="button" value="ID중복체크"
 id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <input type = "hidden" name="idValid" value="0" />
 </td>
@@ -151,7 +188,7 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <tr>
 <td style ="width:110px;"><h5>비밀번호</h5></td>
 <td>
-<input class="form-control" type="password" name="password" id="password_" placeholder ="비밀번호를 입력하세요." value =""/>
+<input class="form-control" type="password" name="password" id="password_" placeholder ="비밀번호를 입력하세요. (영대소문자와 숫자포함 4~12자)" value =""/>
 </td>
 </tr>
 <tr>
@@ -176,7 +213,7 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <tr>
 <td style ="width:110px;"><h5>생년월일</h5></td>
 <td>
-<input class="form-control" type="date" name="birthday" id="birthday" value =""/>
+<input class="form-control" type="text" name="birthday" id="birthday" value ="" placeholder="(주민번호 앞 6자리)" maxlength="6"/>
 </td>
 </tr>
 <tr>
@@ -238,15 +275,21 @@ $("#selectEmail").change(function() {
 <td style ="width:110px;"><h5>프로필</h5></td>
 <td>
 <textarea id="profile" name="profile" maxlength="2048" style="height:180px;" placeholder = "자기소개란"></textarea>
-</td></tr>
+</td>
+</tr>
+<tr>
+<td style = "text-align: left" colspan="3"><input class = "btn btn-primary pull-right" type="submit" value="회원가입"><input class = "btn btn-primary pull-right" type="reset" value="취소"></td>
+
+</tr>
+</tbody>
 </table>
-<input type="submit" value="가입" />
-<input type="reset" value="취소" />
+<!-- <input type="submit" value="가입" />
+<input type="reset" value="취소" /> -->
  <section id="imgsection">
 <input type="image" src="<%=request.getContextPath() %>/images/profile/default.jpg" id="profileImg"/>
 <br /> 
 <div style="position:relative;">
- <input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" /> 
+ <input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"  /> 
 <!-- <span id="fname">프로필 사진 변경</span>
  --></div>
 </section>
@@ -269,14 +312,19 @@ $("[name=up_file]").change(function(){
 	}
 });	
 function fn_fileUpload(value){
-	 if(value.files && value.files[0]) {
+	var value2 = $("#up_file").val();
+	if(value2=="") {
+  		$('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
+  	} 
+	if(value.files && value.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
              $('#profileImg').attr('src', e.target.result);
-			}
-        }
+			console.log(e.target.result);
+        } 
         reader.readAsDataURL(value.files[0]);
 	}
+}
 </script> 
  <%-- <%
 String messageContent = null;
