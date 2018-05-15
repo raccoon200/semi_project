@@ -58,11 +58,15 @@ public class MemberTeamService {
 		return result;
 	}
 
-	public int MemberTeamMandate(String leader, String choose) {
+	public int MemberTeamMandateLeader(String leader, String choose) {
 		Connection conn = getConnection();
-		MemberTeamDAO teamDAO = new MemberTeamDAO();
-		
-		return 0;
+		MemberTeamDAO memberTeamDAO = new MemberTeamDAO();
+		memberTeamDAO.MemberTeamMandateLeader(conn, choose);
+		int result = memberTeamDAO.MemberTeamMandateMember(conn, leader);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 
 	
