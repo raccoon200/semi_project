@@ -31,6 +31,25 @@ public class MemberTeamMandateServlet extends HttpServlet {
 		String leader = request.getParameter("leader");
 		String choose = request.getParameter("choose");
 		int result = new MemberTeamService().MemberTeamMandate(leader, choose);
+		String msg = "";
+		String loc = "";
+		if(result>0) {
+			msg = "성공적으로 위임하였습니다!";
+			loc = "/member/logout";
+		} else {
+			msg = "오류!! 관리자에게 문의하시오!!";
+			String Referer = request.getHeader("Referer"); //어디서 시도했는지
+			String Origin  = request.getHeader("Origin");
+			String url = request.getRequestURL().toString(); //url패턴까지
+			String uri = request.getRequestURI(); //localhost빼고
+			if(Origin == null) {
+				Origin = url.replace(uri, "");
+			}
+			loc = Referer.replace(Origin+request.getContextPath(), "");
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

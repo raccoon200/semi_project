@@ -48,13 +48,14 @@ public class TeamDeleteServlet extends HttpServlet {
 		//4.view단 처리위임.
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
-		String loc = "/search/searchView?teamName="+teamName;
+		String loc = "/";
 		if(result>0) {
 			msg = "팀이 해체되었습니다!";
-			loc = "/";
+			loc = "/search/teamSearch";
 		}
 		else {
 			msg = "팀 해체 실패! 관리자에게 문의하세요!";
+			loc = "/search/searchView?teamName="+teamName;
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
