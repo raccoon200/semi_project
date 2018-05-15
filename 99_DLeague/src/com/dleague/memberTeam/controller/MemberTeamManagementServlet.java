@@ -98,7 +98,7 @@ public class MemberTeamManagementServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
-		request.setAttribute("param", "teamSearch");	//검색파라미터
+		request.setAttribute("param", "memberTeamMemberManagement");	//검색파라미터
 		request.setAttribute("totalMember", totalMember);	//팀토탈수
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/member/memberTeamMemberManagement.jsp");
 		reqDispatcher.forward(request, response);
