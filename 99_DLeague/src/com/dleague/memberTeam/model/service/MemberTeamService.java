@@ -11,6 +11,7 @@ import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.Team;
 import com.dleague.memberTeam.model.vo.TeamMember;
 import com.dleague.memberTeam.model.vo.TeamRegister;
+import com.dleague.memberTeam.model.vo.WaitTeam;
 
 
 
@@ -74,8 +75,11 @@ public class MemberTeamService {
 		return result;
 	}
 
-	
-	
-	
-	
+	public List<WaitTeam> memberTeamGameAcceptPage(String teamName) {
+		Connection conn = getConnection();
+		List<WaitTeam> list = new MemberTeamDAO().memberTeamGameAcceptPage(conn, teamName);
+		close(conn);
+		return list;
+	}
+
 }

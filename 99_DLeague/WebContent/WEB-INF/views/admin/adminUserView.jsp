@@ -2,7 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.dleague.member.model.vo.*,java.util.*" %>
 
-<% List<Member> list = (List<Member>)request.getAttribute("list"); %>
+<% 
+	List<Member> list = (List<Member>)request.getAttribute("list");
+	String userId2="";
+	for(Member m2 : list){
+		userId2=m2.getUserId();
+	}
+%>
 <style>
 table{border:1px solid;}
 #profileImg{width:150px; height:150px;}
@@ -46,7 +52,7 @@ function fn_memberOut() {
 		if("팀원"=="<%=memberLoggedIn.getGrade()%>") alert("팀을 먼저 탈퇴해주세요!");
 		else if("팀장"=="<%=memberLoggedIn.getGrade()%>") alert("팀을 먼저 삭제해주세요!"); 
 		else
-		location.href="<%=request.getContextPath()%>/member/memberOut?userId=<%=memberLoggedIn.getUserId()%>";
+		location.href="<%=request.getContextPath()%>/member/memberOut?userId=<%=userId2%>";
 	}
 }
 </script>
@@ -76,18 +82,18 @@ function fn_memberOut() {
 <tr><td>
 <label for="regioncode">지역명</label></td>
 <td>
-<input type="text" name="regioncode" id="regioncode" value= "
-<%if("G1".equals(member.getRegioncode()) ) {%>서울
-<%}else if("G2".equals(member.getRegioncode()) ) { %>경기
-<%}else if("G3".equals(member.getRegioncode()) ) { %>강원
-<%}else if("G4".equals(member.getRegioncode()) ) { %>충북
-<%}else if("G5".equals(member.getRegioncode()) ) { %>충남
-<%}else if("G6".equals(member.getRegioncode()) ) { %>경북
-<%}else if("G7".equals(member.getRegioncode()) ) { %>전북
-<%}else if("G8".equals(member.getRegioncode()) ) { %>전남
-<%}else if("G9".equals(member.getRegioncode()) ) { %>제주					
-<%} %>
-" required/></td>
+<select id="regioncode" name= "regioncode">
+	<option value="G1" <%="G1".equals(member.getRegioncode())?"selected":""%>>서울</option>
+	<option value="G2" <%="G2".equals(member.getRegioncode())?"selected":""%>>경기</option>
+	<option value="G3" <%="G3".equals(member.getRegioncode())?"selected":""%>>강원</option>
+	<option value="G4" <%="G4".equals(member.getRegioncode())?"selected":""%>>충북</option>
+	<option value="G5" <%="G5".equals(member.getRegioncode())?"selected":""%>>충남</option>
+	<option value="G6" <%="G6".equals(member.getRegioncode())?"selected":""%>>경북</option>
+	<option value="G7" <%="G7".equals(member.getRegioncode())?"selected":""%>>전북</option>
+	<option value="G8" <%="G8".equals(member.getRegioncode())?"selected":""%>>전남</option>
+	<option value="G9" <%="G9".equals(member.getRegioncode())?"selected":""%>>제주</option>
+</select>
+</td>
 </tr>
 
 <tr><td>
