@@ -58,29 +58,36 @@ table.team-register-table td{
 td.view-content{
 	height:150px;
 }
+div#btDiv{padding:0 0 20px 0;}
+button#delbt{width:132px;}
 </style>
 <script>
-function fn_fileUpload(value){
-	if(value.files && value.files[0]) {
-	      var reader = new FileReader();
-	      reader.onload = function (e) {
-	           $('#profileImg').attr('src', e.target.result);
-			}
-	      }
-	      reader.readAsDataURL(value.files[0]);
-	
-}
-function fn_validate(){
-	if($("[name=introduce]").val().trim().length==0) {
-		alert("팀소개를 입력해주세요");
-		return false;
-	}
-	return true;
-}
+$(function (){
+
+	$("#profileImg").attr("src", "<%=request.getContextPath() %>/images/team/<%=logo!=null?logo:"default.png"%>");
+	});
+	$("[name=up_file]").change(function(){ 
+		//$(this).val()은 선택한 파일명임.
+		if($(this).val()==""){
+			$("#fname").show();
+		}	
+		else{
+			$("#fname").hide();
+		}
+	});	
+	function fn_fileUpload(value){
+		 if(value.files && value.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	             $('#profileImg').attr('src', e.target.result);
+				}
+	        }
+	        reader.readAsDataURL(value.files[0]);
+		}
 </script>
-<div>
 <h2>팀 정보수정</h2>
 <hr />
+<div id="allDiv">
 <form action="<%=request.getContextPath() %>/search/TeamUpdateServletEnd" method="post" onsubmit="return fn_validate();" enctype="multipart/form-data">
 	<table class="team-register-table">
 		<tr>
@@ -105,7 +112,8 @@ function fn_validate(){
 			
 			<td rowspan="2">
 			<img src="<%=request.getContextPath() %>/images/team/<%=logo!=null?logo:"default.png"%>" id="profileImg" width="60px" height="60px" alt="" />
-			<input type="file" name="up_file" id="" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" value='<%=logo!=null?logo:"default.png"%>'/>
+			<input type="file" name="up_file" id="" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
+			<span id="fname">프로필 사진 변경</span>
 			</td>
 			
 		</tr>
@@ -154,9 +162,24 @@ function fn_validate(){
 			<td colspan="3" class="view-content"><textarea name="introduce" id="" cols="100" rows="8" style="resize: none" ><%=introduce %></textarea></td>
 		</tr>
 	</table>
+	
+	<div id="inputDiv">
 	<input type="submit" value="정보수정" />
-	<input type="submit" value="팀해체" />
 	<input type="reset" value="초기화" />
+	</div>
 </form>
+	<br />
+	<div id="btDiv"><button id="delbt" onclick="fn_teamDelete('<%=teamName%>');">팀해체</button></div>
 </div>
+<script>
+function fn_teamDelete(teamName){
+	/* console.log(teamName); */
+	if (confirm("정말 팀을 해체하시겠습니까??\n\n팀해체는 복구할 수 없습니다.") == true){    //확인
+		location.href="<%=request.getContextPath()%>/search/teamDelete?teamName="+teamName;
+	}else{   //취소
+	    return;
+	}
+
+}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		

@@ -167,4 +167,31 @@ public class searchService {
 		return result;
 	}
 
+	public int teamDelete(String teamName) {
+		Connection conn = getConnection();
+		int result = new TeamDAO().teamDelete(conn, teamName);//team테이블 status 'N' 변경
+		int result2 = new TeamDAO().teamMemberDelete(conn, teamName);//team_member테이블 삭제
+		int	result3 = new TeamDAO().tblUserDelete(conn, teamName);//tbl_user테이블 grade '선수' 변경
+
+		if(result>0&&result2>0&&result3>0) {	
+			commit(conn);
+		}else { 
+			rollback(conn);
+		}
+		/*if(result>0) {
+			result2 = new TeamDAO().teamMemberDelete(conn, teamName);
+		}
+		if(result2>0) {
+			result3 = new TeamDAO().tblUserDelete(conn, teamName);
+			System.out.println("result3="+result3);
+		}
+		if(result3>0) {	
+			commit(conn);
+		}else { 
+			rollback(conn);
+		}*/
+		close(conn);
+		return result;
+	}
+
 }
