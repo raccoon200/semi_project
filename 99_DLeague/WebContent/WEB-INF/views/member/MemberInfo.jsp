@@ -163,7 +163,8 @@ $("[name=up_file]").change(function(){
 	}
 });	
 function fn_fileUpload(value){
-	 if(value.files && value.files[0]) {
+	 
+	if(value.files && value.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
              $('#profileImg').attr('src', e.target.result);
