@@ -2,6 +2,7 @@ package com.dleague.memberTeam.model.service;
 
 import static com.dleague.common.JDBCTemplate.*;
 
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.List;
 
@@ -56,6 +57,15 @@ public class MemberTeamService {
 		close(conn);
 		return result;
 	}
+
+	public int MemberTeamMandate(String leader, String choose) {
+		Connection conn = getConnection();
+		MemberTeamDAO teamDAO = new MemberTeamDAO();
+		
+		return 0;
+	}
+
+	
 	
 	
 	

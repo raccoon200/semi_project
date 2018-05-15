@@ -1,6 +1,7 @@
 package com.dleague.admin.controller;
 
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dleague.admin.model.service.adminService;
 import com.dleague.member.model.vo.Member;
+import com.dleague.search.model.searchService.searchService;
 import com.dleague.search.model.vo.Team;
 
 /**
@@ -36,7 +38,8 @@ public class AdminTeamServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		List<Team> list = null;/*new adminService().MemberList();*/
 		String searchName = request.getParameter("searchName");
-
+		Hashtable<String,Integer> ht = new searchService().MemberCount();
+		
 		Member m = null;
 		String msg = "";
 		String loc = "/";
@@ -110,6 +113,7 @@ public class AdminTeamServlet extends HttpServlet {
 		request.setAttribute("cPage", cPage);				//페이지바
 		request.setAttribute("param", "adminPageTeam");			//네비게이터 변수
 		request.setAttribute("totalMember", totalMember);	//회원총수
+		request.setAttribute("ht", ht);	
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher(view).forward(request, response);
