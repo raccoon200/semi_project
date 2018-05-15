@@ -18,8 +18,7 @@ console.log("<%=param%>");
 			
 			<!-- 게시판 -->
 			<% if(param=="freeBoard" || param=="regionBoard" || param=="complainBoard") {%>
-			<h2 id="nav-header">게시판</h2>
-			<hr style="border:0;height:2px;background: rgb(244,244,244);"/>
+			<h3 id="nav-header">게시판</h3>
 			<ul class="nav-list">
 				<li><a id='<%=param=="freeBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/freeBoard">자유게시판</a></li>
 				<li><a id='<%=param=="regionBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/regionBoard">지역게시판</a></li>
@@ -28,7 +27,7 @@ console.log("<%=param%>");
 			<%} %>
 			<!-- 로그인/회원가입 -->
 			<%if(param=="login" || param=="enroll") {%>
-			<h2 id="nav-header"></h2>
+			<h2 id="nav-header">로그인/회원가입</h2>
 			<ul class="nav-list">
 				
 				<li><a href="<%=request.getContextPath() %>/member/loginPage" id=id=<%=param=="login"?"nav-selected":""%>>로그인</a></li>
