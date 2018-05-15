@@ -46,7 +46,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		}
 		
 		//1.b saveDirectory
-		String saveDirectory = getServletContext().getRealPath("upload/board"); 
+		String saveDirectory = getServletContext().getRealPath("upload/member"); 
 				
 		System.out.println("saveDirectory="+saveDirectory);
 		
@@ -76,6 +76,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		String grade = multiReq.getParameter("grade");
 		String photo = multiReq.getFilesystemName("up_file");//실제시스템에 저장된 파일명
 		System.out.println(birthday);
+		System.out.println(userId);
 		System.out.println(enrolldate);
 		System.out.println("servlet@"+teamname);
 		Member member = new Member(userId, password, userName, regioncode, phone, email, birthday, teamname

@@ -159,8 +159,10 @@ function fn_memberTeamMandate() {
 }
 </script>
  <!--ui object -->
+ 	<h2>팀원 관리</h2>
+    <hr />
     <table class="tbl_type"  cellspacing="0">
-        <legend>◎회원관리</legend>
+       
         
     <colgroup>
         <col width="10%"> 

@@ -35,3 +35,12 @@ update team set captain = :new.userid where teamname = :new.teamname;
 end;
 /
 
+<!-- waitteam의 status가 Y로 바꼈을 때 game의 away를 waitteam의 teamname으로 바꿔줌.-->
+create or replace trigger trg_waitteam_status_Y
+after update of status on waitteam
+for each row
+when (new.status='Y')
+begin
+update game set away = :old.teamname where game_no = :old.game_no;
+end;
+/
