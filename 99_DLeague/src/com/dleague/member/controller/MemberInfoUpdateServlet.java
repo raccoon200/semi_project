@@ -46,7 +46,7 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		}
 		
 		//1.b saveDirectory
-		String saveDirectory = getServletContext().getRealPath("upload/board"); 
+		String saveDirectory = getServletContext().getRealPath("upload/member"); 
 				
 		System.out.println("saveDirectory="+saveDirectory);
 		

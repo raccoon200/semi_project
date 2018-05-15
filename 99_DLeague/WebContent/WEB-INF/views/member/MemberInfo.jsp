@@ -150,8 +150,13 @@ required/> --%></td>
 </form>
 <script>
 $(function (){
-
-$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/board/<%=member.getPhoto()%>");
+	var value2 = $("#up_file").val();
+	if(value2=="") {
+        $('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
+     } 
+	else {
+		$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/board/<%=member.getPhoto()%>");
+	}
 });
 $("[name=up_file]").change(function(){ 
 	//$(this).val()은 선택한 파일명임.
@@ -163,7 +168,11 @@ $("[name=up_file]").change(function(){
 	}
 });	
 function fn_fileUpload(value){
-	 
+	
+	console.log(value2);
+	   <%-- if(value2=="") {
+	        $('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
+	     }  --%>
 	if(value.files && value.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
