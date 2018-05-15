@@ -52,18 +52,17 @@ public class MemberEnrollEndServlet extends HttpServlet {
       
       MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, "UTF-8", new MyFileRenamePolicy());
       
-      
-      
-      
-      
-      
-   
       String userId  = multiReq.getParameter("userId");
       String password = multiReq.getParameter("password");
       String userName = multiReq.getParameter("userName"); 
       String regioncode = multiReq.getParameter("regioncode");
       String phone = multiReq.getParameter("phone");
-      String email = multiReq.getParameter("email"); 
+      String email ="";
+      if("1".equals(multiReq.getParameter("selectEmail"))) {
+    	  email = multiReq.getParameter("email1")+("@")+multiReq.getParameter("email2");
+      }else {
+    	  email = multiReq.getParameter("email1")+("@")+multiReq.getParameter("selectEmail"); 
+      }
       String birthday =multiReq.getParameter("birthday");
       String profile = multiReq.getParameter("profile");
       String photo = multiReq.getFilesystemName("up_file");
@@ -82,14 +81,6 @@ public class MemberEnrollEndServlet extends HttpServlet {
       member.setProfile(profile);
       member.setPhoto(photo);
       System.out.println("입력한 회원정보 : "+member);
-      
-      
-      
-      
-      
-      
-      
-
       
       int result = new MemberService().insertMember(member);
       
@@ -110,8 +101,6 @@ public class MemberEnrollEndServlet extends HttpServlet {
       RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
       reqDispatcher.forward(request, response);
    }
-   
-   
 
    /**
     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

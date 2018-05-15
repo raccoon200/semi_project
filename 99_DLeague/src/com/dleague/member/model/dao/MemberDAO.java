@@ -169,13 +169,15 @@ public class MemberDAO {
 	         pstmt.setString(4, member.getPhone());
 	         pstmt.setString(5, member.getEmail());
 	         pstmt.setString(6, member.getBirthday());
-	         pstmt.setString(7, member.getTeamname());
-	         pstmt.setString(8, member.getProfile());
-	         pstmt.setString(9, member.getGrade());
+	         /*pstmt.setString(7, member.getTeamname());*/
+	         pstmt.setString(7, member.getProfile());
+	         pstmt.setString(8, member.getGrade());
 	         
-	         pstmt.setDate(10, member.getEnrolldate());
-	         pstmt.setString(11, member.getPhoto());
-	         pstmt.setString(12, member.getUserId());
+	         pstmt.setDate(9, member.getEnrolldate());
+	         pstmt.setString(10, member.getPhoto());
+	         pstmt.setString(11, member.getUserId());
+	         System.out.println(member.getTeamname());
+	         System.out.println(member);
 	         result = pstmt.executeUpdate();
 	         System.out.println("MemberDAO@memberinfoUpdate"+member);
 	      } catch (SQLException e) {
@@ -201,9 +203,9 @@ public class MemberDAO {
 			pstmt.setString(4,  member.getRegioncode());
 			pstmt.setString(5,  member.getPhone());
 			pstmt.setString(6,  member.getEmail());
-			pstmt.setString(7,  member.getBirthday());
-			pstmt.setString(8,  member.getProfile());
-			pstmt.setString(9, member.getPhoto());
+			pstmt.setString(7,  member.getProfile());
+			pstmt.setString(8, member.getPhoto());
+			pstmt.setString(9,  member.getBirthday());
 		
 			result = pstmt.executeUpdate();
 			

@@ -108,7 +108,7 @@ function fn_teamManagement() {
 }
 
 </script>
-	<h2>내 팀 정보</h2>
+	<h2>내 팀 관리</h2>
 	<hr />
 	<div style="text-align: center">
     <div id="bu">

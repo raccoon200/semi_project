@@ -510,7 +510,7 @@ public class TeamDAO {
 	public int teamUpdate(Connection conn, Team team) {
 		int result = -1;
 		PreparedStatement pstmt =  null;
-		PreparedStatement pstmt2 =  null;
+		
 		String query = prop.getProperty("teamUpdate");
 
 		try {
@@ -633,6 +633,64 @@ public class TeamDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public int teamDelete(Connection conn, String teamName) {
+		int result = -1;
+		PreparedStatement pstmt =  null;
+		
+		String query = prop.getProperty("teamDelete");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+		
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int teamMemberDelete(Connection conn, String teamName) {
+		int result2 = -1;
+		PreparedStatement pstmt =  null;
+		
+		String query = prop.getProperty("teamMemberDelete");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+		
+			result2 = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result2;
+	}
+
+	public int tblUserDelete(Connection conn, String teamName) {
+		int result3 = -1;
+		PreparedStatement pstmt =  null;
+		
+		String query = prop.getProperty("tblUserDelete");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+		
+			result3 = pstmt.executeUpdate();
+			System.out.println("teamName="+teamName+"result3="+result3);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result3;
 	}
 
 }

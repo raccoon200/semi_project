@@ -13,7 +13,7 @@
 function fn_checkIdDuplicate(){
 	var userId = $("#userId").val().trim();
 	if(userId.length<4){
-		alert('아이디는 4글자이상 가능합니다.');
+		alert("아이디는 4글자이상 가능합니다. \n (영대소문자와 숫자포함 4~12자)");
 		return false;
 	} 
 	$("#userId").val(userId);
@@ -37,7 +37,7 @@ span#duplicated{color:red; font-weight:bold;}
 <%if(isUsable==true){ %>
 [<span><%=userId %></span>]는 사용 가능합니다.
 <br /><br />
-<button type="button" onclick="setUserId('<%=userId%> ')">닫기</button>
+<button type="button" onclick="setUserId('<%=userId%>')">닫기</button>
 <%} else { %>
 [<span id="duplicated"><%=userId %></span>]는 이미 사용중입니다.
 <br /><br />
