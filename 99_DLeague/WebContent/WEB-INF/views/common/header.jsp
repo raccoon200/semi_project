@@ -343,5 +343,3 @@
          <!-- 메인메뉴 끝 -->
          </div>
       </header>
-
-      <section id="center">

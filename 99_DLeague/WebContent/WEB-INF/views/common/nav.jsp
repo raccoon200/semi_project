@@ -5,6 +5,7 @@
 <script>
 console.log("<%=param%>");
 </script>
+      <section id="center">
 			<nav id="nav">
 			
 			
