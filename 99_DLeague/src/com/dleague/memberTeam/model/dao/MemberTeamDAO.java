@@ -194,6 +194,37 @@ public class MemberTeamDAO {
 			close(pstmt);
 		}
 	}
+	public int memberTeamMandateLeader(Connection conn, String choose) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("memberTeamMandate");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "팀장");
+			pstmt.setString(2, choose);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	public int memberTeamMandateMember(Connection conn, String leader) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("memberTeamMandate");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "팀원");
+			pstmt.setString(2, leader);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 }
