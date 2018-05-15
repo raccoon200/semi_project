@@ -150,6 +150,7 @@
             <col width="10%">
             <col width="10%">
             <col width="15%">
+            <col width="10%">
         </colgroup>
         <thead>
         <tr>
@@ -158,6 +159,7 @@
             <th scope="col">지역</th>
             <th scope="col">등급</th>
             <th scope="col">입단일</th>
+            <th scope="col">팀원강퇴</th>
         </tr>
         </thead>
         <tbody>
@@ -188,13 +190,14 @@
 	            </td>
 	            <td><%=tm.getGrade() %></td>
 	            <td><%=tm.getT_EnrollDate() %></td>
+	            <td><input type="checkbox" class="kick" <%="팀장".equals(tm.getGrade())?"disabled":"" %> /></td>
             </tr>
         <%} %>
         </tbody>
         <tfoot>
             <tr>
             <td>종합</td>
-            <td colspan="2">총 팀원수</td>
+            <td colspan="3">총 팀원수</td>
             <td colspan="3"><%=rnum %>명</td>
             </tr>
             </tfoot>
