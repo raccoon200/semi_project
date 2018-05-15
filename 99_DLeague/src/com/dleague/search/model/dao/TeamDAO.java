@@ -693,4 +693,42 @@ public class TeamDAO {
 		return result3;
 	}
 
+	public int teamUserKick(Connection conn, String kick) {
+		int result = -1;
+		PreparedStatement pstmt =  null;
+		
+		String query = prop.getProperty("teamUserKick");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, kick);
+		
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int teamUserKick2(Connection conn, String kick) {
+		int result = -1;
+		PreparedStatement pstmt =  null;
+		
+		String query = prop.getProperty("teamTblUserKick");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, kick);
+		
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

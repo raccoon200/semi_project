@@ -190,15 +190,16 @@
 	            </td>
 	            <td><%=tm.getGrade() %></td>
 	            <td><%=tm.getT_EnrollDate() %></td>
-	            <td><input type="checkbox" class="kick" <%="팀장".equals(tm.getGrade())?"disabled":"" %> /></td>
+	            <td><input type="checkbox" class="kick" id="kick<%=tm.getRnum() %>" value="<%=tm.getUserId() %>" <%="팀장".equals(tm.getGrade())?"disabled":"" %> /></td>
             </tr>
         <%} %>
         </tbody>
         <tfoot>
             <tr>
             <td>종합</td>
-            <td colspan="3">총 팀원수</td>
-            <td colspan="3"><%=rnum %>명</td>
+            <td colspan="2">총 팀원수</td>
+            <td colspan="2"><%=rnum %>명</td>
+            <td><button onclick="fn_userKick('<%=teamName%>');">강퇴</button></td>
             </tr>
             </tfoot>
         </table>
@@ -265,6 +266,19 @@
 		location.href="<%=request.getContextPath()%>/search/teamUpdate?teamName="+teamName;
 		<%-- ,'<%=rCode%>','<%=capTain%>','<%=foundInDate%>','<%=introduce%>','<%=rogo%>'
 				+"&rCode"+rCode+"&capTain"+capTain+"&foundInDate"+foundInDate+"&introduce"+introduce+"&logo"+logo; --%>
-	}
+	};
+	function fn_userKick(teamName){
+		<%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) ) {%>
+		<%for(TeamMember tm3 : memberList){%>
+			var checkbox=checkbox+","+ $("#kick<%=tm3.getRnum() %>:checked").val();
+		<%}%>
+ 			location.href="<%=request.getContextPath()%>/search/userKick?checkbox="+checkbox+"&teamName="+teamName;
+ 		<%}else {%>
+ 			fn_loginAlert()
+ 		<%}%>
+	};
+	function fn_loginAlert(){
+		alert("팀장만 가능한 기능입니다.");
+	};
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
