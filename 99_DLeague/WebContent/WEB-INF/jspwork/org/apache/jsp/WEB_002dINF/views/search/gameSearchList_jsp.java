@@ -27,9 +27,9 @@ public final class gameSearchList_jsp extends org.apache.jasper.runtime.HttpJspB
 
   static {
     _jspx_dependants = new java.util.HashMap<java.lang.String,java.lang.Long>(3);
-    _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526291753034L));
-    _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1526275687296L));
-    _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1525739378072L));
+    _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526280074032L));
+    _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1526275810397L));
+    _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1525739390861L));
   }
 
   private static final java.util.Set<java.lang.String> _jspx_imports_packages;
