@@ -74,6 +74,7 @@ console.log("<%=param%>");
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName="<%=memberLoggedIn.getTeamname()%>" id="<%=param=="memberTeamManagement"?"nav-selected":"" %>">내 팀 관리</a></li>
 			</ul> 
 			<%} %>
+			
 			<%if(param=="adminPage" || param=="adminPageTeam") {%>
 			<!-- 관리자페이지 -->
 			<h2 id="nav-header">관리자페이지</h2>
