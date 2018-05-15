@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.dleague.board.model.dao.BoardDAO;
+import com.dleague.board.model.vo.Complain;
 import com.dleague.board.model.vo.FreeBoard;
 import com.dleague.board.model.vo.FreeBoardComment;
 import com.dleague.board.model.vo.RegionBoard;
@@ -230,6 +231,64 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
-	
-
+	public List<Complain> selectComplainAll(int cPage, int numPerPage, String searchType, String searchValue) {
+		Connection conn = getConnection();
+		List<Complain> complainList = null;
+		if("all".equals(searchType)) {
+			complainList = new BoardDAO().selectComplainAll(conn, cPage, numPerPage);
+		}else if("title".equals(searchType)) {
+			complainList = new BoardDAO().selectComplainTitle(conn, cPage, numPerPage, searchValue);
+		}else if("writer".equals(searchType)) {
+			complainList = new BoardDAO().selectComplainWriter(conn, cPage, numPerPage, searchValue);
+		}else if("c_userid".equals(searchType)) {
+			complainList = new BoardDAO().selectComplainC_UserId(conn, cPage, numPerPage, searchValue);
+		}else if("c_teamname".equals(searchType)) {
+			complainList = new BoardDAO().selectComplainC_TeamName(conn, cPage, numPerPage, searchValue);
+		}else {
+			complainList = new BoardDAO().selectComplainAll(conn, cPage, numPerPage);
+		}
+		close(conn);
+		return complainList;
+	}
+	public int selectComplainCount(String searchType, String searchValue) {
+		Connection conn = getConnection();
+		int result = -1;
+		if("all".equals(searchType)) {
+			result = new BoardDAO().selectComplainAllCount(conn);
+		}else if("title".equals(searchType)) {
+			result = new BoardDAO().selectComplainTitleCount(conn, searchValue);
+		}else if("writer".equals(searchType)) {
+			result = new BoardDAO().selectComplainWriterCount(conn, searchValue);
+		}else if("c_userid".equals(searchType)) {
+			result = new BoardDAO().selectComplainC_UserIdCount(conn, searchValue);
+		}else if("c_teamname".equals(searchType)) {
+			result = new BoardDAO().selectComplainC_TeamNameCount(conn, searchValue);
+		}else {
+			result = new BoardDAO().selectComplainAllCount(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public Complain selectComplainBoardOne(int no) {
+		Connection conn = getConnection();
+		Complain complainBoard = new BoardDAO().selectComplainBoardOne(conn, no);
+		close(conn);
+		return complainBoard;
+	}
+	public int insertComplain(Complain complain) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().insertComplain(conn, complain);
+		if(result>0) 
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int selectRecentComplainNo() {
+		Connection conn = getConnection();
+		int result = new BoardDAO().selectRecentComplainNo(conn);
+		close(conn);
+		return result;
+	}
 }

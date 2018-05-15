@@ -5,7 +5,7 @@
     <%@ page import="com.dleague.member.model.vo.*, com.dleague.region.model.vo.*, java.util.*" %>
     <%
     Member m = (Member)request.getAttribute("member");
-	List<Region> regionList = (List<Region>)request.getAttribute("regionList");
+   List<Region> regionList = (List<Region>)request.getAttribute("regionList");
 
     %>
         <!-- Bootstrap -->
@@ -21,111 +21,107 @@
     </style>
 <script>
 function fn_checkIdDuplicate(){
-	
-	var userId = $("#userId_").val().trim();
-	if(userId.length<4){
-		alert('아이디는 4글자 이상부터 가능합니다.');
-		return;
-	}
-	
-	var url = "<%=request.getContextPath()%>/member/checkIdDuplicate";
-	var title = "checkIdDuplicate";
-	var status = "left=350px, top=100px, width=300px, height=200px";
-	var popup = window.open("",title,status);
-	
-	var checkIdDuplicateFrm = document.checkIdDuplicateFrm;
-	checkIdDuplicateFrm.userId.value=userId;
-	
-	checkIdDuplicateFrm.target = title;
-	checkIdDuplicateFrm.action = url;
-	checkIdDuplicateFrm.submit();
-	
+   
+   var userId = $("#userId_").val().trim();
+   if(userId.length<4){
+      alert('아이디는 4글자 이상부터 가능합니다. \n (영대소문자와 숫자포함 4~12자)');
+      return;
+   }
+   
+   var url = "<%=request.getContextPath()%>/member/checkIdDuplicate";
+   var title = "checkIdDuplicate";
+   var status = "left=350px, top=100px, width=300px, height=200px";
+   var popup = window.open("",title,status);
+   
+   var checkIdDuplicateFrm = document.checkIdDuplicateFrm;
+   checkIdDuplicateFrm.userId.value=userId;
+   
+   checkIdDuplicateFrm.target = title;
+   checkIdDuplicateFrm.action = url;
+   checkIdDuplicateFrm.submit();
+   
 }
 function fn_checked() {
-	console.log("안녕");
-	var idtext = document.getElementById("userId_");
-	var patext = document.getElementById("password_");
-	var cpatext = document.getElementById("password_chk");
-	var mtext = document.getElementById("email_");
-	var nametext = document.getElementById("userName");
-	var intro = document.getElementById("profile");
-	
-	var userId = idtext.value;
-	var password = patext.value;
-	var password_chk = cpatext.value;
-	var email = mtext.value;
-	var userName = nametext.value;
-	console.log(userId);
-	console.log(password);
-	console.log(password_chk);
-	console.log(email);
-	console.log(userName);
-	var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
-	//id와 비밀번호의 유효성 검사
-	var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i;
-	//email 유효성검사
-	var regname = /^[가-힝]{2,}$/;
-	// 이름 유효성 검사
-	
-	if(!regExp1.test(userId))
-		//아이디 유효성 검사 후 4~12자의 영문 대소문자와 숫자의 유효성이 안맞다면
-		//공백을 주고 알람을 띄운다.
-		//밑에 동일한 유효성 검사
-	{
-		alert("Id를 제대로 입력해주세요.");
-		idtext.value = "";
-		idtext.focus();
-		return false;
-	}else if($("[name=idValid]").val() != 1){
-		
-		alert("아이디체크를 해주세요.")
-		idtext.focus();
-		return false;
-	}
-	else if(!regExp1.test(password))
-		{
-		alert("비밀번호를 제대로 입력해주세요.");
-		patext.value="";
-		patext.focus();
-		return false;
-		}
-	else if(!(password_chk.slice(0, password_chk.length) === password.slice(0,password.length)))
-		{
-		alert("비밀번호가 동일하지 않습니다.");
-		cpatext.value = "";
-		cpatext.focus();
-		return false;
-		}
-	else if ((password_chk.slice(0, password_chk.length) === id.slice(0, id.length)))
-		{
-		alert("비밀번호가 ID와 동일하면 안됩니다.");
-		patext.value= "";
-		patext.focus();
-		cpatext.value= "";
-		cpatext.focus();
-		return false;
-		}
-	else if (!regExp2.test(email))
-		{
-		alert("올바른 이메일 형식이 아닙니다.");
-		mtext.value= "";
-		mtext.focus();
-		return false;
-		}
-	else if(!regname.test(userName))
-		{
-		alert("이름을 제대로 입력해주세요.");
-		nametext.value ="";
-		nametext.focus();
-		return false;
-		}
-	else if (intro.value ==""){
-		alert("자기 소개란을 100자 내외로 입력해주세요.");
-		return false;
-	}
-	return true;
+   var idtext = document.getElementById("userId_");
+   var patext = document.getElementById("password_");
+   var cpatext = document.getElementById("password_chk");
+   var mtext = document.getElementById("email_");
+   var nametext = document.getElementById("userName");
+   var intro = document.getElementById("profile");
+   
+   var userId = idtext.value;
+   var password = patext.value;
+   var password_chk = cpatext.value;
+   var email = mtext.value;
+   var userName = nametext.value;
+
+   var regExp0 = /^[a-zA-Z0-9]{4,12}$/;
+   var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
+   //id와 비밀번호의 유효성 검사
+   var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i;
+   //email 유효성검사
+   var regname = /^[가-힝]{2,}$/;
+   // 이름 유효성 검사
+   console.log("userid ="+userId);
+   if(!regExp0.test(userId))
+      //아이디 유효성 검사 후 4~12자의 영문 대소문자와 숫자의 유효성이 안맞다면
+      //공백을 주고 알람을 띄운다.
+      //밑에 동일한 유효성 검사
+   {
+      alert("Id를 제대로 입력해주세요.");
+   /*    idtext.value = ""; */
+      idtext.focus();
+      return false;
+   }else if($("[name=idValid]").val() != 1){
+      
+      alert("ID중복체크를 해주세요.")
+      idtext.focus();
+      return false;
+   }
+   else if(!regExp1.test(password))
+      {
+      alert("비밀번호를 제대로 입력해주세요.");
+      patext.value="";
+      patext.focus();
+      return false;
+      }
+   else if(!(password_chk.slice(0, password_chk.length) === password.slice(0,password.length)))
+      {
+      alert("비밀번호가 동일하지 않습니다.");
+      cpatext.value = "";
+      cpatext.focus();
+      return false;
+      }
+   else if ((password_chk.slice(0, password_chk.length) === id.slice(0, id.length)))
+      {
+      alert("비밀번호가 ID와 동일하면 안됩니다.");
+      patext.value= "";
+      patext.focus();
+      cpatext.value= "";
+      cpatext.focus();
+      return false;
+      }
+   else if (!regExp2.test(email))
+      {
+      alert("올바른 이메일 형식이 아닙니다.");
+      mtext.value= "";
+      mtext.focus();
+      return false;
+      }
+   else if(!regname.test(userName))
+      {
+      alert("이름을 제대로 입력해주세요.");
+      nametext.value ="";
+      nametext.focus();
+      return false;
+      }
+   else if (intro.value ==""){
+      alert("자기 소개란을 100자 내외로 입력해주세요.");
+      return false;
+   }
+   return true;
 }
-		//http://bitjava.tistory.com/35 <-참조
+      //http://bitjava.tistory.com/35 <-참조
 </script>
 <section id = "enroll-container">
 
@@ -143,7 +139,7 @@ function fn_checked() {
 <td style ="width:110px;"><h5>아이디</h5></td>
 <td>
 <input class="form-control" type="text" name="userId" id="userId_" placeholder = "아이디를 입력하세요 ." value ="" required/>
-<td style="width:110px;"> <input type="button" value="아이디체크"
+<td style="width:110px;"> <input type="button" value="ID중복체크"
 id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <input type = "hidden" name="idValid" value="0" />
 </td>
@@ -260,23 +256,23 @@ $(function (){
 
 });
 $("[name=up_file]").change(function(){ 
-	//$(this).val()은 선택한 파일명임.
-	if($(this).val()==""){
-		$("#fname").show();
-	}	
-	else{
-		$("#fname").hide();
-	}
-});	
+   //$(this).val()은 선택한 파일명임.
+   if($(this).val()==""){
+      $("#fname").show();
+   }   
+   else{
+      $("#fname").hide();
+   }
+});   
 function fn_fileUpload(value){
-	 if(value.files && value.files[0]) {
+    if(value.files && value.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
              $('#profileImg').attr('src', e.target.result);
-			}
+         }
         }
         reader.readAsDataURL(value.files[0]);
-	}
+   }
 </script> 
  <%-- <%
 String messageContent = null;
@@ -318,5 +314,4 @@ if(messageContent != null) {
 
   <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-
 
