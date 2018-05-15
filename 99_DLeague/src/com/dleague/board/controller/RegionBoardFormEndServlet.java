@@ -78,7 +78,7 @@ public class RegionBoardFormEndServlet extends HttpServlet {
 			request.setAttribute("loc", "/board/regionBoard");
 		}
 		
-		
+		request.setAttribute("param", "regionBoard");
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 

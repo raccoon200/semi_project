@@ -44,6 +44,7 @@ public class RegionBoardCommentDeleteServlet extends HttpServlet {
 		}
 		request.setAttribute("loc", loc);
 		request.setAttribute("msg", msg);
+		request.setAttribute("param", "regionBoard");
 		request.getRequestDispatcher(views).forward(request, response);
 	}
 

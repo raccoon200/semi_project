@@ -40,32 +40,40 @@ function fn_checkIdDuplicate(){
 <h2>회원가입 정보입력</h2>
 <form name="memberEnrollFrm" action="<%=request.getContextPath() %>/member/memberEnrollEnd" method="post" enctype="multipart/form-data">
 <!-- onsubmit="return fn_enrollValidate(); -->
-<table>
+<table class = "table table-bordered table-hover" style="text-align: center; border : 1px solid #dddddd">
+<thead>
 <tr>
-<th>아이디</th>
+<th colspan="3"><h4>회원 가입</h4></th>
+</thead>
+<tbody>
+<tr>
+
+
+<tr>
+<td style ="width:110px;"><h5>아이디</h5></td>
 <td>
-<input type="text" name="userId" id="userId_" required/>
-<input type="button" value="아이디체크"
+<input class="form-control" type="text" name="userId" id="userId_" required/>
+<td style="width:110p;"> <input type="button" value="아이디체크"
 id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
 <input type = "hidden" name="idValid" value="0" />
 </td>
 </tr>
 <tr>
-<th>비밀번호</th>
+<td style ="width:110px;"><h5>비밀번호</h5></td>
 <td>
-<input type="password" name="password" id="password_" />
+<input class="form-control" type="password" name="password" id="password_" />
 </td>
 </tr>
 <tr>
-<th>비밀번호 확인</th>
+<td style ="width:110px;"><h5>비밀번호 확인</h5></td>
 <td>
-<input type="password" id="password_chk" />
+<input class="form-control" type="password" id="password_chk" />
 </td>
 </tr>
 <tr>
-<th>이름</th>
+<td style ="width:110px;"><h5>이름</h5></td>
 <td>
-<input type="text" name="userName" id="userName"/>
+<input class="form-control" type="text" name="userName" id="userName"/>
 </td>
 </tr>
 <tr>
@@ -76,20 +84,20 @@ id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
  </tr> -->
  
 <tr>
-<th>생년월일</th>
+<td style ="width:110px;"><h5>생년월일</h5></td>
 <td>
-<input type="date" name="birthday" id="birthday"/>
+<input class="form-control" type="date" name="birthday" id="birthday"/>
 </td>
 </tr>
 <tr>
-<th>휴대폰</th>
+<td style ="width:110px;"><h5>휴대폰</h5></td>
 <td>
-<input type="tel" id="phone" name="phone"
+<input class="form-control" type="tel" id="phone" name="phone"
 placeholder="(-없이)01012345678" maxlength="11"/>
 </td>
 </tr>
 <tr>
-<th>이메일</th>
+<td style ="width:110px;"><h5>이메일</h5></td>
 
 <td>
 <input type="text" name="email"  id="email_" >@
@@ -122,7 +130,7 @@ $("#selectEmail").change(function() {
 </td>
 </tr>
 <tr>
-<th>거주지역</th>   
+<td style ="width:110px;"><h5>거주지역</h5></td>
 <td>
 				<select name="regioncode" id="">
 				<%if(regionList!=null && !regionList.isEmpty()){
@@ -137,7 +145,7 @@ $("#selectEmail").change(function() {
 				</td>
 				</tr>
 <tr>
-<th>프로필</th>
+<td style ="width:110px;"><h5>프로필</h5></td>
 <td>
 <textarea id="profile" name="profile" maxlength="2048" style="height:180px;"></textarea>
 </td></tr>
@@ -180,6 +188,44 @@ function fn_fileUpload(value){
         reader.readAsDataURL(value.files[0]);
 	}
 </script> 
+<%
+String messageContent = null;
+if(session.getAttribute("messageContent") != null) {
+messageContent = (String) session.getAttribute("messageContent");}
+String messageType=null;
+if(session.getAttribute("messageType") != null) {
+	messageType = (String) session.getAttribute("messageType");
+}
+if(messageContent != null) {
+	%>
+	<div class= "modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+	<div class = "modal-content <% if(messageType.equals("오류메시지")) out.println("panel-warning"); else out.println("panel-success"); %>">
+	<div class= "modal-header panel-heading">
+	<button type="button" class="close" data-dismiss="modal">
+	<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title">
+	<%=messageType %></h4>
+	</div>
+	<div class= "modal-body">
+	<%=messageContent %></div>
+	<div class="modal-footer">
+	<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button></div>
+	</div>
+	</div>
+	</div>
+	<script>
+	$('#messageModal').modal("show");
+	</script>
+	<%
+	session.removeAttribute("messageContent");
+	session.removeAttribute("messageType");
+}
+	%>
+	
+}
+%>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 

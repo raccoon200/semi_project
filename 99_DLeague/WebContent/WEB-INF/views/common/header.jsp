@@ -222,7 +222,7 @@ $(function() {
 
 });
 <%if(memberLoggedIn!=null) { %> 
-   function fn_validate() {
+   function fn_validate_team_info() {
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
@@ -253,7 +253,7 @@ $(function() {
          <nav>
             <ul class="main-nav">
                <li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
-               <li id="main-nav-board" class="main-nav-list"><a href="#">게시판</a>
+               <li id="main-nav-board" class="main-nav-list"><a href="#" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
                   <!-- 게시판 -->
                   <div class="main-nav-sub" id="main-nav-sub-board">
                      <ul class="main-nav-sub-ul">
@@ -289,7 +289,7 @@ $(function() {
                         <li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 
                         <%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
-                        <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate();">내 팀 정보</a></li>
+                        <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
 
                         <li><a href="#">내 팀 관리</a></li>
                          <%} %> 

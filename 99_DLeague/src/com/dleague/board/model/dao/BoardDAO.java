@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
+import com.dleague.board.model.vo.FreeBoard;
+import com.dleague.board.model.vo.FreeBoardComment;
 import com.dleague.board.model.vo.RegionBoard;
 import com.dleague.board.model.vo.RegionBoardComment;
 
@@ -151,7 +153,7 @@ public class BoardDAO {
 	}
 
 
-	public int selectRegionBoardNo(Connection conn) {
+	public int selectRecentRegionBoardNo(Connection conn) {
 		int result = -1;
 		PreparedStatement pstmt= null;
 		ResultSet rset = null;
@@ -432,6 +434,392 @@ public class BoardDAO {
 	}
 
 
+	public List<FreeBoard> selectFreeAll(Connection conn, int cPage, int numPerPage) {
+		List<FreeBoard> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectFreeAll");
+		//String query = "SELECT V.* FROM ( SELECT ROWNUM AS RNUM, V.* FROM( SELECT * FROM BOARD_REGION ORDER BY BOARD_REGION_DATE DESC) V ) V WHERE RNUM BETWEEN ? AND ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				FreeBoard board = new FreeBoard(); 
+				board.setBoard_free_no(rset.getInt("board_free_no"));
+				board.setBoard_free_title(rset.getString("board_free_title"));
+				board.setBoard_free_writer(rset.getString("board_free_writer"));
+				board.setBoard_free_date(rset.getDate("board_free_date"));
+				board.setOriginal_file_name(rset.getString("original_file_name"));
+				board.setRenamed_file_name(rset.getString("renamed_file_name"));
+				board.setCount(rset.getInt("count"));
+				list.add(board);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public List<FreeBoard> selectSearchFreeTitle(Connection conn, int cPage, int numPerPage, String searchValue) {
+		List<FreeBoard> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectSearchFreeTitle");
+		//String query = "SELECT V.* FROM ( SELECT ROWNUM AS RNUM, V.* FROM( SELECT * FROM BOARD_REGION ORDER BY BOARD_REGION_DATE DESC) V ) V WHERE RNUM BETWEEN ? AND ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchValue+"%");
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				FreeBoard board = new FreeBoard(); 
+				board.setBoard_free_no(rset.getInt("board_free_no"));
+				board.setBoard_free_title(rset.getString("board_free_title"));
+				board.setBoard_free_writer(rset.getString("board_free_writer"));
+				board.setBoard_free_date(rset.getDate("board_free_date"));
+				board.setOriginal_file_name(rset.getString("original_file_name"));
+				board.setRenamed_file_name(rset.getString("renamed_file_name"));
+				board.setCount(rset.getInt("count"));
+				list.add(board);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public List<FreeBoard> selectSearchFreeId(Connection conn, int cPage, int numPerPage, String searchValue) {
+		List<FreeBoard> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectSearchFreeId");
+		//String query = "SELECT V.* FROM ( SELECT ROWNUM AS RNUM, V.* FROM( SELECT * FROM BOARD_REGION ORDER BY BOARD_REGION_DATE DESC) V ) V WHERE RNUM BETWEEN ? AND ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchValue);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				FreeBoard board = new FreeBoard(); 
+				board.setBoard_free_no(rset.getInt("board_free_no"));
+				board.setBoard_free_title(rset.getString("board_free_title"));
+				board.setBoard_free_writer(rset.getString("board_free_writer"));
+				board.setBoard_free_date(rset.getDate("board_free_date"));
+				board.setOriginal_file_name(rset.getString("original_file_name"));
+				board.setRenamed_file_name(rset.getString("renamed_file_name"));
+				board.setCount(rset.getInt("count"));
+				list.add(board);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public int selectFreeBoardCount(Connection conn) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectFreeBoardCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+		
+	}
+
+
+	public int selectFreeBoardCountByTitle(Connection conn, String searchValue) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectFreeBoardCountByTitle");
+	
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchValue+"%");
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+
+
+	public int selectFreeBoardCountById(Connection conn, String searchValue) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectFreeBoardCountById");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchValue);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+
+
+	public int insertFreeBoard(Connection conn, FreeBoard board) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertFreeBoard");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, board.getBoard_free_title());
+			pstmt.setString(2, board.getBoard_free_writer());
+			pstmt.setString(3, board.getBoard_free_content());
+			pstmt.setString(4, board.getOriginal_file_name());
+			pstmt.setString(5, board.getRenamed_file_name());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int selectFreeBoardNo(Connection conn) {
+		int result = -1;
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectRecentFreeBoardNo");
+		
+		try {
+			pstmt =conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("no");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int increaseFreeCount(Connection conn, int no) {
+		int result = -1;
+		PreparedStatement pstmt= null;
+		String query = prop.getProperty("increaseFreeCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public FreeBoard selectFreeBoardOne(Connection conn, int no) {
+		FreeBoard board = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectFreeBoardOne");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				board = new FreeBoard(); 
+				board.setBoard_free_no(rset.getInt("board_free_no"));
+				board.setBoard_free_title(rset.getString("board_free_title"));
+				board.setBoard_free_writer(rset.getString("board_free_writer"));
+				board.setBoard_free_date(rset.getDate("board_free_date"));
+				board.setBoard_free_content(rset.getString("board_free_content"));
+				board.setOriginal_file_name(rset.getString("original_file_name"));
+				board.setRenamed_file_name(rset.getString("renamed_file_name"));
+				board.setCount(rset.getInt("count"));
+			}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		
+		return board;
+	}
+
+
+	public List<FreeBoardComment> selectFreeCommentAll(Connection conn, int no) {
+		List<FreeBoardComment> freebcList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectFreeCommentAll");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				FreeBoardComment bc = new FreeBoardComment();
+				bc.setBoard_free_comment_no(rset.getInt("board_free_comment_no"));
+				bc.setBoard_free_comment_level(rset.getInt("board_free_comment_level"));
+				bc.setBoard_free_comment_writer(rset.getString("board_free_comment_writer"));
+				bc.setBoard_free_comment_content(rset.getString("board_free_comment_content"));
+				bc.setBoard_free_ref(rset.getInt("board_free_ref"));
+				bc.setBoard_free_comment_ref(rset.getInt("board_free_comment_ref"));
+				bc.setBoard_free_comment_date(rset.getDate("board_free_comment_date"));
+				freebcList.add(bc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return freebcList;
+	}
+
+
+	public int updateFreeBoard(Connection conn, FreeBoard board) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateFreeBoard");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, board.getBoard_free_title());
+			pstmt.setString(2, board.getBoard_free_content());
+			pstmt.setString(3, board.getOriginal_file_name());
+			pstmt.setString(4, board.getRenamed_file_name());
+			pstmt.setInt(5, board.getBoard_free_no());
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteFreeBoard(Connection conn, int no) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteFreeBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int insertFreeBoardComment(Connection conn, FreeBoardComment freeBoardComment) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertFreeBoardComment");
+		
+		try {
+			String boardFreeCommentRef = freeBoardComment.getBoard_free_comment_ref()==0?null:String.valueOf(freeBoardComment.getBoard_free_comment_ref());
+			
+			pstmt= conn.prepareStatement(query);
+			pstmt.setInt(1, freeBoardComment.getBoard_free_comment_level());
+			pstmt.setString(2, freeBoardComment.getBoard_free_comment_writer());
+			pstmt.setString(3, freeBoardComment.getBoard_free_comment_content());
+			pstmt.setInt(4, freeBoardComment.getBoard_free_ref());
+			pstmt.setString(5, boardFreeCommentRef);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int deleteFreeBoardComment(Connection conn, int no, int del) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteFreeBoardComment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			pstmt.setInt(2, del);
+			result = pstmt.executeUpdate();	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
 
 	
 }

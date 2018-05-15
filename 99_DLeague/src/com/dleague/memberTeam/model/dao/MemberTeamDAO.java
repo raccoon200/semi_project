@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.Team;
 import com.dleague.memberTeam.model.vo.TeamMember;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 
 
 public class MemberTeamDAO {
@@ -143,6 +144,26 @@ public class MemberTeamDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int insertTeamRegist(Connection conn, TeamRegister teamReg) {
+		int result = -1;
+		PreparedStatement pstmt =  null;
+		String query = prop.getProperty("insertTeamRegist");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamReg.getTeamName());
+			pstmt.setString(2, teamReg.getT_register_writer());
+			pstmt.setString(3, teamReg.getRegionCode());
+			pstmt.setString(4, teamReg.getTeamLogo());
+			pstmt.setString(5, teamReg.getIntroduce());
+			pstmt.setString(6, teamReg.getRegister_msg());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
 			close(pstmt);
 		}
 		return result;

@@ -1,7 +1,6 @@
 package com.dleague.board.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dleague.board.model.service.BoardService;
-import com.dleague.board.model.vo.RegionBoard;
-import com.dleague.region.model.service.RegionService;
-import com.dleague.region.model.vo.Region;
+import com.dleague.board.model.vo.FreeBoard;
 
 /**
- * Servlet implementation class RegionBoardUpdateServlet
+ * Servlet implementation class FreeBoardUpdateServlet
  */
-@WebServlet("/board/regionBoardUpdate")
-public class RegionBoardUpdateServlet extends HttpServlet {
+@WebServlet("/board/freeBoardUpdate")
+public class FreeBoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegionBoardUpdateServlet() {
+    public FreeBoardUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,13 +34,10 @@ public class RegionBoardUpdateServlet extends HttpServlet {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
 		
-		RegionBoard board = new BoardService().selectRegionBoardOne(no);
-		List<Region> regionList = new RegionService().selectRegionList();
+		FreeBoard board = new BoardService().selectFreeBoardOne(no);
 		request.setAttribute("board", board);
-		request.setAttribute("param", "regionBoard");
-		request.setAttribute("regionList", regionList);
-		request.getRequestDispatcher("/WEB-INF/views/board/regionBoardUpdate.jsp").forward(request, response);
-		
+		request.setAttribute("param", "freeBoard");
+		request.getRequestDispatcher("/WEB-INF/views/board/freeBoardUpdate.jsp").forward(request, response);
 	}
 
 	/**

@@ -11,22 +11,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dleague.board.model.service.BoardService;
+import com.dleague.board.model.vo.FreeBoard;
+import com.dleague.board.model.vo.FreeBoardComment;
 import com.dleague.board.model.vo.RegionBoard;
 import com.dleague.board.model.vo.RegionBoardComment;
 import com.dleague.region.model.service.RegionService;
 import com.dleague.region.model.vo.Region;
 
 /**
- * Servlet implementation class RegionBoardViewServlet
+ * Servlet implementation class FreeBoardViewServlet
  */
-@WebServlet("/board/regionBoardView")
-public class RegionBoardViewServlet extends HttpServlet {
+@WebServlet("/board/freeBoardView")
+public class FreeBoardViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegionBoardViewServlet() {
+    public FreeBoardViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,8 +43,6 @@ public class RegionBoardViewServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 
 		BoardService boardService = new BoardService();
-		
-		List<Region> regionList = new RegionService().selectRegionList();
 		
 		
 		//쿠키검사 (조회수)
@@ -68,7 +68,7 @@ public class RegionBoardViewServlet extends HttpServlet {
 		//게시글 읽음여부 
 		if(!hasRead) {
 			//조회수 증가
-			int result = boardService.increaseRegionCount(no);
+			int result = boardService.increaseFreeCount(no);
 			
 			//쿠키생성
 			Cookie boardCookie = new Cookie("boardCookie", boardCookieVal+"|"+no+"|");
@@ -79,20 +79,19 @@ public class RegionBoardViewServlet extends HttpServlet {
 			
 		}
 		
-		RegionBoard board = boardService.selectRegionBoardOne(no);
+		FreeBoard board = boardService.selectFreeBoardOne(no);
 		
 		//댓글 받아오는부분
-		List<RegionBoardComment> regionbcList = boardService.selectRegionCommentAll(no);
+		List<FreeBoardComment> freebcList = boardService.selectFreeCommentAll(no);
 		
-		request.setAttribute("param", "regionBoard");
+		request.setAttribute("param", "freeBoard");
 		request.setAttribute("board", board);
-		request.setAttribute("regionList", regionList);
-		request.setAttribute("regionbcList", regionbcList);
+		request.setAttribute("freebcList", freebcList);
 		String view = "";
 		if(board!=null) {
-			view = "/WEB-INF/views/board/regionBoardView.jsp";
+			view = "/WEB-INF/views/board/freeBoardView.jsp";
 		}else {
-			view = "/WEB-INF/views/board/boardList.jsp";
+			view = "/WEB-INF/views/board/freeList.jsp";
 		}
 		request.getRequestDispatcher(view).forward(request, response);
 	}
