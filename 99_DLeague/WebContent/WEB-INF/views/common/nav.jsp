@@ -18,18 +18,12 @@ console.log("<%=param%>");
 			<%} %>
 			
 			<!-- 게시판 -->
-<<<<<<< HEAD
-			<% if(param=="freeBoard" || param=="regionBoard" || param=="complain") {%>
-			<h2 id="nav-header">게시판</h2>
-			<hr style="border:0;height:2px;background: rgb(244,244,244);"/>
-=======
 			<% if(param=="freeBoard" || param=="regionBoard" || param=="complainBoard") {%>
 			<h3 id="nav-header">게시판</h3>
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 			<ul class="nav-list">
 				<li><a id='<%=param=="freeBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/freeBoard">자유게시판</a></li>
 				<li><a id='<%=param=="regionBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/regionBoard">지역게시판</a></li>
-				<li><a id='<%=param=="complain"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
+				<li><a id='<%=param=="complainBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
 			</ul>
 			<%} %>
 			<!-- 로그인/회원가입 -->
