@@ -11,7 +11,7 @@ console.log("<%=param%>");
 			
 			<!-- 공지사항 -->
 			<% if(param=="notice"){ %>
-			<h2 id="nav-header">공지사항</h2>
+			<h3 id="nav-header">공지사항</h3>
 			<ul class="nav-list">
 				<li><a id="nav-selected" href="<%=request.getContextPath() %>/notice/noticeList">공지사항</a></li>
 			</ul>
@@ -28,7 +28,7 @@ console.log("<%=param%>");
 			<%} %>
 			<!-- 로그인/회원가입 -->
 			<%if(param=="login" || param=="enroll") {%>
-			<h2 id="nav-header">로그인/회원가입</h2>
+			<h3 id="nav-header">계정</h3>
 			<ul class="nav-list">
 				
 				<li><a href="<%=request.getContextPath() %>/member/loginPage" id=id=<%=param=="login"?"nav-selected":""%>>로그인</a></li>
@@ -37,14 +37,14 @@ console.log("<%=param%>");
 			</ul>
 			<%}%>
 			<%if(param=="passwordCheck") {%>
-			<h2 id = "nav-header">비밀번호 찾기</h2>
+			<h3 id = "nav-header">비밀번호 찾기</h3>
 			<%} %>
 			<%if(param=="passwordUpdate") {%>
-			<h2 id="nav-header">비밀번호 변경</h2>
+			<h3 id="nav-header">비밀번호 변경</h3>
 			<%} %>
 			<%if(param=="gameRegister"||param=="myGameList") {%>
 			<!-- 경기등록  -->
-			<h2 id="nav-header">경기등록</h2>
+			<h3 id="nav-header">경기등록</h3>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/game/gameRegister" id='<%=param=="gameRegister"?"nav-selected":""%>'>경기등록</a></li>
 				<li><a href="<%=request.getContextPath() %>/game/myGameList" id='<%=param=="myGameList"?"nav-selected":""%>'>내팀경기일정</a></li>
@@ -52,7 +52,7 @@ console.log("<%=param%>");
 			<%} %>
 			<%if(param=="teamSearch"||param=="teamSearchList") {%>
 			<!-- 검색 -->
-			<h2 id="nav-header">검색</h2>
+			<h3 id="nav-header">검색</h3>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/search/teamSearch" id='<%=param=="teamSearch"?"nav-selected":""%>'>팀검색</a></li>
 				<li><a href="<%=request.getContextPath() %>/search/gameSearchList" id='<%=param=="teamSearchList"?"nav-selected":""%>'>경기검색</a></li>
@@ -67,7 +67,7 @@ console.log("<%=param%>");
 			</ul>
 			<%} %>
 			<%if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagement") {%>
-			<h2 id="nav-header">마이페이지</h2>
+			<h3 id="nav-header">마이페이지</h3>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/member/memberInfo" id="<%=param=="memberInfo"?"nav-selected":"" %>" >내 정보</a></li>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamInfo" id="<%=param=="memberTeamInfo"?"nav-selected":"" %>">내 팀 정보</a></li>
@@ -77,7 +77,7 @@ console.log("<%=param%>");
 			
 			<%if(param=="adminPage" || param=="adminPageTeam") {%>
 			<!-- 관리자페이지 -->
-			<h2 id="nav-header">관리자페이지</h2>
+			<h3 id="nav-header">관리자페이지</h3>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/admin/adminPage" id="<%=param=="adminPage"?"nav-selected":"" %>" >회원 관리</a></li>
 				<li><a href="<%=request.getContextPath() %>/admin/adminPageTeam" id="<%=param=="adminPageTeam"?"nav-selected":"" %>">팀 관리</a></li>
