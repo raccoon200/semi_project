@@ -8,7 +8,7 @@ div.effect{
 	width: 1000px;
 	height: 391.922px;
 	margin: 0 auto;
-	margin-top: 119px;
+	margin-top: 136px;
 }
 div.effect>img{
 	width: 1000px;
