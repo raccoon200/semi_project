@@ -98,4 +98,6 @@ public class MemberTeamService {
 		else rollback(conn);
 		return result;
 	}
+
+	
 }

@@ -297,5 +297,23 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int memberTeamIn(Connection conn, String userId, String teamName, String msg) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamIn");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, teamName);
+			pstmt.setString(3, msg);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }
 		

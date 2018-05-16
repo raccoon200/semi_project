@@ -85,6 +85,13 @@ public class MemberService {
 		else rollback(conn);
 		return result;
 	}
+	public int memberTeamIn(String userId, String teamName, String msg) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().memberTeamIn(conn, userId, teamName, msg); 
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	
 	
 }

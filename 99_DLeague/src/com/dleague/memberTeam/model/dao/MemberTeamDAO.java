@@ -316,4 +316,5 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
+	
 }
