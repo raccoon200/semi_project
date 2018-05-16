@@ -17,10 +17,15 @@ console.log("<%=param%>");
 			</ul>
 			<%} %>
 			
+<<<<<<< HEAD
+			<!-- 게시판 -->
+			<% if(param=="freeBoard" || param=="regionBoard" || param=="complain") {%>
+=======
 			<!-- 게시판 -->
 
 			<% if(param=="freeBoard" || param=="regionBoard" || param=="complainBoard") {%>
 
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 			<h3 id="nav-header">게시판</h3>
 			<ul class="nav-list">
 				<li><a id='<%=param=="freeBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/freeBoard">자유게시판</a></li>
