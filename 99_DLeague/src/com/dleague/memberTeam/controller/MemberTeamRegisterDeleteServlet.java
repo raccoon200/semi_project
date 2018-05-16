@@ -21,7 +21,7 @@ public class MemberTeamRegisterDeleteServlet extends HttpServlet {
      */
     public MemberTeamRegisterDeleteServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stuba
     }
 
 	/**
