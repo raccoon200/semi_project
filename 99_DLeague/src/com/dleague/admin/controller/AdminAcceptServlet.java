@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dleague.admin.model.service.adminService;
 import com.dleague.member.model.vo.Member;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 import com.dleague.search.model.searchService.searchService;
 import com.dleague.search.model.vo.Team;
 
@@ -36,14 +37,14 @@ public class AdminAcceptServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		List<Team> list = null;/*new adminService().MemberList();*/
-		String searchName = request.getParameter("searchName");
-		Hashtable<String,Integer> ht = new searchService().MemberCount();
+		List<TeamRegister> list = null;/*new adminService().MemberList();*/
+//		String searchName = request.getParameter("searchName");
+//		Hashtable<String,Integer> ht = new searchService().MemberCount();
 		
 		Member m = null;
 		String msg = "";
 		String loc = "/";
-		String view = "/WEB-INF/views/admin/adminTeamList.jsp";
+		String view = "/WEB-INF/views/admin/adminAccept.jsp";
 		int totalMember=0;
 		int cPage=0; 
 		String pageBar ="";
@@ -66,13 +67,13 @@ public class AdminAcceptServlet extends HttpServlet {
 			//1.비지니스 로직 처리
 			int numPerPage = 10;
 			//전체 게시물 수 
-			totalMember = new adminService().selectTeamCount(searchName);	//팀토탈카운트
+			totalMember = new adminService().acceptTeamCount();	//팀토탈카운트
 
 			// (공식1) totalPage
 			totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
 			
 			//2.2 페이징된 회원리스트 가져오기
-			list = new adminService().selectTeamList(cPage, numPerPage,searchName);
+			list = new adminService().acceptTeamList(cPage, numPerPage);
 			
 			//2.3 페이징바 만들기
 			int pageBarSize = 5;
@@ -113,7 +114,6 @@ public class AdminAcceptServlet extends HttpServlet {
 		request.setAttribute("cPage", cPage);				//페이지바
 		request.setAttribute("param", "adminAccept");			//네비게이터 변수
 		request.setAttribute("totalMember", totalMember);	//회원총수
-		request.setAttribute("ht", ht);	
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher(view).forward(request, response);
