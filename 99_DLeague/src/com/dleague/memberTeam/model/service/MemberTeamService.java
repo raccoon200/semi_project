@@ -61,24 +61,12 @@ public class MemberTeamService {
 
 	public int MemberTeamMandateLeader(String leader, String choose) {
 		Connection conn = getConnection();
-<<<<<<< HEAD
 		MemberTeamDAO memberTeamDAO = new MemberTeamDAO();
 		memberTeamDAO.MemberTeamMandateLeader(conn, choose);
 		int result = memberTeamDAO.MemberTeamMandateMember(conn, leader);
 		if(result>0) commit(conn);
 		else rollback(conn);
-=======
-		int result = 0;
-		MemberTeamDAO memberteamDAO = new MemberTeamDAO();
-		result = memberteamDAO.memberTeamMandateLeader(conn, choose);
-		if(result>0) commit(conn);
-		else rollback(conn);
-		
-		result = memberteamDAO.memberTeamMandateMember(conn, leader);
-		if(result>0) commit(conn);
-		else rollback(conn);
-		
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+
 		close(conn);
 		return result;
 	}

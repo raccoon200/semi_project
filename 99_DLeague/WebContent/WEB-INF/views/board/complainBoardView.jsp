@@ -118,9 +118,9 @@ function fn_fileDowload(oName, rName){
 	<%if ("admin".equals(memberLoggedIn.getUserId())){ %>
 	<div class="comment-editor">
 		<form name="boardCommentFrm" action="<%=request.getContextPath()%>/board/complainResultInsert" method="post">
-			<textarea name="boardCommentContent" cols="80" rows="3" required></textarea>
+			<%if(board.getResult()==null) { %>
+			<textarea name="result" cols="80" rows="3" required></textarea>
 			<input type="hidden" name="no" value="<%=board.getComplain_no()%>" />
-			<%if(board.getResult()!=null) { %>
 				<button type="submit" id="btn-insert">등록</button>
 			<%} %>
 		</form>
@@ -133,8 +133,6 @@ function fn_fileDowload(oName, rName){
 			<br />
 			<%=board.getResult() %>
 	</div>
-<input type="button" class="updateBtn" value="수정" onclick="location.href='<%=request.getContextPath()%>/board/complainResultUpdate?no=<%=board.getComplain_no()%>'">
-<input type="button" class="deleteBtn" value="삭제" onclick="location.href='<%=request.getContextPath() %>/board/complainResultDelete?no=<%=board.getComplain_no() %>'"/>
 	<%} %>
 </div>
 
