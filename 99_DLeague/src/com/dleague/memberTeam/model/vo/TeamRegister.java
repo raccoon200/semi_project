@@ -12,6 +12,7 @@ public class TeamRegister {
 	String teamLogo;
 	Date register_date;
 	String status;
+	int rnum;
 	
 	public TeamRegister() {}
 	public TeamRegister(int team_register_no, String teamName, String t_register_writer, String regionCode,
@@ -81,6 +82,17 @@ public class TeamRegister {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	@Override
+	public String toString() {
+		return "[team_register_no=" + team_register_no + ", teamName=" + teamName + ", t_register_writer="
+				+ t_register_writer + ", regionCode=" + regionCode + ", introduce=" + introduce + ", register_msg="
+				+ register_msg + ", teamLogo=" + teamLogo + ", register_date=" + register_date + ", status=" + status
+				+ ", rnum=" + rnum + "]";
+	}
 }
