@@ -52,7 +52,7 @@ public class ComplainBoardServlet extends HttpServlet {
 		//2.1 현재페이지의 회원구하기
 		
 		List<Complain> complainBoardList = new BoardService().selectComplainAll(cPage, numPerPage, searchType, searchValue);
-		System.out.println("서블릿 complainboardList : "+complainBoardList);
+
 		//2.2 전체게시글수, 전체페이지수 구하기
 		int totalBoardCount = new BoardService().selectComplainCount(searchType, searchValue);
 		
