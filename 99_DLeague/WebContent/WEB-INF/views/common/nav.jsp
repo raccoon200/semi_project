@@ -16,12 +16,6 @@ console.log("<%=param%>");
 				<li><a id="nav-selected" href="<%=request.getContextPath() %>/notice/noticeList">공지사항</a></li>
 			</ul>
 			<%} %>
-<<<<<<< HEAD
-			
-
-=======
-			
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 			<!-- 게시판 -->
 			<% if(param=="freeBoard" || param=="regionBoard" || param=="complain") {%>
 
@@ -78,6 +72,9 @@ console.log("<%=param%>");
 				<li><a href="<%=request.getContextPath() %>/member/memberInfoPage" id="<%=param=="memberInfo"?"nav-selected":"" %>" >내 정보</a></li>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" id="<%=param=="memberTeamInfo"?"nav-selected":"" %>">내 팀 정보</a></li>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>" id="<%=param=="memberTeamManagement"?"nav-selected":"" %>">내 팀 관리</a></li>
+				<% if("선수".equals(memberLoggedIn.getGrade())) { %>
+					<li><a href="<%=request.getContextPath() %>/member/memberTeamCreate">팀생성</a><li>
+				<%} %>
 			</ul> 
 			<%} %>
 			
