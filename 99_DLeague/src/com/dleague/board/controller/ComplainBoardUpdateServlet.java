@@ -39,7 +39,8 @@ public class ComplainBoardUpdateServlet extends HttpServlet {
 		
 		if(complain!=null) {
 			request.setAttribute("complainBoard", complain);
-			view = "/WEB-INF/views/common/complainBoardUpdate.jsp";
+			request.setAttribute("param", "complain");
+			view = "/WEB-INF/views/board/complainBoardUpdate.jsp";
 		}else {
 			request.setAttribute("loc", "/board/complainBoardView?no="+no);
 			request.setAttribute("msg", "신고글을 수정하지 못했습니다");
