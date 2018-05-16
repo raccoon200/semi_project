@@ -312,7 +312,15 @@
       alert("팀장만 가능한 기능입니다.");
    };
    function fn_memberTeamIn() {
-	   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>";
+	   var msg = window.prompt("신청 메시지를 뭐라고 보내시겠습니까??");
+	   console.log(prompt);
+	   if(msg=="") {
+		   alert("메시지를 입력하세요!");
+	   }
+	   else if(msg==null) {} 
+	   else{
+		   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>&userId=<%=memberLoggedIn.getUserId()%>&msg="+msg;
+	   }
    }
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
