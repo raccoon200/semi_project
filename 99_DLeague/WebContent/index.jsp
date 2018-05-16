@@ -8,7 +8,7 @@ div.effect{
 	width: 1000px;
 	height: 391.922px;
 	margin: 0 auto;
-	margin-top: 119px;
+	margin-top: 136px;
 }
 div.effect>img{
 	width: 1000px;
@@ -29,7 +29,7 @@ div.effect>img{
 	<div id="slider">
 	<a href="#"><img id="main-img" src="<%=request.getContextPath() %>/images/index/main.jpg" alt="main" /></a>
 	<a href="#"><img id="main-img2" src="<%=request.getContextPath() %>/images/index/main2.jpg" alt="main2" /></a>
-		
+	<a href="#"><img id="main-img3" src="<%=request.getContextPath() %>/images/index/main3.jpg" alt="main3" /></a>
 	</div>
 </div>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
