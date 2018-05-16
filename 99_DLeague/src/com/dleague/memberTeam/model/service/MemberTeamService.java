@@ -59,6 +59,7 @@ public class MemberTeamService {
 		return result;
 	}
 
+
 	public int MemberTeamMandate(String leader, String choose) {
 		Connection conn = getConnection();
 		int result = 0;
