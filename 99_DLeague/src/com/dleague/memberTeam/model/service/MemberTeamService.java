@@ -6,6 +6,7 @@ import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.List;
 
+import com.dleague.member.model.dao.MemberDAO;
 import com.dleague.memberTeam.model.dao.MemberTeamDAO;
 import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.Team;
@@ -83,4 +84,18 @@ public class MemberTeamService {
 		return list;
 	}
 
+	public int memberTeamGameAccept(String teamName, String choose) {
+		Connection conn = getConnection();
+		MemberTeamDAO memberTeamDAO = new MemberTeamDAO();
+		int result = 0;
+		int result2 = 0;
+		result = memberTeamDAO.memberTeamGameAccept(conn, teamName, choose);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		result2 = memberTeamDAO.memberTeamGameAcceptOther(conn, teamName);
+		if(result2>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }

@@ -79,12 +79,12 @@ public class MemberService {
 		return list;
 	}
 	public int memberOut(String userId) {
-		int result = 0;
 		Connection conn = getConnection();
-		result = new MemberDAO().memberOut(conn, userId);
+		int result = new MemberDAO().memberOut(conn, userId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		return result;
 	}
+	
 	
 }
