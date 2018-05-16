@@ -1,7 +1,6 @@
 package com.dleague.member.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.dleague.common.MyFileRenamePolicy;
+import com.dleague.common.wrapper.EncryptWrapper;
 import com.dleague.member.model.service.MemberService;
 import com.dleague.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -68,11 +68,15 @@ public class MemberEnrollEndServlet extends HttpServlet {
       String photo = multiReq.getFilesystemName("up_file");
       System.out.println("userid ="+userId);
 
+      EncryptWrapper e = new EncryptWrapper(request);
+      String encPassword = e.getParameter(password);
+      
+      System.out.println("암호화 패스워드 : "+encPassword);
       System.out.println("password@MemberEnrollEndServlet="+password);
       
       Member member = new Member();
       member.setUserId(userId);
-      member.setPassword(password);
+      member.setPassword(encPassword);
       member.setUserName(userName);
       member.setRegioncode(regioncode);
       member.setPhone(phone);

@@ -63,7 +63,7 @@ function fn_memberTeamGameAccept() {
 	}
 	else {
 		if(confirm("해당 팀과의 경기를 수락하시겠습니까?")) {
-			location.href = "<%=request.getContextPath()%>/member/memberTeamGameAccept?teamName="+choose;
+			location.href = "<%=request.getContextPath()%>/member/memberTeamGameAccept?teamName=<%=memberLoggedIn.getTeamname()%>&choose="+choose;
 		}
 	}
 }
@@ -92,7 +92,7 @@ function fn_memberTeamGameAccept() {
     <tbody>
     <%if(list == null || list.isEmpty()){ %>
 		<tr>
-			<td colspan="5" align="center">데이터가 존재하지 않습니다.</td>
+			<td colspan="4" align="center">데이터가 존재하지 않습니다.</td>
 		</tr>
 		<%}else{ 
 			for(WaitTeam waitTeam : list){%>
@@ -105,7 +105,7 @@ function fn_memberTeamGameAccept() {
 		</tbody>
 		<tfoot>
 		<tr>
-		<td>
+		<td colspan="3">
 		</td>
 		<td>
 		</td>
