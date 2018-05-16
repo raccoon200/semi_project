@@ -61,23 +61,12 @@ public class MemberTeamService {
 
 	public int MemberTeamMandateLeader(String leader, String choose) {
 		Connection conn = getConnection();
-
 		MemberTeamDAO memberTeamDAO = new MemberTeamDAO();
 		memberTeamDAO.MemberTeamMandateLeader(conn, choose);
 		int result = memberTeamDAO.MemberTeamMandateMember(conn, leader);
 		if(result>0) commit(conn);
 		else rollback(conn);
 
-		int result = 0;
-		MemberTeamDAO memberteamDAO = new MemberTeamDAO();
-		result = memberteamDAO.memberTeamMandateLeader(conn, choose);
-		if(result>0) commit(conn);
-		else rollback(conn);
-		
-		result = memberteamDAO.memberTeamMandateMember(conn, leader);
-		if(result>0) commit(conn);
-		else rollback(conn);
-		
 		close(conn);
 		return result;
 	}

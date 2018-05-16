@@ -291,4 +291,15 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	public int complainResultInsert(int no, String complain_result) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().complainResultInsert(conn, no, complain_result);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }
