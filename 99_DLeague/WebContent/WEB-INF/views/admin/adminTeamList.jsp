@@ -305,7 +305,7 @@
 
     <!--ui object -->
     <table class="tbl_type"  cellspacing="0" >
-        <legend>◎회원리스트</legend>
+        <legend>◎팀리스트</legend>
     <colgroup>
         <col width="10%"> 
         <col width="10%">

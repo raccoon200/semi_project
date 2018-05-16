@@ -171,7 +171,7 @@ function fn_loginAlert(){
 <input type="date" id="gameDate"  style="height:33px;" /><button class="button" id="teamOneSearch">검색</button>
 </div><br />
 <table class="table table-hover">
-	<pre>  <span class="sp" id="sp1">경기날짜</span>                        <span class="sp" id="sp2">경기팀</span>                      <span class="sp" id="sp3">게임시간<span/> <span class="sp" id="sp4">상제정보</span></pre>
+	<pre>  <span class="sp" id="sp1">경기날짜</span>                        <span class="sp" id="sp2">경기팀</span>                      <span class="sp" id="sp3">게임시간<span/>  <span class="sp" id="sp4">상세정보</span></pre>
 	<%if(list != null || list.isEmpty()){ %>
 	<%for(Game g : list){ %>
 	<tr onclick="fn_MemberList('<%=g.getGameNo()%>','<%=g.getStatus()%>');">

@@ -291,4 +291,37 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	public int complainResultInsert(int no, String complain_result) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().complainResultInsert(conn, no, complain_result);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int updateComplain(Complain complain) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().updateComplain(conn, complain);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int deleteComplainBoard(int no) {
+		Connection conn = getConnection();
+		int result = new BoardDAO().deleteComplainBoard(conn, no);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }
