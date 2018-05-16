@@ -118,4 +118,11 @@ public class adminService {
 		return list;
 	}
 
+	public List<TeamRegister> acceptTeam(String acceptNo) {
+		Connection conn = getConnection();
+		List<TeamRegister> list = new adminDAO().acceptTeam(conn, acceptNo);
+		close(conn);
+		return list;
+	}
+
 }
