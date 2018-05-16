@@ -75,13 +75,13 @@ console.log("<%=param%>");
 			</ul> 
 			<%} %>
 			
-			<%if(param=="adminPage" || param=="adminPageTeam") {%>
+			<%if(param=="adminPage" || param=="adminPageTeam" ||param=="adminAccept") {%>
 			<!-- 관리자페이지 -->
 			<h3 id="nav-header">관리자페이지</h3>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/admin/adminPage" id="<%=param=="adminPage"?"nav-selected":"" %>" >회원 관리</a></li>
 				<li><a href="<%=request.getContextPath() %>/admin/adminPageTeam" id="<%=param=="adminPageTeam"?"nav-selected":"" %>">팀 관리</a></li>
-				<li><a href="#">팀 수락</a></li>
+				<li><a href="<%=request.getContextPath() %>/admin/adminAccept" id="<%=param=="adminAccept"?"nav-selected":"" %>">팀 수락</a></li>
 				<li><a href="#">접속 통계</a></li>
 			</ul>  
 			<%} %>

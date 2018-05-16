@@ -527,4 +527,45 @@ public class adminDAO {
 		return list;
 	}
 
+	public List<TeamRegister> acceptTeam(Connection conn, String acceptNo) {
+		List<TeamRegister> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("acceptTeam");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			
+			pstmt.setString(1, acceptNo);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
+			rset=pstmt.executeQuery();
+			
+			list = new ArrayList<TeamRegister>();
+			while(rset.next()) {
+				TeamRegister tr = new TeamRegister();
+				tr.setTeam_register_no(rset.getInt("team_register_no"));
+				tr.setTeamName(rset.getString("teamname"));
+				tr.setT_register_writer(rset.getString("t_register_writer"));
+				tr.setRegionCode(rset.getString("regioncode"));
+				tr.setTeamLogo(rset.getString("teamlogo"));
+				tr.setIntroduce(rset.getString("introduce"));
+				tr.setRegister_msg(rset.getString("register_msg"));
+				tr.setRegister_date(rset.getDate("register_date"));
+				tr.setStatus(rset.getString("status"));
+				tr.setRnum(rset.getInt("rnum"));
+				
+				list.add(tr);
+			}
+//			System.out.println("list@AdminDAO.selectMemberList="+list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }
