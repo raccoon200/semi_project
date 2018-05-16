@@ -19,7 +19,7 @@ import com.dleague.member.model.vo.Member;
 /**
  * Servlet implementation class MemberLoginServlet
  */
-@WebServlet("/member/login")
+@WebServlet(name="MemberLoginServlet", urlPatterns="/member/login")
 public class MemberLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
