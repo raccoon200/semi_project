@@ -92,6 +92,11 @@ public class MemberService {
 		else rollback(conn);
 		return result;
 	}
+	public int memberTeamInCount(String userId, String teamName) {
+		Connection conn = getConnection();
+		int cnt = new MemberDAO().memberTeamInCount(conn, userId, teamName);
+		return cnt;
+	}
 	
 	
 }

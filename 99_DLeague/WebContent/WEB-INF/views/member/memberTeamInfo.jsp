@@ -113,6 +113,7 @@ function fn_teamOut() {
 </script>
 	<h2>내 팀 정보</h2>
 	<hr />
+	<%if(memberLoggedIn.getTeamname()!=null) {%>
 	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
@@ -287,4 +288,5 @@ function fn_teamOut() {
             <!--//ui object -->
         </div>
 </div>
+<%} %>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
