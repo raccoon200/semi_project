@@ -554,7 +554,6 @@ public class adminDAO {
 				tr.setRegister_msg(rset.getString("register_msg"));
 				tr.setRegister_date(rset.getDate("register_date"));
 				tr.setStatus(rset.getString("status"));
-				tr.setRnum(rset.getInt("rnum"));
 				
 				list.add(tr);
 			}
@@ -566,6 +565,26 @@ public class adminDAO {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int acceptTeamSuccess(Connection conn, String yorN, int t_reg_no) {
+		int result = -1;
+		PreparedStatement pstmt =  null;
+		
+		String query = prop.getProperty("acceptTeamSuccess");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, yorN);
+			pstmt.setInt(2, t_reg_no);
+		
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
