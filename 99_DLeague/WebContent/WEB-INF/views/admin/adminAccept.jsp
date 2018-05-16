@@ -188,7 +188,7 @@
     </style>
     <div id="teamDiv">
     <div id="teamDiv2">
-    <h2>팀 관리</h2>
+    <h2>팀 신청 관리</h2>
     <hr />
     	<div id="test">
     		<select id="selectCode">
@@ -305,7 +305,7 @@
 
     <!--ui object -->
     <table class="tbl_type"  cellspacing="0" >
-        <legend>◎회원리스트</legend>
+        <legend>◎팀신청리스트</legend>
     <colgroup>
         <col width="10%"> 
         <col width="10%">

@@ -111,7 +111,7 @@ public class AdminAcceptServlet extends HttpServlet {
 		request.setAttribute("list", list);					//회원리스트
 		request.setAttribute("pageBar", pageBar);			//페이지바
 		request.setAttribute("cPage", cPage);				//페이지바
-		request.setAttribute("param", "adminPageTeam");			//네비게이터 변수
+		request.setAttribute("param", "adminAccept");			//네비게이터 변수
 		request.setAttribute("totalMember", totalMember);	//회원총수
 		request.setAttribute("ht", ht);	
 		request.setAttribute("msg", msg);

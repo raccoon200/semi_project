@@ -76,7 +76,7 @@ console.log("<%=param%>");
 			</ul> 
 			<%} %>
 			
-			<%if(param=="adminPage" || param=="adminPageTeam") {%>
+			<%if(param=="adminPage" || param=="adminPageTeam" ||param=="adminAccept") {%>
 			<!-- 관리자페이지 -->
 			<h3 id="nav-header">관리자페이지</h3>
 			<ul class="nav-list">
