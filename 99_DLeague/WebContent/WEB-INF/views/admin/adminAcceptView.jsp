@@ -12,7 +12,7 @@
    String tr_msg;
    Date foundInDate=null;
    String rogo="";
-   int t_reg_no="";
+   int t_reg_no=0;
    
    for(TeamRegister tr : list){
 	   teamName = tr.getTeamName();
@@ -140,9 +140,11 @@
 </div>
 <script>
 function fn_success(YorN){
-	console.log(YorN);
+	/* console.log(YorN); */
+	var t_reg_no = <%=t_reg_no%>;
 	if(YorN=='Y'){
 		var Y = fn_confirmY();
+		/* console.log(Y); */
 		if(Y){
 			location.href="<%=request.getContextPath()%>/admin/adminAcceptViewEnd?YorN="+YorN+"&t_reg_no="+t_reg_no;
 		}else{}
@@ -154,10 +156,10 @@ function fn_success(YorN){
 	}
 }
 function fn_confirmY(){
-	confirm("팀을 수락하시겠습니까?")
+	return confirm("팀을 수락하시겠습니까?");
 }
 function fn_confirmN(){
-	confirm("팀을 거절하시겠습니까?")
+	return confirm("팀을 거절하시겠습니까?")
 }
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

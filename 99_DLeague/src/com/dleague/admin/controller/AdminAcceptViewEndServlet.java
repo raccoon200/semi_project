@@ -35,31 +35,36 @@ public class AdminAcceptViewEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		int result = 0;
-		String YorN = request.getParameter("YorN");
+		String yorN = request.getParameter("YorN");
 		int t_reg_no = Integer.parseInt(request.getParameter("t_reg_no"));
+		int totalMember = new adminService().acceptTeamCount();
+		List<TeamRegister> list = new adminService().acceptTeam(t_reg_no);
 		
 		Member m = null;
 		String msg = "";
-		String loc = "/";
-		String view = "/WEB-INF/views/admin/adminAccept.jsp";
+		String loc = "/admin/adminAccept";
+		String view = "";
 		
 		if(session != null) {
 			m = (Member)session.getAttribute("memberLoggedIn");
 		}
 		if(m!=null && "admin".equals(m.getUserId())) {
 			//1. 파라미터 변수에 담기
-			if("Y".equals(YorN)) {
-				result = new adminService().acceptTeamSuccess(YorN,t_reg_no);
+			if("Y".equals(yorN)) {
+				result = new adminService().acceptTeamSuccess(yorN,t_reg_no,list);
+
 				if(result>0) {
 					msg = "팀생성 수락에 성공했습니다!\\n\\n팀을 생성합니다.";
+					view = "/WEB-INF/views/common/msg.jsp";
 				}else {
 					msg = "팀생성 수락이 실패했습니다!\\n\\n관리자에게 문의하세요.";
 					view = "/WEB-INF/views/common/msg.jsp";
 				}
-			}else if("N".equals(YorN)) {
-				result = new adminService().acceptTeamSuccess(YorN,t_reg_no);
+			}else if("N".equals(yorN)) {
+				result = new adminService().acceptTeamSuccess(yorN,t_reg_no,list);
 				if(result>0) {
 					msg = "팀생성이 거절 되었습니다!";
+					view = "/WEB-INF/views/common/msg.jsp";
 				}else {
 					msg = "팀생성 거절이 실패했습니다!\\n\\n관리자에게 문의하세요.";
 					view = "/WEB-INF/views/common/msg.jsp";
