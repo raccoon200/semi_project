@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.dleague.admin.model.dao.adminDAO;
 import com.dleague.member.model.vo.Member;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 import com.dleague.search.model.dao.TeamDAO;
 import com.dleague.search.model.vo.Team;
 
@@ -99,6 +100,20 @@ public class adminService {
 	public List<String> selectByTeamName(String searchName) {
 		Connection conn = getConnection();
 		List<String> list = new adminDAO().selectByTeamName(conn, searchName);
+		close(conn);
+		return list;
+	}
+
+	public int acceptTeamCount() {
+		Connection conn = getConnection();
+		int totalMember = new adminDAO().acceptTeamCount(conn);
+		close(conn);
+		return totalMember;
+	}
+
+	public List<TeamRegister> acceptTeamList(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<TeamRegister> list = new adminDAO().acceptTeamList(conn, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
