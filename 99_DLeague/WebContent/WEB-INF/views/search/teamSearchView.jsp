@@ -159,7 +159,7 @@
             <th scope="col">지역</th>
             <th scope="col">등급</th>
             <th scope="col">입단일</th>
-            <th scope="col">팀원강퇴</th>
+            <th scope="col">강퇴</th>
         </tr>
         </thead>
         <tbody>
