@@ -503,10 +503,19 @@ public class adminDAO {
 			
 			list = new ArrayList<TeamRegister>();
 			while(rset.next()) {
-				TeamRegister m = new TeamRegister();
-
-
-				list.add(m);
+				TeamRegister tr = new TeamRegister();
+				tr.setTeam_register_no(rset.getInt("team_register_no"));
+				tr.setTeamName(rset.getString("teamname"));
+				tr.setT_register_writer(rset.getString("t_register_writer"));
+				tr.setRegionCode(rset.getString("regioncode"));
+				tr.setTeamLogo(rset.getString("teamlogo"));
+				tr.setIntroduce(rset.getString("introduce"));
+				tr.setRegister_msg(rset.getString("register_msg"));
+				tr.setRegister_date(rset.getDate("register_date"));
+				tr.setStatus(rset.getString("status"));
+				tr.setRnum(rset.getInt("rnum"));
+				
+				list.add(tr);
 			}
 //			System.out.println("list@AdminDAO.selectMemberList="+list);
 		} catch (SQLException e) {
