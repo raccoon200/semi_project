@@ -328,6 +328,9 @@
                         <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
 
                         <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
+                        <% if("선수".equals(memberLoggedIn.getGrade())) { %>
+							<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamCreate">팀생성</a><li>
+						<%} %>
                          <%} %> 
                      </ul>
                   </div>

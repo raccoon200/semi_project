@@ -284,6 +284,36 @@ public class MemberTeamDAO {
 		}
 		return list;
 	}
-	
-	
+	public int memberTeamGameAccept(Connection conn, String teamName, String choose) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamGameAccept");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, choose);
+			pstmt.setString(2, teamName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int memberTeamGameAcceptOther(Connection conn, String teamName) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamGameAcceptOther");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

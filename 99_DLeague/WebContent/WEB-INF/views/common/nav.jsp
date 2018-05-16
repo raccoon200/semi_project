@@ -16,7 +16,6 @@ console.log("<%=param%>");
 				<li><a id="nav-selected" href="<%=request.getContextPath() %>/notice/noticeList">공지사항</a></li>
 			</ul>
 			<%} %>
-
 			<!-- 게시판 -->
 			<% if(param=="freeBoard" || param=="regionBoard" || param=="complain") {%>
 
