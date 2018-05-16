@@ -82,7 +82,7 @@ console.log("<%=param%>");
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/admin/adminPage" id="<%=param=="adminPage"?"nav-selected":"" %>" >회원 관리</a></li>
 				<li><a href="<%=request.getContextPath() %>/admin/adminPageTeam" id="<%=param=="adminPageTeam"?"nav-selected":"" %>">팀 관리</a></li>
-				<li><a href="#">팀 수락</a></li>
+				<li><a href="<%=request.getContextPath() %>/admin/adminAccept" id="<%=param=="adminAccept"?"nav-selected":"" %>">팀 수락</a></li>
 				<li><a href="#">접속 통계</a></li>
 			</ul>  
 			<%} %>
