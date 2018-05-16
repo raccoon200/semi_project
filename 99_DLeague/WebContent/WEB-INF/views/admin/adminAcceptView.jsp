@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.*, com.dleague.search.model.vo.*,com.dleague.memberTeam.model.vo.*"%>
+<%@page import="java.util.*,com.dleague.memberTeam.model.vo.*"%>
 <%
    List<TeamRegister> list = (List<TeamRegister>)request.getAttribute("list");
    
@@ -11,8 +11,8 @@
    String introduce="";
    String tr_msg;
    Date foundInDate=null;
-   int rnum=0;
    String rogo="";
+   int t_reg_no="";
    
    for(TeamRegister tr : list){
 	   teamName = tr.getTeamName();
@@ -22,6 +22,7 @@
 	   tr_msg=tr.getRegister_msg();
 	   foundInDate=tr.getRegister_date();
 	   rogo=tr.getTeamLogo();
+	   t_reg_no=tr.getTeam_register_no();
    }
 
 %>
@@ -34,13 +35,14 @@
    img#logoimg{width: 250px;height: 200px;display: inline-block;margin: 50px 0 0 0;}
    img#logo{width: 200px;height: 80px;display: inline-block;}
    div#logoDiv{width: 200px;height: 80px;display: inline-block;}
-   div#imgDiv{width: 410px;height: 315px;display: inline-block;float: left;text-align:center;}
+   div#imgDiv{width: 410px;height: 315px;display: inline-block;float: left;text-align:center; border:3px solid skyblue; border-radius: 10px}
    /* div#bu,#a,#b,#c,#d{border: 1px solid black;} */
    div#bu{height: 590px; width: 700px; display: inline-block;}
    div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
    div#b{border-radius: 10px;background:lightgreen;height: 80px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
    div#c{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;  text-align: center; display: inline-block; margin:10px 0 0 0;}
    div#d{height: 80px; width: 200px; text-align: center; display: inline-block;}
+   div#all{padding:10px}
    /*글자색깔*/
    h2#aa{color:#2828CD;}
    h2#bb{color:#DB631F;}
@@ -63,42 +65,13 @@
     /*teamTable*/
     div#teamTable{width: 350px; display: inline-block;}
     /*teamTable*/
-    /*수정삭제버튼*/
-    div#btDiv{padding:30px; display: inline-block;}
-    button#bt1, #bt2{padding:5px;}
-    /*수정삭제버튼*/
-    .btnM {
-	  display: inline-block;
-	  background: transparent;
-	  text-transform: uppercase;
-	  font-weight: 500;
-	  font-style: normal;
-	  font-size: 1rem;
-	  letter-spacing: 0.3em;
-	  color:rgba(223,190,106,0.8);
-	  border-radius: 0;
-	  padding: 18px 80px 20px;
-	  transition: all 0.7s ease-out;
-	  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
-	  background-position: 1% 50%;
-	  background-size: 300% 300%;
-	  text-decoration: none;
-	  margin: 0.625rem;
-	  border: none;
-	  border: 1px solid rgba(223,190,106,0.8);
-	}
 	
-	.btnM:hover {
-	  cursor:pointer;
-	  color: #fff;
-	  border: 1px solid rgba(223,190,106,0);
-	  color: $white;
-	  background-position: 99% 50%;
-	}  
+	div#btDiv{padding:10px; display: inline-block;}
+	.bt{padding:10px;}
 </style>
-   <h2>팀상세정보</h2>
+   <h2>팀 신청 상세정보</h2>
    <hr />
-   <div style="text-align: center">
+   <div style="text-align: center" id="all">
     <div id="bu">
        <div id="imgDiv">
            <img id="logoimg" src=
@@ -115,7 +88,7 @@
         </div>
         <br>
         <div id="b">
-            <h3 id="bb">팀장</h3>
+            <h3 id="bb">신청자</h3>
             <h4><%=capTain %></h4>
         </div>
         <br>
@@ -152,140 +125,39 @@
            <img id="logo" src="<%=request.getContextPath() %>/images/headerImage.jpg" alt="첨부파일"/>
         </div>
          <div id="d">
-            <h2 id="aa">창단일</h2>
+            <h2 id="aa">신청일</h2>
             <h3><%=foundInDate %></h3>
         </div>
         <br><br>
+        <h3>팀소개글</h3>
         <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
         <br />
+        <h3>팀신청 사유</h3>
         <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
-   <%-- <div id="memberTable">
-     <!--ui object -->
-    <table class="tbl_type"  cellspacing="0">
-        <legend>◎팀원정보</legend>
-        <colgroup>
-            <col width="10%"> 
-            <col width="15%">
-            <col width="10%">
-            <col width="10%">
-            <col width="15%">
-            <col width="10%">
-        </colgroup>
-        <thead>
-        <tr>
-            <th scope="col">순번</th>
-            <th scope="col">팀원</th>
-            <th scope="col">지역</th>
-            <th scope="col">등급</th>
-            <th scope="col">입단일</th>
-            <th scope="col">강퇴</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%for(TeamMember tm : memberList){ %>
-            <tr>
-               <td class="ranking" scope="row"><%=tm.getRnum() %></td>
-               <td><%=tm.getUserId() %></td>
-               <td>
-                  <%if("G1".equals(tm.getRegionCode()) ) {%>
-                    서울
-                 <%}else if("G2".equals(tm.getRegionCode()) ) { %>
-                    경기
-                 <%}else if("G3".equals(tm.getRegionCode()) ) { %>
-                    강원
-                 <%}else if("G4".equals(tm.getRegionCode()) ) { %>
-                    충북
-                 <%}else if("G5".equals(tm.getRegionCode()) ) { %>
-                    충남
-                 <%}else if("G6".equals(tm.getRegionCode()) ) { %>
-                    경북
-                 <%}else if("G7".equals(tm.getRegionCode()) ) { %>
-                    전북
-                 <%}else if("G8".equals(tm.getRegionCode()) ) { %>
-                    전남
-                 <%}else if("G9".equals(tm.getRegionCode()) ) { %>
-                    제주               
-                 <%} %>
-               </td>
-               <td><%=tm.getGrade() %></td>
-               <td><%=tm.getT_EnrollDate() %></td>
-               <td><input type="checkbox" class="kick" id="kick<%=tm.getRnum() %>" value="<%=tm.getUserId() %>" <%="팀장".equals(tm.getGrade())?"disabled":"" %> /></td>
-            </tr>
-        <%} %>
-        </tbody>
-        <tfoot>
-            <tr>
-            <td>종합</td>
-            <td colspan="2">총 팀원수</td>
-            <td colspan="2"><%=rnum %>명</td>
-            <td><button onclick="fn_userKick('<%=teamName%>');">강퇴</button></td>
-            </tr>
-            </tfoot>
-        </table>
-        <!--//ui object -->
-    </div >
-<div id="teamTable">
-        <!--ui object -->
-        <table class="tbl_type"  cellspacing="0">
-                <legend>◎팀활동내역</legend>
-            <colgroup>
-                <col width="10%"> 
-                <col width="10%">
-                <col width="10%">
-                <col width="25%">
-                <col width="10%">
-            </colgroup>
-            <thead>
-            <tr>
-                <th scope="col">게임번호</th>
-                <th scope="col">HomeTeam</th>
-                <th scope="col">AwayTeam</th>
-                <th scope="col">게임날짜</th>
-                <th scope="col">결과</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%if(num==0){ %>
-            <tr>
-                <td colspan="5">데이터가 없습니다.</td>
-            </tr>
-            <%}else{ %>
-            <%for(Activity a: activityList){ %>
-            <tr>
-                <td class="ranking" scope="row"><%=a.getActivity_No() %></td>
-                <td style="color:<%=((a.getHome().equals(teamName))?"red":"black" )%>"><%=a.getHome() %></td>
-                <td style="color:<%=((a.getAway().equals(teamName))?"red":"black" )%>"><%=a.getAway() %></td>
-                <td><%=a.getActivityDate() %></td>
-                <td><%=a.getResult() %></td>
-                </tr>
-            </tr>
-            <%} 
-            } %>
-            </tbody>
-            <tfoot>
-                <tr>
-                <td colspan="5">활동내역</td>
-                </tr>
-                </tfoot>
-            </table>
-            <!--//ui object --> 
-            
-        </div>--%>
-        
-        <%if(memberLoggedIn!=null&&null==memberLoggedIn.getTeamname()) {%>
-        	<input type="button" value="팀 가입 신청" style="position:relative; " class="btnM" onclick="fn_memberTeamIn();"/>
-        <%} %>
-        <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) )  {%>
-        <div id="btDiv">
-              <button id="bt1" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
-        </div>
-        <%}else{ %>
-        <div id="btDiv"></div>
-        <%} %>
+    <div id="btDiv"><button class="bt" onclick="fn_success('Y')">팀수락</button></div> <div id="btDiv"><button class="bt" onclick="fn_success('N')">팀거절</button></div>
 </div>
 <script>
-  
+function fn_success(YorN){
+	console.log(YorN);
+	if(YorN=='Y'){
+		var Y = fn_confirmY();
+		if(Y){
+			location.href="<%=request.getContextPath()%>/admin/adminAcceptViewEnd?YorN="+YorN+"&t_reg_no="+t_reg_no;
+		}else{}
+	}else if(YorN=='N'){
+		var N = fn_confirmN();
+		if(N){
+			location.href="<%=request.getContextPath()%>/admin/adminAcceptViewEnd?YorN="+YorN+"&t_reg_no="+t_reg_no;
+		}else{}
+	}
+}
+function fn_confirmY(){
+	confirm("팀을 수락하시겠습니까?")
+}
+function fn_confirmN(){
+	confirm("팀을 거절하시겠습니까?")
+}
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
