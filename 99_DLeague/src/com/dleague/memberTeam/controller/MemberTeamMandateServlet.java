@@ -31,16 +31,6 @@ public class MemberTeamMandateServlet extends HttpServlet {
 		String leader = request.getParameter("leader");
 		String choose = request.getParameter("choose");
 
-		int result = new MemberTeamService().MemberTeamMandateLeader(leader, choose);
-		//결과에 따른 분기
-		String loc = "";
-		String msg = "";
-		if(result>0) {
-			msg = "성공적으로 위임하였습니다.";
-			loc = "/member/logout";
-		} else {
-			msg = "위임 실패! 관리자에게 문의하시오!";
-			loc = "/";
 		int result = new MemberTeamService().MemberTeamMandate(leader, choose);
 		String msg = "";
 		String loc = "";
