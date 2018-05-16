@@ -37,9 +37,7 @@ public class AdminAcceptServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		List<TeamRegister> list = null;/*new adminService().MemberList();*/
-//		String searchName = request.getParameter("searchName");
-//		Hashtable<String,Integer> ht = new searchService().MemberCount();
+		List<TeamRegister> list = null;
 		
 		Member m = null;
 		String msg = "";
@@ -85,14 +83,14 @@ public class AdminAcceptServlet extends HttpServlet {
 			if(pageNo == 1) {
 				
 			} else {
-				pageBar += "<a href= '"+request.getContextPath()+"/admin/adminPageTeam?cPage="+(pageNo-1)+"'><span class='page gradient'>이전</span></a>";
+				pageBar += "<a href= '"+request.getContextPath()+"/admin/adminAccept?cPage="+(pageNo-1)+"'><span class='page gradient'>이전</span></a>";
 			}
 			//[pageNo]
 			while(pageNo <= pageEnd && pageNo <= totalPage){
 				if(pageNo==cPage) {
 					pageBar += "<span class='page active'>"+pageNo+"</span>";				
 				}else {
-					pageBar+="<a href='"+request.getContextPath()+"/admin/adminPageTeam?cPage="+pageNo+"'><span class='page gradient'>"+pageNo+"</span></a>";	
+					pageBar+="<a href='"+request.getContextPath()+"/admin/adminAccept?cPage="+pageNo+"'><span class='page gradient'>"+pageNo+"</span></a>";	
 				}
 				pageNo++;
 			}
@@ -100,7 +98,7 @@ public class AdminAcceptServlet extends HttpServlet {
 			if(pageNo > totalPage) {
 				
 			}else {
-				pageBar += "<a href= '"+request.getContextPath()+"/admin/adminPageTeam?cPage="+(pageNo)+"'><span class='page gradient'>다음</span></a>";
+				pageBar += "<a href= '"+request.getContextPath()+"/admin/adminAccept?cPage="+(pageNo)+"'><span class='page gradient'>다음</span></a>";
 			}
 //			System.out.println("list@AdminMemberListServlet="+list);
 //			System.out.println("totalMember@AdminMemberListServlet="+totalMember);
@@ -109,11 +107,11 @@ public class AdminAcceptServlet extends HttpServlet {
 			view = "/WEB-INF/views/common/msg.jsp";
 		}
 		
-		request.setAttribute("list", list);					//회원리스트
+		request.setAttribute("list", list);					//신청팀리스트
 		request.setAttribute("pageBar", pageBar);			//페이지바
 		request.setAttribute("cPage", cPage);				//페이지바
-		request.setAttribute("param", "adminAccept");			//네비게이터 변수
-		request.setAttribute("totalMember", totalMember);	//회원총수
+		request.setAttribute("param", "adminAccept");		//네비게이터 변수
+		request.setAttribute("totalMember", totalMember);	//신청팀총수
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher(view).forward(request, response);

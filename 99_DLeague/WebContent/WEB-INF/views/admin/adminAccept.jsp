@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.*, com.dleague.search.model.vo.*"%>
+<%@page import="java.util.*, com.dleague.memberTeam.model.vo.*"%>
 <%
-	List<Team> list = (List<Team>)request.getAttribute("list");
-	Hashtable<String,Integer> ht = (Hashtable<String,Integer>)request.getAttribute("ht");
+	List<TeamRegister> list = (List<TeamRegister>)request.getAttribute("list");
 	int totalMember = (int)request.getAttribute("totalMember");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -206,8 +205,8 @@
     <thead>
     <tr>
         <th scope="col">순번</th>
-        <th scope="col">팀명</th>
-        <th scope="col">팀장</th>
+        <th scope="col">신청 팀명</th>
+        <th scope="col">신청자</th>
         <th scope="col">지역</th>
         <th scope="col">신청일</th>
         <th scope="col">수락여부</th>
@@ -220,35 +219,43 @@
 			<td colspan="8" align="center">데이터가 존재하지 않습니다.</td>
 		</tr>
 	<%} else { %>
-		<%for(Team t : list){ %>
+		<%for(TeamRegister tr : list){ %>
 		<tr>
-			<td class="ranking" scope="row"><%=t.getRnum() %></td>
-			<td><%=t.getTeamName() %></td>
-        	<td><%=t.getCapTain() %></td>
+			<td class="ranking" scope="row"><%=tr.getRnum() %></td>
+			<td><%=tr.getTeamName() %></td>
+        	<td><%=tr.getT_register_writer() %></td>
 	        <td>
-	        <%if("G1".equals(t.getRegionCode()) ) {%>
+	        <%if("G1".equals(tr.getRegionCode()) ) {%>
        			서울
-       		<%}else if("G2".equals(t.getRegionCode()) ) { %>
+       		<%}else if("G2".equals(tr.getRegionCode()) ) { %>
        			경기
-       		<%}else if("G3".equals(t.getRegionCode()) ) { %>
+       		<%}else if("G3".equals(tr.getRegionCode()) ) { %>
        			강원
-       		<%}else if("G4".equals(t.getRegionCode()) ) { %>
+       		<%}else if("G4".equals(tr.getRegionCode()) ) { %>
        			충북
-       		<%}else if("G5".equals(t.getRegionCode()) ) { %>
+       		<%}else if("G5".equals(tr.getRegionCode()) ) { %>
        			충남
-       		<%}else if("G6".equals(t.getRegionCode()) ) { %>
+       		<%}else if("G6".equals(tr.getRegionCode()) ) { %>
        			경북
-       		<%}else if("G7".equals(t.getRegionCode()) ) { %>
+       		<%}else if("G7".equals(tr.getRegionCode()) ) { %>
        			전북
-       		<%}else if("G8".equals(t.getRegionCode()) ) { %>
+       		<%}else if("G8".equals(tr.getRegionCode()) ) { %>
        			전남
-       		<%}else if("G9".equals(t.getRegionCode()) ) { %>
+       		<%}else if("G9".equals(tr.getRegionCode()) ) { %>
        			제주					
        		<%} %>
 	        </td>
-        	<td><%=t.getFoundingDate() %></td>
-	        <td><%= ht.get(t.getTeamName())%></td>
-			<td><button  onclick="fn_teamView('<%=t.getTeamName()%>');">상세보기</button></td>
+        	<td><%=tr.getRegister_date() %></td>
+	        <td>
+	        	<%if(tr.getStatus()==null){%>
+	        		신청대기중
+	        	<%}else if("N".equals(tr.getStatus())){ %>
+	        		수락거부
+	        	<%}else if("Y".equals(tr.getStatus())){ %>
+	        		팀생성완료
+	        	<%} %>
+	        </td>
+			<td><button  onclick="fn_teamAcceptView('<%=tr.getTeam_register_no()%>');">상세보기</button></td>
 		</tr>
 	<% 		} 
  	 	}%>
@@ -256,9 +263,9 @@
     
     <script>
 	<!-- 상세보기버튼 -->
-	function fn_teamView(teamName){
+	function fn_teamAcceptView(acceptNo){
 		/* console.log(userId); */
-		location.href="<%=request.getContextPath()%>/search/searchView?teamName="+teamName;
+		location.href="<%=request.getContextPath()%>/admin/adminAcceptView?acceptNo="+acceptNo;
 	};
 	<!-- 상세보기버튼끝 -->
     </script>
@@ -266,7 +273,7 @@
     <tfoot>
         <tr>
         <td colspan="1">총</td>
-        <td colspan="3">팀리스트</td>
+        <td colspan="3">팀신청리스트</td>
         <td colspan="3"><%=totalMember %>개 팀</td>
         </tr>
         </tfoot>
