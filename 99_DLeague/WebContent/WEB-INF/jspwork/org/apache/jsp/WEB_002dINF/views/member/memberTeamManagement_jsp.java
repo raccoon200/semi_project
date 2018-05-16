@@ -27,9 +27,27 @@ public final class memberTeamManagement_jsp extends org.apache.jasper.runtime.Ht
 
   static {
     _jspx_dependants = new java.util.HashMap<java.lang.String,java.lang.Long>(3);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526381681365L));
+    _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1526428681146L));
+    _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1526381421272L));
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
     _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526429072318L));
     _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1526431237422L));
     _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1526429072319L));
+<<<<<<< HEAD
+=======
+=======
+    _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526428587280L));
+    _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1526430050545L));
+    _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1526372379452L));
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
   }
 
   private static final java.util.Set<java.lang.String> _jspx_imports_packages;
@@ -612,7 +630,7 @@ if(memberLoggedIn!=null) {
       out.write("\t\t\t");
  if(param=="notice"){ 
       out.write("\r\n");
-      out.write("\t\t\t<h3 id=\"nav-header\">공지사항</h3>\r\n");
+      out.write("\t\t\t<h2 id=\"nav-header\">공지사항</h2>\r\n");
       out.write("\t\t\t<ul class=\"nav-list\">\r\n");
       out.write("\t\t\t\t<li><a id=\"nav-selected\" href=\"");
       out.print(request.getContextPath() );
@@ -653,7 +671,7 @@ if(memberLoggedIn!=null) {
       out.write("\t\t\t");
 if(param=="login" || param=="enroll") {
       out.write("\r\n");
-      out.write("\t\t\t<h3 id=\"nav-header\">계정</h3>\r\n");
+      out.write("\t\t\t<h2 id=\"nav-header\">로그인/회원가입</h2>\r\n");
       out.write("\t\t\t<ul class=\"nav-list\">\r\n");
       out.write("\t\t\t\t\r\n");
       out.write("\t\t\t\t<li><a href=\"");
@@ -672,14 +690,14 @@ if(param=="login" || param=="enroll") {
       out.write("\t\t\t");
 if(param=="passwordCheck") {
       out.write("\r\n");
-      out.write("\t\t\t<h3 id = \"nav-header\">비밀번호 찾기</h3>\r\n");
+      out.write("\t\t\t<h2 id = \"nav-header\">비밀번호 찾기</h2>\r\n");
       out.write("\t\t\t");
 } 
       out.write("\r\n");
       out.write("\t\t\t");
 if(param=="passwordUpdate") {
       out.write("\r\n");
-      out.write("\t\t\t<h3 id=\"nav-header\">비밀번호 변경</h3>\r\n");
+      out.write("\t\t\t<h2 id=\"nav-header\">비밀번호 변경</h2>\r\n");
       out.write("\t\t\t");
 } 
       out.write("\r\n");
@@ -687,7 +705,7 @@ if(param=="passwordUpdate") {
 if(param=="gameRegister"||param=="myGameList") {
       out.write("\r\n");
       out.write("\t\t\t<!-- 경기등록  -->\r\n");
-      out.write("\t\t\t<h3 id=\"nav-header\">경기등록</h3>\r\n");
+      out.write("\t\t\t<h2 id=\"nav-header\">경기등록</h2>\r\n");
       out.write("\t\t\t<ul class=\"nav-list\">\r\n");
       out.write("\t\t\t\t<li><a href=\"");
       out.print(request.getContextPath() );
@@ -707,7 +725,7 @@ if(param=="gameRegister"||param=="myGameList") {
 if(param=="teamSearch"||param=="teamSearchList") {
       out.write("\r\n");
       out.write("\t\t\t<!-- 검색 -->\r\n");
-      out.write("\t\t\t<h3 id=\"nav-header\">검색</h3>\r\n");
+      out.write("\t\t\t<h2 id=\"nav-header\">검색</h2>\r\n");
       out.write("\t\t\t<ul class=\"nav-list\">\r\n");
       out.write("\t\t\t\t<li><a href=\"");
       out.print(request.getContextPath() );
@@ -750,26 +768,22 @@ if(param=="memberTeamMemberManagement" || param=="memberTeamGameAcceptPage") {
       out.write("\t\t\t");
 if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagement") {
       out.write("\r\n");
-      out.write("\t\t\t<h3 id=\"nav-header\">마이페이지</h3>\r\n");
+      out.write("\t\t\t<h2 id=\"nav-header\">마이페이지</h2>\r\n");
       out.write("\t\t\t<ul class=\"nav-list\">\r\n");
       out.write("\t\t\t\t<li><a href=\"");
       out.print(request.getContextPath() );
-      out.write("/member/memberInfoPage\" id=\"");
+      out.write("/member/memberInfo\" id=\"");
       out.print(param=="memberInfo"?"nav-selected":"" );
       out.write("\" >내 정보</a></li>\r\n");
       out.write("\t\t\t\t<li><a href=\"");
       out.print(request.getContextPath() );
-      out.write("/member/memberTeamInfoPage?teamName=");
-      out.print(memberLoggedIn.getTeamname());
-      out.write("\" id=\"");
+      out.write("/member/memberTeamInfo\" id=\"");
       out.print(param=="memberTeamInfo"?"nav-selected":"" );
       out.write("\">내 팀 정보</a></li>\r\n");
       out.write("\t\t\t\t<li><a href=\"");
       out.print(request.getContextPath() );
-      out.write("/member/memberTeamManagementPage?teamName=");
+      out.write("/member/memberTeamManagementPage?teamName=\"");
       out.print(memberLoggedIn.getTeamname());
-      out.write("&userId=");
-      out.print(memberLoggedIn.getUserId());
       out.write("\" id=\"");
       out.print(param=="memberTeamManagement"?"nav-selected":"" );
       out.write("\">내 팀 관리</a></li>\r\n");
@@ -782,7 +796,7 @@ if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagemen
 if(param=="adminPage" || param=="adminPageTeam") {
       out.write("\r\n");
       out.write("\t\t\t<!-- 관리자페이지 -->\r\n");
-      out.write("\t\t\t<h3 id=\"nav-header\">관리자페이지</h3>\r\n");
+      out.write("\t\t\t<h2 id=\"nav-header\">관리자페이지</h2>\r\n");
       out.write("\t\t\t<ul class=\"nav-list\">\r\n");
       out.write("\t\t\t\t<li><a href=\"");
       out.print(request.getContextPath() );

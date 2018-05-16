@@ -47,7 +47,6 @@ public class MemberTeamMandateServlet extends HttpServlet {
 				Origin = url.replace(uri, "");
 			}
 			loc = Referer.replace(Origin+request.getContextPath(), "");
-
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

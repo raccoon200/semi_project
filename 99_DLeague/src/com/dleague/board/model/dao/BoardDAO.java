@@ -1201,6 +1201,53 @@ public class BoardDAO {
 		return result;
 	}
 
+
+	public int updateComplain(Connection conn, Complain complain) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = "";
+		if("c_userid".equals(complain.getComplain_type())) 
+			query = prop.getProperty("updateComplainU");
+		else 
+			query = prop.getProperty("updateComplainT");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, complain.getComplain_title());
+			pstmt.setString(2, complain.getComplain_content());
+			if("c_userid".equals(complain.getComplain_type())) 
+				pstmt.setString(3, complain.getC_userId());
+			else
+				pstmt.setString(3,  complain.getC_teamname());
+			pstmt.setString(4, complain.getComplain_type());
+			pstmt.setInt(5, complain.getComplain_no());
+			
+					
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int deleteComplainBoard(Connection conn, int no) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteComplainBoard");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	
 	
 }

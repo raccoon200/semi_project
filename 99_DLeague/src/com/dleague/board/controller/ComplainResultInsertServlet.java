@@ -34,15 +34,17 @@ public class ComplainResultInsertServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 		
 		int result = new BoardService().complainResultInsert(no, complain_result);
-		String view="";
+		String view="/WEB-INF/views/common/msg.jsp";
 		if(result>0) {
-			view="/board/complainBoardView?no="+result;
-			request.setAttribute("param", "complain");
+			request.setAttribute("msg", "신고글을 처리했습니다");
+			request.setAttribute("loc", "/board/complainBoardView?no="+no);
+			
 		}else {
 			request.setAttribute("msg", "신고글을 처리하지 못했습니다");
-			request.setAttribute("loc", "/board/complainBoardView?no="+result);
-			view="/WEB-INF/views/common/msg.jsp";
+			request.setAttribute("loc", "/board/complainBoardView?no="+no);
+	
 		}
+		request.setAttribute("param", "complain");
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 

@@ -17,8 +17,9 @@ console.log("<%=param%>");
 			</ul>
 			<%} %>
 			
-			<!-- 게시판 -->
 
+
+			<!-- 게시판 -->
 			<% if(param=="freeBoard" || param=="regionBoard" || param=="complain") {%>
 
 			<h3 id="nav-header">게시판</h3>

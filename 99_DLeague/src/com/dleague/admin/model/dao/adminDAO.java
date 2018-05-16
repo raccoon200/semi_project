@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.member.model.vo.Member;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 import com.dleague.search.model.vo.Team;
 
 import static com.dleague.common.JDBCTemplate.close;
@@ -452,6 +453,62 @@ public class adminDAO {
 				list.add(rset.getString("teamname"));
 			}
 			/*System.out.println("DAO="+list);*/
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int acceptTeamCount(Connection conn) {
+		int totalMember = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("acceptTeamCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalMember = rset.getInt("cnt");
+			}
+//			System.out.println("totalMember@AdminDAO="+totalMember);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMember;
+	}
+
+	public List<TeamRegister> acceptTeamList(Connection conn, int cPage, int numPerPage) {
+		List<TeamRegister> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("acceptTeamListByPaging");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			//공식2 시작 rownum과 마지막 rownum을 구하는 공식
+			pstmt.setInt(1, numPerPage*(cPage-1)+1);
+			pstmt.setInt(2, numPerPage*cPage);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
+			rset=pstmt.executeQuery();
+			
+			list = new ArrayList<TeamRegister>();
+			while(rset.next()) {
+				TeamRegister m = new TeamRegister();
+
+
+				list.add(m);
+			}
+//			System.out.println("list@AdminDAO.selectMemberList="+list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
