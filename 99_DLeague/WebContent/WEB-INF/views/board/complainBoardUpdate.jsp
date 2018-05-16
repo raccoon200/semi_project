@@ -59,7 +59,8 @@ div.comment-viewer{
 
 </script>
 <h2>신고게시판 - 수정</h2>
-<form action="<%=request.getContextPath()%>/board/complainBoardFormEnd" method="post">
+<form action="<%=request.getContextPath()%>/board/complainBoardUpdateEnd" method="post">
+<input type="hidden" name="no" value="<%=complain.getComplain_no() %>" />
 <table class="board-table">
 	<tr>
 		<th>제목</th>
@@ -89,7 +90,7 @@ div.comment-viewer{
 		<td colspan="6" class="view-content"><textarea name="complain_content" id="" cols="80" rows="10"><%=complain.getComplain_content() %></textarea></td>
 	</tr>
 </table>
-<input type="submit" value="작성" />
+<input type="submit" value="수정" />
 <input type="button" value="취소" />
 </form>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		

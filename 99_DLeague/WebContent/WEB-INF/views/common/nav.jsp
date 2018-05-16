@@ -16,7 +16,12 @@ console.log("<%=param%>");
 				<li><a id="nav-selected" href="<%=request.getContextPath() %>/notice/noticeList">공지사항</a></li>
 			</ul>
 			<%} %>
+<<<<<<< HEAD
 			
+
+=======
+			
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 			<!-- 게시판 -->
 			<% if(param=="freeBoard" || param=="regionBoard" || param=="complain") {%>
 

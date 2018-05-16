@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.dleague.board.model.service.BoardService;
 
 /**
- * Servlet implementation class ComplainResultInsertServlet
+ * Servlet implementation class ComplainBoardDeleteServlet
  */
-@WebServlet("/board/complainResultInsert")
-public class ComplainResultInsertServlet extends HttpServlet {
+@WebServlet("/board/complainBoardDelete")
+public class ComplainBoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ComplainResultInsertServlet() {
+    public ComplainBoardDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +30,16 @@ public class ComplainResultInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String complain_result = request.getParameter("result");
 		int no = Integer.parseInt(request.getParameter("no"));
-		
-		int result = new BoardService().complainResultInsert(no, complain_result);
-		String view="/WEB-INF/views/common/msg.jsp";
+		int result = new BoardService().deleteComplainBoard(no);
+		String view = "";
 		if(result>0) {
-			request.setAttribute("msg", "신고글을 처리했습니다");
-			request.setAttribute("loc", "/board/complainBoardView?no="+no);
-			
+			view="/board/complainBoard";
 		}else {
-			request.setAttribute("msg", "신고글을 처리하지 못했습니다");
+			request.setAttribute("msg", "신고글을 삭제하지 못했습니다");
 			request.setAttribute("loc", "/board/complainBoardView?no="+no);
-	
+			view="/WEB-INF/views/common/msg.jsp";
 		}
-		request.setAttribute("param", "complain");
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 
