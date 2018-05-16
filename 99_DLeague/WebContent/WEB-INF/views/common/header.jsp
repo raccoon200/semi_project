@@ -245,7 +245,7 @@
 	}
 	</style>
 <script>
-<%if(memberLoggedIn!=null) { %> 
+<%-- <%if(memberLoggedIn!=null) { %> 
    function fn_validate_team_info() {
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
@@ -254,7 +254,7 @@
 
       return false;
    }
-<%} %>
+<%} %> --%>
 </script>
 </head>
 <body>
@@ -325,7 +325,8 @@
                         <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 
                         <%-- <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
-                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
+                        <!-- onclick="return fn_validate_team_info();" -->
+                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" >내 팀 정보</a></li>
 
                         <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
                         <% if("선수".equals(memberLoggedIn.getGrade())) { %>

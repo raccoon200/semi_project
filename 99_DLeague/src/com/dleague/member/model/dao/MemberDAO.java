@@ -315,5 +315,27 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int memberTeamInCount(Connection conn, String userId, String teamName) {
+		int cnt = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("memberTeamInCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, teamName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				cnt = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cnt;
+	}
+
 }
 		

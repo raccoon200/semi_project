@@ -32,13 +32,28 @@ public class MemberTeamInServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String teamName = request.getParameter("teamName");
 		String msg = request.getParameter("msg");
-		int result = new MemberService().memberTeamIn(userId, teamName, msg);
-		
+		MemberService memberService = new MemberService();
+		int result = 0;
+		int cnt = memberService.memberTeamInCount(userId, teamName);
+		if(!(cnt>0)) result = memberService.memberTeamIn(userId, teamName, msg);
+		String Referer = request.getHeader("Referer"); //어디서 시도했는지
+		String Origin  = request.getHeader("Origin");
+		String url = request.getRequestURL().toString(); //url패턴까지
+		String uri = request.getRequestURI(); //localhost빼고
+		if(Origin == null) {
+			Origin = url.replace(uri, "");
+		}
+		String loc = Referer.replace(Origin+request.getContextPath(), "");
 		if(result>0) {
 			msg = "성공적으로 신청되었습니다!";
+		} else if(cnt>0) {
+			msg = "이미 신청한 팀입니다!";
 		} else {
 			msg = "오류!! 관리자에게 문의하시오!";
 		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
