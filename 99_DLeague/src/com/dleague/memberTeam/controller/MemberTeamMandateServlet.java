@@ -30,6 +30,19 @@ public class MemberTeamMandateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String leader = request.getParameter("leader");
 		String choose = request.getParameter("choose");
+<<<<<<< HEAD
+		
+		int result = new MemberTeamService().MemberTeamMandateLeader(leader, choose);
+		//결과에 따른 분기
+		String loc = "";
+		String msg = "";
+		if(result>0) {
+			msg = "성공적으로 위임하였습니다.";
+			loc = "/member/logout";
+		} else {
+			msg = "위임 실패! 관리자에게 문의하시오!";
+			loc = "/";
+=======
 		int result = new MemberTeamService().MemberTeamMandate(leader, choose);
 		String msg = "";
 		String loc = "";
@@ -46,6 +59,7 @@ public class MemberTeamMandateServlet extends HttpServlet {
 				Origin = url.replace(uri, "");
 			}
 			loc = Referer.replace(Origin+request.getContextPath(), "");
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

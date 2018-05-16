@@ -13,7 +13,7 @@
 table{border:1px solid;}
 #profileImg{width:150px; height:150px;}
 #imgsection{position: relative; left:350px; top:-250px;}
-.btn {
+#btn {
   display: inline-block;
   background: transparent;
   text-transform: uppercase;
@@ -34,7 +34,7 @@ table{border:1px solid;}
   border: 1px solid rgba(223,190,106,0.8);
 }
 
-.btn:hover {
+#btn:hover {
   cursor:pointer;
   color: #fff;
   border: 1px solid rgba(223,190,106,0);
@@ -58,7 +58,7 @@ function fn_memberOut() {
 </script>
 <section>
 <form action="<%=request.getContextPath()%>/member/MemberInfoUpdate" method="post" enctype="multipart/form-data">
-<input type="button" value="회원 탈퇴" style="position:relative; " class="btn" onclick="fn_memberOut();"/>
+<input type="button" value="회원 탈퇴" style="position:relative; " class="btn" id="btn" onclick="fn_memberOut();"/>
 <table>
 <tr>
 <td>
