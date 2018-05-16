@@ -1172,7 +1172,7 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				count = rset.getInt("cnt");
+				count = rset.getInt("no");
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -1181,6 +1181,24 @@ public class BoardDAO {
 			close(pstmt);
 		}
 		return count;
+	}
+
+
+	public int complainResultInsert(Connection conn, int no, String complain_result) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("complainResultInsert");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, complain_result);
+			pstmt.setInt(2, no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	
