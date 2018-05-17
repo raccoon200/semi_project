@@ -25,7 +25,6 @@ a:hover {
 	text-decoration:underline;
 } */
 
-
 table a:link {
 	color: #666;
 	font-weight: bold;
