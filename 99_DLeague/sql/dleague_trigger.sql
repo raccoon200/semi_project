@@ -54,12 +54,12 @@ begin
 end;
 /
 
-<!-- member_register의 yn이 'Y'로 바뀔경우(팀장) --> 
-create or replace trigger member_register_yn
+<!-- member_register에서 yn이 'Y'로 변한 행이 있으면 팀이름과 아이디를 가져다 tbl_user에 수정, trg_add_team_member때문에 team_member에도 추가됨 -->
+create or replace trigger member_register_YN
 after update of yn on member_register
 for each row
 when (new.yn = 'Y')
 begin
-    update tbl_user set teamname = :new.teamname, grade = '팀원' where userid = :new.userid;
+   update tbl_user set teamname = :new.teamname, grade = '팀원' where userid = :new.userid;
 end;
 /
