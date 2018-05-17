@@ -58,7 +58,7 @@
             <span class='text-center'><a href="<%=request.getContextPath() %>/login/passwordCheckPage" class="text-sm">비밀번호 찾기</a></span>
             <hr />
             <div class="form-group">
-                <a href="" class="btn btn-default btn-block m-t-md">회원가입</a>
+                <a href="<%=request.getContextPath() %>/member/memberEnroll" class="btn btn-default btn-block m-t-md">회원가입</a>
             </div>
         </form>
           </div>
