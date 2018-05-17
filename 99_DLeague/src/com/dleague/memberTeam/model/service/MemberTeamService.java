@@ -102,14 +102,13 @@ public class MemberTeamService {
 		return result;
 	}
 
-<<<<<<< HEAD
 	public int selectTeamCreateCheck(String t_register_writer) {
 		Connection conn= getConnection();
 		int result = new MemberTeamDAO().selectTeamCreateCheck(conn, t_register_writer);
 		commit(conn);
 		return result;
 	}
-=======
+
 	public List<MemberRegister> memberRegisterList(String userId) {
 		Connection conn = getConnection();
 		List<MemberRegister> list = new MemberTeamDAO().memberRegisterList(conn, userId);
@@ -156,5 +155,4 @@ public class MemberTeamService {
 	}
 
 	
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 }
