@@ -48,7 +48,7 @@ public class MemberTeamInServlet extends HttpServlet {
 		if(cnt>0) {
 			msg = "이미 신청한 팀입니다! 내 팀 정보-가입 신청한 팀 내역에서 삭제해주세요!";
 		} else if(cntTeamCreate>0) {
-			msg = "팀 생성 신청과 가입신청 중 둘 중 하나만 할 수 있습니다!";
+			msg = "팀 생성 신청 대기중입니다!";
 		} else if(result>0) {
 			msg = "성공적으로 신청되었습니다!";
 		} else {

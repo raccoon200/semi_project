@@ -35,10 +35,14 @@ public class MemberTeamCreateServlet extends HttpServlet {
 		/*request.setCharacterEncoding("utf-8");*/
 		String userId = request.getParameter("userId");
 		System.out.println(userId);
-		int cnt = new MemberTeamService().cntTeamCreate(userId);
+		MemberTeamService memberTeamService = new MemberTeamService();
+		int cnt = memberTeamService.cntTeamCreate(userId);
+		int cntR = memberTeamService.cntRegister(userId);
 		/*System.out.println(cnt);*/
-		if(cnt>0) {
-			String msg = "이미 팀 생성 중입니다!";
+		if(cnt>0 || cntR>0) {
+			String msg = "";
+			if(cnt>0) msg = "이미 팀 생성 중입니다!";
+			else if(cntR>0) msg = "팀 가입신청 대기 중입니다!";
 			String Referer = request.getHeader("Referer"); //어디서 시도했는지
 			String Origin  = request.getHeader("Origin");
 			String url = request.getRequestURL().toString(); //url패턴까지

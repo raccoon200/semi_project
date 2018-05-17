@@ -459,18 +459,36 @@ public class MemberTeamDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = prop.getProperty("cntTeamCreate");
-		int result = 0;
+		int cntTeamCreate = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
 			rset = pstmt.executeQuery();
-			if(rset.next())	result = rset.getInt("cnt");
+			if(rset.next())	cntTeamCreate = rset.getInt("cnt");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		return result;
+		return cntTeamCreate;
+	}
+	public int cntRegister(Connection conn, String userId) {
+		int cntR = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("cntRegister");
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, userId);
+				rset = pstmt.executeQuery();
+				if(rset.next()) cntR = rset.getInt("cnt");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+		return cntR;
 	}
 	}

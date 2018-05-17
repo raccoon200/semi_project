@@ -170,8 +170,15 @@ public class MemberTeamService {
 
 	public int cntTeamCreate(String userId) {
 		Connection conn = getConnection();
-		int result = new MemberTeamDAO().cntTeamCreate(conn, userId);
+		int cntTeamCreate = new MemberTeamDAO().cntTeamCreate(conn, userId);
 		close(conn);
-		return result;
+		return cntTeamCreate;
+	}
+
+	public int cntRegister(String userId) {
+		Connection conn = getConnection();
+		int cntR = new MemberTeamDAO().cntRegister(conn, userId);
+		close(conn);
+		return cntR;
 	}
 }
