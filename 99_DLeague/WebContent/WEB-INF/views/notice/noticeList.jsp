@@ -383,7 +383,7 @@ function fn_search() {
 	</table>
 	<div id="pageBar" class="pagination">
 		<%=(request.getAttribute("pageBar")!=null)?request.getAttribute("pageBar"):"" %>
-		<%if(memberLoggedIn!=null) { %>
+		<%if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getUserId())) { %>
 			<input type="button" class="write-btn" value="글쓰기" onclick="location.href='<%=request.getContextPath()%>/notice/noticeForm'"/>
 		<%} %>
 	</div>
