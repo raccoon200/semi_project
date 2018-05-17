@@ -316,4 +316,19 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
+	public int selectTeamCreateCheck(Connection conn, String t_register_writer) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("selectTeamCreateCheck");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, t_register_writer);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
