@@ -118,7 +118,9 @@ function fn_teamOut() {
 	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
-    		<input type="button" value="팀 탈퇴" style="position:relative; " class="btn" onclick="fn_teamOut();"/> 
+    		<%if(!memberLoggedIn.getUserId().equals(capTain)) {%>
+    		<input type="button" value="팀 탈퇴" style="position:relative; " class="btn" onclick="fn_teamOut();" />
+    		<%} %> 
         	<img id="logoimg" src=
         	<%if(rogo!=null){ %>
         		"<%=request.getContextPath() %>/images/team/<%=rogo %>"

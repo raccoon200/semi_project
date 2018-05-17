@@ -200,9 +200,9 @@ function fn_memberTeamMandate() {
 				<td><%=m.getUserId() %></td>
 	        	<td><%=m.getUserName() %></td>
 		        <td><%=m.getPhone() %></td>
-		        <td><%=m.getEmail() %></td>
+		        <td><%=m.getEmail()==null ?"없음":m.getEmail()%></td>
 	        	<td><%=m.getBirthday() %></td>
-	        	<td><%=m.getProfile() %></td>
+	        	<td><%=m.getProfile() ==null ?"없음":m.getProfile()%></td>
 	        	<td><%=m.getGrade() %></td>
 			</tr>
 		<%}

@@ -131,7 +131,7 @@ public class MemberTeamService {
 		int result = memberTeamDAO.memberTeamMemberAccept(conn, userId, teamName);
 		if(result>0) commit(conn);
 		else rollback(conn);
-		result = memberTeamDAO.memberynYdelete(conn);
+		result = memberTeamDAO.memberOtherdelete(conn, userId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
