@@ -52,16 +52,23 @@ function fn_memberOut() {
 }
 function fn_memberUpdateCheck() {
 	if($("#up_file").val()=="") {
-		change.innerHTML = "<input type=\"file\" name=\"my_file\" value=\"<%=member%>"";
-		return false;
+		change.innerHTML = "<input type=\'file\' name=\'my_file\' value=\'<%=memberLoggedIn.getPhoto()%>'";
+		return true;
 	} else return true;
+}
+function fn_update_password(){
+	var url = "<%=request.getContextPath()%>/member/updatePassword?userId=<%=memberLoggedIn!=null?memberLoggedIn.getUserId():""%>";
+	var title = "updatePassword";
+	var status = "left=500px, top=200px, width=450px, height=260px";
+	
+	var popup = window.open(url, title, status);
 }
 </script>
 <section>
 <form action="<%=request.getContextPath()%>/member/MemberInfoUpdate" method="post" enctype="multipart/form-data" onsubmit="return fn_memberUpdateCheck();">
 <h2>내 정보</h2>
 <hr />
-<input type="button" value="회원 탈퇴" style="position:relative; " class="btnM" onclick="fn_memberOut();"/>
+<input type="button" value="회원 탈퇴" style="position:relative; " class="btnM" onclick="fn_memberOut()"/>
 <table>
 <tr>
 <td>
@@ -69,11 +76,11 @@ function fn_memberUpdateCheck() {
 </td>
 <td><input type="text" name="userId" id="userId" value="<%=member.getUserId()%>" readonly/></td>
 </tr>
-<tr><td>
+<%-- <tr><td>
 <label for="password">비밀번호 </label></td>
 <td>
 <input type="password" name="password" id="password" value="<%=member.getPassword()%>" required/></td>
-</tr>
+</tr> --%>
 
 <tr><td>
 <label for="userName">이름</label></td>
@@ -110,7 +117,7 @@ required/> --%></td>
 <tr><td>
 <label for="email">이메일</label></td>
 <td>
-<input type="email" name="email" id="email" value="<%=member.getEmail()%>"/></td>
+<input type="email" name="email" id="email" value="<%=member.getEmail()!=null?member.getEmail():""%>"/></td>
 </tr>
 
 <tr><td>
@@ -122,13 +129,13 @@ required/> --%></td>
 <tr><td>
 <label for="teamname">팀이름</label></td>
 <td>
-<input type="text" name="teamName" id="teamName" readonly value="<%=member.getTeamname()%>"/></td>
+<input type="text" name="teamName" id="teamName" readonly value="<%=member.getTeamname()!=null?member.getTeamname():""%>"/></td>
 </tr>
 
 <tr><td>
 <label for="profile">프로필</label></td>
 <td>
-<input type="text" name="profile" id="profile" value="<%=member.getProfile()%>"/></td>
+<input type="text" name="profile" id="profile" value="<%=member.getProfile()!=null?member.getProfile():""%>"/></td>
 </tr>
 
 <tr>
@@ -148,6 +155,7 @@ required/> --%></td>
 <br />
 <input type="submit" value="수정" class="btn"/>
 <input type="reset" value="초기화" class="btn"/>
+<input type="button" value="비밀번호수정" class="btn" onclick="fn_update_password()" />
 <section id="imgsection">
 <input type="image" style="pointer-events: none;" id="profileImg"/>
 <br /> 

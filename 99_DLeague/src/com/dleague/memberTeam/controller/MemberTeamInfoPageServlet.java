@@ -16,6 +16,7 @@ import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.MemberRegister;
 import com.dleague.memberTeam.model.vo.Team;
 import com.dleague.memberTeam.model.vo.TeamMember;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 
 
 /**
@@ -41,13 +42,12 @@ public class MemberTeamInfoPageServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String teamName = request.getParameter("teamName");
 		//2. 업무로직 요청
-		List<Team> list = new MemberTeamService().teamSearch(teamName);
-		
-		List<TeamMember> memberList = new MemberTeamService().teamMemberSearch(teamName);
-		
-		List<Activity> activityList = new MemberTeamService().activityListSearch(teamName);
-		
-		List<MemberRegister> memberRegisterList = new MemberTeamService().memberRegisterList(userId);
+		MemberTeamService memberTeamService = new MemberTeamService();
+		List<Team> list = memberTeamService.teamSearch(teamName);
+		List<TeamMember> memberList = memberTeamService.teamMemberSearch(teamName);
+		List<Activity> activityList = memberTeamService.activityListSearch(teamName);
+		List<MemberRegister> memberRegisterList = memberTeamService.memberRegisterList(userId);
+		TeamRegister teamRegister = memberTeamService.teamRegister(userId);
 		
 		/*System.out.println("activityList="+activityList);*/
 		//3. view단 처리위임
@@ -56,6 +56,7 @@ public class MemberTeamInfoPageServlet extends HttpServlet {
 		request.setAttribute("activityList", activityList);	//활동내역 리스트
 		request.setAttribute("param", "memberTeamInfo");
 		request.setAttribute("memberRegisterList", memberRegisterList);
+		request.setAttribute("teamRegister", teamRegister);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/member/memberTeamInfo.jsp");
 		reqDispatcher.forward(request, response);
 	}
