@@ -294,7 +294,6 @@
         <%} %>
 </div>
 <script>
-
    function fn_teamUpdate(teamName){
       location.href="<%=request.getContextPath()%>/search/teamUpdate?teamName="+teamName;
       <%-- ,'<%=rCode%>','<%=capTain%>','<%=foundInDate%>','<%=introduce%>','<%=rogo%>'
@@ -321,7 +320,7 @@
 	   }
 	   else if(msg==null) {} 
 	   else{
-	 	var userId = "<%=memberLoggedIn.getUserId()%>";
+	 		var userId = "<%=memberLoggedIn.getUserId()%>";
 		   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>&userId="+userId+"&msg="+msg;
 	   }
    }
