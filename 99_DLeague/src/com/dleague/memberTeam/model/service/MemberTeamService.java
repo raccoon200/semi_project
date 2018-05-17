@@ -167,4 +167,11 @@ public class MemberTeamService {
 		close(conn);
 		return result;
 	}
+
+	public int cntTeamCreate(String userId) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().cntTeamCreate(conn, userId);
+		close(conn);
+		return result;
+	}
 }

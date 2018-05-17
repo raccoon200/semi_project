@@ -34,6 +34,7 @@ public class MemberTeamInServlet extends HttpServlet {
 		String msg = request.getParameter("msg");
 		MemberService memberService = new MemberService();
 		int result = 0;
+		int cntTeamCreate = new MemberTeamService().cntTeamCreate(userId);
 		int cnt = memberService.memberTeamInCount(userId, teamName);
 		if(!(cnt>0)) result = memberService.memberTeamIn(userId, teamName, msg);
 		String Referer = request.getHeader("Referer"); //어디서 시도했는지
@@ -44,10 +45,12 @@ public class MemberTeamInServlet extends HttpServlet {
 			Origin = url.replace(uri, "");
 		}
 		String loc = Referer.replace(Origin+request.getContextPath(), "");
-		if(result>0) {
-			msg = "성공적으로 신청되었습니다!";
-		} else if(cnt>0) {
+		if(cnt>0) {
 			msg = "이미 신청한 팀입니다! 내 팀 정보-가입 신청한 팀 내역에서 삭제해주세요!";
+		} else if(cntTeamCreate>0) {
+			msg = "팀 생성 신청과 가입신청 중 둘 중 하나만 할 수 있습니다!";
+		} else if(result>0) {
+			msg = "성공적으로 신청되었습니다!";
 		} else {
 			msg = "오류!! 관리자에게 문의하시오!";
 		}

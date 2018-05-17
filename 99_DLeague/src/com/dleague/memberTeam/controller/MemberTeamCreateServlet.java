@@ -33,11 +33,29 @@ public class MemberTeamCreateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*request.setCharacterEncoding("utf-8");*/
-		/*int cnt = new MemberTeamService().cntTeamCreate();*/
+		String userId = request.getParameter("userId");
+		System.out.println(userId);
+		int cnt = new MemberTeamService().cntTeamCreate(userId);
+		/*System.out.println(cnt);*/
+		if(cnt>0) {
+			String msg = "이미 팀 생성 중입니다!";
+			String Referer = request.getHeader("Referer"); //어디서 시도했는지
+			String Origin  = request.getHeader("Origin");
+			String url = request.getRequestURL().toString(); //url패턴까지
+			String uri = request.getRequestURI(); //localhost빼고
+			if(Origin == null) {
+				Origin = url.replace(uri, "");
+			}
+			String loc = Referer.replace(Origin+request.getContextPath(), "");
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+			return;
+		}
 		List<Region> regionList = new RegionService().selectRegionList();
 		request.setAttribute("param", "memberTeamCreate");
 		request.setAttribute("regionList", regionList);
-		request.getRequestDispatcher("/WEB-INF/views/member/memberTeamCreate.jsp").forward(request, response);;
+		request.getRequestDispatcher("/WEB-INF/views/member/memberTeamCreate.jsp").forward(request, response);
 	}
 
 	/**

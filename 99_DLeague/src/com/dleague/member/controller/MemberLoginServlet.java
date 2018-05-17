@@ -61,7 +61,7 @@ public class MemberLoginServlet extends HttpServlet {
 		}
 		
 		loc = Referer.replace(Origin+request.getContextPath(), "");
-		System.out.println("loc="+loc);
+		/*System.out.println("loc="+loc);*/
 		
 		if(result==MemberService.LOGIN_OK) {
 			view="/";
@@ -71,8 +71,8 @@ public class MemberLoginServlet extends HttpServlet {
 			//request.setAttribute("memberLoggedIn", m);
 			//세션이 존재하면, 해당세션을 리턴, 없으면 새로생성해서 리턴.
 			HttpSession session = request.getSession();
-			System.out.println(m);
-			System.out.println("발급된 세션아이디 : "+session.getId());
+			/*System.out.println(m);*/
+			/*System.out.println("발급된 세션아이디 : "+session.getId());*/
 			session.setAttribute("memberLoggedIn", m);
 			//세션타임아웃설정
 			session.setMaxInactiveInterval(30*60);
