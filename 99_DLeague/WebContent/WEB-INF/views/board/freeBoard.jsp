@@ -8,7 +8,124 @@
 
 %>
 <style>
-table.board-table{
+/*테이블*/
+a:link {
+	color: #666;
+	font-weight: bold;
+	text-decoration:none;
+}
+a:visited {
+	color: #666;
+	font-weight:bold;
+	text-decoration:none;
+}
+a:active,
+a:hover {
+	color: #bd5a35;
+	text-decoration:underline;
+}
+
+
+table a:link {
+	color: #666;
+	font-weight: bold;
+	text-decoration:none;
+}
+table a:visited {
+	color: #999999;
+	font-weight:bold;
+	text-decoration:none;
+}
+table a:active,
+table a:hover {
+	color: #bd5a35;
+	text-decoration:underline;
+}
+table {
+	font-family: 'Nanum Gothic', sans-serif;
+	/* font-family:Arial, Helvetica, sans-serif; */
+	color:#666;
+	font-size:12px;
+	text-shadow: 1px 1px 0px #fff;
+	background:#eaebec;
+	/* margin:20px; */
+	border:#ccc 1px solid;
+	border-radius:3px;
+	box-shadow: 0 1px 2px #d1d1d1;
+	width:100%;
+	
+}
+table th {
+	padding:15px;
+	border-top:1px solid #fafafa;
+	border-bottom:1px solid #e0e0e0;
+	font-size: 15px;
+	background: #c3d4ee;
+	text-align: center;
+}
+table th:first-child{
+	padding-left:20px;
+}
+table tr:first-of-type{
+	pointer-events: none;
+}
+table tr:first-child th:first-child{
+	-moz-border-radius-topleft:3px;
+	-webkit-border-top-left-radius:3px;
+	border-top-left-radius:3px;
+}
+table tr:first-child th:last-child{
+	-moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius:3px;
+	border-top-right-radius:3px;
+}
+table tr{
+	text-align: center;
+	padding-left:20px;
+}
+table tr td:first-child{
+	font-weight:bold;
+	padding-left:20px;
+	border-left: 0;
+	font-size:14px;
+}
+table tr td {
+	font-weight:bold;
+	padding:12px;
+	border-top: 1px solid #ffffff;
+	border-bottom:1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+	
+	background: #fafafa;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+table tr.even td{
+	background: #f6f6f6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+	background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+}
+table tr:last-child td{
+	border-bottom:0;
+}
+table tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	border-bottom-left-radius:3px;
+}
+table tr:last-child td:last-child{
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-bottom-right-radius:3px;
+}
+table tr:hover td{
+	background: #f2f2f2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+	background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);	
+}
+
+/*테이블끝*/
+/* table.board-table{
 	border:1px solid black;
 	border-collapse:collapse;
 	width:680px;
@@ -29,7 +146,7 @@ table.board-table tr th, td{
 table.board-table tr:hover{
 	background:rgb(240,240,240);
 	cursor:pointer;
-}
+} */
 span.search-area{
 	
 }
@@ -113,12 +230,12 @@ function fn_search() {
 	
 	<table class="board-table">
 		<tr>
-			<th width="40">번호</th>
-			<th width="210">제목</th>
-			<th width="60">작성자</th>
-			<th>첨부파일</th>
-			<th width="100">작성일</th>
-			<th width="70">조회수</th>
+			<th width="10%">번호</th>
+			<th width="40%">제목</th>
+			<th width="12%">작성자</th>
+			<th width="13%">첨부파일</th>
+			<th width="15%">작성일</th>
+			<th width="15%">조회수</th>
 		</tr>
 		<%if(boardList!=null && !boardList.isEmpty()) { 
 			for(int i=0; i<boardList.size(); i++) {

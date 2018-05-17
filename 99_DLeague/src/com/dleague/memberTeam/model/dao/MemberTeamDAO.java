@@ -273,6 +273,22 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
+	public int selectTeamCreateCheck(Connection conn, String t_register_writer) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("selectTeamCreateCheck");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, t_register_writer);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	public List<MemberRegister> memberRegisterList(Connection conn, String userId) {
 		List<MemberRegister> list = null;
 		PreparedStatement pstmt = null;
@@ -318,7 +334,6 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
-	
 	public List<MemberRegister> memberTeamMemberAcceptPage(Connection conn, String teamName) {
 		List<MemberRegister> memberRegisterList = null;
 		PreparedStatement pstmt = null;
@@ -390,6 +405,7 @@ public class MemberTeamDAO {
 			pstmt.setString(1, "N");
 			pstmt.setString(2, userId);
 			pstmt.setString(3, teamName);
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
