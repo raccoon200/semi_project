@@ -6,6 +6,7 @@
 	List<TeamMember> memberList = (List<TeamMember>)request.getAttribute("memberList");
 	List<Activity> activityList = (List<Activity>)request.getAttribute("activityList");
 	List<MemberRegister> memberRegisterList = (List<MemberRegister>)request.getAttribute("memberRegisterList");
+	TeamRegister teamRegister = (TeamRegister)request.getAttribute("teamRegister"); 
 	System.out.println(memberRegisterList);
 	//team정보
 	String teamName="";
@@ -333,6 +334,59 @@ function fn_teamOut() {
 		</tfoot>
 		</table>
     
+<% } else if (teamRegister!=null){ %>
+	
+	<h2>팀 생성 신청 내역</h2>
+    
+    <table class="tbl_type"  cellspacing="0">
+       
+    <colgroup>
+        <col width="10%"> 
+        <col width="10%">
+        <col width="10%">
+        <col width="15%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+    </colgroup>
+    <thead>
+    <tr>
+        <th scope="col">선택</th>
+    	<th scope="col">신청번호</th>
+    	<th scope="col">팀 이름</th>
+    	<th scope="col">팀장</th>
+    	<th scope="col">지역코드</th>
+        <th scope="col">팀 소개</th>
+        <th scope="col">신청 메시지</th>
+        <th scope="col">신청 날짜</th>
+        <th scope="col">신청 상태</th>        
+    </tr>
+    </thead>
+    <tbody> 
+    	
+		<td><input type="radio" name="choose" id="choose" value="<%=teamRegister.getTeam_register_no()%>" onchange="fn_choose_change(this)"/></td>
+		<td><%=teamRegister.getTeam_register_no()%></td>
+		<td><%=teamRegister.getTeamName()%></td>
+		<td><%=teamRegister.getT_register_writer()%></td>
+		<td><%=teamRegister.getRegionCode()%></td>
+		<td><%=teamRegister.getIntroduce()%></td>
+		<td><%=teamRegister.getRegister_msg()%></td>
+		<td><%=teamRegister.getRegister_date()%></td>
+		<td><%=teamRegister.getStatus()%></td>
+	<tr>
+		</tbody>
+		<tfoot>
+		<tr>
+		<td colspan="4">
+		</td>
+		<td>
+		</td>
+		</tr>
+		</tfoot>
+		</table>
+	
 <% } else {%>
 <h2>팀이 없습니다!</h2>
 <input type="button" value="팀 생성하기" onclick="location.href='<%=request.getContextPath() %>/member/memberTeamCreate'" class="btn"/>

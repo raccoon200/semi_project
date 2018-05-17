@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 
-import com.dleague.member.model.dao.MemberDAO;
 import com.dleague.memberTeam.model.dao.MemberTeamDAO;
 import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.MemberRegister;
@@ -153,6 +152,10 @@ public class MemberTeamService {
 		close(conn);
 		return result;
 	}
-
-	
+	public TeamRegister teamRegister(String userId) {
+		Connection conn = getConnection();
+		TeamRegister teamRegister = new MemberTeamDAO().teamRegister(conn, userId);
+		close(conn);
+		return teamRegister;
+	}
 }
