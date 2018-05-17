@@ -52,7 +52,7 @@ function fn_memberOut() {
 }
 function fn_memberUpdateCheck() {
 	if($("#up_file").val()=="") {
-		alert("이미지는 무조건 바꾸어야 합니다!");
+		change.innerHTML = "<input type=\"file\" name=\"my_file\" value=\"<%=member%>"";
 		return false;
 	} else return true;
 }
@@ -68,7 +68,7 @@ function fn_update_password(){
 <form action="<%=request.getContextPath()%>/member/MemberInfoUpdate" method="post" enctype="multipart/form-data" onsubmit="return fn_memberUpdateCheck();">
 <h2>내 정보</h2>
 <hr />
-<input type="button" value="회원 탈퇴" style="position:relative; " class="btnM" onclick="fn_memberOut();"/>
+<input type="button" value="회원 탈퇴" style="position:relative; " class="btnM" onclick="fn_memberOut()"/>
 <table>
 <tr>
 <td>
@@ -161,6 +161,7 @@ required/> --%></td>
 <br /> 
 <div style="position:relative;">
 <input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
+
 <span id="fname">프로필 사진 변경</span>
 </div>
 </section>

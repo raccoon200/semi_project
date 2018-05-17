@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.game.model.exception.GameException;
 import com.dleague.game.model.service.GameService;
 
 /**
@@ -34,7 +35,13 @@ public class WaitTeamServlet extends HttpServlet {
 		//System.out.println("teamName@WaitTeamServlet = "+teamName);
 		//System.out.println("gameNo@WaitTeamServlet = "+gameNo);
 		
-		int result = new GameService().waitTeam(teamName, gameNo);
+		int result=0;
+		try {
+			result = new GameService().waitTeam(teamName, gameNo);
+		} catch (GameException e) {
+			e.printStackTrace();
+			throw new ServletException();
+		}
 		
 		String msg = "";
 		String loc = "";

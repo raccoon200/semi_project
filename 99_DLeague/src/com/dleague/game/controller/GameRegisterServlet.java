@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dleague.game.model.exception.GameException;
 import com.dleague.game.model.service.GameService;
 import com.dleague.member.model.vo.Member;
 
@@ -41,7 +42,13 @@ public class GameRegisterServlet extends HttpServlet {
 			m = (Member)session.getAttribute("memberLoggedIn");
 		}
 		if(m != null) {			
-			int cnt = new GameService().getGameCountByTeamName(m.getTeamname());
+			int cnt=0;
+			try {
+				cnt = new GameService().getGameCountByTeamName(m.getTeamname());
+			} catch (GameException e) {
+				e.printStackTrace();
+				throw new ServletException();
+			}
 			System.out.println(cnt);
 			if(cnt > 0) {
 				view = "/WEB-INF/views/common/msg.jsp";

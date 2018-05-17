@@ -4,11 +4,13 @@ import static com.dleague.common.JDBCTemplate.*;
 
 import java.net.ConnectException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import com.dleague.member.model.dao.MemberDAO;
 import com.dleague.memberTeam.model.dao.MemberTeamDAO;
 import com.dleague.memberTeam.model.vo.Activity;
+import com.dleague.memberTeam.model.vo.MemberRegister;
 import com.dleague.memberTeam.model.vo.Team;
 import com.dleague.memberTeam.model.vo.TeamMember;
 import com.dleague.memberTeam.model.vo.TeamRegister;
@@ -96,13 +98,63 @@ public class MemberTeamService {
 		result2 = memberTeamDAO.memberTeamGameAcceptOther(conn, teamName);
 		if(result2>0) commit(conn);
 		else rollback(conn);
+		close(conn);
 		return result;
 	}
 
+<<<<<<< HEAD
 	public int selectTeamCreateCheck(String t_register_writer) {
 		Connection conn= getConnection();
 		int result = new MemberTeamDAO().selectTeamCreateCheck(conn, t_register_writer);
 		commit(conn);
 		return result;
 	}
+=======
+	public List<MemberRegister> memberRegisterList(String userId) {
+		Connection conn = getConnection();
+		List<MemberRegister> list = new MemberTeamDAO().memberRegisterList(conn, userId);
+		close(conn);
+		return list;
+	}
+
+	public int memberTeamRegisterDelete(String userId, String choose) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().memberTeamRegisterDelete(conn, userId, choose);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public List<MemberRegister> memberTeamMemberAcceptPage(String teamName) {
+		Connection conn = getConnection();
+		List<MemberRegister> memberRegisterList = new MemberTeamDAO().memberTeamMemberAcceptPage(conn, teamName);
+		close(conn);
+		return memberRegisterList;
+	}
+
+	public int memberTeamMemberAccept(String userId, String teamName) {
+		Connection conn = getConnection();
+		MemberTeamDAO memberTeamDAO = new MemberTeamDAO();
+		int result = memberTeamDAO.memberTeamMemberAccept(conn, userId, teamName);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		result = memberTeamDAO.memberOtherdelete(conn, userId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int memberTeamMemberRefuse(String userId, String teamName) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().memberTeamMemberRefuse(conn, userId, teamName);
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		close(conn);
+		return result;
+	}
+
+	
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 }

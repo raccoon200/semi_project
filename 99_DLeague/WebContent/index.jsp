@@ -8,7 +8,7 @@ div.effect{
 	width: 1000px;
 	height: 391.922px;
 	margin: 0 auto;
-	margin-top: 119px;
+	margin-top: 136px;
 }
 div.effect>img{
 	width: 1000px;
@@ -54,7 +54,7 @@ $('#slider').vmcSlider({
 	duration: 2000,
 	speed: 1000
 });
-</script>>
+</script>
 <footer id="footer">
 <div id="footer-wrapper">
     <a href="<%=request.getContextPath()%>"><img id="footer-image" src="<%=request.getContextPath() %>/images/headerImage.png" /></a>
