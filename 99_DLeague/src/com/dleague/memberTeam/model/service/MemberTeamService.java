@@ -152,17 +152,10 @@ public class MemberTeamService {
 		close(conn);
 		return result;
 	}
-
-<<<<<<< HEAD
 	public TeamRegister teamRegister(String userId) {
 		Connection conn = getConnection();
 		TeamRegister teamRegister = new MemberTeamDAO().teamRegister(conn, userId);
 		close(conn);
 		return teamRegister;
 	}
-
-	
-=======
-	
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 }
