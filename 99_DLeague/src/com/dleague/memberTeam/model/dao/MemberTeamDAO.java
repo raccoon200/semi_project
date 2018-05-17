@@ -415,7 +415,7 @@ public class MemberTeamDAO {
 		return result;
 	}
 	public TeamRegister teamRegister(Connection conn, String userId) {
-		TeamRegister teamRegister = new TeamRegister();
+		TeamRegister teamRegister = null;
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("teamRegister");
@@ -424,6 +424,7 @@ public class MemberTeamDAO {
 			pstmt.setString(1, userId);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
+				teamRegister = new TeamRegister();
 				teamRegister.setTeam_register_no(rset.getInt("team_register_no"));
 				teamRegister.setTeamName(rset.getString("teamname"));
 				teamRegister.setT_register_writer(rset.getString("t_register_writer"));
