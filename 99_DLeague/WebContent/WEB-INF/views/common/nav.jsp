@@ -66,13 +66,14 @@ console.log("<%=param%>");
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamGameAcceptPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamGameAcceptPage"?"nav-selected":""%>'>팀 경기 수락</a></li>
 			</ul>
 			<%} %>
-			<%if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagement") {%>
+			<%if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagement" || param=="memberTeamCreate") {%>
 			<h3 id="nav-header">마이페이지</h3>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/member/memberInfoPage" id="<%=param=="memberInfo"?"nav-selected":"" %>" >내 정보</a></li>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>" id="<%=param=="memberTeamInfo"?"nav-selected":"" %>">내 팀 정보</a></li>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>" id="<%=param=="memberTeamManagement"?"nav-selected":"" %>">내 팀 관리</a></li>
-				<li><a href="<%=request.getContextPath() %>/member/memberTeamCreate?userId=<%=memberLoggedIn.getUserId()%>">팀생성</a></li>
+				<li><a href="<%=request.getContextPath() %>/member/memberTeamCreate?userId=<%=memberLoggedIn.getUserId()%>" id="<%=param=="memberTeamCreate"?"nav-selected":""%>">팀생성</a></li>
+				
 			</ul> 
 			<%} %>
 			

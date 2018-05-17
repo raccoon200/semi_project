@@ -35,7 +35,7 @@ public class MemberTeamCreateServlet extends HttpServlet {
 		/*request.setCharacterEncoding("utf-8");*/
 		/*int cnt = new MemberTeamService().cntTeamCreate();*/
 		List<Region> regionList = new RegionService().selectRegionList();
-		request.setAttribute("param", "team");
+		request.setAttribute("param", "memberTeamCreate");
 		request.setAttribute("regionList", regionList);
 		request.getRequestDispatcher("/WEB-INF/views/member/memberTeamCreate.jsp").forward(request, response);;
 	}
