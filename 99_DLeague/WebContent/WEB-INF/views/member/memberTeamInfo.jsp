@@ -337,14 +337,14 @@ function fn_teamOut() {
 <% } else if (teamRegister!=null){ %>
 	
 	<h2>팀 생성 신청 내역</h2>
-    
+    <input type="button" value="신청 취소" style="position:relative; " class="btn" onclick="fn_teamOut();" />
     <table class="tbl_type"  cellspacing="0">
        
     <colgroup>
         <col width="10%"> 
         <col width="10%">
         <col width="10%">
-        <col width="15%">
+        <col width="10%">
         <col width="10%">
         <col width="10%">
         <col width="10%">
@@ -379,7 +379,7 @@ function fn_teamOut() {
 		</tbody>
 		<tfoot>
 		<tr>
-		<td colspan="4">
+		<td colspan="8">
 		</td>
 		<td>
 		</td>

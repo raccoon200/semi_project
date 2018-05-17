@@ -429,7 +429,8 @@ public class MemberTeamDAO {
 				teamRegister.setT_register_writer(rset.getString("t_register_writer"));
 				teamRegister.setRegionCode(rset.getString("regioncode"));
 				teamRegister.setIntroduce(rset.getString("introduce"));
-				teamRegister.setRegister_msg(rset.getString("register_date"));
+				teamRegister.setRegister_msg(rset.getString("register_msg"));
+				teamRegister.setRegister_date(rset.getDate("register_date"));
 				teamRegister.setStatus(rset.getString("status"));
 			}
 			System.out.println(teamRegister);
