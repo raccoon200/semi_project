@@ -280,6 +280,14 @@ public class MemberTeamDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, t_register_writer);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	public List<MemberRegister> memberRegisterList(Connection conn, String userId) {
 		List<MemberRegister> list = null;
