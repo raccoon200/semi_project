@@ -432,6 +432,7 @@ public class MemberTeamDAO {
 				teamRegister.setRegister_msg(rset.getString("register_date"));
 				teamRegister.setStatus(rset.getString("status"));
 			}
+			System.out.println(teamRegister);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -153,7 +153,6 @@ public class MemberTeamService {
 		return result;
 	}
 
-<<<<<<< HEAD
 	public TeamRegister teamRegister(String userId) {
 		Connection conn = getConnection();
 		TeamRegister teamRegister = new MemberTeamDAO().teamRegister(conn, userId);
@@ -162,7 +161,5 @@ public class MemberTeamService {
 	}
 
 	
-=======
-	
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
+
 }
