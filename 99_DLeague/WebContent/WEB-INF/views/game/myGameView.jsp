@@ -582,18 +582,26 @@ $(function() {
 	<%} %>
   	</div>
   	<br />
-<button type="button" class="btn btn-primary btn-block disabled" id="btn_game_register" onclick="fn_game_register();">경기 신청</button>
+<button type="button" class="btn btn-primary btn-block disabled" id="btn_game_register" onclick="fn_game_register();" disabled>경기 신청</button>
+<%if(gameStatus && memberLoggedIn != null && tHome.getTeamName().equals(memberLoggedIn.getTeamname()) && "팀장".equals(memberLoggedIn.getGrade())) {%>
+<button type="button" class="btn btn-danger btn-block" onclick="fn_delete_game();">삭제</button>
+<%} %>
 <script>
 $(function(){
 	if(<%=memberLoggedIn.getTeamname() == null%>){
-		$("#btn_game_register").removeClass('disabled');	
+		$("#btn_game_register").removeClass('disabled').removeAttr("disabled");
 	}else if(<%=!tHome.getTeamName().equals(memberLoggedIn.getTeamname()) && tAway == null%>){
-		$("#btn_game_register").removeClass('disabled');	
+		$("#btn_game_register").removeClass('disabled').removeAttr("disabled");	
 	}
 });
 <%if(gameStatus){%>
 function fn_game_register() {
 	location.href = "<%=request.getContextPath()%>/game/waitTeam?teamName=<%=memberLoggedIn.getTeamname()%>&gameNo=<%=g.getGameNo()%>";
+}
+<%}%>
+<%if(gameStatus && memberLoggedIn != null && tHome.getTeamName().equals(memberLoggedIn.getTeamname()) && "팀장".equals(memberLoggedIn.getGrade())) {%>
+function fn_delete_game() {
+	location.href = "<%=request.getContextPath()%>/game/deleteGame?no=<%=g.getGameNo()%>";
 }
 <%}%>
 </script>

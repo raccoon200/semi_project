@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.*, com.dleague.search.model.vo.*"%>
+<%@page import="java.util.*, com.dleague.search.model.vo.*,com.dleague.member.model.vo.*"%>
 <%
 	List<Team> list = (List<Team>)request.getAttribute("list");
 	List<TeamMember> memberList = (List<TeamMember>)request.getAttribute("memberList");
 	List<Activity> activityList = (List<Activity>)request.getAttribute("activityList");
+	/* Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn"); */
 	
 	//team정보
 	String teamName="";
@@ -71,6 +72,10 @@
     /*teamTable*/
     div#teamTable{width: 350px; display: inline-block;}
     /*teamTable*/
+    /*수정삭제버튼*/
+    div#btDiv{padding:30px; display: inline-block;}
+    button#bt1, #bt2{padding:5px;}
+    /*수정삭제버튼*/
 </style>
 	<h2>팀상세정보</h2>
 	<hr />
@@ -145,6 +150,7 @@
             <col width="10%">
             <col width="10%">
             <col width="15%">
+            <col width="10%">
         </colgroup>
         <thead>
         <tr>
@@ -153,6 +159,7 @@
             <th scope="col">지역</th>
             <th scope="col">등급</th>
             <th scope="col">입단일</th>
+            <th scope="col">팀원강퇴</th>
         </tr>
         </thead>
         <tbody>
@@ -183,13 +190,14 @@
 	            </td>
 	            <td><%=tm.getGrade() %></td>
 	            <td><%=tm.getT_EnrollDate() %></td>
+	            <td><input type="checkbox" class="kick" <%="팀장".equals(tm.getGrade())?"disabled":"" %> /></td>
             </tr>
         <%} %>
         </tbody>
         <tfoot>
             <tr>
             <td>종합</td>
-            <td colspan="2">총 팀원수</td>
+            <td colspan="3">총 팀원수</td>
             <td colspan="3"><%=rnum %>명</td>
             </tr>
             </tfoot>
@@ -231,7 +239,8 @@
                 <td><%=a.getResult() %></td>
                 </tr>
             </tr>
-            <%}} %>
+            <%} 
+            } %>
             </tbody>
             <tfoot>
                 <tr>
@@ -240,6 +249,22 @@
                 </tfoot>
             </table>
             <!--//ui object -->
+        
+            
         </div>
+        <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) )  {%>
+        <div id="btDiv">
+           	<button id="bt1" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
+        </div>
+        <%}else{ %>
+        <div id="btDiv"></div>
+        <%} %>
 </div>
+<script>
+	function fn_teamUpdate(teamName){
+		location.href="<%=request.getContextPath()%>/search/teamUpdate?teamName="+teamName;
+		<%-- ,'<%=rCode%>','<%=capTain%>','<%=foundInDate%>','<%=introduce%>','<%=rogo%>'
+				+"&rCode"+rCode+"&capTain"+capTain+"&foundInDate"+foundInDate+"&introduce"+introduce+"&logo"+logo; --%>
+	}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

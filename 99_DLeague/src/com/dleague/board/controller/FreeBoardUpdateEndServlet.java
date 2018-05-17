@@ -75,7 +75,7 @@ public class FreeBoardUpdateEndServlet extends HttpServlet {
 		}else {
 			String msg = "게시글 등록 실패!";
 			view = "/WEB-INF/views/common/msg.jsp";
-			request.setAttribute("msg", "");
+			request.setAttribute("msg", msg);
 			request.setAttribute("loc", "/board/freeBoard");
 		}
 		

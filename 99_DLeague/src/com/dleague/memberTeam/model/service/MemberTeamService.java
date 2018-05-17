@@ -2,6 +2,7 @@ package com.dleague.memberTeam.model.service;
 
 import static com.dleague.common.JDBCTemplate.*;
 
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.Team;
 import com.dleague.memberTeam.model.vo.TeamMember;
 import com.dleague.memberTeam.model.vo.TeamRegister;
+import com.dleague.memberTeam.model.vo.WaitTeam;
 
 
 
@@ -38,7 +40,10 @@ public class MemberTeamService {
 
 	public int memberTeamOut(String userId) {
 		Connection conn = getConnection();
-		int result = new MemberTeamDAO().memberTeamOut(conn, userId);
+		MemberTeamDAO memberDAO = new MemberTeamDAO();
+		int result = memberDAO.memberTeamOut(conn, userId);
+		memberDAO.memberTeamDelete(conn, userId);
+		
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -53,7 +58,28 @@ public class MemberTeamService {
 		close(conn);
 		return result;
 	}
-	
-	
-	
+
+	public int MemberTeamMandate(String leader, String choose) {
+		Connection conn = getConnection();
+		int result = 0;
+		MemberTeamDAO memberteamDAO = new MemberTeamDAO();
+		result = memberteamDAO.memberTeamMandateLeader(conn, choose);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		result = memberteamDAO.memberTeamMandateMember(conn, leader);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
+
+	public List<WaitTeam> memberTeamGameAcceptPage(String teamName) {
+		Connection conn = getConnection();
+		List<WaitTeam> list = new MemberTeamDAO().memberTeamGameAcceptPage(conn, teamName);
+		close(conn);
+		return list;
+	}
+
 }

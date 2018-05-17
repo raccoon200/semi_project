@@ -2,10 +2,13 @@ package com.dleague.member.model.service;
 
 import static com.dleague.common.JDBCTemplate.*;
 
+
 import java.sql.Connection;
+import java.util.List;
 
 import com.dleague.member.model.dao.MemberDAO;
 import com.dleague.member.model.vo.Member;
+import com.dleague.memberTeam.model.vo.Team;
 
 public class MemberService {
 	//로그인처리를 위한 상수선언
@@ -54,15 +57,34 @@ public class MemberService {
 		return result;
 	}
 	
-		
 	public int memberInfoUpdate(Member member) {
 		Connection conn = getConnection();
 		int result = new MemberDAO().memberInfoUpdate(conn, member);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
+		return result;
+	}
+	public int selectMemberCount(String teamName) {
+		Connection conn = getConnection();
+		int totalMember = new MemberDAO().selectMemberCount(conn, teamName);
+		close(conn);
+		return totalMember;
+	}
+	
+	public List<Member> selectMemberList(int cPage, int numPerPage, String teamName) {
+		Connection conn = getConnection();
+		List<Member> list = new MemberDAO().selectMemberList(conn, cPage, numPerPage, teamName);
+		close(conn);
+		return list;
+	}
+	public int memberOut(String userId) {
+		int result = 0;
+		Connection conn = getConnection();
+		result = new MemberDAO().memberOut(conn, userId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		return result;
 	}
-	
 	
 }

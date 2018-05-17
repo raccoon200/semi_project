@@ -6,12 +6,12 @@
 	String script = (String)request.getAttribute("script");
 	
 	//System.out.println("msg@msg.jsp="+msg);
-	//System.out.println("loc@msg.jsp="+loc);
+	//System.out.println("loc@msg.jsp="+loc);s
 %>
 
 <script>
 alert('<%=msg %>');
 /* 스크립트에 값이 담겨있을때만 실행함. */
 <%= script!=null?script:""%>
-location.href = '<%=loc %>';
+location.href = ("<%=loc %>");
 </script>

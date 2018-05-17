@@ -3,6 +3,7 @@ package com.dleague.member.model.dao;
 import static com.dleague.common.JDBCTemplate.*;
 
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -13,12 +14,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.dleague.member.model.vo.Member;
 
+
 public class MemberDAO {
-private Properties prop = new Properties();
+	private Properties prop = new Properties();
 	
 	public MemberDAO() {
 		URL fileUrl = MemberDAO.class.getResource("/sql/member/member-query.properties");
@@ -165,13 +169,15 @@ private Properties prop = new Properties();
 	         pstmt.setString(4, member.getPhone());
 	         pstmt.setString(5, member.getEmail());
 	         pstmt.setString(6, member.getBirthday());
-	         pstmt.setString(7, member.getTeamname());
-	         pstmt.setString(8, member.getProfile());
-	         pstmt.setString(9, member.getGrade());
+	         /*pstmt.setString(7, member.getTeamname());*/
+	         pstmt.setString(7, member.getProfile());
+	         pstmt.setString(8, member.getGrade());
 	         
-	         pstmt.setDate(10, member.getEnrolldate());
-	         pstmt.setString(11, member.getPhoto());
-	         pstmt.setString(12, member.getUserId());
+	         pstmt.setDate(9, member.getEnrolldate());
+	         pstmt.setString(10, member.getPhoto());
+	         pstmt.setString(11, member.getUserId());
+	         System.out.println(member.getTeamname());
+	         System.out.println(member);
 	         result = pstmt.executeUpdate();
 	         System.out.println("MemberDAO@memberinfoUpdate"+member);
 	      } catch (SQLException e) {
@@ -184,6 +190,7 @@ private Properties prop = new Properties();
 	   }
 
 
+<<<<<<< HEAD
 	public int insertMember(Connection conn, Member member) {
 int result = 0;
 PreparedStatement pstmt = null;
@@ -215,8 +222,113 @@ result = pstmt.executeUpdate();
 
 	} catch (SQLException e) {
 		e.printStackTrace();
+=======
+	public int insertMember(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertMember");
+		System.out.println(member);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  member.getUserId());
+			pstmt.setString(2,  member.getPassword());
+			pstmt.setString(3, member.getUserName());
+			pstmt.setString(4,  member.getRegioncode());
+			pstmt.setString(5,  member.getPhone());
+			pstmt.setString(6,  member.getEmail());
+			pstmt.setString(7,  member.getProfile());
+			pstmt.setString(8, member.getPhoto());
+			pstmt.setString(9,  member.getBirthday());
+		
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+				e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		}
+		
+	public int selectMemberCount(Connection conn, String teamName) {
+		int totalMember = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectMemberCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalMember = rset.getInt("cnt");
+			}
+			System.out.println("totalMember@MemberDAO="+totalMember);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMember;
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 	}
-return result;
+
+	public List<Member> selectMemberList(Connection conn, int cPage, int numPerPage, String teamName) {
+		List<Member> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		String query = prop.getProperty("selectMemberListByPaging");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			//공식2 시작 rownum과 마지막 rownum을 구하는 공식
+			pstmt.setString(1, teamName);
+			pstmt.setInt(2, numPerPage*(cPage-1)+1);
+			pstmt.setInt(3, numPerPage*cPage);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
+			rset=pstmt.executeQuery();
+			
+			list = new ArrayList<Member>();
+			while(rset.next()) {
+				m = new Member();
+				m.setUserId(rset.getString("userid"));
+				m.setUserName(rset.getString("username"));
+				m.setPhone(rset.getString("phone"));
+				m.setEmail(rset.getString("email"));
+				m.setBirthday(rset.getString("birthday"));
+				m.setProfile(rset.getString("profile"));
+				m.setGrade(rset.getString("grade"));
+				m.setRnum(rset.getInt("rnum"));			
+				list.add(m);
+			}
+			System.out.println("list@MemberDAO.selectMemberList="+list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int memberOut(Connection conn, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberOut");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }
 		

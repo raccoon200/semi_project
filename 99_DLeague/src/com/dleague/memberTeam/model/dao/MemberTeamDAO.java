@@ -16,6 +16,7 @@ import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.Team;
 import com.dleague.memberTeam.model.vo.TeamMember;
 import com.dleague.memberTeam.model.vo.TeamRegister;
+import com.dleague.memberTeam.model.vo.WaitTeam;
 
 
 public class MemberTeamDAO {
@@ -168,4 +169,89 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
+	/*public void updateGrade(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateGrade");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	}*/
+	public void memberTeamDelete(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamDelete");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	}
+	public int memberTeamMandateLeader(Connection conn, String choose) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("memberTeamMandate");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "팀장");
+			pstmt.setString(2, choose);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return result;
+	}
+	public int memberTeamMandateMember(Connection conn, String leader) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("memberTeamMandate");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "팀원");
+			pstmt.setString(2, leader);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public List<WaitTeam> memberTeamGameAcceptPage(Connection conn, String teamName) {
+		PreparedStatement pstmt = null;
+		ArrayList<WaitTeam> list = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("memberTeamGameAcceptPage");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while(rset.next()) {
+				WaitTeam waitteam = new WaitTeam();
+				waitteam.setWaitNo(rset.getInt("wait_no"));
+				waitteam.setTeamName(rset.getString("teamname"));
+				waitteam.setGameNo(rset.getInt("game_no"));
+				list.add(waitteam);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
 }

@@ -6,264 +6,298 @@
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic" rel="stylesheet">
 <title>DLeague</title>
 
 <script src="<%=request.getContextPath()%>/js/jquery-3.3.1.js"></script>
 
 <style>
-/* 전체컨테이너 */
-div#container   {width:960px; margin:0 auto;}
-
-/*header*/
-
-header#header         { height:120px; position:relative; padding:10px 0 0 0;}
-header#header h1       {margin-left:10px;}
-
-header#header nav {
-    
-   width:100%; 
-   margin-top:15px;
-   position:relative;
-}
-ul.main-nav {
-   display:table;
-   padding:0px; /*ul태그가 가진 기본padding초기화*/
-   margin:auto;
-}
-ul.main-nav > li.main-nav-list{
-   list-style-type:none;
-   width:8em;
-   height:2em;
-   float:left;
-   padding-left:15px;
-   padding-right:15px;
-   text-align:center;
-   font-family:"휴먼모음T", sans-serif;
-   font-size:1.2em;
-   background-color:white;
-}
-
-ul.main-nav > li.main-nav-list > a{
-   display:block;
-   padding:.5em;
-   text-decoration:none;
-   color:#292929;
-}
-ul.main-nav > li.main-nav-list:hover{border-radius:5px;}
-
-div#header-div{
-   display:block;
-   height:50px;
-}
-img#header-image {
-   padding-left:10px;
-   width:180px;
-   height:60px;
-   float:left;
-   display:inline;
-}
-ul#header-list {
-   display:block;
-   float:right;
-   display:table;
-   padding:0px; /*ul태그가 가진 기본padding초기화*/
-   margin:auto;
-}
-ul#header-list li{
-   display:inline;
-   list-style-type:none;
-   padding:10px;
-   font-family:"휴먼모음T", sans-serif;
-}
-ul#header-list li a{
-   text-decoration:none;
-   font-family:"휴먼모음T", sans-serif;
-   color:gray;
-}
-ul#header-list li a:hover{
-   color:black;
-}
-
-div.main-nav-sub > ul{
-   background:rgb(245,245,245);
-   padding:0px;
-   border-radius:5px;
-}
-div.main-nav-sub > ul > li{
-   list-style-type:none;
-   display:inline-block;
-   padding:2px;
-}
-div.main-nav-sub > ul > li > a{
-   text-decoration:none;
-   font-family:"휴먼모음T", sans-serif;
-   font-size:16px;
-   color:rgb(100,100,100);
-   
-}
-div.main-nav-sub > ul > li> a:hover{
-   color:black;
-}
-div.main-nav-sub {
-   position:absolute;
-   top:40px;
-   padding:1px;
-   display:none;
-   
-}
-div#main-nav-sub-boardss{
-   left:180px;
-	left:180px;
-}
-div#main-nav-sub-register{
-   left:400px;
-}
-div#main-nav-sub-search{
-   left:600px;
-}
-div#main-nav-sub-mypage{
-   left:730px;
-}
-
-
-/*section-center*/
-section#center{
-   height:700px;
-   overflow:hidden;
-   height:auto;
-   background:rgb(64,128,183);
-   
-}
-/*content*/
-section#content{
-   display:inline-block;
-   margin:2px;
-   width:750px;
-   background:white;
-   border:1px solid rgb(245,245,245);
-   border-radius: 4px;
-   padding-left:10px;
-   
-}
-/*nav*/
-nav#nav{
-background:rgb(255,255,255);
-border:2px solid rgb(64,128,183);
-width:186px;
-float:left;
-margin-left:3px;
-border-radius:5px;
-}
-nav#nav ul.nav-list{
-   padding:0px;
-}
-nav#nav ul.nav-list li{
-   font-family:"휴먼모음T", sans-serif;
-   padding-top:10px;
-   color:gray;
-   font-size:1.2em;
-   list-style-type:none;
-   text-align:center;
-}
-
-nav#nav ul.nav-list li a{
-   text-decoration:none;
-   color:gray;
-}
-nav#nav ul.nav-list li a:hover{
-
-   color:black;
-}
-nav#nav h2#nav-header{
-   font-family:"휴먼모음T", sans-serif;
-   text-align:center;
-   padding:0px;
-}
-
-/*footer*/
-footer#footer{
-   background:rgb(240,240,240);
-   padding:5px;
-   display:block;
-}
-footer#footer p {
-   font-family:"휴먼모음T", sans-serif;
-   color:gray;
-   text-align:center;
-   font-size:0.7em;
-}
-
-/*effect*/
-ul.main-nav > li.main-nav-list a#header-selected {
-   color:rgb(64,128,183);
-}
-nav#nav ul.nav-list li a#nav-selected{
-   color:black;
-}
-</style>
+	header#header{ 
+	    width: 100%;
+	    height:119px; 
+	    padding:10px 0 0 0;
+	    background: white;
+	    position: fixed;
+	    top: 0px;
+	    left: 0px;
+	    border-bottom: 1px solid #f3f3f3;
+	    z-index: 150;
+	}
+	div#header-div{
+	    display:block;
+	    width: 100%;
+	    height:41px;
+	    background: #f3f3f3;
+	    position: fixed;
+	    top: 0px;
+	    left: 0px;
+	}
+	div.header-div-wrap{
+	    position: relative;
+	    width: 960px;
+	    height: 41px;
+	    margin: 0 auto;
+	    background: #f3f3f3;
+	}
+	div.header-div-wrapping-nav{
+	    position: relative;
+	    width: 960px;
+	    height: 77px;
+	    margin: 0 auto;
+	    background: white;
+	    top: 31px;
+	}
+	img#header-image{
+	    height: 77px;
+	}
+	header#header nav{
+	    float: right;
+	}
+	ul.main-nav{
+	    display:table;
+	    padding:0px; /*ul태그가 가진 기본padding초기화*/
+	    margin-top: 23px;
+	    margin-bottom: 0px;
+	    vertical-align: baseline;
+	    list-style: none;
+	}
+	.main-nav-list{
+	    float: left;
+	    padding-top: 7px;
+	}
+	li.main-nav-list:hover{
+	    border-bottom: 3px solid rgb(64,128,183); 
+	}
+	li.main-nav-list:hover>div{
+	    border-top: 3px solid rgb(64,128,183); 
+	}
+	li.main-nav-list:hover>a{
+	    color: rgb(64,128,183); 
+	}
+	li.main-nav-list:hover div.main-nav-sub{
+	    display: block;
+	}
+	.main-nav-list>a{
+	    display: block;
+	    padding: 0 0 19px;
+	    margin: 0 35px;
+	    font-size: 20px;
+	    color: #121212;
+	    font-family: 'Do Hyeon', sans-serif;
+	}
+	.main-nav-list>a:link{
+	    text-decoration: none;
+	}
+	ul#header-list {
+	    display:block;
+	    float:right;
+	    display:table;
+	    padding:0px; /*ul태그가 가진 기본padding초기화*/
+	    margin:auto;
+	    margin-top: 7px;
+	}
+	ul#header-list li{
+	    display:inline;
+	    list-style-type:none;
+	    padding:10px;
+	    font-size: 11px;
+	    font-family: 'Nanum Gothic', sans-serif;
+	}
+	ul#header-list li a{
+	    text-decoration:none;
+	    font-size: 9px;
+	    font-family: 'Nanum Gothic', sans-serif;
+	    color:black;
+	}
+	.main-nav-sub-li{
+	    list-style-type:none;
+	    text-align: center;
+	    padding-bottom: 10px;
+	    padding-top: 10px;
+	}
+	.main-nav-sub-ul{
+	    padding: 0px;
+	}
+	div.main-nav-sub{
+	    border: 1px solid rgb(64,128,183);
+	    display: none;
+	    background: white;
+	}
+	li.main-nav-sub-li a{
+	    text-decoration:none;
+	    font-size: 15px;
+	    font-family: 'Nanum Gothic', sans-serif;
+	    color:black;
+	}
+	li.main-nav-sub-li:hover{
+	    background: rgb(64,128,183);
+	}
+	li.main-nav-sub-li:hover>a{
+	    color: white;
+	}
+	/*section-center*/
+	section#center{
+	    margin: 0 auto;
+	    width: 960px;
+	    min-height: 960px;
+	    position: relative;
+	    padding-top: 168px;
+	
+	}
+	nav#nav{
+	    float: left;
+	    width: 175px;
+	    padding: 12px 0 0 14px;
+	    margin-right: 45px;
+	    display: block;
+	    position: fixed;
+	}
+	h3#nav-header{
+	    font-size: 23px;
+	    width: 115px;
+	    margin: 0 0 30px 15px;
+	    padding-bottom: 25px;
+	    border-bottom: 4px solid rgb(64,128,183);
+	    color: #111;
+	    line-height: 1.3;
+	    font-family: 'Nanum Gothic', sans-serif;
+	    font-weight: bold;
+	}
+	ul.nav-list{
+	    margin-left: 15px;
+	    list-style: none;
+	    margin: 0;
+	    margin-left: 15px; 
+	    padding: 0;
+	    border: 0;
+	    font: inherit;
+	    vertical-align: baseline;
+	}
+	ul.nav-list li{
+	    padding: 0;
+	    margin-bottom: 15px;
+	}
+	ul.nav-list li>a{
+	    display: block;
+	    font-size: 17px;
+	    color: #7c7c7c;
+	    font-family: 'Nanum Gothic', sans-serif;
+	    text-decoration:none;
+	}
+	a#nav-selected{
+	    color: rgb(64,128,183);
+	    font-weight: bolder;
+	}
+	section#content{
+	    position: relative;
+	    display:inline-block;
+	    margin:2px;
+	    width:750px;
+	    min-height: 300px;
+	    background:white;
+	    padding-left:10px;
+	    left: 206px;
+	}
+	ul.nav-list li>a:hover{
+	    font-weight: bolder;
+	    color: rgb(64,128,183);
+	}
+	ul.main-nav>li.main-nav-list a#header-selected{
+	    color:rgb(64,128,183);
+	}
+	ul.main-nav>li.header-selected{
+	    border-bottom: 3px solid rgb(64,128,183);
+	}
+	footer#footer{
+	    background:#222;
+	    padding:5px;
+	    display:block;
+	    height: 220px;
+	}
+	footer#footer p {
+	    font-family: 'Nanum Gothic', sans-serif;
+	    color:gray;
+	    text-align:center;
+	    font-size:15px;
+	    display: inline-block;
+	    position: relative;
+	    top: 80px;
+	    left: 307px;
+	}
+	div#footer-wrapper{
+	    position: relative;
+	    width: 960px;
+	    height: 220px;
+	    margin: 0 auto;         
+	}
+	img#footer-image{
+	    position: relative;
+	    height: 77px;
+	    top: 54px;
+	    left: 170px;
+	}
+	</style>
 <script>
-
-$(function() {
-   $(".main-nav-list").hover(function() {
-      $(this).children("div").show();
-      $(this).children("a").css("color","rgb(64,128,183)")
-   }, function() {
-      $(this).children("div").hide();
-      
-      if($(this).children("a").attr("id")=="header-selected"){
-         $(this).children("a").css("color","rgb(64,128,183)");
-      }else {
-         $(this).children("a").css("color","black");
-      }
-   })
-
-});
 <%if(memberLoggedIn!=null) { %> 
    function fn_validate_team_info() {
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
+
       return false;
    }
 <%} %>
 </script>
 </head>
 <body>
-   <div id="container">
-      <header id="header">
-         <div id="header-div">
-         <a href="<%=request.getContextPath() %>/"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.jpg" /></a>
-         <ul id="header-list">
-            <%if(memberLoggedIn==null) {%>
-               <li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
-               <li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
-            <%} else { %>
-               <li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
-               <li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
-               <li><a href="<%=request.getContextPath()%>/admin/adminPage">관리자페이지</a></li>
-               
-            <%} %>
-         </ul>
-         
-         </div>
-         <nav>
+    <header id="header">
+        <div id="header-div">
+            <div class="header-div-wrap">
+                <ul id="header-list">
+				<%if(memberLoggedIn==null) {%>
+				    <li><a href="<%=request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
+				    <li>|</li>
+				    <li><a href="<%=request.getContextPath() %>/member/loginPage">로그인</a></li>
+				 <%} else if("admin".equals(memberLoggedIn.getUserId())) { %>
+				    <li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
+				    <li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
+				    <li>|</li>
+				    <li><a href="<%=request.getContextPath()%>/admin/adminPage">관리자페이지</a></li>
+				    
+				 <%}else{ %>
+				    <li><%=memberLoggedIn.getUserId() %>님 환영합니다!</li>
+				       <li><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></li>
+				 <%} %>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="header-div-wrapping-nav">
+            <a href="<%=request.getContextPath()%>"><img id="header-image" src="<%=request.getContextPath() %>/images/headerImage.png" /></a>
+            <nav>
             <ul class="main-nav">
-               <li id="main-nav-notice" class="main-nav-list"><a href="#">공지사항</a></li>
-               <li id="main-nav-board" class="main-nav-list"><a href="#" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
-                  <!-- 게시판 -->
-                  <div class="main-nav-sub" id="main-nav-sub-board">
-                     <ul class="main-nav-sub-ul">
-                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/freeBoard" >자유게시판</a></li>
-                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/regionBoard" >지역게시판</a></li>
-                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
-                     </ul>
-                  </div>
+			   <li id="main-nav-notice" class="main-nav-list "><a href="<%=request.getContextPath()%>/notice/noticeList">공지사항</a></li>
+               
+               <li id="main-nav-board" class='main-nav-list <%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>
+                   <a href="<%=request.getContextPath() %>/board/freeBoard" id='<%=param=="freeBoard"||param=="regionBoard"||param=="complainBoard"?"header-selected":""%>'>게시판</a>
+                   <div class="main-nav-sub" id="main-nav-sub-board">
+                       <ul class="main-nav-sub-ul">
+                           <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/freeBoard" >자유게시판</a></li>
+                           <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/regionBoard" >지역게시판</a></li>
+                           <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
+                       </ul>
+                   </div>  
                </li>
-               <li id="main-nav-register" class='main-nav-list'><a href="<%=request.getContextPath() %>/game/gameRegister" id='<%=param=="gameRegister"||param=="myGameList"?"header-selected":""%>'>경기등록</a>
+               <li id="main-nav-register" class='main-nav-list <%=param=="gameRegister"||param=="myGameList"?"header-selected":""%>'>
+               	  <a href="<%=request.getContextPath() %>/game/gameRegister" id='<%=param=="gameRegister"||param=="myGameList"?"header-selected":""%>'>경기등록</a>
                   <!-- 경기등록  -->
                   <div class="main-nav-sub" id="main-nav-sub-register">
                      <ul class="main-nav-sub-ul">
@@ -272,7 +306,8 @@ $(function() {
                      </ul>
                   </div>
                </li>
-               <li id="main-nav-search" class="main-nav-list"><a href="<%=request.getContextPath() %>/search/teamSearch" id='<%=param=="teamSearch"?"header-selected":""%>'>검색</a>
+               <li id="main-nav-search" class='main-nav-list <%=param=="teamSearch"?"header-selected":""%>'>
+                  <a href="<%=request.getContextPath() %>/search/teamSearch" id='<%=param=="teamSearch"?"header-selected":""%>'>검색</a>
                   <!-- 검색 -->
                   <div class="main-nav-sub" id="main-nav-sub-search">
                      <ul class="main-nav-sub-ul">
@@ -281,17 +316,18 @@ $(function() {
                      </ul>
                   </div>
                </li>
-               <li id="main-nav-mypage" class="main-nav-list"><a href="<%=request.getContextPath() %>/member/memberInfoPage" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
+               <li id="main-nav-mypage" class='main-nav-list <%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>
+                  <a href="<%=request.getContextPath() %>/member/memberInfoPage" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
                   <!-- 마이페이지 -->
                   <div class="main-nav-sub" id="main-nav-sub-mypage">
-                     <ul class="nav-list">
+                     <ul class="main-nav-sub-ul">
                          <%if(memberLoggedIn!=null) {%> 
-                        <li><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
+                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 
-                        <%-- <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
-                        <li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
+                        <%-- <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
+                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
 
-                        <li><a href="#">내 팀 관리</a></li>
+                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
                          <%} %> 
                      </ul>
                   </div>
@@ -305,6 +341,5 @@ $(function() {
             
          </nav>
          <!-- 메인메뉴 끝 -->
+         </div>
       </header>
-
-      <section id="center">

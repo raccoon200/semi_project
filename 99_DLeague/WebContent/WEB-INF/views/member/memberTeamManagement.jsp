@@ -81,17 +81,17 @@
 	  font-style: normal;
 	  font-size: 1rem;
 	  letter-spacing: 0.3em;
-	  color:lightgreen;
+	  color:rgba(223,190,106,0.8);
 	  border-radius: 0;
 	  padding: 18px 80px 20px;
 	  transition: all 0.7s ease-out;
-	  background: linear-gradient(270deg, lightgreen, lightgreen, rgba(34,34,34,0), rgba(34,34,34,0));
+	  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
 	  background-position: 1% 50%;
 	  background-size: 300% 300%;
 	  text-decoration: none;
 	  margin: 0.625rem;
 	  border: none;
-	  border: 1px solid lightgreen;
+	  border: 1px solid rgba(223,190,106,0.8);
 	}
 	
 	.btn:hover {
@@ -103,18 +103,17 @@
     /* 버튼 디자인 */
 </style>
 <script>
-function fn_teamOut() {
-	if(confirm("정말 탈퇴하시겠습니까?")) {
-		location.href="<%=request.getContextPath()%>/member/memberTeamOut?userId=<%=memberLoggedIn.getUserId()%>";
-	}
+function fn_teamManagement() {
+	location.href="<%=request.getContextPath()%>/member/memberTeamManagement?teamName=<%=teamName%>";
 }
+
 </script>
-	<h2>내 팀 정보</h2>
+	<h2>내 팀 관리</h2>
 	<hr />
 	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
-    		<input type="button" value="팀 탈퇴" style="position:relative; " class="btn" onclick="fn_teamOut();"/> 
+    		<input type="button" value="팀 관리" style="position:relative; " class="btn" onclick="fn_teamManagement()"/> 
         	<img id="logoimg" src=
         	<%if(rogo!=null){ %>
         		"<%=request.getContextPath() %>/images/team/<%=rogo %>"

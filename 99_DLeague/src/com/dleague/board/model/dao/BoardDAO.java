@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
+import com.dleague.board.model.vo.Complain;
 import com.dleague.board.model.vo.FreeBoard;
 import com.dleague.board.model.vo.FreeBoardComment;
 import com.dleague.board.model.vo.RegionBoard;
@@ -25,7 +26,6 @@ public class BoardDAO {
 	
 	public BoardDAO() {
 		String fileName = BoardDAO.class.getResource("/sql/board/board-query.properties").getPath();
-		System.out.println("fileName : "+fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -819,7 +819,370 @@ public class BoardDAO {
 		return result;
 	}
 
-	
 
+	public List<Complain> selectComplainAll(Connection conn, int cPage, int numPerPage) {
+		List<Complain> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainAll");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Complain complainBoard = new Complain();
+				complainBoard.setComplain_no(rset.getInt("complain_no"));
+				complainBoard.setComplain_title(rset.getString("complain_title"));
+				complainBoard.setComplain_writer(rset.getString("complain_writer"));
+				complainBoard.setComplain_date(rset.getDate("complain_date"));
+				complainBoard.setComplain_content(rset.getString("complain_content"));
+				complainBoard.setC_userId(rset.getString("c_userid"));
+				complainBoard.setC_teamname(rset.getString("c_teamname"));
+				complainBoard.setComplain_type(rset.getString("complain_type"));
+				complainBoard.setResult(rset.getString("result"));
+				complainBoard.setResult_Date(rset.getDate("result_date"));
+				list.add(complainBoard);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public List<Complain> selectComplainTitle(Connection conn, int cPage, int numPerPage, String searchValue) {
+		List<Complain> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainTitle");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchValue+"%");
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Complain complainBoard = new Complain();
+				complainBoard.setComplain_no(rset.getInt("complain_no"));
+				complainBoard.setComplain_title(rset.getString("complain_title"));
+				complainBoard.setComplain_writer(rset.getString("complain_writer"));
+				complainBoard.setComplain_date(rset.getDate("complain_date"));
+				complainBoard.setComplain_content(rset.getString("complain_content"));
+				complainBoard.setC_userId(rset.getString("c_userid"));
+				complainBoard.setC_teamname(rset.getString("c_teamname"));
+				complainBoard.setComplain_type(rset.getString("complain_type"));
+				complainBoard.setResult(rset.getString("result"));
+				complainBoard.setResult_Date(rset.getDate("result_date"));
+				list.add(complainBoard);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<Complain> selectComplainWriter(Connection conn, int cPage, int numPerPage, String searchValue) {
+		List<Complain> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainWriter");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchValue);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Complain complainBoard = new Complain();
+				complainBoard.setComplain_no(rset.getInt("complain_no"));
+				complainBoard.setComplain_title(rset.getString("complain_title"));
+				complainBoard.setComplain_writer(rset.getString("complain_writer"));
+				complainBoard.setComplain_date(rset.getDate("complain_date"));
+				complainBoard.setComplain_content(rset.getString("complain_content"));
+				complainBoard.setC_userId(rset.getString("c_userid"));
+				complainBoard.setC_teamname(rset.getString("c_teamname"));
+				complainBoard.setComplain_type(rset.getString("complain_type"));
+				complainBoard.setResult(rset.getString("result"));
+				complainBoard.setResult_Date(rset.getDate("result_date"));
+				list.add(complainBoard);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<Complain> selectComplainC_UserId(Connection conn, int cPage, int numPerPage, String searchValue) {
+		List<Complain> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainC_UserId");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchValue);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Complain complainBoard = new Complain();
+				complainBoard.setComplain_no(rset.getInt("complain_no"));
+				complainBoard.setComplain_title(rset.getString("complain_title"));
+				complainBoard.setComplain_writer(rset.getString("complain_writer"));
+				complainBoard.setComplain_date(rset.getDate("complain_date"));
+				complainBoard.setComplain_content(rset.getString("complain_content"));
+				complainBoard.setC_userId(rset.getString("c_userid"));
+				complainBoard.setC_teamname(rset.getString("c_teamname"));
+				complainBoard.setComplain_type(rset.getString("complain_type"));
+				complainBoard.setResult(rset.getString("result"));
+				complainBoard.setResult_Date(rset.getDate("result_date"));
+				list.add(complainBoard);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public List<Complain> selectComplainC_TeamName(Connection conn, int cPage, int numPerPage, String searchValue) {
+		List<Complain> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainC_TeamName");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchValue);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Complain complainBoard = new Complain();
+				complainBoard.setComplain_no(rset.getInt("complain_no"));
+				complainBoard.setComplain_title(rset.getString("complain_title"));
+				complainBoard.setComplain_writer(rset.getString("complain_writer"));
+				complainBoard.setComplain_date(rset.getDate("complain_date"));
+				complainBoard.setComplain_content(rset.getString("complain_content"));
+				complainBoard.setC_userId(rset.getString("c_userid"));
+				complainBoard.setC_teamname(rset.getString("c_teamname"));
+				complainBoard.setComplain_type(rset.getString("complain_type"));
+				complainBoard.setResult(rset.getString("result"));
+				complainBoard.setResult_Date(rset.getDate("result_date"));
+				list.add(complainBoard);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public int selectComplainAllCount(Connection conn) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainAllCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+	public int selectComplainTitleCount(Connection conn, String searchValue) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainTitleCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchValue+"%");
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+	public int selectComplainWriterCount(Connection conn, String searchValue) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainWriterCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchValue);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+	public int selectComplainC_UserIdCount(Connection conn, String searchValue) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainC_UserIdCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchValue);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+	public int selectComplainC_TeamNameCount(Connection conn, String searchValue) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainC_TeamNameCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchValue);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+
+
+	public Complain selectComplainBoardOne(Connection conn, int no) {
+		Complain complainBoard = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectComplainBoardOne");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1,  no);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				complainBoard = new Complain();
+				complainBoard.setComplain_no(rset.getInt("complain_no"));
+				complainBoard.setComplain_title(rset.getString("complain_title"));
+				complainBoard.setComplain_writer(rset.getString("complain_writer"));
+				complainBoard.setComplain_date(rset.getDate("complain_date"));
+				complainBoard.setComplain_content(rset.getString("complain_content"));
+				complainBoard.setC_userId(rset.getString("c_userid"));
+				complainBoard.setC_teamname(rset.getString("c_teamname"));
+				complainBoard.setComplain_type(rset.getString("complain_type"));
+				complainBoard.setResult(rset.getString("result"));
+				complainBoard.setResult_Date(rset.getDate("result_date"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return complainBoard;
+	}
+
+
+	public int insertComplain(Connection conn, Complain complain) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = "";
+		if("c_userid".equals(complain.getComplain_type())) 
+			query = prop.getProperty("insertComplainU");
+		else 
+			query = prop.getProperty("insertComplainT");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, complain.getComplain_title());
+			pstmt.setString(2, complain.getComplain_writer());
+			pstmt.setString(3, complain.getComplain_content());
+			if("c_userid".equals(complain.getComplain_type())) 
+				pstmt.setString(4, complain.getC_userId());
+			else
+				pstmt.setString(4,  complain.getC_teamname());
+			pstmt.setString(5, complain.getComplain_type());
+		
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int selectRecentComplainNo(Connection conn) {
+		int count = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectRecentComplainNo");
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
+
+	
 	
 }
