@@ -14,9 +14,12 @@
     <!-- Custom Style -->
     <style>
     table{align:center;}
-    #profile{position: relative; left:-120px; top:0px;}
+    #profile{position: relative; left:-110px; top:0px;}
     #profileImg{width:100px; height:150px;} 
-#imgsection{position: relative; left:400px; top:-265px;}
+#imgsection{position: relative; left:535px; top:-265px;}
+
+
+#userId_{width:80%; display:inline-block;}
     </style>
 <script>
 function fn_checkIdDuplicate(){
@@ -192,11 +195,10 @@ function fn_checked() {
 <tr>
 <tr>
 <td style ="width:110px;"><h5>아이디</h5></td>
-<td>
+<td style="text-align:left;">
 <input class="form-control" type="text" name="userId" id="userId_" placeholder = "아이디를 입력하세요 . (영대소문자와 숫자포함 4~12자)" value ="" required/>
-<td style="width:110px;"> <input type="button" value="ID중복체크" id="btn-idValid" onclick="fn_checkIdDuplicate()" />
+<input class = "btn btn-primary pull-right" value="중복검사" id="btn-idValid" onclick="fn_checkIdDuplicate()" style="width:100px;" />
 <input type = "hidden" name="idValid" value="0" />
-</td>
 </tr>
 <tr>
 <td style ="width:110px;"><h5>비밀번호</h5></td>
@@ -274,7 +276,7 @@ $("#selectEmail").change(function() {
 <tr>
 <td style ="width:110px;"><h5>프로필</h5></td>
 <td>
-<textarea id="profile" name="profile" maxlength="2048" style="height:180px;" placeholder = "자기소개란"></textarea>
+<textarea id="profile" name="profile" maxlength="2048" cols="50"style="height:180px;" placeholder = "자기소개란"></textarea>
 </td>
 </tr>
 <tr>
