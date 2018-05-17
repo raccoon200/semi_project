@@ -9,7 +9,7 @@
 %>
 <style>
 /*테이블*/
-a:link {
+/* a:link {
 	color: #666;
 	font-weight: bold;
 	text-decoration:none;
@@ -23,7 +23,7 @@ a:active,
 a:hover {
 	color: #bd5a35;
 	text-decoration:underline;
-}
+} */
 
 
 table a:link {
