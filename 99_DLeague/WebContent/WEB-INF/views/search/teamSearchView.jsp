@@ -165,7 +165,7 @@
             <h3><%=foundInDate %></h3>
         </div>
         <br><br>
-        <h3>팀소개글</h3>
+        <h3> < 팀소개글 > </h3>
         <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
@@ -294,6 +294,7 @@
         <%} %>
 </div>
 <script>
+var userId = "<%=memberLoggedIn.getUserId()%>"
    function fn_teamUpdate(teamName){
       location.href="<%=request.getContextPath()%>/search/teamUpdate?teamName="+teamName;
       <%-- ,'<%=rCode%>','<%=capTain%>','<%=foundInDate%>','<%=introduce%>','<%=rogo%>'
@@ -320,7 +321,7 @@
 	   }
 	   else if(msg==null) {} 
 	   else{
-	 	   var userId = memberLoggedIn.getUserId();
+	 	   
 		   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>&userId="+userId+"&msg="+msg;
 	   }
    }
