@@ -9,7 +9,7 @@
 %>
 <style>
 /*테이블*/
-a:link {
+/* a:link {
 	color: #666;
 	font-weight: bold;
 	text-decoration:none;
@@ -23,7 +23,7 @@ a:active,
 a:hover {
 	color: #bd5a35;
 	text-decoration:underline;
-}
+} */
 
 
 table a:link {
@@ -175,7 +175,6 @@ div#pageBar span{
 	color:rgb(64,128,183);
 } */
 .write-btn{
-	margin-right:40px;
 	float:right;
 }
 /*페이지*/
