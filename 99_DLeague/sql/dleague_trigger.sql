@@ -53,3 +53,13 @@ begin
     insert into tbl_delete_user values (seq_game_no.nextval, :old.userid, :old.password, :old.username,:old.regioncode, :old.phone, :old.profile, :old.photo, sysdate);
 end;
 /
+
+<!-- member_register의 yn이 'Y'로 바뀔경우(팀장) --> 
+create or replace trigger member_register_yn
+after update of yn on member_register
+for each row
+when (new.yn = 'Y')
+begin
+    update tbl_user set teamname = :new.teamname, grade = '팀원' where userid = :new.userid;
+end;
+/

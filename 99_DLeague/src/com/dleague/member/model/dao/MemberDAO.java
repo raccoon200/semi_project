@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.member.model.vo.Member;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 
 
 public class MemberDAO {
@@ -336,7 +337,6 @@ public class MemberDAO {
 		}
 		return cnt;
 	}
-
 
 }
 		

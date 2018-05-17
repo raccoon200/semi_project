@@ -52,8 +52,8 @@ function fn_memberOut() {
 }
 function fn_memberUpdateCheck() {
 	if($("#up_file").val()=="") {
-		change.innerHTML = "<input type=\"file\" name=\"my_file\" value=\"<%=member%>"";
-		return false;
+		change.innerHTML = "<input type=\'file\' name=\'my_file\' value=\'<%=memberLoggedIn.getPhoto()%>'";
+		return true;
 	} else return true;
 }
 </script>

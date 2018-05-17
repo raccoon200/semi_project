@@ -398,4 +398,27 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
-}
+	public TeamRegister teamRegister(Connection conn, String userId) {
+		TeamRegister teamRegister = new TeamRegister();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("teamRegister");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				teamRegister.setTeam_register_no(rset.getInt("team_register_no"));
+				teamRegister.setTeamName(rset.getString("teamname"));
+				teamRegister.setT_register_writer(rset.getString("t_register_writer"));
+				teamRegister.setRegionCode(rset.getString("regioncode"));
+				teamRegister.setIntroduce(rset.getString("introduce"));
+				teamRegister.setRegister_msg(rset.getString("register_date"));
+				teamRegister.setStatus(rset.getString("status"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teamRegister;
+		}
+	}
