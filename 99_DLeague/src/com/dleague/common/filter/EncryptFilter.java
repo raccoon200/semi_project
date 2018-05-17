@@ -18,7 +18,8 @@ import com.dleague.common.wrapper.MultipartWrapper;
  */
 @WebFilter(servletNames = { 
 		"MemberLoginServlet", 
-		"MemberEnrollEndServlet" 
+		"MemberEnrollEndServlet",
+		"PasswordCheck"
 		//"MemberUpdateServlet"
 		,"MemberUpdatePasswordEndServlet"
 })

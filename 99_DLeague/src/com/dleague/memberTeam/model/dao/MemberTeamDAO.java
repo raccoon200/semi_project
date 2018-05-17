@@ -273,6 +273,22 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
+	public int selectTeamCreateCheck(Connection conn, String t_register_writer) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("selectTeamCreateCheck");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, t_register_writer);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	public List<MemberRegister> memberRegisterList(Connection conn, String userId) {
 		List<MemberRegister> list = null;
 		PreparedStatement pstmt = null;
@@ -318,7 +334,6 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
-	
 	public List<MemberRegister> memberTeamMemberAcceptPage(Connection conn, String teamName) {
 		List<MemberRegister> memberRegisterList = null;
 		PreparedStatement pstmt = null;
@@ -364,12 +379,13 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
-	public int memberynYdelete(Connection conn) {
+	public int memberOtherdelete(Connection conn, String userId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("memberynYdelete");
+		String query = prop.getProperty("memberOtherdelete");
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -389,6 +405,7 @@ public class MemberTeamDAO {
 			pstmt.setString(1, "N");
 			pstmt.setString(2, userId);
 			pstmt.setString(3, teamName);
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -397,4 +414,29 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
-}
+	public TeamRegister teamRegister(Connection conn, String userId) {
+		TeamRegister teamRegister = new TeamRegister();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("teamRegister");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				teamRegister.setTeam_register_no(rset.getInt("team_register_no"));
+				teamRegister.setTeamName(rset.getString("teamname"));
+				teamRegister.setT_register_writer(rset.getString("t_register_writer"));
+				teamRegister.setRegionCode(rset.getString("regioncode"));
+				teamRegister.setIntroduce(rset.getString("introduce"));
+				teamRegister.setRegister_msg(rset.getString("register_msg"));
+				teamRegister.setRegister_date(rset.getDate("register_date"));
+				teamRegister.setStatus(rset.getString("status"));
+			}
+			System.out.println(teamRegister);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teamRegister;
+		}
+	}

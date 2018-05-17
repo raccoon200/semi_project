@@ -165,7 +165,7 @@
             <h3><%=foundInDate %></h3>
         </div>
         <br><br>
-        <h3>팀소개글</h3>
+        <h3> < 팀소개글 > </h3>
         <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
@@ -228,7 +228,12 @@
             <td>종합</td>
             <td colspan="2">총 팀원수</td>
             <td colspan="2"><%=rnum %>명</td>
-            <td><button onclick="fn_userKick('<%=teamName%>');">강퇴</button></td>
+            <td>
+            <%if(memberLoggedIn==null){ %>
+            <%}else{%>
+            <button onclick="fn_userKick('<%=teamName%>');">강퇴</button>
+            <%} %>
+            </td>
             </tr>
             </tfoot>
         </table>
@@ -296,8 +301,6 @@
 <script>
    function fn_teamUpdate(teamName){
       location.href="<%=request.getContextPath()%>/search/teamUpdate?teamName="+teamName;
-      <%-- ,'<%=rCode%>','<%=capTain%>','<%=foundInDate%>','<%=introduce%>','<%=rogo%>'
-            +"&rCode"+rCode+"&capTain"+capTain+"&foundInDate"+foundInDate+"&introduce"+introduce+"&logo"+logo; --%>
    };
    function fn_userKick(teamName){
       <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) ) {%>
@@ -310,19 +313,21 @@
        <%}%>
    };
    function fn_loginAlert(){
-      alert("팀장만 가능한 기능입니다.");
+      alert("소속 팀장만 가능한 기능입니다.");
    };
    function fn_memberTeamIn() {
 	   var msg = window.prompt("신청 메시지를 뭐라고 보내시겠습니까??");
 	   console.log(prompt);
+	   <%if(memberLoggedIn!=null){%>
 	   if(msg=="") {
 		   alert("메시지를 입력하세요!");
 	   }
 	   else if(msg==null) {} 
 	   else{
-	 	   var userId = memberLoggedIn.getUserId();
+	 		var userId = "<%=memberLoggedIn.getUserId()%>";
 		   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>&userId="+userId+"&msg="+msg;
 	   }
+	   <%}%>
    }
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

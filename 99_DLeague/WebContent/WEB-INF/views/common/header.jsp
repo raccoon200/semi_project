@@ -317,7 +317,8 @@
                   </div>
                </li>
                <li id="main-nav-mypage" class='main-nav-list <%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>
-                  <a href="<%=request.getContextPath() %>/member/memberInfoPage" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
+          		  
+                  <a href="<%=(memberLoggedIn!=null)?request.getContextPath()+"/member/memberInfoPage":"javascript:window.alert('로그인 후 사용가능합니다.')"%>" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
                   <!-- 마이페이지 -->
                   <div class="main-nav-sub" id="main-nav-sub-mypage">
                      <ul class="main-nav-sub-ul">

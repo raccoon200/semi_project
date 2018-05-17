@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 
-import com.dleague.member.model.dao.MemberDAO;
 import com.dleague.memberTeam.model.dao.MemberTeamDAO;
 import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.MemberRegister;
@@ -102,6 +101,13 @@ public class MemberTeamService {
 		return result;
 	}
 
+	public int selectTeamCreateCheck(String t_register_writer) {
+		Connection conn= getConnection();
+		int result = new MemberTeamDAO().selectTeamCreateCheck(conn, t_register_writer);
+		commit(conn);
+		return result;
+	}
+
 	public List<MemberRegister> memberRegisterList(String userId) {
 		Connection conn = getConnection();
 		List<MemberRegister> list = new MemberTeamDAO().memberRegisterList(conn, userId);
@@ -131,7 +137,7 @@ public class MemberTeamService {
 		int result = memberTeamDAO.memberTeamMemberAccept(conn, userId, teamName);
 		if(result>0) commit(conn);
 		else rollback(conn);
-		result = memberTeamDAO.memberynYdelete(conn);
+		result = memberTeamDAO.memberOtherdelete(conn, userId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -146,6 +152,10 @@ public class MemberTeamService {
 		close(conn);
 		return result;
 	}
-
-	
+	public TeamRegister teamRegister(String userId) {
+		Connection conn = getConnection();
+		TeamRegister teamRegister = new MemberTeamDAO().teamRegister(conn, userId);
+		close(conn);
+		return teamRegister;
+	}
 }
