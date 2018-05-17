@@ -7,7 +7,7 @@
 	List<Activity> activityList = (List<Activity>)request.getAttribute("activityList");
 	List<MemberRegister> memberRegisterList = (List<MemberRegister>)request.getAttribute("memberRegisterList");
 	TeamRegister teamRegister = (TeamRegister)request.getAttribute("teamRegister"); 
-	System.out.println(memberRegisterList);
+	
 	//team정보
 	String teamName="";
 	String capTain="";

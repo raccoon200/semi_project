@@ -158,4 +158,11 @@ public class MemberTeamService {
 		close(conn);
 		return teamRegister;
 	}
+
+	public int MemberTeamRegisterCancel(String choose) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().MemberTeamRegisterCancel(conn, choose);
+		close(conn);
+		return result;
+	}
 }

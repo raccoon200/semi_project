@@ -440,4 +440,12 @@ public class MemberTeamDAO {
 		}
 		return teamRegister;
 		}
+	public int MemberTeamRegisterCancel(Connection conn, String choose) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("MemberTeamRegisterCancel");
+		
+		
+		return result;
+	}
 	}

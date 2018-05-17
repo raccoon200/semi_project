@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.memberTeam.model.service.MemberTeamService;
+
 /**
  * Servlet implementation class MemberTeamRegisterCancelServlet
  */
@@ -26,8 +28,8 @@ public class MemberTeamRegisterCancelServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		response.getWriter().append(request.getParameter("choose")).append(request.getContextPath());
+		String choose = request.getParameter("choose");
+		int result = new MemberTeamService().MemberTeamRegisterCancel(choose);
 	}
 
 	/**
