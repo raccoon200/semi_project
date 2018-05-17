@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.memberTeam.model.service.MemberTeamService;
 import com.dleague.region.model.service.RegionService;
 import com.dleague.region.model.vo.Region;
 
@@ -31,8 +32,8 @@ public class MemberTeamCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
+		/*request.setCharacterEncoding("utf-8");*/
+		/*int cnt = new MemberTeamService().cntTeamCreate();*/
 		List<Region> regionList = new RegionService().selectRegionList();
 		request.setAttribute("param", "team");
 		request.setAttribute("regionList", regionList);

@@ -434,7 +434,7 @@ public class MemberTeamDAO {
 				teamRegister.setRegister_date(rset.getDate("register_date"));
 				teamRegister.setStatus(rset.getString("status"));
 			}
-			System.out.println(teamRegister);
+			/*System.out.println(teamRegister);*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -444,8 +444,15 @@ public class MemberTeamDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("MemberTeamRegisterCancel");
-		
-		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, choose);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 	}
