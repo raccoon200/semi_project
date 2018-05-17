@@ -527,7 +527,7 @@ public class adminDAO {
 		return list;
 	}
 
-	public List<TeamRegister> acceptTeam(Connection conn, String acceptNo) {
+	public List<TeamRegister> acceptTeam(Connection conn, int acceptNo) {
 		List<TeamRegister> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -537,7 +537,7 @@ public class adminDAO {
 		try {
 			pstmt=conn.prepareStatement(query);
 			
-			pstmt.setString(1, acceptNo);
+			pstmt.setInt(1, acceptNo);
 			/*System.out.println(numPerPage*(cPage-1)+1);
 			System.out.println(numPerPage*cPage);*/
 			rset=pstmt.executeQuery();
@@ -584,6 +584,68 @@ public class adminDAO {
 		}finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public int acceptTeamInsert(Connection conn, List<TeamRegister> list) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("acceptTeamInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			for(TeamRegister tr : list) {
+				pstmt.setString(1,tr.getTeamName());
+				pstmt.setString(2,tr.getRegionCode());
+				pstmt.setString(3,tr.getT_register_writer());
+				pstmt.setString(4,tr.getTeamLogo());
+				pstmt.setString(5,tr.getIntroduce());
+				pstmt.setDate(6,tr.getRegister_date());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		return result;
+	}
+
+	public int acceptTeamMemberInsert(Connection conn, List<TeamRegister> list) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("acceptTeamMemberInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			for(TeamRegister tr : list) {
+				pstmt.setString(1,tr.getT_register_writer());
+				pstmt.setString(2,tr.getTeamName());
+				pstmt.setDate(3,tr.getRegister_date());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		return result;
+	}
+
+	public int acceptUserUpdate(Connection conn, List<TeamRegister> list) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("acceptUserUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			for(TeamRegister tr : list) {
+				pstmt.setString(1,tr.getTeamName());
+				pstmt.setString(2,tr.getT_register_writer());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
 		return result;
 	}
 

@@ -246,15 +246,13 @@
        		<%} %>
 	        </td>
         	<td><%=tr.getRegister_date() %></td>
-	        <td>
-	        	<%if(tr.getStatus()==null){%>
-	        		신청대기중
-	        	<%}else if("N".equals(tr.getStatus())){ %>
-	        		수락거부
-	        	<%}else if("Y".equals(tr.getStatus())){ %>
-	        		팀생성완료
-	        	<%} %>
-	        </td>
+        	<%if(tr.getStatus()==null){%>
+        		<td style="background:yellow;font-weight:bold">신청대기중</td>
+        	<%}else if("N".equals(tr.getStatus())){ %>
+        		<td style="background:tomato;font-weight:bold"><strong></strong>수락거부</td>
+        	<%}else if("Y".equals(tr.getStatus())){ %>
+        		<td style="background:skyblue;font-weight:bold">팀생성완료</td>
+        	<%} %>
 			<td><button  onclick="fn_teamAcceptView('<%=tr.getTeam_register_no()%>');">상세보기</button></td>
 		</tr>
 	<% 		} 

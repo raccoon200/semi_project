@@ -95,14 +95,19 @@ function fn_memberTeamMemberRefuse() {
     </tr>
     </thead>
     <tbody> 
-	<%for(MemberRegister memberRegister : memberRegisterList){%>
+    <%if(memberRegisterList == null || memberRegisterList.isEmpty()){ %>
+		<tr>
+			<td colspan="5" align="center">데이터가 존재하지 않습니다.</td>
+		</tr>
+		<%}else{ %>
+		<% for(MemberRegister memberRegister : memberRegisterList){%>
 		<td><input type="radio" name="choose" id="choose" value="<%=memberRegister.getUserId()%>" onchange="fn_choose_change(this)"/></td>
 		<td><%=memberRegister.getUserId()%></td>
 		<td><%=memberRegister.getMsg() %></td>
 		<td><%=memberRegister.getRegisterDate() %></td>
 		<td><%=memberRegister.getYN()==null?"승인대기중":"거절함" %></td>
 	<tr>
-	<%} %>
+	<%} }%>
 		</tbody>
 		<tfoot>
 		<tr>
