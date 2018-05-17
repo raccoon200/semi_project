@@ -36,6 +36,7 @@ public class DeleteGameServlet extends HttpServlet {
 			result = new GameService().deleteGame(gameNo);
 		} catch (GameException e) {
 			e.printStackTrace();
+			throw new ServletException();
 		}
 		
 		String msg = "";
