@@ -118,4 +118,30 @@ public class adminService {
 		return list;
 	}
 
+	public List<TeamRegister> acceptTeam(int acceptNo) {
+		Connection conn = getConnection();
+		List<TeamRegister> list = new adminDAO().acceptTeam(conn, acceptNo);
+		close(conn);
+		return list;
+	}
+
+	public int acceptTeamSuccess(String yorN, int t_reg_no, List<TeamRegister> list) {
+		Connection conn = getConnection();
+		int result = new adminDAO().acceptTeamSuccess(conn, yorN, t_reg_no);
+		if("Y".equals(yorN)&&result>0) {
+			int result2 = new adminDAO().acceptTeamInsert(conn,list);
+			int result3 = new adminDAO().acceptTeamMemberInsert(conn,list);
+			int result4 = new adminDAO().acceptUserUpdate(conn,list);
+			if(result2>0&&result3>0&&result4>0) {
+				commit(conn);
+			}else { 
+				rollback(conn);
+			}
+			close(conn);
+		}
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

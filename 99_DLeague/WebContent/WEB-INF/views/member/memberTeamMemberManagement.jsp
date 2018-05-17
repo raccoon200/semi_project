@@ -153,6 +153,8 @@ function fn_memberTeamMandate() {
 	}
 	else {
 		if(confirm("해당 회원에게 팀장 위임하시겠습니까?")) {
+			if(choose == "<%=memberLoggedIn.getUserId()%>") alert("본인에겐 위임할 수 없습니다!");
+			else
 			location.href = "<%=request.getContextPath()%>/member/memberTeamMandate?leader=<%=memberLoggedIn.getUserId()%>&choose="+choose;
 		}
 	}

@@ -5,7 +5,8 @@
 	List<Team> list = (List<Team>)request.getAttribute("list");
 	List<TeamMember> memberList = (List<TeamMember>)request.getAttribute("memberList");
 	List<Activity> activityList = (List<Activity>)request.getAttribute("activityList");
-	
+	List<MemberRegister> memberRegisterList = (List<MemberRegister>)request.getAttribute("memberRegisterList");
+	System.out.println(memberRegisterList);
 	//team정보
 	String teamName="";
 	String capTain="";
@@ -113,6 +114,7 @@ function fn_teamOut() {
 </script>
 	<h2>내 팀 정보</h2>
 	<hr />
+	<%if(memberLoggedIn.getTeamname()!=null) {%>
 	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
@@ -287,4 +289,67 @@ function fn_teamOut() {
             <!--//ui object -->
         </div>
 </div>
+<%} else if (!memberRegisterList.isEmpty()) { %> 
+	<h2>가입 신청한 팀 내역</h2>
+    <input type="button" value="삭제" style="position:relative; " class="btn" onclick="fn_memberRegisterDelete()"/>
+    <table class="tbl_type"  cellspacing="0">
+       
+    <colgroup>
+        <col width="10%"> 
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+    </colgroup>
+    <thead>
+    <tr>
+        <th scope="col">선택</th>
+    	<th scope="col">신청한 팀</th>
+    	<th scope="col">보낸 메시지</th>
+        <th scope="col">신청날짜</th>
+        <th scope="col">상태</th>
+    </tr>
+    </thead>
+    <tbody> 
+	<%for(MemberRegister memberRegister : memberRegisterList){%>
+		<td><input type="radio" name="choose" id="choose" value="<%=memberRegister.getTeamName()%>" onchange="fn_choose_change(this)"/></td>
+		<td><%=memberRegister.getTeamName()%></td>
+		<td><%=memberRegister.getMsg() %></td>
+		<td><%=memberRegister.getRegisterDate() %></td>
+		<td><%=memberRegister.getYN()==null?"승인대기중":"거절당함" %></td>
+	<tr>
+	<%} %>
+		</tbody>
+		<tfoot>
+		<tr>
+		<td colspan="4">
+		</td>
+		<td>
+		</td>
+		</tr>
+		</tfoot>
+		</table>
+    
+<% } else {%>
+<h2>팀이 없습니다!</h2>
+<input type="button" value="팀 생성하기" onclick="location.href='<%=request.getContextPath() %>/member/memberTeamCreate'" class="btn"/>
+<%} %>
+<script>
+var choose = "";
+function fn_choose_change(choose) {
+	this.choose = choose.value;	
+	
+}
+function fn_memberRegisterDelete() {
+	if (choose=="") {
+		alert("대상을 선택해주세요!");
+	}
+	else {
+		if(confirm("해당 팀 가입신청을 삭제하시겠습니까?")) {
+			location.href = "<%=request.getContextPath()%>/member/memberTeamRegisterDelete?choose="+choose+"&userId=<%=memberLoggedIn.getUserId()%>";
+		}
+	}
+}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

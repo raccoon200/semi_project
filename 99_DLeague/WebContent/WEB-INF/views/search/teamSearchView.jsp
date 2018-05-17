@@ -43,7 +43,7 @@
    img#logoimg{width: 250px;height: 200px;display: inline-block;margin: 50px 0 0 0;}
    img#logo{width: 200px;height: 80px;display: inline-block;}
    div#logoDiv{width: 200px;height: 80px;display: inline-block;}
-   div#imgDiv{width: 410px;height: 315px;display: inline-block;float: left;text-align:center;}
+   div#imgDiv{width: 410px;height: 315px;display: inline-block;float: left;text-align:center;border:3px solid skyblue; border-radius: 10px}
    /* div#bu,#a,#b,#c,#d{border: 1px solid black;} */
    div#bu{height: 590px; width: 700px; display: inline-block;}
    div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
@@ -165,6 +165,7 @@
             <h3><%=foundInDate %></h3>
         </div>
         <br><br>
+        <h3>팀소개글</h3>
         <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
@@ -281,7 +282,7 @@
         
             
         </div>
-        <%if(memberLoggedIn!=null&&null==memberLoggedIn.getTeamname()) {%>
+        <%if(memberLoggedIn!=null&&null==memberLoggedIn.getTeamname()&&!memberLoggedIn.getUserId().equals("admin")) {%>
         	<input type="button" value="팀 가입 신청" style="position:relative; " class="btnM" onclick="fn_memberTeamIn();"/>
         <%} %>
         <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) )  {%>
@@ -312,7 +313,16 @@
       alert("팀장만 가능한 기능입니다.");
    };
    function fn_memberTeamIn() {
-	   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>";
+	   var msg = window.prompt("신청 메시지를 뭐라고 보내시겠습니까??");
+	   console.log(prompt);
+	   if(msg=="") {
+		   alert("메시지를 입력하세요!");
+	   }
+	   else if(msg==null) {} 
+	   else{
+	 	   var userId = memberLoggedIn.getUserId();
+		   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>&userId="+userId+"&msg="+msg;
+	   }
    }
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

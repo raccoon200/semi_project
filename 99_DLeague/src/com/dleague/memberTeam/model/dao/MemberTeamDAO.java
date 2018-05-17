@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.memberTeam.model.vo.Activity;
+import com.dleague.memberTeam.model.vo.MemberRegister;
 import com.dleague.memberTeam.model.vo.Team;
 import com.dleague.memberTeam.model.vo.TeamMember;
 import com.dleague.memberTeam.model.vo.TeamRegister;
@@ -169,19 +170,7 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
-	/*public void updateGrade(Connection conn, String userId) {
-		PreparedStatement pstmt = null;
-		String query = prop.getProperty("updateGrade");
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, userId);
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-	}*/
+	
 	public void memberTeamDelete(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("memberTeamDelete");
@@ -196,37 +185,6 @@ public class MemberTeamDAO {
 		}
 	}
 
-	public void MemberTeamMandateLeader(Connection conn, String choose) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String query = prop.getProperty("MemberTeamMandate");
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "팀장");
-			pstmt.setString(2, choose);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-	}
-	public int MemberTeamMandateMember(Connection conn, String leader) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String query = prop.getProperty("MemberTeamMandate");
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "팀원");
-			pstmt.setString(2, leader);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
 	public int memberTeamMandateLeader(Connection conn, String choose) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -275,7 +233,6 @@ public class MemberTeamDAO {
 				waitteam.setGameNo(rset.getInt("game_no"));
 				list.add(waitteam);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -308,6 +265,130 @@ public class MemberTeamDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, teamName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public List<MemberRegister> memberRegisterList(Connection conn, String userId) {
+		List<MemberRegister> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MemberRegister memberResiter = null;
+		String query = prop.getProperty("memberResiterList");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<MemberRegister>();
+			while(rset.next()) {
+				memberResiter = new MemberRegister();
+				memberResiter.setUserId(rset.getString("userid"));
+				memberResiter.setTeamName(rset.getString("teamname"));
+				memberResiter.setMsg(rset.getString("message"));
+				memberResiter.setRegisterDate(rset.getDate("register_date"));
+				memberResiter.setYN(rset.getString("YN"));
+				list.add(memberResiter);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public int memberTeamRegisterDelete(Connection conn, String userId, String choose) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamRegisterDelete");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, choose);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<MemberRegister> memberTeamMemberAcceptPage(Connection conn, String teamName) {
+		List<MemberRegister> memberRegisterList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("memberTeamMemberAcceptPage");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			rset = pstmt.executeQuery();
+			memberRegisterList = new ArrayList<MemberRegister>();
+			while(rset.next()) {
+				MemberRegister memberRegister = new MemberRegister();
+				memberRegister.setUserId(rset.getString("userid"));
+				memberRegister.setMsg(rset.getString("message"));
+				memberRegister.setRegisterDate(rset.getDate("register_date"));
+				memberRegister.setYN(rset.getString("yn"));
+				memberRegisterList.add(memberRegister);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return memberRegisterList;
+	}
+	public int memberTeamMemberAccept(Connection conn, String userId, String teamName) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamMemberAcceptOrRefuse");
+		System.out.println(userId);
+		System.out.println(teamName);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "Y");
+			pstmt.setString(2, userId);
+			pstmt.setString(3, teamName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int memberynYdelete(Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberynYdelete");
+		try {
+			pstmt = conn.prepareStatement(query);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int memberTeamMemberRefuse(Connection conn, String userId, String teamName) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamMemberAcceptOrRefuse");
+		System.out.println(userId);
+		System.out.println(teamName);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "N");
+			pstmt.setString(2, userId);
+			pstmt.setString(3, teamName);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
