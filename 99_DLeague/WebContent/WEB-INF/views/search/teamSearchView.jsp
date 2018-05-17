@@ -282,7 +282,7 @@
         
             
         </div>
-        <%if(memberLoggedIn!=null&&null==memberLoggedIn.getTeamname()) {%>
+        <%if(memberLoggedIn!=null&&null==memberLoggedIn.getTeamname()&&!memberLoggedIn.getUserId().equals("admin")) {%>
         	<input type="button" value="팀 가입 신청" style="position:relative; " class="btnM" onclick="fn_memberTeamIn();"/>
         <%} %>
         <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) )  {%>
@@ -320,7 +320,8 @@
 	   }
 	   else if(msg==null) {} 
 	   else{
-		   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>&userId=<%=memberLoggedIn.getUserId()%>&msg="+msg;
+	 	   var userId = memberLoggedIn.getUserId();
+		   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>&userId="+userId+"&msg="+msg;
 	   }
    }
 </script>

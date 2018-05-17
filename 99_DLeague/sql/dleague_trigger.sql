@@ -45,7 +45,7 @@ update game set away = :old.teamname where game_no = :old.game_no;
 end;
 /
 
-<!-- tbl_user에서 삭제한 정보, 탈퇴 테이블로 옮기는 트리거 -->
+<!-- tbl_user에서 삭제한 정보를 멤버 탈퇴 테이블로 옮기는 트리거 -->
 create or replace trigger tb_user_delete
 after delete on tbl_user
 for each row
