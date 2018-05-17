@@ -14,7 +14,7 @@ import com.dleague.member.model.service.MemberService;
 /**
  * Servlet implementation class MemberPasswordUpdate
  */
-@WebServlet("/member/passwordUpdate")
+@WebServlet(name="PasswordCheck", urlPatterns="/member/passwordUpdate")
 public class MemberPasswordUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.member.model.vo.Member;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 import com.dleague.search.model.vo.Team;
 
 import static com.dleague.common.JDBCTemplate.close;
@@ -459,6 +460,193 @@ public class adminDAO {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int acceptTeamCount(Connection conn) {
+		int totalMember = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("acceptTeamCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalMember = rset.getInt("cnt");
+			}
+//			System.out.println("totalMember@AdminDAO="+totalMember);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMember;
+	}
+
+	public List<TeamRegister> acceptTeamList(Connection conn, int cPage, int numPerPage) {
+		List<TeamRegister> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("acceptTeamListByPaging");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			//공식2 시작 rownum과 마지막 rownum을 구하는 공식
+			pstmt.setInt(1, numPerPage*(cPage-1)+1);
+			pstmt.setInt(2, numPerPage*cPage);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
+			rset=pstmt.executeQuery();
+			
+			list = new ArrayList<TeamRegister>();
+			while(rset.next()) {
+				TeamRegister tr = new TeamRegister();
+				tr.setTeam_register_no(rset.getInt("team_register_no"));
+				tr.setTeamName(rset.getString("teamname"));
+				tr.setT_register_writer(rset.getString("t_register_writer"));
+				tr.setRegionCode(rset.getString("regioncode"));
+				tr.setTeamLogo(rset.getString("teamlogo"));
+				tr.setIntroduce(rset.getString("introduce"));
+				tr.setRegister_msg(rset.getString("register_msg"));
+				tr.setRegister_date(rset.getDate("register_date"));
+				tr.setStatus(rset.getString("status"));
+				tr.setRnum(rset.getInt("rnum"));
+				
+				list.add(tr);
+			}
+//			System.out.println("list@AdminDAO.selectMemberList="+list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<TeamRegister> acceptTeam(Connection conn, int acceptNo) {
+		List<TeamRegister> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("acceptTeam");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			
+			pstmt.setInt(1, acceptNo);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
+			rset=pstmt.executeQuery();
+			
+			list = new ArrayList<TeamRegister>();
+			while(rset.next()) {
+				TeamRegister tr = new TeamRegister();
+				tr.setTeam_register_no(rset.getInt("team_register_no"));
+				tr.setTeamName(rset.getString("teamname"));
+				tr.setT_register_writer(rset.getString("t_register_writer"));
+				tr.setRegionCode(rset.getString("regioncode"));
+				tr.setTeamLogo(rset.getString("teamlogo"));
+				tr.setIntroduce(rset.getString("introduce"));
+				tr.setRegister_msg(rset.getString("register_msg"));
+				tr.setRegister_date(rset.getDate("register_date"));
+				tr.setStatus(rset.getString("status"));
+				
+				list.add(tr);
+			}
+//			System.out.println("list@AdminDAO.selectMemberList="+list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int acceptTeamSuccess(Connection conn, String yorN, int t_reg_no) {
+		int result = -1;
+		PreparedStatement pstmt =  null;
+		
+		String query = prop.getProperty("acceptTeamSuccess");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, yorN);
+			pstmt.setInt(2, t_reg_no);
+		
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int acceptTeamInsert(Connection conn, List<TeamRegister> list) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("acceptTeamInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			for(TeamRegister tr : list) {
+				pstmt.setString(1,tr.getTeamName());
+				pstmt.setString(2,tr.getRegionCode());
+				pstmt.setString(3,tr.getT_register_writer());
+				pstmt.setString(4,tr.getTeamLogo());
+				pstmt.setString(5,tr.getIntroduce());
+				pstmt.setDate(6,tr.getRegister_date());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		return result;
+	}
+
+	public int acceptTeamMemberInsert(Connection conn, List<TeamRegister> list) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("acceptTeamMemberInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			for(TeamRegister tr : list) {
+				pstmt.setString(1,tr.getT_register_writer());
+				pstmt.setString(2,tr.getTeamName());
+				pstmt.setDate(3,tr.getRegister_date());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		return result;
+	}
+
+	public int acceptUserUpdate(Connection conn, List<TeamRegister> list) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("acceptUserUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			for(TeamRegister tr : list) {
+				pstmt.setString(1,tr.getTeamName());
+				pstmt.setString(2,tr.getT_register_writer());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		return result;
 	}
 
 }

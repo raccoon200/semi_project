@@ -3,11 +3,13 @@
 <%@ page import="com.dleague.member.model.vo.*" %>
 
 <% Member member = (Member)request.getAttribute("Member"); %>
+
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <style>
 table{border:1px solid;}
 #profileImg{width:150px; height:150px;}
 #imgsection{position: relative; left:350px; top:-250px;}
-.btn {
+ .btnM {
   display: inline-block;
   background: transparent;
   text-transform: uppercase;
@@ -28,16 +30,15 @@ table{border:1px solid;}
   border: 1px solid rgba(223,190,106,0.8);
 }
 
-.btn:hover {
+.btnM:hover {
   cursor:pointer;
   color: #fff;
   border: 1px solid rgba(223,190,106,0);
   color: $white;
   background-position: 99% 50%;
-} 
+}  
 /* 버튼 디자인 */
 </style>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
 <script>
 function fn_memberOut() {
@@ -49,10 +50,25 @@ function fn_memberOut() {
 		location.href="<%=request.getContextPath()%>/member/memberOut?userId=<%=memberLoggedIn.getUserId()%>";
 	}
 }
+function fn_memberUpdateCheck() {
+	if($("#up_file").val()=="") {
+		change.innerHTML = "<input type=\'file\' name=\'my_file\' value=\'<%=memberLoggedIn.getPhoto()%>'";
+		return true;
+	} else return true;
+}
+function fn_update_password(){
+	var url = "<%=request.getContextPath()%>/member/updatePassword?userId=<%=memberLoggedIn!=null?memberLoggedIn.getUserId():""%>";
+	var title = "updatePassword";
+	var status = "left=500px, top=200px, width=450px, height=260px";
+	
+	var popup = window.open(url, title, status);
+}
 </script>
 <section>
-<form action="<%=request.getContextPath()%>/member/MemberInfoUpdate" method="post" enctype="multipart/form-data">
-<input type="button" value="회원 탈퇴" style="position:relative; " class="btn" onclick="fn_memberOut();"/>
+<form action="<%=request.getContextPath()%>/member/MemberInfoUpdate" method="post" enctype="multipart/form-data" onsubmit="return fn_memberUpdateCheck();">
+<h2>내 정보</h2>
+<hr />
+<input type="button" value="회원 탈퇴" style="position:relative; " class="btnM" onclick="fn_memberOut()"/>
 <table>
 <tr>
 <td>
@@ -60,11 +76,11 @@ function fn_memberOut() {
 </td>
 <td><input type="text" name="userId" id="userId" value="<%=member.getUserId()%>" readonly/></td>
 </tr>
-<tr><td>
+<%-- <tr><td>
 <label for="password">비밀번호 </label></td>
 <td>
 <input type="password" name="password" id="password" value="<%=member.getPassword()%>" required/></td>
-</tr>
+</tr> --%>
 
 <tr><td>
 <label for="userName">이름</label></td>
@@ -101,7 +117,7 @@ required/> --%></td>
 <tr><td>
 <label for="email">이메일</label></td>
 <td>
-<input type="email" name="email" id="email" value="<%=member.getEmail()%>"/></td>
+<input type="email" name="email" id="email" value="<%=member.getEmail()!=null?member.getEmail():""%>"/></td>
 </tr>
 
 <tr><td>
@@ -113,13 +129,13 @@ required/> --%></td>
 <tr><td>
 <label for="teamname">팀이름</label></td>
 <td>
-<input type="text" name="teamName" id="teamName" readonly value="<%=member.getTeamname()%>"/></td>
+<input type="text" name="teamName" id="teamName" readonly value="<%=member.getTeamname()!=null?member.getTeamname():""%>"/></td>
 </tr>
 
 <tr><td>
 <label for="profile">프로필</label></td>
 <td>
-<input type="text" name="profile" id="profile" value="<%=member.getProfile()%>"/></td>
+<input type="text" name="profile" id="profile" value="<%=member.getProfile()!=null?member.getProfile():""%>"/></td>
 </tr>
 
 <tr>
@@ -137,29 +153,34 @@ required/> --%></td>
 
 </table>
 <br />
-<input type="submit" value="수정" />
-<input type="reset" value="초기화" />
+<input type="submit" value="수정" class="btn"/>
+<input type="reset" value="초기화" class="btn"/>
+<input type="button" value="비밀번호수정" class="btn" onclick="fn_update_password()" />
 <section id="imgsection">
-<input type="image" <%-- src="<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>" --%> id="profileImg"/>
+<input type="image" style="pointer-events: none;" id="profileImg"/>
 <br /> 
 <div style="position:relative;">
-<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" />
+<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
+
 <span id="fname">프로필 사진 변경</span>
 </div>
 </section>
 </form>
 <script>
 $(function (){
-	var value2 = $("#up_file").val();
-	if(value2=="") {
+
+	if("<%=member.getPhoto()%>"=="default.jpg" || "<%=member.getPhoto()%>"=="null") {
         $('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
      } 
 	else {
-		$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/board/<%=member.getPhoto()%>");
+		$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>");
 	}
 });
 $("[name=up_file]").change(function(){ 
 	//$(this).val()은 선택한 파일명임.
+	if($("#up_file").val()=="") {
+		$('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
+	}
 	if($(this).val()==""){
 		$("#fname").show();
 	}	
@@ -169,14 +190,10 @@ $("[name=up_file]").change(function(){
 });	
 function fn_fileUpload(value){
 	
-	console.log(value2);
-	   <%-- if(value2=="") {
-	        $('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
-	     }  --%>
 	if(value.files && value.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-             $('#profileImg').attr('src', e.target.result);
+             $('#profileImg').attr('src', e.target.result);         
 			}
         }
         reader.readAsDataURL(value.files[0]);

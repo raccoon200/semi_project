@@ -194,4 +194,14 @@ public class searchService {
 		return result;
 	}
 
+	public int teamUserKick(String kick) {
+		Connection conn = getConnection();
+		int result = new TeamDAO().teamUserKick(conn, kick);
+		int result2 = new TeamDAO().teamUserKick2(conn, kick);
+		if(result>0 && result2>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 }

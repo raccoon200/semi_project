@@ -142,6 +142,8 @@ function fn_memberTeamGetOut() {
 	}
 	else{
 		if(confirm("해당 회원을 제명하시겠습니까?")) {
+			if(choose == "<%=memberLoggedIn.getUserId()%>") alert("본인에겐 제명할 수 없습니다!");
+			else
 			location.href = "<%=request.getContextPath()%>/member/memberTeamGetOut?choose="+choose;
 		}
 	}
@@ -153,6 +155,8 @@ function fn_memberTeamMandate() {
 	}
 	else {
 		if(confirm("해당 회원에게 팀장 위임하시겠습니까?")) {
+			if(choose == "<%=memberLoggedIn.getUserId()%>") alert("본인에겐 위임할 수 없습니다!");
+			else
 			location.href = "<%=request.getContextPath()%>/member/memberTeamMandate?leader=<%=memberLoggedIn.getUserId()%>&choose="+choose;
 		}
 	}
@@ -198,9 +202,9 @@ function fn_memberTeamMandate() {
 				<td><%=m.getUserId() %></td>
 	        	<td><%=m.getUserName() %></td>
 		        <td><%=m.getPhone() %></td>
-		        <td><%=m.getEmail() %></td>
+		        <td><%=m.getEmail()==null ?"없음":m.getEmail()%></td>
 	        	<td><%=m.getBirthday() %></td>
-	        	<td><%=m.getProfile() %></td>
+	        	<td><%=m.getProfile() ==null ?"없음":m.getProfile()%></td>
 	        	<td><%=m.getGrade() %></td>
 			</tr>
 		<%}

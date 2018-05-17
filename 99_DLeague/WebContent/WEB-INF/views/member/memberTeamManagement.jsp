@@ -120,7 +120,7 @@ function fn_teamManagement() {
         	<%}else{ %>
         	 	"<%=request.getContextPath() %>/images/team/default.png" 
         	<%} %>
-        	 alt="첨부파일" style="display:<%=rogo==null?"inline":"none" %>;"/>
+        	 alt="첨부파일" <%-- style="display:<%=rogo==null?"inline":"none" %>;" --%>/>
         </div>
         <div id="a">
             <h2 id="bb">팀이름</h2>

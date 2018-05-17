@@ -45,6 +45,7 @@ public class MemberTeamManagementPageServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+			return;
 		} 
 		String userId = request.getParameter("userId");
 		
@@ -71,6 +72,7 @@ public class MemberTeamManagementPageServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+			return;
 		} 
 		else {
 		request.setAttribute("list", list);					//팀리스트

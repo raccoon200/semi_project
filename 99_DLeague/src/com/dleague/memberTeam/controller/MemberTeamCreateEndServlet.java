@@ -68,7 +68,17 @@ public class MemberTeamCreateEndServlet extends HttpServlet {
 		String introduce = multiReq.getParameter("introduce");
 		String register_msg = multiReq.getParameter("register_msg");
 		String teamLogo = multiReq.getFilesystemName("up_file");
+		if(teamLogo==null) {
+			teamLogo = "default.png";
+		}
 		
+		//
+		int count = new MemberTeamService().selectTeamCreateCheck(t_register_writer);
+		if(count>0) {
+			request.setAttribute("msg", "이미 팀가입을 한 상태입니다");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		}
 		
 		TeamRegister team = new TeamRegister();
 		team.setTeamName(teamName);
@@ -78,6 +88,8 @@ public class MemberTeamCreateEndServlet extends HttpServlet {
 		team.setRegister_msg(register_msg);
 		team.setTeamLogo(teamLogo);;
 		
+		System.out.println("teamLogo : "+teamLogo);
+		
 		//3.비지니스로직 처리
 	
 		int result = new MemberTeamService().insertTeamRegist(team);
@@ -85,7 +97,7 @@ public class MemberTeamCreateEndServlet extends HttpServlet {
 		//4.view단 처리위임.
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
-		String loc = "/board/boardList";
+		String loc = "/";
 		if(result>0) {
 			msg = "팀  등록 신청 성공!";
 			loc = "/";

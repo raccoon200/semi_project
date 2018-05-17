@@ -79,12 +79,24 @@ public class MemberService {
 		return list;
 	}
 	public int memberOut(String userId) {
-		int result = 0;
 		Connection conn = getConnection();
-		result = new MemberDAO().memberOut(conn, userId);
+		int result = new MemberDAO().memberOut(conn, userId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		return result;
 	}
+	public int memberTeamIn(String userId, String teamName, String msg) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().memberTeamIn(conn, userId, teamName, msg); 
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public int memberTeamInCount(String userId, String teamName) {
+		Connection conn = getConnection();
+		int cnt = new MemberDAO().memberTeamInCount(conn, userId, teamName);
+		return cnt;
+	}
+	
 	
 }

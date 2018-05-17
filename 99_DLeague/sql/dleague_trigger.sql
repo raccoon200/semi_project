@@ -44,3 +44,22 @@ begin
 update game set away = :old.teamname where game_no = :old.game_no;
 end;
 /
+
+<!-- tbl_user에서 삭제한 정보를 멤버 탈퇴 테이블로 옮기는 트리거 -->
+create or replace trigger tb_user_delete
+after delete on tbl_user
+for each row
+begin
+    insert into tbl_delete_user values (seq_game_no.nextval, :old.userid, :old.password, :old.username,:old.regioncode, :old.phone, :old.profile, :old.photo, sysdate);
+end;
+/
+
+<!-- member_register에서 yn이 'Y'로 변한 행이 있으면 팀이름과 아이디를 가져다 tbl_user에 수정, trg_add_team_member때문에 team_member에도 추가됨 -->
+create or replace trigger member_register_YN
+after update of yn on member_register
+for each row
+when (new.yn = 'Y')
+begin
+   update tbl_user set teamname = :new.teamname, grade = '팀원' where userid = :new.userid;
+end;
+/

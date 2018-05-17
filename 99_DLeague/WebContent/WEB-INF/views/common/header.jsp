@@ -245,16 +245,28 @@
 	}
 	</style>
 <script>
+<<<<<<< HEAD
 <%if(memberLoggedIn!=null) { %> 
+=======
+<%-- <%if(memberLoggedIn!=null) { %> 
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
    function fn_validate_team_info() {
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
       }
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
 
+<<<<<<< HEAD
       return false;
+=======
+      return false;
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
    }
+<<<<<<< HEAD
 <%} %>
+=======
+<%} %> --%>
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 </script>
 </head>
 <body>
@@ -317,7 +329,8 @@
                   </div>
                </li>
                <li id="main-nav-mypage" class='main-nav-list <%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>
-                  <a href="<%=request.getContextPath() %>/member/memberInfoPage" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
+          		  
+                  <a href="<%=(memberLoggedIn!=null)?request.getContextPath()+"/member/memberInfoPage":"javascript:window.alert('로그인 후 사용가능합니다.')"%>" id='<%=param=="memberInfo"||param=="memberTeamInfo"?"header-selected":""%>'>마이페이지</a>
                   <!-- 마이페이지 -->
                   <div class="main-nav-sub" id="main-nav-sub-mypage">
                      <ul class="main-nav-sub-ul">
@@ -325,9 +338,13 @@
                         <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberInfoPage">내 정보</a></li>
 
                         <%-- <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 정보</a></li> --%>
-                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>" onclick="return fn_validate_team_info();">내 팀 정보</a></li>
+                        <!-- onclick="return fn_validate_team_info();" -->
+                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId() %>" >내 팀 정보</a></li>
 
                         <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
+                        <% if("선수".equals(memberLoggedIn.getGrade())) { %>
+							<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamCreate?userId=<%=memberLoggedIn.getUserId()%>">팀생성</a><li>
+						<%} %>
                          <%} %> 
                      </ul>
                   </div>

@@ -8,14 +8,12 @@ import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import com.oreilly.servlet.MultipartRequest;
-
-public class EncryptWrapper2 extends HttpServletRequestWrapper {
+public class EncryptWrapper extends HttpServletRequestWrapper {
 
 	//기본생성자가 없으므로
 	//반드시 HttpServletRequest를 매개변수로 하는 생성자를 작성해야함.
-	public EncryptWrapper2(MultipartRequest request) {
-		super((HttpServletRequest) request);
+	public EncryptWrapper(HttpServletRequest request) {
+		super(request);
 	}
 	/*request.getParameter("password");*/
 	@Override
@@ -23,16 +21,16 @@ public class EncryptWrapper2 extends HttpServletRequestWrapper {
 		String value = "";
 		//if(key != null && key.equals("password")) {
 		//비밀번호수정시 파라미터 password_new추가
-		if(key != null && (key.equals("password") || key.equals("password_new"))) {
-			value = super.getParameter(key);
+		if(key != null) {
+			value = key;
 			System.out.println("암호화전 : "+value);
 			//암호화처리 메소드호출
 			value = getSha512(value);
 			System.out.println("암호화후 : "+value);
 		}
-		else {
+		/*else {
 			value = super.getParameter(key);
-		}
+		}*/
 		return value;
 	}
 
@@ -58,7 +56,7 @@ public class EncryptWrapper2 extends HttpServletRequestWrapper {
 		//바이너리데이터 포맷팅으로 Base64인코더를 이용.
 		//바이트배열 => 문자열
 		encPwd = Base64.getEncoder().encodeToString(encryptedBytes);
-		System.out.println(password + ", "+encPwd);
+		
 		return encPwd;
 	}
 	

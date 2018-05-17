@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dleague.member.model.vo.Member;
+import com.dleague.memberTeam.model.vo.TeamRegister;
 
 
 public class MemberDAO {
@@ -163,19 +164,19 @@ public class MemberDAO {
 	      try {
 	         //ssssssssss
 	         pstmt = conn.prepareStatement(query);
-	         pstmt.setString(1, member.getPassword());
-	         pstmt.setString(2, member.getUserName());
-	         pstmt.setString(3, member.getRegioncode());
-	         pstmt.setString(4, member.getPhone());
-	         pstmt.setString(5, member.getEmail());
-	         pstmt.setString(6, member.getBirthday());
+	/*         pstmt.setString(1, member.getPassword());*/
+	         pstmt.setString(1, member.getUserName());
+	         pstmt.setString(2, member.getRegioncode());
+	         pstmt.setString(3, member.getPhone());
+	         pstmt.setString(4, member.getEmail());
+	         pstmt.setString(5, member.getBirthday());
 	         /*pstmt.setString(7, member.getTeamname());*/
-	         pstmt.setString(7, member.getProfile());
-	         pstmt.setString(8, member.getGrade());
+	         pstmt.setString(6, member.getProfile());
+	         pstmt.setString(7, member.getGrade());
 	         
-	         pstmt.setDate(9, member.getEnrolldate());
-	         pstmt.setString(10, member.getPhoto());
-	         pstmt.setString(11, member.getUserId());
+	         pstmt.setDate(8, member.getEnrolldate());
+	         pstmt.setString(9, member.getPhoto());
+	         pstmt.setString(10, member.getUserId());
 	         System.out.println(member.getTeamname());
 	         System.out.println(member);
 	         result = pstmt.executeUpdate();
@@ -330,5 +331,46 @@ result = pstmt.executeUpdate();
 		}
 		return result;
 	}
+
+	public int memberTeamIn(Connection conn, String userId, String teamName, String msg) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamIn");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, teamName);
+			pstmt.setString(3, msg);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int memberTeamInCount(Connection conn, String userId, String teamName) {
+		int cnt = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("memberTeamInCount");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, teamName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				cnt = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cnt;
+	}
+
 }
 		

@@ -30,11 +30,12 @@ public class MemberTeamMandateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String leader = request.getParameter("leader");
 		String choose = request.getParameter("choose");
+
 		int result = new MemberTeamService().MemberTeamMandate(leader, choose);
 		String msg = "";
 		String loc = "";
 		if(result>0) {
-			msg = "성공적으로 위임하였습니다!";
+			msg = "성공적으로 위임하였습니다! 재로그인시 적용됩니다!";
 			loc = "/member/logout";
 		} else {
 			msg = "오류!! 관리자에게 문의하시오!!";
