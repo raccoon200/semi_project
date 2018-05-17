@@ -294,7 +294,7 @@
         <%} %>
 </div>
 <script>
-var userId = "<%=memberLoggedIn.getUserId()%>"
+
    function fn_teamUpdate(teamName){
       location.href="<%=request.getContextPath()%>/search/teamUpdate?teamName="+teamName;
       <%-- ,'<%=rCode%>','<%=capTain%>','<%=foundInDate%>','<%=introduce%>','<%=rogo%>'
