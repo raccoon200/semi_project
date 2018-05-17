@@ -344,6 +344,9 @@ function fn_teamOut() {
         <col width="10%"> 
         <col width="10%">
         <col width="10%">
+        <col width="15%">
+        <col width="10%">
+        <col width="10%">
         <col width="10%">
         <col width="10%">
         <col width="10%">
@@ -351,10 +354,14 @@ function fn_teamOut() {
     <thead>
     <tr>
         <th scope="col">선택</th>
-    	<th scope="col">신청한 팀</th>
-    	<th scope="col">보낸 메시지</th>
-        <th scope="col">신청날짜</th>
-        <th scope="col">상태</th>
+    	<th scope="col">신청번호</th>
+    	<th scope="col">팀 이름</th>
+    	<th scope="col">팀장</th>
+    	<th scope="col">지역코드</th>
+        <th scope="col">팀 소개</th>
+        <th scope="col">신청 메시지</th>
+        <th scope="col">신청 날짜</th>
+        <th scope="col">신청 상태</th>        
     </tr>
     </thead>
     <tbody> 
