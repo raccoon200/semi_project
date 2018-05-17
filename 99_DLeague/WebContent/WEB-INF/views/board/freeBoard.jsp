@@ -383,7 +383,7 @@ function fn_search() {
 		</tr>
 		<%} %>
 	</table>
-	<div id="pageBar">
+	<div id="pageBar" class="pagination">
 		<%=(request.getAttribute("pageBar")!=null)?request.getAttribute("pageBar"):"" %>
 		<%if(memberLoggedIn!=null) { %>
 			<input type="button" class="write-btn" value="글쓰기" onclick="location.href='<%=request.getContextPath()%>/board/freeBoardForm'"/>
