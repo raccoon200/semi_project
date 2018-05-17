@@ -175,7 +175,6 @@ div#pageBar span{
 	color:rgb(64,128,183);
 } */
 .write-btn{
-	margin-right:40px;
 	float:right;
 }
 /*페이지*/
