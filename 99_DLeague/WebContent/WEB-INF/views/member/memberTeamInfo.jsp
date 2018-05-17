@@ -333,11 +333,10 @@ function fn_teamOut() {
 		</tr>
 		</tfoot>
 		</table>
-    
 <% } else if (teamRegister!=null){ %>
-	
+	<%System.out.println(teamRegister); %>
 	<h2>팀 생성 신청 내역</h2>
-    <input type="button" value="신청 취소" style="position:relative; " class="btn" onclick="fn_teamOut();" />
+    <input type="button" value="신청 취소" style="position:relative; " class="btn" onclick="fn_registerCancel();" />
     <table class="tbl_type"  cellspacing="0">
        
     <colgroup>
@@ -370,12 +369,32 @@ function fn_teamOut() {
 		<td><%=teamRegister.getTeam_register_no()%></td>
 		<td><%=teamRegister.getTeamName()%></td>
 		<td><%=teamRegister.getT_register_writer()%></td>
-		<td><%=teamRegister.getRegionCode()%></td>
+		<td>
+       	<%if("G1".equals(teamRegister.getRegionCode()) ) {%>
+   			서울
+   		<%}else if("G2".equals(teamRegister.getRegionCode()) ) { %>
+   			경기
+   		<%}else if("G3".equals(teamRegister.getRegionCode()) ) { %>
+   			강원
+   		<%}else if("G4".equals(teamRegister.getRegionCode()) ) { %>
+   			충북
+   		<%}else if("G5".equals(teamRegister.getRegionCode()) ) { %>
+   			충남
+   		<%}else if("G6".equals(teamRegister.getRegionCode()) ) { %>
+   			경북
+   		<%}else if("G7".equals(teamRegister.getRegionCode()) ) { %>
+   			전북
+   		<%}else if("G8".equals(teamRegister.getRegionCode()) ) { %>
+   			전남
+   		<%}else if("G9".equals(teamRegister.getRegionCode()) ) { %>
+   			제주					
+   		<%} %>
+        </td>
 		<td><%=teamRegister.getIntroduce()%></td>
 		<td><%=teamRegister.getRegister_msg()%></td>
 		<td><%=teamRegister.getRegister_date()%></td>
-		<td><%=teamRegister.getStatus()%></td>
-	<tr>
+		<td><%=teamRegister.getStatus()=="N"?"거절당함":"승인대기중"%></td>
+		<tr>
 		</tbody>
 		<tfoot>
 		<tr>
@@ -404,6 +423,15 @@ function fn_memberRegisterDelete() {
 	else {
 		if(confirm("해당 팀 가입신청을 삭제하시겠습니까?")) {
 			location.href = "<%=request.getContextPath()%>/member/memberTeamRegisterDelete?choose="+choose+"&userId=<%=memberLoggedIn.getUserId()%>";
+		}
+	}
+}
+function fn_registerCancel() {
+	if (choose=="") {
+		alert("대상을 선택해주세요!");
+	} else {
+		if(confirm("해당 팀 생성 신청 내역을 삭제하시겠습니까?")) {
+			location.href = "<%=request.getContextPath()%>/member/memberTeamRegisterCancel?choose="+choose;
 		}
 	}
 }
