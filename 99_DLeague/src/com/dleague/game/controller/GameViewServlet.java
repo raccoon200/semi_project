@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.game.model.exception.GameException;
 import com.dleague.game.model.service.GameService;
 import com.dleague.game.model.vo.Game;
 import com.dleague.search.model.searchService.searchService;
@@ -40,28 +41,41 @@ public class GameViewServlet extends HttpServlet {
 		String home = "";
 		String away = "";
 		Object o = null;
-		if("Y".equals(status)) {			
-			Activity a = new GameService().selectOneWithResult(no);
-			home = a.getHome();
-			away = a.getAway();
-			o = a;			
-		}else {
-			Game g = new GameService().selectOneGame(no);
-			home = g.getHome();
-			away = g.getAway();
-			o = g;
-		}
-		Team tHome = new GameService().selectTeamByTeamName(home);
-		Team tAway = new GameService().selectTeamByTeamName(away);
-		System.out.println(tHome);
-		System.out.println(tAway);
+		List<TeamMember> hMemberList = null;
+		List<TeamMember> aMemberList = null;
 		
-		List<TeamMember> hMemberList = new searchService().teamMemberSearch(home);
-		List<TeamMember> aMemberList = new searchService().teamMemberSearch(away);
+		List<Activity> hActivityList = null;
+		List<Activity> aActivityList = null;
 		
-		List<Activity> hActivityList = new searchService().activityListSearch(home);
-		List<Activity> aActivityList = new searchService().activityListSearch(away);
+		Team tHome = null;
+		Team tAway = null;
 
+		try {
+			if("Y".equals(status)) {			
+				Activity a = new GameService().selectOneWithResult(no);
+				home = a.getHome();
+				away = a.getAway();
+				o = a;			
+			}else {
+				Game g = new GameService().selectOneGame(no);
+				home = g.getHome();
+				away = g.getAway();
+				o = g;
+			}
+			tHome = new GameService().selectTeamByTeamName(home);
+			tAway = new GameService().selectTeamByTeamName(away);
+			System.out.println(tHome);
+			System.out.println(tAway);
+			
+			hMemberList = new searchService().teamMemberSearch(home);
+			aMemberList = new searchService().teamMemberSearch(away);
+			
+			hActivityList = new searchService().activityListSearch(home);
+			aActivityList = new searchService().activityListSearch(away);
+		}catch (GameException e) {
+			e.printStackTrace();
+			throw new ServletException();
+		}
 		String view = "/WEB-INF/views/game/myGameView.jsp";
 		
 		request.setAttribute("obj", o);

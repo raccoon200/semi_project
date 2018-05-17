@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.game.model.exception.GameException;
 import com.dleague.game.model.service.GameService;
 
 /**
@@ -30,7 +31,13 @@ public class DeleteGameServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int gameNo = Integer.parseInt(request.getParameter("no"));
 		
-		int result = new GameService().deleteGame(gameNo);
+		int result=0;
+		try {
+			result = new GameService().deleteGame(gameNo);
+		} catch (GameException e) {
+			e.printStackTrace();
+			throw new ServletException();
+		}
 		
 		String msg = "";
 		String loc = "";

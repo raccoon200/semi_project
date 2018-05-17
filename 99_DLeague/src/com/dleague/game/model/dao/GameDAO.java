@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.dleague.game.model.exception.GameException;
 import com.dleague.game.model.vo.Game;
 import com.dleague.search.model.vo.Activity;
 import com.dleague.search.model.vo.Team;
@@ -26,7 +27,7 @@ public class GameDAO {
 			e.printStackTrace();
 		}
 	}
-	public int insertGame(Connection conn, Game g) {
+	public int insertGame(Connection conn, Game g) throws GameException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertGame");
@@ -43,12 +44,13 @@ public class GameDAO {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new GameException("insertGame 에러"+ e.getMessage());
 		} finally {
 			close(pstmt);
 		}
 		return result;
 	}
-	public int getGameCountByTeamName(Connection conn, String teamname) {
+	public int getGameCountByTeamName(Connection conn, String teamname) throws GameException {
 		int cnt = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -62,12 +64,12 @@ public class GameDAO {
 				cnt = rset.getInt("cnt");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GameException("getGameCountByTeamName 에러"+ e.getMessage());
 		}
 		return cnt;
 	}
-	public List<Game> selectListByTeamName(Connection conn, String teamname) {
+	public List<Game> selectListByTeamName(Connection conn, String teamname) throws GameException {
 		List<Game> list = new ArrayList<Game>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -94,13 +96,13 @@ public class GameDAO {
 				list.add(g);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GameException("selectListByTeamName 에러"+ e.getMessage());
 		}
 		
 		return list;
 	}
-	public Game selectOneGame(Connection conn, int no) {
+	public Game selectOneGame(Connection conn, int no) throws GameException {
 		Game g = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -128,12 +130,12 @@ public class GameDAO {
 				g.setAwayLogo(rset.getString("awaylogo"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GameException("selectOneGame 에러"+ e.getMessage());
 		}
 		return g;
 	}
-	public Activity selectOneWithResult(Connection conn, int no) {
+	public Activity selectOneWithResult(Connection conn, int no) throws GameException {
 		Activity a = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -154,13 +156,13 @@ public class GameDAO {
 				a.setResult(rset.getString("result"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GameException("selectOneWithResult 에러"+ e.getMessage());
 		}
 
 		return a;
 	}
-	public Team selectTeamByTeamName(Connection conn, String teamname) {
+	public Team selectTeamByTeamName(Connection conn, String teamname) throws GameException {
 		Team t = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -185,6 +187,7 @@ public class GameDAO {
 			/*System.out.println("DAO="+list);*/
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new GameException("selectTeamByTeamName 에러"+ e.getMessage());
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -192,7 +195,7 @@ public class GameDAO {
 		
 		return t;
 	}
-	public int waitTeamCheck(Connection conn, String teamName, int gameNo) {
+	public int waitTeamCheck(Connection conn, String teamName, int gameNo) throws GameException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -211,10 +214,11 @@ public class GameDAO {
 		} catch (SQLException e) {
 			result = -1;
 			e.printStackTrace();
+			throw new GameException("waitTeamCheck 에러"+ e.getMessage());
 		}
 		return result;
 	}
-	public int insertWaitTeam(Connection conn, String teamName, int gameNo) {
+	public int insertWaitTeam(Connection conn, String teamName, int gameNo) throws GameException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertWaitTeam");
@@ -226,12 +230,12 @@ public class GameDAO {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GameException("insertWaitTeam 에러"+ e.getMessage());
 		}
 		return result;
 	}
-	public int deleteGame(Connection conn, int gameNo) {
+	public int deleteGame(Connection conn, int gameNo) throws GameException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("deleteGame");
@@ -242,8 +246,8 @@ public class GameDAO {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GameException("deleteGame 에러"+ e.getMessage());
 		}
 		
 		return result;
