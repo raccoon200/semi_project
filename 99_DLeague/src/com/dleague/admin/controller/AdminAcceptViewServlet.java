@@ -35,7 +35,7 @@ public class AdminAcceptViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		List<TeamRegister> list = null;/*new adminService().MemberList();*/
-		String acceptNo = request.getParameter("acceptNo");
+		int acceptNo = Integer.parseInt(request.getParameter("acceptNo"));
 
 		Member m = null;
 		String msg = "";

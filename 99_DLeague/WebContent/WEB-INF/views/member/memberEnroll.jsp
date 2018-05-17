@@ -14,9 +14,21 @@
     <!-- Custom Style -->
     <style>
     table{align:center;}
-    #profile{position: relative; left:-120px; top:0px;}
+    #profile{position: relative; left:-110px; top:0px;}
     #profileImg{width:100px; height:150px;} 
-#imgsection{position: relative; left:400px; top:-265px;}
+#imgsection{position: relative; left:535px; top:-265px;}
+
+
+#userId_{width:80%; display:inline-block;}
+
+#passwordCheckTd{
+	position:relative;
+}
+#passwordCheckMessage {
+	position:absolute;
+	top:10px;
+	left:10px;
+}
     </style>
 <script>
 function fn_checkIdDuplicate(){
@@ -63,6 +75,16 @@ function fn_birthday() {
 	} 
 	 return true;
 }
+function passwordCheckFunction() {
+	var password = $('#password_').val();
+	var passwordchk = $('#password_chk').val();
+	if ( password != passwordchk) {
+		$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
+	} else if(password == passwordchk){
+		$('#passwordCheckMessage').html('');
+	}
+	}
+
 function fn_checked() {
 	console.log("안녕");
 	var idtext = document.getElementById("userId_");
@@ -97,7 +119,7 @@ function fn_checked() {
 	var regExp2 = /[a-z0-9]{2,}$/;
 	var regExp3 = /[a-z0-9]{2,}\.[a-z0-9]{2,}$/;
 	//email의 직접입력부분 유효성검사
-	var regname = /^[가-힝]{2,4}$/;
+	var regname = /^[가-힝]{2,5}$/;
 	// 이름 유효성 검사
   	var regExp4 = /[0-9]{6,6}$/; 
 	// 주민번호 유효성 검사
@@ -192,28 +214,27 @@ function fn_checked() {
 <tr>
 <tr>
 <td style ="width:110px;"><h5>아이디</h5></td>
-<td>
+<td style="text-align:left;">
 <input class="form-control" type="text" name="userId" id="userId_" placeholder = "아이디를 입력하세요 . (영대소문자와 숫자포함 4~12자)" value ="" required/>
-<td style="width:110px;"> <input type="button" value="ID중복체크" id="btn-idValid" onclick="fn_checkIdDuplicate()" />
+<input class = "btn btn-primary pull-right" value="중복검사" id="btn-idValid" onclick="fn_checkIdDuplicate()" style="width:100px;" />
 <input type = "hidden" name="idValid" value="0" />
-</td>
 </tr>
 <tr>
 <td style ="width:110px;"><h5>비밀번호</h5></td>
 <td>
-<input class="form-control" type="password" name="password" id="password_" placeholder ="비밀번호를 입력하세요. (영대소문자와 숫자포함 4~12자)" value =""/>
+<input class="form-control" type="password" name="password" id="password_" placeholder ="비밀번호를 입력하세요. (영대소문자와 숫자포함 4~12자)" onkeyup="passwordCheckFunction();" value =""/>
 </td>
 </tr>
 <tr>
 <td style ="width:110px;"><h5>비밀번호 확인</h5></td>
 <td>
-<input class="form-control" type="password" id="password_chk" placeholder ="위와 동일한 비밀번호를 입력하세요." value ="" />
+<input class="form-control" type="password" id="password_chk" placeholder ="위와 동일한 비밀번호를 입력하세요." onkeyup="passwordCheckFunction();" value ="" />
 </td>
 </tr>
 <tr>
 <td style ="width:110px;"><h5>이름</h5></td>
 <td>
-<input class="form-control" type="text" name="userName" id="userName" value =""/>
+<input class="form-control" type="text" name="userName" id="userName" value ="" placeholder ="(이름 5글자내외)"/>
 </td>
 </tr>
 <tr>
@@ -233,7 +254,7 @@ function fn_checked() {
 <td>
 <input type="text" name="email1"  id="email_" value ="" >@
 <input type="text" name = "email2" id="email_1" disabled value="naver.com" value = "">
-<select name="selectEmail" id="selectEmail">
+<select name="selectEmail" id="selectEmail"  style = "height:30px">
 <option value="1">직접입력</option>
 <option value="naver.com" selected>naver.com</option>
 <option value="daum.net">daum.net</option>
@@ -259,7 +280,7 @@ $("#selectEmail").change(function() {
 <tr>
 <td style ="width:110px;"><h5>거주지역</h5></td>
 <td>
-            <select name="regioncode" id="">
+            <select name="regioncode" id="" style = "height:30px">
             <%if(regionList!=null && !regionList.isEmpty()){
             for(int i=0; i<regionList.size(); i++) {
                Region region = regionList.get(i);
@@ -274,11 +295,11 @@ $("#selectEmail").change(function() {
 <tr>
 <td style ="width:110px;"><h5>프로필</h5></td>
 <td>
-<textarea id="profile" name="profile" maxlength="2048" style="height:180px;" placeholder = "자기소개란"></textarea>
+<textarea id="profile" name="profile" maxlength="2048" cols="50"style="height:180px;" placeholder = "자기소개란"></textarea>
 </td>
 </tr>
 <tr>
-<td style = "text-align: left" colspan="3"><input class = "btn btn-primary pull-right" type="submit" value="회원가입"><input class = "btn btn-primary pull-right" type="reset" value="취소"></td>
+<td style = "text-align: left" colspan="3" id="passwordCheckTd"><h5 style ="color: red;" id ="passwordCheckMessage" ></h5><input class = "btn btn-primary pull-right" type="submit" value="회원가입"><input class = "btn btn-primary pull-right" type="reset" value="취소"></td>
 </tr>
 </tbody>
 </table>

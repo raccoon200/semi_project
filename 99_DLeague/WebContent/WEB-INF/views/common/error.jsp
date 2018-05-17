@@ -32,8 +32,8 @@
 </style>
 </head>
 <body>
-	<h2>재고관리오류</h2>
-    <p><span id="e-msg"><%= exception.getMessage() %></span></p>
+	<h2>오류</h2>
+    <p><span id="e-msg">잘못된 경로로 접근하였습니다.</span></p>
     <p>관리자에게 문의하세요</p>
     
     <br />

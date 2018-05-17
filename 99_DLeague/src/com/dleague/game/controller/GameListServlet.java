@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dleague.game.model.exception.GameException;
 import com.dleague.game.model.service.GameService;
 import com.dleague.game.model.vo.Game;
 import com.dleague.member.model.vo.Member;
@@ -50,7 +51,12 @@ public class GameListServlet extends HttpServlet {
 			msg = "팀이 필요한 서비스입니다.\\n\\n팀을 생성하거나 팀가입을 해주세요.";
 			view = "/WEB-INF/views/common/msg.jsp";
 		}else {
-			list = new GameService().selectListByTeamName(m.getTeamname());
+			try {
+				list = new GameService().selectListByTeamName(m.getTeamname());
+			} catch (GameException e) {
+				e.printStackTrace();
+				throw new ServletException();
+			}
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

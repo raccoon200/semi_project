@@ -54,7 +54,7 @@ $('#slider').vmcSlider({
 	duration: 2000,
 	speed: 1000
 });
-</script>>
+</script>
 <footer id="footer">
 <div id="footer-wrapper">
     <a href="<%=request.getContextPath()%>"><img id="footer-image" src="<%=request.getContextPath() %>/images/headerImage.png" /></a>

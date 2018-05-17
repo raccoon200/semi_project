@@ -12,7 +12,8 @@
    String tr_msg;
    Date foundInDate=null;
    String rogo="";
-   int t_reg_no="";
+   int t_reg_no=0;
+   String status="";
    
    for(TeamRegister tr : list){
 	   teamName = tr.getTeamName();
@@ -23,6 +24,7 @@
 	   foundInDate=tr.getRegister_date();
 	   rogo=tr.getTeamLogo();
 	   t_reg_no=tr.getTeam_register_no();
+	   status = tr.getStatus();
    }
 
 %>
@@ -136,13 +138,19 @@
         <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
+    <%if(status==null){ %>
     <div id="btDiv"><button class="bt" onclick="fn_success('Y')">팀수락</button></div> <div id="btDiv"><button class="bt" onclick="fn_success('N')">팀거절</button></div>
+	<%}else{ %>
+	<div id="btDiv" style="background:skyblue;"><label for="">결과가처리되었습니다.</label></div>
+	<%} %>
 </div>
 <script>
 function fn_success(YorN){
-	console.log(YorN);
+	/* console.log(YorN); */
+	var t_reg_no = <%=t_reg_no%>;
 	if(YorN=='Y'){
 		var Y = fn_confirmY();
+		/* console.log(Y); */
 		if(Y){
 			location.href="<%=request.getContextPath()%>/admin/adminAcceptViewEnd?YorN="+YorN+"&t_reg_no="+t_reg_no;
 		}else{}
@@ -154,10 +162,10 @@ function fn_success(YorN){
 	}
 }
 function fn_confirmY(){
-	confirm("팀을 수락하시겠습니까?")
+	return confirm("팀을 수락하시겠습니까?");
 }
 function fn_confirmN(){
-	confirm("팀을 거절하시겠습니까?")
+	return confirm("팀을 거절하시겠습니까?")
 }
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

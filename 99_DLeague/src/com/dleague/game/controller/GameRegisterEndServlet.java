@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.game.model.exception.GameException;
 import com.dleague.game.model.service.GameService;
 import com.dleague.game.model.vo.Game;
 
@@ -59,7 +60,13 @@ public class GameRegisterEndServlet extends HttpServlet {
 		g.setGameContent(game_content);
 		g.setPlace(gamePlace+"#"+addrDetail+"#"+point_x+"#"+point_y);
 		
-		int result = new GameService().insertGame(g);
+		int result;
+		try {
+			result = new GameService().insertGame(g);
+		} catch (GameException e) {
+			e.printStackTrace();
+			throw new ServletException();
+		}
 		
 		String msg = "";
 		String loc = "/";
