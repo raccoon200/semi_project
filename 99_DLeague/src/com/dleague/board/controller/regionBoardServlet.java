@@ -84,7 +84,7 @@ public class regionBoardServlet extends HttpServlet {
 		if(pageNo == 1) {
 			
 		}else {
-			pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+(pageNo-1)+"'>[이전]</a> ";
+			pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+(pageNo-1)+"'><span class='page gradient'>이전</span></a>";
 		}
 		
 		// pageNo section
@@ -93,10 +93,10 @@ public class regionBoardServlet extends HttpServlet {
 		while(!(pageNo>pageEnd || pageNo > totalPage)){
 			
 			if(cPage == pageNo ){
-				pageBar += "<span class='cPage'>"+pageNo+"</span> ";
+				pageBar += "<span class='page active'>"+pageNo+"</span> ";
 			} 
 			else {
-				pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+pageNo+"'>"+pageNo+"</a> ";
+				pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+pageNo+"'><span class='page gradient'>"+pageNo+"</span></a> ";
 			}
 			pageNo++;
 		}
@@ -105,7 +105,7 @@ public class regionBoardServlet extends HttpServlet {
 		if(pageNo > totalPage){
 			//pageBar += "<span>[다음]</span>";
 		} else {
-			pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+pageNo+"'>[다음]</a>";
+			pageBar += "<a href='"+request.getContextPath()+"/board/regionBoard?region="+regionCode+"&cPage="+pageNo+"'><span class='page gradient'>다음</span></a>";
 		}
 		ArrayList<Integer> boardNo = new ArrayList<>();
 		for(int i=0; i<regionBoardList.size(); i++) {
