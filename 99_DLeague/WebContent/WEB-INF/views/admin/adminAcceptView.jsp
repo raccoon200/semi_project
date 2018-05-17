@@ -13,6 +13,7 @@
    Date foundInDate=null;
    String rogo="";
    int t_reg_no=0;
+   String status="";
    
    for(TeamRegister tr : list){
 	   teamName = tr.getTeamName();
@@ -23,6 +24,7 @@
 	   foundInDate=tr.getRegister_date();
 	   rogo=tr.getTeamLogo();
 	   t_reg_no=tr.getTeam_register_no();
+	   status = tr.getStatus();
    }
 
 %>
@@ -136,7 +138,11 @@
         <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
+    <%if(status==null){ %>
     <div id="btDiv"><button class="bt" onclick="fn_success('Y')">팀수락</button></div> <div id="btDiv"><button class="bt" onclick="fn_success('N')">팀거절</button></div>
+	<%}else{ %>
+	<div id="btDiv" style="background:skyblue;"><label for="">결과가처리되었습니다.</label></div>
+	<%} %>
 </div>
 <script>
 function fn_success(YorN){
