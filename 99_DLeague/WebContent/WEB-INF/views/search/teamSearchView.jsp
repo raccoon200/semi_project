@@ -320,7 +320,7 @@
 	   }
 	   else if(msg==null) {} 
 	   else{
-	 	   var userId = memberLoggedIn.getUserId();
+	 	   var userId = "<%=memberLoggedIn.getUserId()%>";
 		   location.href = "<%=request.getContextPath()%>/member/memberTeamIn?teamName=<%=teamName%>&userId="+userId+"&msg="+msg;
 	   }
    }

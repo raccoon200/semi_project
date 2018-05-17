@@ -364,12 +364,13 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
-	public int memberynYdelete(Connection conn) {
+	public int memberOtherdelete(Connection conn, String userId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("memberynYdelete");
+		String query = prop.getProperty("memberOtherdelete");
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
