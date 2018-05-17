@@ -37,7 +37,7 @@ function fn_MemberList(gameNo,status){
 			<table style="display: inline-block;">
 				<tr>
 					<td>
-						<img src="<%=request.getContextPath() %>/images/team/<%=g.getHomeLogo() %>" alt="home" style="height: 112.188px;"/>
+						<img src="<%=request.getContextPath() %>/images/team/<%=g.getHomeLogo() %>" alt="home" style="width: 150px; height: 112.188px;"/>
 					</td>
 				</tr>
 				<tr>
@@ -50,7 +50,7 @@ function fn_MemberList(gameNo,status){
 			<table style="display: inline-block;">
 				<tr>
 					<td>
-						<img src='<%=request.getContextPath() %>/images/team/<%=g.getAwayLogo()==null?"awayNull.png":g.getAwayLogo() %>' alt="home" style="height: 112.188px;"/>
+						<img src='<%=request.getContextPath() %>/images/team/<%=g.getAwayLogo()==null?"awayNull.png":g.getAwayLogo() %>' alt="home" style="width: 150px; height: 112.188px;"/>
 					</td>
 				</tr>
 				<tr>

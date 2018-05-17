@@ -23,7 +23,7 @@ console.log("<%=param%>");
 			<ul class="nav-list">
 				<li><a id='<%=param=="freeBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/freeBoard">자유게시판</a></li>
 				<li><a id='<%=param=="regionBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/regionBoard">지역게시판</a></li>
-				<li><a id='<%=param=="complainBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
+				<li><a id='<%=param=="complain"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
 			</ul>
 			<%} %>
 			<!-- 로그인/회원가입 -->
@@ -31,9 +31,9 @@ console.log("<%=param%>");
 			<h3 id="nav-header">계정</h3>
 			<ul class="nav-list">
 				
-				<li><a href="<%=request.getContextPath() %>/member/loginPage" id=id=<%=param=="login"?"nav-selected":""%>>로그인</a></li>
+				<li><a href="<%=request.getContextPath() %>/member/loginPage" id=<%=param=="login"?"nav-selected":""%>>로그인</a></li>
 				
-				<li><a href="#" id=<%=param=="enroll"?"nav-selected":""%>>회원가입</a></li>
+				<li><a href="<%=request.getContextPath() %>/member/memberEnroll" id=<%=param=="enroll"?"nav-selected":""%>>회원가입</a></li>
 			</ul>
 			<%}%>
 			<%if(param=="passwordCheck") {%>

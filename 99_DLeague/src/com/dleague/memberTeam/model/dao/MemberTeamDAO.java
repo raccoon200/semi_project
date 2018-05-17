@@ -273,6 +273,15 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
+<<<<<<< HEAD
+	public int selectTeamCreateCheck(Connection conn, String t_register_writer) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("selectTeamCreateCheck");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, t_register_writer);
+=======
 	public List<MemberRegister> memberRegisterList(Connection conn, String userId) {
 		List<MemberRegister> list = null;
 		PreparedStatement pstmt = null;
@@ -364,12 +373,13 @@ public class MemberTeamDAO {
 		}
 		return result;
 	}
-	public int memberynYdelete(Connection conn) {
+	public int memberOtherdelete(Connection conn, String userId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("memberynYdelete");
+		String query = prop.getProperty("memberOtherdelete");
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -389,6 +399,7 @@ public class MemberTeamDAO {
 			pstmt.setString(1, "N");
 			pstmt.setString(2, userId);
 			pstmt.setString(3, teamName);
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
