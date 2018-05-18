@@ -55,7 +55,7 @@
 	/* div#e{border-radius: 10px;background:lightgreen;height: 45px; width: 200px;  text-align: center; display: inline-block; margin:0 0 0 0;} */
 	div#d{height: 80px; width: 200px; text-align: center; display: inline-block;}
 	span#span{color:#2828CD;font-size:25px;}
-	span#span1{border-radius: 10px;color:#FE2EF7;background:lightgreen;padding:10px;}
+	span#span1{border-radius: 10px;color:#DB631F;background:#D8F781;padding:10px;}
 	/*글자색깔*/
 	h2#aa{color:#2828CD;}
 	h2#bb{color:#DB631F;}
@@ -79,9 +79,9 @@
     /*teamTable*/
      /*수정삭제버튼*/
     div#btDiv{padding:30px; display: inline-block;}
-    button#bt1, #bt2{padding:5px;}
+    button#bt1, #bt2{padding:10px;font-size:20px;}
     /*수정삭제버튼*/
-    .btn {
+    /* .btn {
 	  display: inline-block;
 	  background: transparent;
 	  text-transform: uppercase;
@@ -108,7 +108,7 @@
 	  border: 1px solid rgba(223,190,106,0);
 	  color: $white;
 	  background-position: 99% 50%;
-	} 
+	}  */
     /* 버튼 디자인 */
     #h2my{display:inline-block;}
 </style>
@@ -313,7 +313,7 @@ function fn_teamOut() {
         </div>
         <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) )  {%>
         <div id="btDiv">
-              <button id="bt1" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
+              <button id="bt1" class="btn btn-primary" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
         </div>
         <%}else{ %>
         <div id="btDiv"></div>

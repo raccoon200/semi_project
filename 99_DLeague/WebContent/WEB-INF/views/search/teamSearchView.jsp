@@ -74,7 +74,7 @@
     /*teamTable*/
     /*수정삭제버튼*/
     div#btDiv{padding:30px; display: inline-block;}
-    button#bt1, #bt2{padding:5px;}
+    button#bt1, #bt2{padding:10px;font-size:20px;}
     /*수정삭제버튼*/
     .btnM {
 	  display: inline-block;
@@ -288,11 +288,13 @@
             
         </div>
         <%if(memberLoggedIn!=null&&null==memberLoggedIn.getTeamname()&&!memberLoggedIn.getUserId().equals("admin")) {%>
-        	<input type="button" value="팀 가입 신청" style="position:relative; " class="btnM" onclick="fn_memberTeamIn();"/>
+        	<br /><br />	
+        	<input type="button" value="팀 가입 신청" class="btn btn-primary" onclick="fn_memberTeamIn();"/>
+        	<br />
         <%} %>
         <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) )  {%>
         <div id="btDiv">
-              <button id="bt1" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
+              <button class="btn btn-primary" id="bt1" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
         </div>
         <%}else{ %>
         <div id="btDiv"></div>
