@@ -197,4 +197,20 @@ public class MemberTeamService {
 		else rollback(conn);
 		return result;
 	}
+
+	public int memberTeamGameNOT(String gameNo) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().memberTeamGameNOT(conn, gameNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
+	public int memberTeamGameRefuse(String teamName, String choose) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().memberTeamGameRefuse(conn, teamName, choose);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }

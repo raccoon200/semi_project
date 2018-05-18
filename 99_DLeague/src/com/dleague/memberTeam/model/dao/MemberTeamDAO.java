@@ -523,10 +523,43 @@ public class MemberTeamDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("memberTeamAcitivty");
+		System.out.println(gameNo);
+		System.out.println(score);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, score);
 			pstmt.setString(2, gameNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		}
+	public int memberTeamGameNOT(Connection conn, String gameNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamGameNOT");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gameNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		}
+	public int memberTeamGameRefuse(Connection conn, String teamName, String choose) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamGameRefuse");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, choose);
+			pstmt.setString(2, teamName);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
