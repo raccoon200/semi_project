@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dleague.memberTeam.model.service.MemberTeamService;
 import com.dleague.region.model.service.RegionService;
 import com.dleague.region.model.vo.Region;
 
@@ -31,12 +32,34 @@ public class MemberTeamCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
+		/*request.setCharacterEncoding("utf-8");*/
+		String userId = request.getParameter("userId");
+		System.out.println(userId);
+		MemberTeamService memberTeamService = new MemberTeamService();
+		int cnt = memberTeamService.cntTeamCreate(userId);
+		int cntR = memberTeamService.cntRegister(userId);
+		/*System.out.println(cnt);*/
+		if(cnt>0 || cntR>0) {
+			String msg = "";
+			if(cnt>0) msg = "이미 팀 생성 중입니다!";
+			else if(cntR>0) msg = "팀 가입신청 대기 중입니다!";
+			String Referer = request.getHeader("Referer"); //어디서 시도했는지
+			String Origin  = request.getHeader("Origin");
+			String url = request.getRequestURL().toString(); //url패턴까지
+			String uri = request.getRequestURI(); //localhost빼고
+			if(Origin == null) {
+				Origin = url.replace(uri, "");
+			}
+			String loc = Referer.replace(Origin+request.getContextPath(), "");
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+			return;
+		}
 		List<Region> regionList = new RegionService().selectRegionList();
-		request.setAttribute("param", "team");
+		request.setAttribute("param", "memberTeamCreate");
 		request.setAttribute("regionList", regionList);
-		request.getRequestDispatcher("/WEB-INF/views/member/memberTeamCreate.jsp").forward(request, response);;
+		request.getRequestDispatcher("/WEB-INF/views/member/memberTeamCreate.jsp").forward(request, response);
 	}
 
 	/**

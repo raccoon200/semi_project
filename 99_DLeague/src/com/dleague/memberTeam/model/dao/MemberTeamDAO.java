@@ -434,7 +434,7 @@ public class MemberTeamDAO {
 				teamRegister.setRegister_date(rset.getDate("register_date"));
 				teamRegister.setStatus(rset.getString("status"));
 			}
-			System.out.println(teamRegister);
+			/*System.out.println(teamRegister);*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -444,8 +444,51 @@ public class MemberTeamDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("MemberTeamRegisterCancel");
-		
-		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, choose);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
+	}
+	public int cntTeamCreate(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("cntTeamCreate");
+		int cntTeamCreate = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if(rset.next())	cntTeamCreate = rset.getInt("cnt");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cntTeamCreate;
+	}
+	public int cntRegister(Connection conn, String userId) {
+		int cntR = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("cntRegister");
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, userId);
+				rset = pstmt.executeQuery();
+				if(rset.next()) cntR = rset.getInt("cnt");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+		return cntR;
 	}
 	}
