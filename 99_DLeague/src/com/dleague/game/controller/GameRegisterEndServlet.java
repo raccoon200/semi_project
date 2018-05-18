@@ -41,17 +41,17 @@ public class GameRegisterEndServlet extends HttpServlet {
 		String game_content = request.getParameter("game_content");
 		String addrDetail = request.getParameter("addrDetail");
 		
-		System.out.println("dateTime = " + dateTime);
-		System.out.println("gamePlace = " + gamePlace);
-		System.out.println("point_x = " + point_x);
-		System.out.println("point_y = " + point_y);
-		System.out.println("game_content = " + game_content);
-		System.out.println("addrDetail = " + addrDetail);
-		System.out.println("teamName = " + teamName);
-		
+//		System.out.println("dateTime = " + dateTime);
+//		System.out.println("gamePlace = " + gamePlace);
+//		System.out.println("point_x = " + point_x);
+//		System.out.println("point_y = " + point_y);
+//		System.out.println("game_content = " + game_content);
+//		System.out.println("addrDetail = " + addrDetail);
+//		System.out.println("teamName = " + teamName);
+//		
 		String[] sepDateTime = dateTime.split(" - ");
 
-		System.out.println("sepDateTime = " + sepDateTime[0]+","+sepDateTime[1]);
+//		System.out.println("sepDateTime = " + sepDateTime[0]+","+sepDateTime[1]);
 
 		Game g = new Game();
 		g.setHome(teamName);

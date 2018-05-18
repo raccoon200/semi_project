@@ -41,15 +41,17 @@ td.view-content{
 }
 </style>
 <script>
+
 function fn_fileUpload(value){
-	if(value.files && value.files[0]) {
-	      var reader = new FileReader();
-	      reader.onload = function (e) {
-	           $('#profileImg').attr('src', e.target.result);
-			}
-	      }
-	      reader.readAsDataURL(value.files[0]);
 	
+	if(value.files && value.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+           $('#profileImg').attr('src', e.target.result);
+		}
+      }
+      reader.readAsDataURL(value.files[0]);
+
 }
 function fn_validate(){
 	if($("[name=teamName]").val().trim().length==0) {
@@ -61,6 +63,7 @@ function fn_validate(){
 </script>
 <h2>팀 생성</h2>
 <form action="<%=request.getContextPath() %>/member/memberTeamCreateEnd" method="post" onsubmit="return fn_validate();" enctype="multipart/form-data">
+	
 	<table class="team-register-table">
 		<tr>
 			<th>팀이름</th>
