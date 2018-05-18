@@ -17,7 +17,7 @@
 		g = (Game)o;
 		place = g.getPlace().split("#");
 	}else{
-		a = (Activity)a;
+		a = (Activity)o;
 		place = a.getPlace().split("#");
 	}
 	Team tHome = (Team)request.getAttribute("tHome");
@@ -131,17 +131,17 @@ $(function() {
 				<img src="<%=request.getContextPath() %>/images/team/<%=gameStatus?g.getHomeLogo():a.getHomeLogo() %>" alt="home" style="width: 150px; height: 112.188px;"/>
 			</td>
 			<td rowspan="2">
-				<h1 style= "display: inline-block; font-weight: 700; font-size: 70px; margin-left : 20px; margin-right : 60px;"><%=gameStatus?"&nbsp;":a.getResult().substring(0, a.getResult().indexOf(":"))%></h1>
+				<h1 style= "display: inline-block; font-weight: 700; font-size: 50px; margin-left : 20px; margin-right : 43px;"><%=gameStatus?"&nbsp;":a.getResult().substring(0, a.getResult().indexOf(":"))%></h1>
 			</td>
 			<td rowspan="2">
 				<h2 style="display: inline-block;">VS</h2>
 			</td>
 			<td rowspan="2">
-				<h1 style= "display: inline-block; font-weight: 700; font-size: 70px; margin-left : 60px; margin-right : 20px;"><%=gameStatus?"&nbsp;":a.getResult().substring(a.getResult().indexOf(":")+1, a.getResult().length())%></h1>
+				<h1 style= "display: inline-block; font-weight: 700; font-size: 50px; margin-left : 40px; margin-right : 20px;"><%=gameStatus?"&nbsp;":a.getResult().substring(a.getResult().indexOf(":")+1, a.getResult().length())%></h1>
 			</td>
 		</tr>
 		<tr style=" text-aline : center;">
-			<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getHome())?"red":""%>; font-size : 18px;'>
+			<td style='color: <%=memberLoggedIn.getTeamname().equals(gameStatus?g.getHome():a.getHome())?"red":""%>; font-size : 18px;'>
 				<%=gameStatus?g.getHome():a.getHome()%>
 			</td>
 			<td></td>
@@ -165,7 +165,7 @@ $(function() {
 			
 		</tr>
 		<tr style=" text-aline : center;">
-			<td style='color: <%=memberLoggedIn.getTeamname().equals(g.getAway())?"red":""%>; font-size : 18px;'>
+			<td style='color: <%=memberLoggedIn.getTeamname().equals(gameStatus?g.getAway():a.getAway())?"red":""%>; font-size : 18px;'>
 				<%if (gameStatus){ %>
 					<%=g.getAway() !=null?g.getAway():"&nbsp;" %>	
 				<% }else{%>
