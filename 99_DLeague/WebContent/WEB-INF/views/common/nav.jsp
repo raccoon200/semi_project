@@ -59,7 +59,7 @@ console.log("<%=param%>");
 				<li><a href="<%=request.getContextPath() %>/search/gameSearchList" id='<%=param=="teamSearchList"?"nav-selected":""%>'>경기검색</a></li>
 			</ul>
 			<%} %>
-			<%if(param=="memberTeamMemberManagement" || param=="memberTeamGameAcceptPage" || param=="memberTeamMemberAcceptPage") {%>
+			<%if(param=="memberTeamMemberManagement" || param=="memberTeamGameAcceptPage" || param=="memberTeamMemberAcceptPage" || param=="memberTeamActivityPage") {%>
 			<h3 id="nav-header">팀 관리</h3>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamManagement?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamMemberManagement"?"nav-selected":""%>'>팀원 관리</a></li>

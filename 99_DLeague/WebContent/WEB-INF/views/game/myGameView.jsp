@@ -372,8 +372,8 @@ $(function() {
 	            <%for(Activity act: hActivityList){ %>
 	            <tr>
 	                <td class="ranking" scope="row"><%=act.getActivity_No() %></td>
-	                <td style="color:<%=((act.getHome().equals(tHome))?"red":"black" )%>"><%=a.getHome() %></td>
-	                <td style="color:<%=((act.getAway().equals(tHome))?"red":"black" )%>"><%=a.getAway() %></td>
+	                <td style="color:<%=((act.getHome().equals(tHome))?"red":"black" )%>"><%=act.getHome() %></td>
+	                <td style="color:<%=((act.getAway().equals(tHome))?"red":"black" )%>"><%=act.getAway() %></td>
 	                <td><%=act.getActivityDate() %></td>
 	                <td><%=act.getResult() %></td>
 	                </tr>
