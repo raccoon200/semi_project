@@ -208,12 +208,12 @@ function fn_checked() {
 <table class = "table table-bordered table-hover" style="text-align: center; border : 1px solid #dddddd">
 <thead>
 <tr>
-<th colspan="3"><h4>회원 가입</h4></th>
+<th colspan="3"><h4 style="font-weight : bold;">회원 가입</h4></th>
 </thead>
 <tbody>
 <tr>
 <tr>
-<td style ="width:110px;"><h5>아이디</h5></td>
+<td style ="width:110px;"><h5 style="font-weight : bold;">아이디</h5></td>
 
 <td style="text-align:left;">
 <input class="form-control" type="text" name="userId" id="userId_" placeholder = "아이디를 입력하세요 . (영대소문자와 숫자포함 4~12자)" value ="" required/>
@@ -222,37 +222,37 @@ function fn_checked() {
 <input type = "hidden" name="idValid" value="0" />
 </tr>
 <tr>
-<td style ="width:110px;"><h5>비밀번호</h5></td>
+<td style ="width:110px;"><h5 style="font-weight : bold;">비밀번호</h5></td>
 <td>
 <input class="form-control" type="password" name="password" id="password_" placeholder ="비밀번호를 입력하세요. (영대소문자와 숫자포함 4~12자)" onkeyup="passwordCheckFunction();" value =""/>
 </td>
 </tr>
 <tr>
-<td style ="width:110px;"><h5>비밀번호 확인</h5></td>
+<td style ="width:110px;"><h5 style="font-weight : bold;">비밀번호 확인</h5></td>
 <td>
 <input class="form-control" type="password" id="password_chk" placeholder ="위와 동일한 비밀번호를 입력하세요." onkeyup="passwordCheckFunction();" value ="" />
 </td>
 </tr>
 <tr>
-<td style ="width:110px;"><h5>이름</h5></td>
+<td style ="width:110px;"><h5 style="font-weight : bold;">이름</h5></td>
 <td>
 <input class="form-control" type="text" name="userName" id="userName" value ="" placeholder ="(이름 5글자내외)"/>
 </td>
 </tr>
 <tr>
-<td style ="width:110px;"><h5>생년월일</h5></td>
+<td style ="width:110px;"><h5 style="font-weight : bold;">생년월일</h5></td>
 <td>
 <input class="form-control" type="text" name="birthday" id="birthday" value ="" placeholder="(주민번호 앞 6자리)" maxlength="6"/> 
 </td>
 </tr>
 <tr>
-<td style ="width:110px;"><h5>휴대폰</h5></td>
+<td style ="width:110px;"><h5 style="font-weight : bold;">휴대폰</h5></td>
 <td>
 <input class="form-control" type="tel" id="phone" name="phone" placeholder="(-없이)01012345678" maxlength="11" value =""/>
 </td>
 </tr>
 <tr>
-<td style ="width:110px;"><h5>이메일</h5></td>
+<td style ="width:110px;"><h5 style="font-weight : bold;">이메일</h5></td>
 <td>
 <input type="text" name="email1"  id="email_" value ="" >@
 <input type="text" name = "email2" id="email_1" disabled value="naver.com" value = "">
@@ -280,7 +280,7 @@ $("#selectEmail").change(function() {
 </td>
 </tr>
 <tr>
-<td style ="width:110px;"><h5>거주지역</h5></td>
+<td style ="width:110px;"><h5 style="font-weight : bold;">거주지역</h5></td>
 <td>
             <select name="regioncode" id="" style = "height:30px">
             <%if(regionList!=null && !regionList.isEmpty()){
@@ -295,7 +295,7 @@ $("#selectEmail").change(function() {
             </td>
             </tr>
 <tr>
-<td style ="width:110px;"><h5>프로필</h5></td>
+<td style ="width:110px;"><h5 style="font-weight : bold;">프로필</h5></td>
 <td>
 <textarea id="profile" name="profile" maxlength="2048" cols="50"style="height:180px;" placeholder = "자기소개란"></textarea>
 </td>
