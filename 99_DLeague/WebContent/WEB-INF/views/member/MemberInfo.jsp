@@ -6,9 +6,9 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <style>
-table{border:1px solid;}
+
 #profileImg{width:150px; height:150px;}
-#imgsection{position: relative; left:350px; top:-250px;}
+#imgsection{position: relative; left:500px; top:-503px;}
  .btnM {
   display: inline-block;
   background: transparent;
@@ -67,9 +67,8 @@ function fn_update_password(){
 <section>
 <form action="<%=request.getContextPath()%>/member/MemberInfoUpdate" method="post" enctype="multipart/form-data" onsubmit="return fn_memberUpdateCheck();">
 <h2>내 정보</h2>
-<hr />
-<input type="button" value="회원 탈퇴" style="position:relative; " class="btnM" onclick="fn_memberOut()"/>
-<table>
+<hr /><br />
+<table class="table table-striped" style="width: 60%;">
 <tr>
 <td>
 <label for="userId">아이디 </label>
@@ -91,7 +90,7 @@ function fn_update_password(){
 <tr><td>
 <label for="regioncode">지역명</label></td>
 <td>
-<select id="regioncode" name= "regioncode">
+<select id="regioncode" class="form-control" name= "regioncode" style="width: 50%;">
 	<option value="G1" <%="G1".equals(member.getRegioncode())?"selected":""%>>서울</option>
 	<option value="G2" <%="G2".equals(member.getRegioncode())?"selected":""%>>경기</option>
 	<option value="G3" <%="G3".equals(member.getRegioncode())?"selected":""%>>강원</option>
@@ -117,7 +116,7 @@ required/> --%></td>
 <tr><td>
 <label for="email">이메일</label></td>
 <td>
-<input type="email" name="email" id="email" value="<%=member.getEmail()!=null?member.getEmail():""%>"/></td>
+<input type="email" class = "form-control" name="email" id="email" value="<%=member.getEmail()!=null?member.getEmail():""%>"/></td>
 </tr>
 
 <tr><td>
@@ -153,11 +152,13 @@ required/> --%></td>
 
 </table>
 <br />
-<input type="submit" value="수정" class="btn"/>
-<input type="reset" value="초기화" class="btn"/>
-<input type="button" value="비밀번호수정" class="btn" onclick="fn_update_password()" />
+<input type="submit" value="수정" class="btn btn-primary"/>
+<input type="reset" value="초기화" class="btn btn-primary"/>
+<input type="button" value="비밀번호수정" class="btn btn-primary" onclick="fn_update_password()" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" value="회원 탈퇴" style="position:relative; " class="btn btn-danger" onclick="fn_memberOut()"/>
 <section id="imgsection">
-<input type="image" style="pointer-events: none;" id="profileImg"/>
+<input type="image" style="pointer-events: none;" id="profileImg" class="img-rounded"/>
 <br /> 
 <div style="position:relative;">
 <input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
@@ -175,6 +176,7 @@ $(function (){
 	else {
 		$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>");
 	}
+	$("input:text").addClass("form-control");
 });
 $("[name=up_file]").change(function(){ 
 	//$(this).val()은 선택한 파일명임.

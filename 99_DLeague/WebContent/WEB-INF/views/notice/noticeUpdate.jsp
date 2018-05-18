@@ -9,37 +9,68 @@
 %>
 <style>
 table.notice-table{
-	border:1px solid black;
+	border:1px solid rgb(240,240,240);
 	border-collapse:collapse;
 	width:680px;
+	
 }
 table.notice-table tr{
-	border:1px solid black;
-
+	border:1px solid gray;
+	
 }
 table.notice-table tr th{
-	background: rgb(64,128,183);
+	background: rgb(147,213,245);
 	color:white;
+	border-radius: 1px;
 }
 table.notice-table tr{
 	height:5px;
-		
 }
-table.notice-table tr th, td{
-	border:1px solid rgb(100,100,100);
+table.notice-table tr td{
+	border:1px solid rgb(220,220,220);
 	padding:10px;
 	text-align:left;
 	font-size:13px;
 }
-table.notice-table tr:hover{
-	background:rgb(240,240,240);
+table.notice-table tr th{
+	border:1px solid rgb(220,220,220);
+	padding:10px;
+	text-align:center;
+	font-size:13px;
+
 }
+
 table.notice-table th{
-	width:60px
+	width:80px;
 }
 .view-content {
 	height:200px;
+	
 }
+.btn{
+	border-radius:2px;
+	border:1px solid rgb(240,240,240);
+	background:rgb(147,213,245);
+	color:white;
+}
+.btn-area{
+	padding-left:40%;
+	padding-top:5px;
+}
+span#fname{
+	position:absolute;
+	top:10px;
+	left:85px;
+	
+	padding-top:2px;
+	padding-bottom:3px;
+	padding-right:420px;
+	background:white;
+}
+td#upTd{
+	position:relative;
+}
+
 </style>
 
 
@@ -56,18 +87,19 @@ table.notice-table th{
 		<tr>
 			<th>작성자</th>
 			<td colspan="5">
-				<input type="text" readonly name="notice_writer" value="<%=memberLoggedIn!=null?memberLoggedIn.getUserId():"" %>" />
+				<input type="text" readonly name="notice_writer" value='<%=memberLoggedIn!=null?memberLoggedIn.getUserId():"" %>' />
 			</td>
 		</tr>
 		<tr>
 			<th>첨부파일</th>
-			<td colspan="5" style="position:relative">
+			<td id="upTd" colspan="5">
 				<%if(notice.getOriginal_file_name() != null){ %>
             		<!-- 파일태그에 value속성은 임의로 변경할 수 없음. -->
-            		<input type="file" name="up_file"/>
+            		<input type="file" name="up_file" onchange="fn_changeFile()"/>
             		<span id="fname"><%=notice.getOriginal_file_name() %></span>
             		<!-- 파일변경대비 기존파일이름 필드 -->
             		<input type="hidden" name="old_file" value="<%=notice.getOriginal_file_name()%>"/>
+            		<input type="hidden" name="old_file_path" value="<%=notice.getRenamed_file_name() %>"/>
             	<%} else { %>            	
 	            	<input type="file" name="up_file"/>
             	<%} %>
@@ -78,12 +110,25 @@ table.notice-table th{
 		</tr>
 		<tr>
 			<td colspan="6" class="view-content">
-				<textarea name="notice_content" id="" cols="80" rows="10" required><%=notice.getNotice_content() %></textarea>
+				<textarea name="notice_content" id="" cols="100" rows="10" required><%=notice.getNotice_content() %></textarea>
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="수정" />
-	<input type="button" value="취소" />
+	<div class="btn-area">
+		<input class="btn" type="submit" value="수정" />
+		<input class="btn" type="button" value="취소"  onclick='location.href="<%=request.getContextPath()%>/notice/noticeView?no=<%=notice.getNotice_no() %>"'/>
+	</div>
 </form>
+<script>
+function fn_changeFile(value) {
+	var fileValue = $("[name=up_file]").val().split("\\");
+	var fileName = fileValue[fileValue.length-1];
+	if(fileName==""){
+		$("#fname").show();
+	}else{
+		$("#fname").hide();
+	}
 
+}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		
