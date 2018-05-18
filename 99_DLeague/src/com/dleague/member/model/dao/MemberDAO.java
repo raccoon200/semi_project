@@ -278,5 +278,61 @@ public class MemberDAO {
       return cnt;
    }
 
+public int memberOut(Connection conn, String userId) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	String query = prop.getProperty("memberOut");
+	try {
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, userId);
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	return result;
+
+}
+
+public List<Member> selectMemberList(Connection conn, int cPage, int numPerPage, String teamName) {
+	List<Member> list = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	Member m = null;
+	String query = prop.getProperty("selectMemberListByPaging");
+	
+	try {
+		pstmt=conn.prepareStatement(query);
+		//페이징
+		pstmt.setString(1, teamName);
+		pstmt.setInt(2, numPerPage*(cPage-1)+1);
+		pstmt.setInt(3, numPerPage*cPage);
+		/*System.out.println(numPerPage*(cPage-1)+1);
+		System.out.println(numPerPage*cPage);*/
+		rset=pstmt.executeQuery();
+		
+		list = new ArrayList<Member>();
+		while(rset.next()) {
+			m = new Member();
+			m.setUserId(rset.getString("userid"));
+			m.setUserName(rset.getString("username"));
+			m.setPhone(rset.getString("phone"));
+			m.setEmail(rset.getString("email"));
+			m.setBirthday(rset.getString("birthday"));
+			m.setProfile(rset.getString("profile"));
+			m.setGrade(rset.getString("grade"));
+			m.setRnum(rset.getInt("rnum"));			
+			list.add(m);
+		}
+		System.out.println("list@MemberDAO.selectMemberList="+list);
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	return list;
+	}
 }
       

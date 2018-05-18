@@ -81,6 +81,7 @@ legend{padding:10px 0px 0px 40px;}
 		</tfoot>
 		</table>
 <script>
+
 var choose = "";
 function fn_choose_change(choose) {
 	this.choose = choose.value;	
