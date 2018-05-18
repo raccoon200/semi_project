@@ -245,7 +245,6 @@
 	}
 	</style>
 <script>
-
 <%if(memberLoggedIn!=null) { %> 
 
 <%-- <%if(memberLoggedIn!=null) { %> 
@@ -262,6 +261,7 @@
 
 <%} %> --%>
 <%}%>
+
 </script>
 </head>
 <body>

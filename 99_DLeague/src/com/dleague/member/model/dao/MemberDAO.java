@@ -187,113 +187,56 @@ public class MemberDAO {
          return result;
       }
 
-
-   public int insertMember(Connection conn, Member member) {
-      int result = 0;
-      PreparedStatement pstmt = null;
-      String query = prop.getProperty("insertMember");
-      System.out.println(member);
-      try {
-         pstmt = conn.prepareStatement(query);
-         pstmt.setString(1,  member.getUserId());
-         pstmt.setString(2,  member.getPassword());
-         pstmt.setString(3, member.getUserName());
-         pstmt.setString(4,  member.getRegioncode());
-         pstmt.setString(5,  member.getPhone());
-         pstmt.setString(6,  member.getEmail());
-         pstmt.setString(7,  member.getProfile());
-         pstmt.setString(8, member.getPhoto());
-         pstmt.setString(9,  member.getBirthday());
-      
-         result = pstmt.executeUpdate();
-         
-      } catch (SQLException e) {
-            e.printStackTrace();
-      } finally {
-         close(pstmt);
-      }
-      return result;
-      }
-      
-   public int selectMemberCount(Connection conn, String teamName) {
-      int totalMember = 0;
-      PreparedStatement pstmt = null;
-      ResultSet rset = null;
-      
-      String query = prop.getProperty("selectMemberCount");
-      
-      try {
-         pstmt = conn.prepareStatement(query);
-         pstmt.setString(1, teamName);
-         rset = pstmt.executeQuery();
-         if(rset.next()) {
-            totalMember = rset.getInt("cnt");
-         }
-         System.out.println("totalMember@MemberDAO="+totalMember);
-      } catch (SQLException e) {
-         e.printStackTrace();
-      } finally {
-         close(rset);
-         close(pstmt);
-      }
-      return totalMember;
-   }
-
-   public List<Member> selectMemberList(Connection conn, int cPage, int numPerPage, String teamName) {
-      List<Member> list = null;
-      PreparedStatement pstmt = null;
-      ResultSet rset = null;
-      Member m = null;
-      String query = prop.getProperty("selectMemberListByPaging");
-      
-      try {
-         pstmt=conn.prepareStatement(query);
-         //공식2 시작 rownum과 마지막 rownum을 구하는 공식
-         pstmt.setString(1, teamName);
-         pstmt.setInt(2, numPerPage*(cPage-1)+1);
-         pstmt.setInt(3, numPerPage*cPage);
-         /*System.out.println(numPerPage*(cPage-1)+1);
-         System.out.println(numPerPage*cPage);*/
-         rset=pstmt.executeQuery();
-         
-         list = new ArrayList<Member>();
-         while(rset.next()) {
-            m = new Member();
-            m.setUserId(rset.getString("userid"));
-            m.setUserName(rset.getString("username"));
-            m.setPhone(rset.getString("phone"));
-            m.setEmail(rset.getString("email"));
-            m.setBirthday(rset.getString("birthday"));
-            m.setProfile(rset.getString("profile"));
-            m.setGrade(rset.getString("grade"));
-            m.setRnum(rset.getInt("rnum"));         
-            list.add(m);
-         }
-         System.out.println("list@MemberDAO.selectMemberList="+list);
-      } catch (SQLException e) {
-         e.printStackTrace();
-      } finally {
-         close(rset);
-         close(pstmt);
-      }
-      return list;
-   }
-
-   public int memberOut(Connection conn, String userId) {
-      int result = 0;
-      PreparedStatement pstmt = null;
-      String query = prop.getProperty("memberOut");
-      try {
-         pstmt = conn.prepareStatement(query);
-         pstmt.setString(1, userId);
-         result = pstmt.executeUpdate();
-      } catch (SQLException e) {
-         e.printStackTrace();
-      } finally {
-         close(pstmt);
-      }
-      return result;
-   }
+	public int insertMember(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertMember");
+		System.out.println(member);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  member.getUserId());
+			pstmt.setString(2,  member.getPassword());
+			pstmt.setString(3, member.getUserName());
+			pstmt.setString(4,  member.getRegioncode());
+			pstmt.setString(5,  member.getPhone());
+			pstmt.setString(6,  member.getEmail());
+			pstmt.setString(7,  member.getProfile());
+			pstmt.setString(8, member.getPhoto());
+			pstmt.setString(9,  member.getBirthday());
+		
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+				e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		}
+		
+	public int selectMemberCount(Connection conn, String teamName) {
+		int totalMember = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectMemberCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalMember = rset.getInt("cnt");
+			}
+			System.out.println("totalMember@MemberDAO="+totalMember);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMember;
+	}
 
    public int memberTeamIn(Connection conn, String userId, String teamName, String msg) {
       int result = 0;
@@ -335,5 +278,61 @@ public class MemberDAO {
       return cnt;
    }
 
+public int memberOut(Connection conn, String userId) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	String query = prop.getProperty("memberOut");
+	try {
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, userId);
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	return result;
+
+}
+
+public List<Member> selectMemberList(Connection conn, int cPage, int numPerPage, String teamName) {
+	List<Member> list = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	Member m = null;
+	String query = prop.getProperty("selectMemberListByPaging");
+	
+	try {
+		pstmt=conn.prepareStatement(query);
+		//페이징
+		pstmt.setString(1, teamName);
+		pstmt.setInt(2, numPerPage*(cPage-1)+1);
+		pstmt.setInt(3, numPerPage*cPage);
+		/*System.out.println(numPerPage*(cPage-1)+1);
+		System.out.println(numPerPage*cPage);*/
+		rset=pstmt.executeQuery();
+		
+		list = new ArrayList<Member>();
+		while(rset.next()) {
+			m = new Member();
+			m.setUserId(rset.getString("userid"));
+			m.setUserName(rset.getString("username"));
+			m.setPhone(rset.getString("phone"));
+			m.setEmail(rset.getString("email"));
+			m.setBirthday(rset.getString("birthday"));
+			m.setProfile(rset.getString("profile"));
+			m.setGrade(rset.getString("grade"));
+			m.setRnum(rset.getInt("rnum"));			
+			list.add(m);
+		}
+		System.out.println("list@MemberDAO.selectMemberList="+list);
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	return list;
+	}
 }
       

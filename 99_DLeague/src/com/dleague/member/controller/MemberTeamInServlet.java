@@ -36,7 +36,7 @@ public class MemberTeamInServlet extends HttpServlet {
 		int result = 0;
 		int cntTeamCreate = new MemberTeamService().cntTeamCreate(userId);
 		int cnt = memberService.memberTeamInCount(userId, teamName);
-		if(!(cnt>0)) result = memberService.memberTeamIn(userId, teamName, msg);
+		if(!(cnt>0 || cntTeamCreate>0)) result = memberService.memberTeamIn(userId, teamName, msg);
 		String Referer = request.getHeader("Referer"); //어디서 시도했는지
 		String Origin  = request.getHeader("Origin");
 		String url = request.getRequestURL().toString(); //url패턴까지
