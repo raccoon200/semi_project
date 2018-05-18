@@ -143,6 +143,7 @@ public class GameDAO {
 		String query = prop.getProperty("selectOneWithResult");
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				a = new Activity();
