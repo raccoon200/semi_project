@@ -7,7 +7,7 @@
 <meta charset=UTF-8>
 <title>에러페이지</title>
 <style>
-    img{
+    img#basketball{
         position: relative;
         width: 100px;
         height: 100px;
@@ -27,11 +27,11 @@
             left : 450px;
         }
     }
-    body{text-align: center;}
+    body#error{text-align: center;}
     span#e-msg{color: red; font-size: 1.5em;}
 </style>
 </head>
-<body>
+<body id="error">
 	<h2>오류</h2>
     <p><span id="e-msg">잘못된 경로로 접근하였습니다.</span></p>
     <p>관리자에게 문의하세요</p>
@@ -51,6 +51,6 @@
     <br>
     <br>
     <br>
-    <img src="<%=request.getContextPath() %>/images/common/basketball.png" alt="basketball">
+    <img src="<%=request.getContextPath() %>/images/common/basketball.png" alt="basketball" id="basketball">
 </body>
 </html>
