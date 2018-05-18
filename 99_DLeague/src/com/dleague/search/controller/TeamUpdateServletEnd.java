@@ -88,10 +88,10 @@ public class TeamUpdateServletEnd extends HttpServlet {
 		int result = new searchService().teamUpdate(team);
 		
 		//팀업데이트가 성공하면
+		String userId="";
+		String memberTeamName="";
+		String grade="";
 		if(result>0) {
-			String userId="";
-			String memberTeamName="";
-			String grade="";
 			for(TeamMember tm : list) {
 				userId= tm.getUserId();
 				memberTeamName = tm.getTeamName();
@@ -126,14 +126,15 @@ public class TeamUpdateServletEnd extends HttpServlet {
 		String loc = "/";
 		if(result>0) {
 			msg = "팀  정보 수정 성공!";
-			loc = "/search/searchView?teamName="+teamName;
+			loc = "/member/memberTeamInfoPage?teamName="+memberTeamName+"&userId="+userId;
 		}
 		else {
 			msg = "팀 정보 수정 실패!";
-			loc = "/search/searchView?teamName="+teamName;
+			loc = "/member/memberTeamInfoPage?teamName="+memberTeamName+"&userId="+userId;
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
+		request.setAttribute("param", "memberTeamInfo");
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 
