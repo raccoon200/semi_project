@@ -32,6 +32,46 @@
     </style>
 <script>
 function fn_checkIdDuplicate(){
+<<<<<<< HEAD
+   
+   var userId = $("#userId_").val().trim();
+   if(userId.length<4){
+      alert('아이디는 4글자 이상부터 가능합니다. \n (영대소문자와 숫자포함 4~12자)');
+      return;
+   }
+   
+   var url = "<%=request.getContextPath()%>/member/checkIdDuplicate";
+   var title = "checkIdDuplicate";
+   var status = "left=350px, top=100px, width=300px, height=200px";
+   var popup = window.open("",title,status);
+   
+   var checkIdDuplicateFrm = document.checkIdDuplicateFrm;
+   checkIdDuplicateFrm.userId.value=userId;
+   
+   checkIdDuplicateFrm.target = title;
+   checkIdDuplicateFrm.action = url;
+   checkIdDuplicateFrm.submit();
+   
+   
+   var userId = $("#userId_").val().trim();
+   if(userId.length<4){
+      alert('아이디는 4글자 이상부터 가능합니다. \n (영대소문자와 숫자포함 4~12자)');
+      return;
+   }
+   
+   var url = "<%=request.getContextPath()%>/member/checkIdDuplicate";
+   var title = "checkIdDuplicate";
+   var status = "left=350px, top=100px, width=300px, height=200px";
+   var popup = window.open("",title,status);
+   
+   var checkIdDuplicateFrm = document.checkIdDuplicateFrm;
+   checkIdDuplicateFrm.userId.value=userId;
+   
+   checkIdDuplicateFrm.target = title;
+   checkIdDuplicateFrm.action = url;
+   checkIdDuplicateFrm.submit();
+   
+=======
 	
 	var userId = $("#userId_").val().trim();
 	if(userId.length<4){
@@ -51,7 +91,24 @@ function fn_checkIdDuplicate(){
 	checkIdDuplicateFrm.action = url;
 	checkIdDuplicateFrm.submit();
 	
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 }
+<<<<<<< HEAD
+function fn_checked() {
+<<<<<<< HEAD
+   var idtext = document.getElementById("userId_");
+   var patext = document.getElementById("password_");
+   var cpatext = document.getElementById("password_chk");
+   var mtext = document.getElementById("email_");
+   var nametext = document.getElementById("userName");
+   var intro = document.getElementById("profile");
+   
+   var userId = idtext.value;
+   var password = patext.value;
+   var password_chk = cpatext.value;
+   var email = mtext.value;
+   var userName = nametext.value;
+=======
 function fn_birthday() {
 	 if($("#birthday").val().length!=6 || Number($("#birthday").val())==NaN) {
 		/* alert("생년월일은 6자리숫자로입력해주세요"); */
@@ -84,7 +141,195 @@ function passwordCheckFunction() {
 		$('#passwordCheckMessage').html('');
 	}
 	}
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 
+<<<<<<< HEAD
+   var regExp0 = /^[a-zA-Z0-9]{4,12}$/;
+   var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
+   //id와 비밀번호의 유효성 검사
+   var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i;
+   //email 유효성검사
+   var regname = /^[가-힝]{2,}$/;
+   // 이름 유효성 검사
+   console.log("userid ="+userId);
+   if(!regExp0.test(userId))
+      //아이디 유효성 검사 후 4~12자의 영문 대소문자와 숫자의 유효성이 안맞다면
+      //공백을 주고 알람을 띄운다.
+      //밑에 동일한 유효성 검사
+   {
+      alert("Id를 제대로 입력해주세요.");
+   /*    idtext.value = ""; */
+      idtext.focus();
+      return false;
+   }else if($("[name=idValid]").val() != 1){
+      
+      alert("ID중복체크를 해주세요.")
+      idtext.focus();
+      return false;
+   }
+   else if(!regExp1.test(password))
+      {
+      alert("비밀번호를 제대로 입력해주세요.");
+      patext.value="";
+      patext.focus();
+      return false;
+      }
+   else if(!(password_chk.slice(0, password_chk.length) === password.slice(0,password.length)))
+      {
+      alert("비밀번호가 동일하지 않습니다.");
+      cpatext.value = "";
+      cpatext.focus();
+      return false;
+      }
+   else if ((password_chk.slice(0, password_chk.length) === id.slice(0, id.length)))
+      {
+      alert("비밀번호가 ID와 동일하면 안됩니다.");
+      patext.value= "";
+      patext.focus();
+      cpatext.value= "";
+      cpatext.focus();
+      return false;
+      }
+   else if (!regExp2.test(email))
+      {
+      alert("올바른 이메일 형식이 아닙니다.");
+      mtext.value= "";
+      mtext.focus();
+      return false;
+      }
+   else if(!regname.test(userName))
+      {
+      alert("이름을 제대로 입력해주세요.");
+      nametext.value ="";
+      nametext.focus();
+      return false;
+      }
+   else if (intro.value ==""){
+      alert("자기 소개란을 100자 내외로 입력해주세요.");
+      return false;
+   }
+   return true;
+
+   console.log("안녕");
+   var idtext = document.getElementById("userId_");
+   var patext = document.getElementById("password_");
+   var cpatext = document.getElementById("password_chk");
+   var mtext = document.getElementById("email_");
+   var m1text = document.getElementById("email_1");
+   var nametext = document.getElementById("userName");
+   var bitext = document.getElementById("birthday");
+   var phtext = document.getElementById("phone");
+   var intro = document.getElementById("profile");
+   
+   var userId = idtext.value;
+   var password = patext.value;
+   var password_chk = cpatext.value;
+   var email_ = mtext.value;
+   var email_1 = m1text.value;
+   var userName = nametext.value;
+   var birthday = bitext.value;
+   var phone = phtext.value;
+   console.log(userId);
+   console.log(password);
+   console.log(password_chk);
+   console.log("email ="+email_+"@"+email_1);
+   console.log(userName);
+   console.log(birthday);
+   console.log(콜);
+   var regExp0 = /^[a-zA-Z0-9]{4,12}$/;
+   var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
+   //id와 비밀번호의 유효성 검사
+/*    var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i; */
+   var regExp2 = /[a-z0-9]{2,}$/;
+   var regExp3 = /[a-z0-9]{2,}\.[a-z0-9]{2,}$/;
+   //email 유효성검사
+   var regname = /^[가-힝]{2,4}$/;
+   // 이름 유효성 검사
+    var regExp4 = /[0-9]{6,6}$/;
+   // 폰유효성 검사
+   var regph = /^01[0-9]{8,9}$/s;
+   console.log("userid ="+userId);
+   if(!regExp0.test(userId))
+      //아이디 유효성 검사 후 4~12자의 영문 대소문자와 숫자의 유효성이 안맞다면
+      //공백을 주고 알람을 띄운다.
+      //밑에 동일한 유효성 검사
+   {
+      alert("Id를 제대로 입력해주세요.");
+   /*    idtext.value = ""; */
+      idtext.focus();
+      return false;
+   }else if($("[name=idValid]").val() != 1){
+      
+      alert("ID중복체크를 해주세요.")
+      idtext.focus();
+      return false;
+   }
+   else if(!regExp1.test(password))
+      {
+      alert("비밀번호를 제대로 입력해주세요.");
+      patext.value="";
+      patext.focus();
+      return false;
+      }
+   else if(!(password_chk.slice(0,password_chk.length) === password.slice(0,password.length)))
+      {
+      alert("비밀번호가 동일하지 않습니다.");
+      cpatext.value = "";
+      cpatext.focus();
+      return false;
+      }
+   else if ((password_chk.slice(0, password_chk.length) === userId.slice(0, userId.length)))
+      {
+      alert("비밀번호가 ID와 동일하면 안됩니다.");
+      patext.value= "";
+      patext.focus();
+      cpatext.value= "";
+      cpatext.focus();
+      return false;
+      }
+   else if(!regname.test(userName))
+      {
+         alert("이름을 제대로 입력해주세요.");
+         nametext.value ="";
+         nametext.focus();
+         return false;
+         }
+   else if(!regExp4.test(birthday))
+      {
+      alert("생년월일을 확인해주세요.");
+      bitext.value="";
+      bitext.focus();
+      return false;
+      }
+   else if(!regph.test(콜))
+      {
+      alert("전화번호를 확인해주세요.");
+      phtext.value="";
+      phtext.focus();
+      return false;
+      }
+   else if (!regExp2.test(email_))
+      {
+      alert("이메일을 확인해주세요.");
+      mtext.value= "";
+      mtext.focus();
+      return false;
+      }
+   else if (!regExp3.text(email_1))
+      {
+      alert("직접입력부분을 확인해주세요.");
+      m1text.value="";
+      m1text.focus();
+      return false;
+      }
+   else if (intro.value ==""){
+      alert("자기 소개란을 100자 내외로 입력해주세요.");
+      return false;
+   }
+   return true;
+}
+
+=======
 function fn_checked() {
 	console.log("안녕");
 	var idtext = document.getElementById("userId_");
@@ -201,6 +446,7 @@ function fn_checked() {
 	}
 	return true;
 }
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 </script>
 <section id = "enroll-container">
 
@@ -214,9 +460,17 @@ function fn_checked() {
 <tr>
 <tr>
 <td style ="width:110px;"><h5>아이디</h5></td>
+<<<<<<< HEAD
+<td>
+=======
 <td style="text-align:left;">
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 <input class="form-control" type="text" name="userId" id="userId_" placeholder = "아이디를 입력하세요 . (영대소문자와 숫자포함 4~12자)" value ="" required/>
+<<<<<<< HEAD
+<td style="width:110px;"> <input type="button" value="ID중복체크" id="btn-idValid" onclick="fn_checkIdDuplicate()"/>
+=======
 <input class = "btn btn-primary pull-right" value="중복검사" id="btn-idValid" onclick="fn_checkIdDuplicate()" style="width:100px;" />
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 <input type = "hidden" name="idValid" value="0" />
 </tr>
 <tr>
@@ -328,18 +582,38 @@ $("[name=up_file]").change(function(){
 	}
 });	
 function fn_fileUpload(value){
+<<<<<<< HEAD
+    if(value.files && value.files[0]) {
+   var value2 = $("#up_file").val();
+   if(value2=="") {
+        $('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
+     } 
+   if(value.files && value.files[0]) {
+=======
 	var value2 = $("#up_file").val();
 	if(value2=="") {
   		$('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
   	} 
 	if(value.files && value.files[0]) {
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
         var reader = new FileReader();
         reader.onload = function (e) {
              $('#profileImg').attr('src', e.target.result);
+<<<<<<< HEAD
+         }
+        }
+         console.log(e.target.result);
+=======
 			console.log(e.target.result);
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
         } 
         reader.readAsDataURL(value.files[0]);
+<<<<<<< HEAD
+   }
+   }
+=======
 	}
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 }
 </script> 
  <%-- <%
@@ -380,5 +654,8 @@ if(messageContent != null) {
     --%>
   <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git

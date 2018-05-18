@@ -48,7 +48,7 @@ public class EncryptFilter implements Filter {
 		//암호화래퍼객체 생성
 		MultipartWrapper encWrapper = new MultipartWrapper(httpReq);
 	
-		System.out.println("[암호화처리됨@EncryptFilter]");
+		//System.out.println("[암호화처리됨@EncryptFilter]");
 		// pass the request along the filter chain
 		chain.doFilter(encWrapper, response);
 	}

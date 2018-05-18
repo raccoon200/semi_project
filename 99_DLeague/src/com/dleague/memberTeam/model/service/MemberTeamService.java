@@ -158,4 +158,27 @@ public class MemberTeamService {
 		close(conn);
 		return teamRegister;
 	}
+
+	public int MemberTeamRegisterCancel(String choose) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().MemberTeamRegisterCancel(conn, choose);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int cntTeamCreate(String userId) {
+		Connection conn = getConnection();
+		int cntTeamCreate = new MemberTeamDAO().cntTeamCreate(conn, userId);
+		close(conn);
+		return cntTeamCreate;
+	}
+
+	public int cntRegister(String userId) {
+		Connection conn = getConnection();
+		int cntR = new MemberTeamDAO().cntRegister(conn, userId);
+		close(conn);
+		return cntR;
+	}
 }
