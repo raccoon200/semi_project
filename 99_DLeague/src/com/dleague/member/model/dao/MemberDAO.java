@@ -190,40 +190,6 @@ public class MemberDAO {
 	      return result;
 	   }
 
-
-<<<<<<< HEAD
-	public int insertMember(Connection conn, Member member) {
-int result = 0;
-PreparedStatement pstmt = null;
-String query = prop.getProperty("insertMember");
-System.out.println(member);
-try {
-	pstmt = conn.prepareStatement(query);
-	pstmt.setString(1,  member.getUserId());
-	pstmt.setString(2,  member.getPassword());
-	pstmt.setString(3, member.getUserName());
-<<<<<<< HEAD
-	pstmt.setString(4, member.getPhoto());
-	pstmt.setString(5,  member.getBirthday());
-pstmt.setString(4,  member.getPhone());
-pstmt.setString(5,  member.getEmail());
-pstmt.setString(6,  member.getRegioncode());
-pstmt.setString(7,  member.getProfile());
-=======
-	pstmt.setString(4,  member.getRegioncode());
-	pstmt.setString(5,  member.getPhone());
-	pstmt.setString(6,  member.getEmail());
-	pstmt.setString(7,  member.getBirthday());
-	pstmt.setString(8,  member.getProfile());
-	pstmt.setString(9, member.getPhoto());
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
-
-	
-result = pstmt.executeUpdate();
-
-	} catch (SQLException e) {
-		e.printStackTrace();
-=======
 	public int insertMember(Connection conn, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -273,7 +239,6 @@ result = pstmt.executeUpdate();
 			close(pstmt);
 		}
 		return totalMember;
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 	}
 
 	public List<Member> selectMemberList(Connection conn, int cPage, int numPerPage, String teamName) {
