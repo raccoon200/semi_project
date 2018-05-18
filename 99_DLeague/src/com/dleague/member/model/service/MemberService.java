@@ -98,5 +98,4 @@ public class MemberService {
 		return cnt;
 	}
 	
-	
 }
