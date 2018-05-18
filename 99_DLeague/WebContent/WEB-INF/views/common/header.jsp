@@ -245,7 +245,10 @@
 	}
 	</style>
 <script>
+<%if(memberLoggedIn!=null) { %> 
+
 <%-- <%if(memberLoggedIn!=null) { %> 
+
    function fn_validate_team_info() {
       if(<%=memberLoggedIn.getTeamname()%>!=null) {
          return true;   
@@ -253,8 +256,12 @@
       if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
 
       return false;
-   }
+	}
+<%} %>
+
 <%} %> --%>
+<%}%>
+
 </script>
 </head>
 <body>
