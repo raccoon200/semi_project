@@ -234,8 +234,6 @@ public class NoticeDAO {
 			pstmt.setInt(5,notice.getNotice_no());
 			
 			result = pstmt.executeUpdate();
-			System.out.println("notice : "+notice.getNotice_no()+", "+notice.getNotice_title());
-			System.out.println("result : "+result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

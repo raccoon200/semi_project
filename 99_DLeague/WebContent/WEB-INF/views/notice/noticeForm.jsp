@@ -9,36 +9,55 @@
 %>
 <style>
 table.notice-table{
-	border:1px solid black;
+	border:1px solid rgb(240,240,240);
 	border-collapse:collapse;
 	width:680px;
+	
 }
 table.notice-table tr{
-	border:1px solid black;
-
+	border:1px solid gray;
+	
 }
 table.notice-table tr th{
-	background: rgb(64,128,183);
+	background: rgb(147,213,245);
 	color:white;
+	border-radius: 1px;
 }
 table.notice-table tr{
 	height:5px;
-		
 }
-table.notice-table tr th, td{
-	border:1px solid rgb(100,100,100);
+table.notice-table tr td{
+	border:1px solid rgb(220,220,220);
 	padding:10px;
 	text-align:left;
 	font-size:13px;
+}
+table.notice-table tr th{
+	border:1px solid rgb(220,220,220);
+	padding:10px;
+	text-align:center;
+	font-size:13px;
+
 }
 table.notice-table tr:hover{
 	background:rgb(240,240,240);
 }
 table.notice-table th{
-	width:60px
+	width:80px;
 }
 .view-content {
 	height:200px;
+	
+}
+.btn{
+	border-radius:2px;
+	border:1px solid rgb(240,240,240);
+	background:rgb(147,213,245);
+	color:white;
+}
+.btn-area{
+	padding-left:40%;
+	padding-top:5px;
 }
 </style>
 <script>
@@ -76,12 +95,14 @@ function fn_loginAlert(){
 		</tr>
 		<tr>
 			<td colspan="6" class="view-content">
-				<textarea name="notice_content" id="" cols="80" rows="10" required></textarea>
+				<textarea name="notice_content" id="" cols="100" rows="10" required></textarea>
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="등록" />
-	<input type="button" value="취소" />
+	<div class="btn-area">
+		<input class="btn" type="submit" value="등록" />
+		<input class="btn" type="button" value="취소" />
+	</div>
 </form>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		

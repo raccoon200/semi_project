@@ -100,67 +100,26 @@ legend{padding:10px 0px 0px 40px;}
 	    background: -moz-linear-gradient(0% 0% 270deg,#565b5f, #3e4347);
 	}
 	/*페이지끝*/    
-	.btn {
-	  display: inline-block;
-	  background: transparent;
-	  text-transform: uppercase;
-	  font-weight: 500;
-	  font-style: normal;
-	  font-size: 1rem;
-	  letter-spacing: 0.3em;
-	  color:rgba(223,190,106,0.8);
-	  border-radius: 0;
-	  padding: 18px 80px 20px;
-	  transition: all 0.7s ease-out;
-	  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
-	  background-position: 1% 50%;
-	  background-size: 300% 300%;
-	  text-decoration: none;
-	  margin: 0.625rem;
-	  border: none;
-	  border: 1px solid rgba(223,190,106,0.8);
-	}
 	
-	.btn:hover {
-	  color: #fff;
-	  border: 1px solid rgba(223,190,106,0);
-	  color: $white;
-	  background-position: 99% 50%;
-	} 
-    /* 버튼 디자인 */
 </style>
 <script>
-var choose = "";
-function fn_choose_change(choose) {
-	this.choose = choose.value;
-	
-}
 
-function fn_memberTeamGetOut() {
-	if (choose=="") {
-		alert("대상을 선택해주세요!");
-	}
-	else{
-		if(confirm("해당 회원을 제명하시겠습니까?")) {
-			if(choose == "<%=memberLoggedIn.getUserId()%>") alert("본인에겐 제명할 수 없습니다!");
-			else
-			location.href = "<%=request.getContextPath()%>/member/memberTeamGetOut?choose="+choose;
-		}
+function fn_memberTeamGetOut(choose) {
+	if(confirm("해당 회원을 제명하시겠습니까?")) {
+		if(choose == "<%=memberLoggedIn.getUserId()%>") alert("본인에겐 제명할 수 없습니다!");
+		else
+		location.href = "<%=request.getContextPath()%>/member/memberTeamGetOut?choose="+choose;
 	}
 }
 
-function fn_memberTeamMandate() {
-	if (choose=="") {
-		alert("대상을 선택해주세요!");
-	}
-	else {
-		if(confirm("해당 회원에게 팀장 위임하시겠습니까?")) {
-			if(choose == "<%=memberLoggedIn.getUserId()%>") alert("본인에겐 위임할 수 없습니다!");
-			else
-			location.href = "<%=request.getContextPath()%>/member/memberTeamMandate?leader=<%=memberLoggedIn.getUserId()%>&choose="+choose;
-		}
+function fn_memberTeamMandate(choose) {
+	if(confirm("해당 회원에게 팀장 위임하시겠습니까?")) {
+		if(choose == "<%=memberLoggedIn.getUserId()%>") alert("본인에겐 위임할 수 없습니다!");
+		else
+		location.href = "<%=request.getContextPath()%>/member/memberTeamMandate?leader=<%=memberLoggedIn.getUserId()%>&choose="+choose;
 	}
 }
+
 </script>
  <!--ui object -->
  	<h2>팀원 관리</h2>
@@ -175,10 +134,13 @@ function fn_memberTeamMandate() {
         <col width="10%">
         <col width="10%">
         <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
     </colgroup>
     <thead>
     <tr>
-    	<th scope="col">선택</th>
         <th scope="col">순번</th>
         <th scope="col">아이디</th>
         <th scope="col">이름</th>
@@ -187,17 +149,18 @@ function fn_memberTeamMandate() {
         <th scope="col">생년월일</th>
         <th scope="col">프로필</th>
         <th scope="col">등급</th>
+        <th scope="col">제명</th>
+        <th scope="col">팀장 위임</th>
     </tr>
     </thead>
     <tbody>
     <%if(list == null || list.isEmpty()){ %>
 		<tr>
-			<td colspan="5" align="center">데이터가 존재하지 않습니다.</td>
+			<td colspan="10" align="center">데이터가 존재하지 않습니다.</td>
 		</tr>
 		<%}else{ 
 			for(Member m : list){%>
 			<tr>
-				<td><input type="radio" name="choose" id="choose" value="<%=m.getUserId()%>" onchange="fn_choose_change(this)"/></td>
 				<td class="ranking" scope="row"><%=m.getRnum() %></td>
 				<td><%=m.getUserId() %></td>
 	        	<td><%=m.getUserName() %></td>
@@ -206,6 +169,8 @@ function fn_memberTeamMandate() {
 	        	<td><%=m.getBirthday() %></td>
 	        	<td><%=m.getProfile() ==null ?"없음":m.getProfile()%></td>
 	        	<td><%=m.getGrade() %></td>
+	        	<td><button class="btn" onclick="fn_memberTeamGetOut(this.value)" value="<%=m.getUserId()%>">제명</button></td>
+	        	<td><button class="btn" onclick="fn_memberTeamMandate(this.value)" value="<%=m.getUserId()%>">팀장 위임</button></td>
 			</tr>
 		<%}
 		} %>
@@ -217,11 +182,11 @@ function fn_memberTeamMandate() {
         <td>종합</td>
         <td>총 인원수</td>
         <td>전체</td>
-        <td colspan="6"><%= totalMember%>명</td>
+        <td colspan="7"><%= totalMember%>명</td>
         </tr>
         <tr>
-        <input type="button" value="제명하기" class="btn" onclick="fn_memberTeamGetOut()"/>
-        <input type="button" value="팀장 위임하기" class="btn" onclick="fn_memberTeamMandate()"/>
+        <!-- <input type="button" value="제명하기" class="btn" onclick="fn_memberTeamGetOut()"/>
+        <input type="button" value="팀장 위임하기" class="btn" onclick="fn_memberTeamMandate()"/> -->
         </tr>
         </tfoot>
     </table>

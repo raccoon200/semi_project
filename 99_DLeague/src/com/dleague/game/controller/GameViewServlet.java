@@ -64,8 +64,8 @@ public class GameViewServlet extends HttpServlet {
 			}
 			tHome = new GameService().selectTeamByTeamName(home);
 			tAway = new GameService().selectTeamByTeamName(away);
-			System.out.println(tHome);
-			System.out.println(tAway);
+//			System.out.println(tHome);
+//			System.out.println(tAway);
 			
 			hMemberList = new searchService().teamMemberSearch(home);
 			aMemberList = new searchService().teamMemberSearch(away);
