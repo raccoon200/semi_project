@@ -48,6 +48,7 @@ public class MemberTeamMemberAcceptServlet extends HttpServlet {
 		String loc = Referer.replace(Origin+request.getContextPath(), "");
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
+		request.setAttribute("ok", "ok");
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 

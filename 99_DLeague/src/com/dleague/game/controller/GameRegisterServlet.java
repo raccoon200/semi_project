@@ -49,7 +49,7 @@ public class GameRegisterServlet extends HttpServlet {
 				e.printStackTrace();
 				throw new ServletException();
 			}
-			System.out.println(cnt);
+//			System.out.println(cnt);
 			if(cnt > 0) {
 				view = "/WEB-INF/views/common/msg.jsp";
 				msg = "등록된 경기가 있거나, 처리되지 않은 경기가 있습니다. 확인해주세요.";
