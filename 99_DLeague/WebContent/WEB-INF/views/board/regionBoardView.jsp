@@ -53,7 +53,7 @@ button#btn-insert{
 	width:80px;
 	height:57px;
 	color:white;
-	background: /* rgb(64,128,183); */#76AAEE;
+	background: /* rgb(64,128,183); */#FFC158;
 	position:relative;
 	float: right;
     margin: 0px 10px 0 0px;
@@ -125,7 +125,7 @@ table.board-table th {
 	border-top:1px solid #fafafa;
 	border-bottom:1px solid #e0e0e0;
 	font-size: 15px;
-	background: #c3d4ee;
+	background: #FFDFAB;
 	text-align: center;
 }
 table.board-table th:first-child{
@@ -206,7 +206,7 @@ table#tbl-comment tr:hover button.btn-delete{
 }
 button.btn-reply{float:right;}
 button.btn-delete{float:right;}
-#comment-container{padding-bottom:20px;}
+#comment-container{padding:30px;}
 .comment-writer{font-weight:bold; font-size:15px;}
 </style>
 <script>
@@ -299,6 +299,7 @@ function fn_fileDowload(oName, rName){
 </script>
 
 <h2>지역게시판</h2>
+<hr />
 <table class="board-table">
 	<tr>
 		<th>번호</th>
@@ -411,6 +412,7 @@ function fn_fileDowload(oName, rName){
 <% if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getUserId())){ %>
 <input type="button" class="deleteBtn" value="글삭제" onclick="location.href='<%=request.getContextPath() %>/board/regionBoardDelete?no=<%=board.getBoard_region_no() %>'"/>
 <%} %>
+<br /><br /><br />
 </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		
