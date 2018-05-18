@@ -41,7 +41,7 @@ td.view-content{
 	height:150px;
 }*/
 
-div#comment-container button#btn-insert{
+button#btn-insert{
 	width:80px;
 	height:57px;
 	color:white;
@@ -225,9 +225,9 @@ $(function(){
 		<%if(memberLoggedIn != null){%>
 		//로그인한 경우
 		var tr = $("<tr></tr>");
-		var html = '<td style="display:none; text-align:left;" colspan="2">';
+		var html = '<td style="display:none; text-align:left;" colspan="6">';
 		html += '<form action="<%=request.getContextPath()%>/board/freeBoardCommentInsert" method="post">';
-		html += '<textarea name="boardCommentContent" cols="60" rows="3"></textarea>';
+		html += '<textarea name="boardCommentContent" cols="80" rows="3" style="resize:none;"></textarea>';
 		html += '<button type="submit" id="btn-insert">등록</button>';
 		html += '<input type="hidden" name="boardCommentWriter" value="<%=memberLoggedIn!=null?memberLoggedIn.getUserId():""%>" />';
 		html += '<input type="hidden" name="boardRef" value="<%=board.getBoard_free_no()%>" />';
@@ -324,15 +324,13 @@ function fn_fileDowload(oName, rName){
 	<tr>
 		<td colspan="6" class="view-content"><%=board.getBoard_free_content() %></td>
 	</tr>
-</table>
 <div id="comment-container">
 	<div class="comment-editor">
-	<table class="board-table">
 	<tr>
 		<th width="20%">댓글입력 : </th>
-			<td width="80%">
+			<td width="80%" colspan="6">
 				<form name="boardCommentFrm" action="<%=request.getContextPath()%>/board/freeBoardCommentInsert" method="post">
-					<textarea name="boardCommentContent" cols="70" rows="3.2"></textarea>
+					<textarea name="boardCommentContent" cols="70" rows="3.2" style="resize:none;"></textarea>
 					<button type="submit" id="btn-insert">등록</button>
 					<input type="hidden" name="boardCommentWriter" value="<%=memberLoggedIn!=null?memberLoggedIn.getUserId():""%>" />
 					<input type="hidden" name="boardRef" value="<%=board.getBoard_free_no()%>" />
@@ -354,7 +352,7 @@ function fn_fileDowload(oName, rName){
 				<sub class="comment-date">입력날짜 : <%=bc.getBoard_free_comment_date() %></sub>
 
 			</td>
-			<td>
+			<td colspan="6">
 				<%=bc.getBoard_free_comment_content() %>
 				<!-- 삭제버튼추가 -->
 				<%if(memberLoggedIn != null &&
@@ -371,7 +369,7 @@ function fn_fileDowload(oName, rName){
 			<td>
 				<pre>        ┖▶</pre>
 			</td>
-			<td>
+			<td colspan="6">
 				<sub class="comment-writer">ID : <%=bc.getBoard_free_comment_writer() %></sub>
 				<sub class="comment-date">댓글날짜 : <%=bc.getBoard_free_comment_date() %></sub>
 				<br />
