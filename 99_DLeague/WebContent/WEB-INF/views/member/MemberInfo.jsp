@@ -158,7 +158,7 @@ required/> --%></td>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input type="button" value="회원 탈퇴" style="position:relative; " class="btn btn-danger" onclick="fn_memberOut()"/>
 <section id="imgsection">
-<input type="image" style="pointer-events: none;" id="profileImg"/>
+<input type="image" style="pointer-events: none;" id="profileImg" class="img-rounded"/>
 <br /> 
 <div style="position:relative;">
 <input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
