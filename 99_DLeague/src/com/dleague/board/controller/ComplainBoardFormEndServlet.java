@@ -68,26 +68,27 @@ public class ComplainBoardFormEndServlet extends HttpServlet {
 				check=1;
 			}
 		}
+		String view = "";
 		if(check==-1) {
 			request.setAttribute("msg", "신고대상이 존재하지 않는 회원/팀입니다");
 			request.setAttribute("loc", "/board/complainBoard");
-			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
-		}
-		
-		
-		int result = new BoardService().insertComplain(complain);
-		if(result>0) {
-			result = new BoardService().selectRecentComplainNo();
-		}
-		String view = "";
-		if(result>0) {
-			view="/board/complainBoardView?no="+result;
-			request.setAttribute("complainBoard", complain);
-			request.setAttribute("param", "complain");
-		}else {
-			request.setAttribute("msg", "신고글을 작성하지 못했습니다");
-			request.setAttribute("loc", "/WEB-INF/views/board/complainBoardList.jsp");
 			view="/WEB-INF/views/common/msg.jsp";
+			//request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		}else {
+			int result = new BoardService().insertComplain(complain);
+			if(result>0) {
+				result = new BoardService().selectRecentComplainNo();
+			}
+			
+			if(result>0) {
+				view="/board/complainBoardView?no="+result;
+				request.setAttribute("complainBoard", complain);
+				request.setAttribute("param", "complain");
+			}else {
+				request.setAttribute("msg", "신고글을 작성하지 못했습니다");
+				request.setAttribute("loc", "/WEB-INF/views/board/complainBoardList.jsp");
+				view="/WEB-INF/views/common/msg.jsp";
+			}
 		}
 		request.getRequestDispatcher(view).forward(request, response);
 	}
