@@ -55,7 +55,7 @@ public class MemberTeamCreateServlet extends HttpServlet {
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 			return;
-		}
+		} 
 		List<Region> regionList = new RegionService().selectRegionList();
 		request.setAttribute("param", "memberTeamCreate");
 		request.setAttribute("regionList", regionList);

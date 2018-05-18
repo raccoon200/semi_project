@@ -8,7 +8,6 @@ console.log("<%=param%>");
       <section id="center">
 			<nav id="nav">
 			
-			
 			<!-- 공지사항 -->
 			<% if(param=="notice"){ %>
 			<h3 id="nav-header">공지사항</h3>
@@ -59,13 +58,14 @@ console.log("<%=param%>");
 				<li><a href="<%=request.getContextPath() %>/search/gameSearchList" id='<%=param=="teamSearchList"?"nav-selected":""%>'>경기검색</a></li>
 			</ul>
 			<%} %>
-			<%if(param=="memberTeamMemberManagement" || param=="memberTeamGameAcceptPage" || param=="memberTeamMemberAcceptPage" || param=="memberTeamActivityPage") {%>
+			<%if(param=="memberTeamMemberManagement" || param=="memberTeamGameAcceptPage" || param=="memberTeamMemberAcceptPage" || param=="memberTeamActivityPage" || param=="memberTeamDelete") {%>
 			<h3 id="nav-header">팀 관리</h3>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamManagement?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamMemberManagement"?"nav-selected":""%>'>팀원 관리</a></li>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamMemberAcceptPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamMemberAcceptPage"?"nav-selected":""%>'>팀원 수락</a></li>
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamGameAcceptPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamGameAcceptPage"?"nav-selected":""%>'>팀 경기 수락</a></li>
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamActivityPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamActivityPage"?"nav-selected":"" %>'>팀 활동 이력</a></li>
+				<li><a href="<%=request.getContextPath()%>/member/memberTeamDelete?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamDelete"?"nav-selected":"" %>'>팀 삭제</a></li>
 			</ul>
 			<%} %>
 			<%if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagement" || param=="memberTeamCreate") {%>

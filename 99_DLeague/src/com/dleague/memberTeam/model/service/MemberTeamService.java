@@ -213,4 +213,10 @@ public class MemberTeamService {
 		else rollback(conn);
 		return result;
 	}
+
+	public int cntTeamMember(String teamName) {
+		Connection conn = getConnection();
+		int cnt = new MemberTeamDAO().cntTeamMember(conn, teamName);
+		return cnt;
+	}
 }

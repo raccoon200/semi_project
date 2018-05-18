@@ -568,4 +568,23 @@ public class MemberTeamDAO {
 		}
 		return result;
 		}
+	public int cntTeamMember(Connection conn, String teamName) {
+		int cnt = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("cntTeamMember");
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) cnt = rset.getInt("cnt");
+			System.out.println(cnt);
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cnt;
+		}
 	}
