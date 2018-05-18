@@ -193,7 +193,7 @@
 	}
 	a#nav-selected{
 	    color: rgb(64,128,183);
-	    font-weight: bolder;
+	    font-weight: bold;
 	}
 	section#content{
 	    position: relative;
