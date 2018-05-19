@@ -409,7 +409,7 @@ function fn_fileDowload(oName, rName){
 <input type="button" class="updateBtn" value="글수정" onclick="location.href='<%=request.getContextPath()%>/board/regionBoardUpdate?no=<%=board.getBoard_region_no()%>'">
 <input type="button" class="deleteBtn" value="글삭제" onclick="location.href='<%=request.getContextPath() %>/board/regionBoardDelete?no=<%=board.getBoard_region_no() %>'"/>
 <%} %>
-<% if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getUserId())){ %>
+<% if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getUserId()) && !"admin".equals(board.getBoard_region_writer())){ %>
 <input type="button" class="deleteBtn" value="글삭제" onclick="location.href='<%=request.getContextPath() %>/board/regionBoardDelete?no=<%=board.getBoard_region_no() %>'"/>
 <%} %>
 <br /><br /><br />
