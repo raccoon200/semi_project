@@ -3,17 +3,25 @@
 <%@ page import="com.dleague.member.model.vo.*,java.util.*" %>
 
 <% 
+	/* Member member = (Member)request.getAttribute("Member"); */
 	List<Member> list = (List<Member>)request.getAttribute("list");
 	String userId2="";
+	String userPhoto="";
 	for(Member m2 : list){
 		userId2=m2.getUserId();
+		m2.getPhoto();
 	}
+	System.out.println(userPhoto);
+
+
 %>
+
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <style>
-table{border:1px solid;}
+
 #profileImg{width:150px; height:150px;}
-#imgsection{position: relative; left:350px; top:-250px;}
-#btn {
+#imgsection{position: relative; left:500px; top:-503px;}
+ .btnM {
   display: inline-block;
   background: transparent;
   text-transform: uppercase;
@@ -34,16 +42,15 @@ table{border:1px solid;}
   border: 1px solid rgba(223,190,106,0.8);
 }
 
-#btn:hover {
+.btnM:hover {
   cursor:pointer;
   color: #fff;
   border: 1px solid rgba(223,190,106,0);
   color: $white;
   background-position: 99% 50%;
-} 
+}  
 /* 버튼 디자인 */
 </style>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/nav.jsp"%>
 <script>
 function fn_memberOut() {
@@ -55,11 +62,26 @@ function fn_memberOut() {
 		location.href="<%=request.getContextPath()%>/member/memberOut?userId=<%=userId2%>";
 	}
 }
+function fn_memberUpdateCheck() {
+	if($("#up_file").val()=="") {
+		change.innerHTML = "<input type=\'file\' name=\'my_file\' value=\'<%=userPhoto%>'";
+		return true;
+	} else return true;
+}
+function fn_update_password(){
+	var url = "<%=request.getContextPath()%>/member/updatePassword?userId=<%=memberLoggedIn!=null?userId2:""%>";
+	var title = "updatePassword";
+	var status = "left=500px, top=200px, width=450px, height=260px";
+	
+	var popup = window.open(url, title, status);
+}
 </script>
 <section>
-<form action="<%=request.getContextPath()%>/member/MemberInfoUpdate" method="post" enctype="multipart/form-data">
-<input type="button" value="회원 탈퇴" style="position:relative; " class="btn" id="btn" onclick="fn_memberOut();"/>
-<table>
+
+<form action="<%=request.getContextPath()%>/member/MemberInfoUpdate" method="post" enctype="multipart/form-data" onsubmit="return fn_memberUpdateCheck();">
+<h2>내 정보</h2>
+<hr /><br />
+<table class="table table-striped" style="width: 60%;">
 <tr>
 <td>
 <%for(Member member:list){ %>
@@ -67,11 +89,11 @@ function fn_memberOut() {
 </td>
 <td><input type="text" name="userId" id="userId" value="<%=member.getUserId()%>" readonly/></td>
 </tr>
-<tr><td>
+<%-- <tr><td>
 <label for="password">비밀번호 </label></td>
 <td>
 <input type="password" name="password" id="password" value="<%=member.getPassword()%>" required/></td>
-</tr>
+</tr> --%>
 
 <tr><td>
 <label for="userName">이름</label></td>
@@ -82,7 +104,7 @@ function fn_memberOut() {
 <tr><td>
 <label for="regioncode">지역명</label></td>
 <td>
-<select id="regioncode" name= "regioncode">
+<select id="regioncode" class="form-control" name= "regioncode" style="width: 50%;">
 	<option value="G1" <%="G1".equals(member.getRegioncode())?"selected":""%>>서울</option>
 	<option value="G2" <%="G2".equals(member.getRegioncode())?"selected":""%>>경기</option>
 	<option value="G3" <%="G3".equals(member.getRegioncode())?"selected":""%>>강원</option>
@@ -93,7 +115,10 @@ function fn_memberOut() {
 	<option value="G8" <%="G8".equals(member.getRegioncode())?"selected":""%>>전남</option>
 	<option value="G9" <%="G9".equals(member.getRegioncode())?"selected":""%>>제주</option>
 </select>
-</td>
+<%-- <input type="text" name="regioncode" id="regioncode" value= "
+<%if("G1".equals(member.getRegioncode()) ) {%>서울
+" 
+required/> --%></td>
 </tr>
 
 <tr><td>
@@ -105,7 +130,7 @@ function fn_memberOut() {
 <tr><td>
 <label for="email">이메일</label></td>
 <td>
-<input type="email" name="email" id="email" value="<%=member.getEmail()%>"/></td>
+<input type="email" class = "form-control" name="email" id="email" value="<%=member.getEmail()!=null?member.getEmail():""%>"/></td>
 </tr>
 
 <tr><td>
@@ -117,13 +142,13 @@ function fn_memberOut() {
 <tr><td>
 <label for="teamname">팀이름</label></td>
 <td>
-<input type="text" name="teamName" id="teamName" readonly value="<%=member.getTeamname()%>"/></td>
+<input type="text" name="teamName" id="teamName" readonly value="<%=member.getTeamname()!=null?member.getTeamname():""%>"/></td>
 </tr>
 
 <tr><td>
 <label for="profile">프로필</label></td>
 <td>
-<input type="text" name="profile" id="profile" value="<%=member.getProfile()%>"/></td>
+<input type="text" name="profile" id="profile" value="<%=member.getProfile()!=null?member.getProfile():""%>"/></td>
 </tr>
 
 <tr>
@@ -138,16 +163,20 @@ function fn_memberOut() {
 <td>
 <input type="text" name="enrolldate" id="enrolldate" readonly value="<%=member.getEnrolldate()%>"/></td>
 </tr>
-
+<%} %>
 </table>
 <br />
-<input type="submit" value="수정" />
-<input type="reset" value="초기화" />
+<input type="submit" value="수정" class="btn btn-primary"/>
+<input type="reset" value="초기화" class="btn btn-primary"/>
+<input type="button" value="비밀번호수정" class="btn btn-primary" onclick="fn_update_password()" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" value="회원 탈퇴" style="position:relative; " class="btn btn-danger" onclick="fn_memberOut()"/>
 <section id="imgsection">
-<input type="image" <%-- src="<%=request.getContextPath()%>/upload/member/<%=member.getPhoto()%>" --%> id="profileImg"/>
+<input type="image" style="pointer-events: none;" id="profileImg" class="img-rounded"/>
 <br /> 
 <div style="position:relative;">
-<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);" />
+<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
+
 <span id="fname">프로필 사진 변경</span>
 </div>
 </section>
@@ -155,10 +184,19 @@ function fn_memberOut() {
 <script>
 $(function (){
 
-$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/board/<%=member.getPhoto()%>");
+	if("<%=userPhoto%>"=="default.jpg" || "<%=userPhoto%>"=="null") {
+        $('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
+     } 
+	else {
+		$("#profileImg").attr("src", "<%=request.getContextPath()%>/upload/member/<%=userPhoto%>");
+	}
+	$("input:text").addClass("form-control");
 });
 $("[name=up_file]").change(function(){ 
 	//$(this).val()은 선택한 파일명임.
+	if($("#up_file").val()=="") {
+		$('#profileImg').attr('src', "<%=request.getContextPath() %>/images/profile/default.jpg");
+	}
 	if($(this).val()==""){
 		$("#fname").show();
 	}	
@@ -167,16 +205,16 @@ $("[name=up_file]").change(function(){
 	}
 });	
 function fn_fileUpload(value){
-	 if(value.files && value.files[0]) {
+	
+	if(value.files && value.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-             $('#profileImg').attr('src', e.target.result);
+             $('#profileImg').attr('src', e.target.result);         
 			}
         }
         reader.readAsDataURL(value.files[0]);
 	}
 </script>
-<%} %>
 <style>
 
 span#fname{

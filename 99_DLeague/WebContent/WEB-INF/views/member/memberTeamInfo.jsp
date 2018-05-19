@@ -46,14 +46,16 @@
 	img#logoimg{width: 250px;height: 200px;display: inline-block;margin: 50px 0 0 0;}
 	img#logo{width: 200px;height: 80px;display: inline-block;}
 	div#logoDiv{width: 200px;height: 80px;display: inline-block;}
-	div#imgDiv{width: 410px;height: 315px;display: inline-block;float: left;text-align:center;}
+	div#imgDiv{width: 410px;height: 315px;display: inline-block;float: left;text-align:center;border:3px solid skyblue; border-radius: 10px}
 	/* div#bu,#a,#b,#c,#d{border: 1px solid black;} */
 	div#bu{height: 590px; width: 700px; display: inline-block;}
 	div#a{border-radius: 10px;background:lightgreen;height: 100px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
 	div#b{border-radius: 10px;background:lightgreen;height: 80px; width: 200px; text-align: center; display: inline-block; margin:10px 0 0 0;}
 	div#c{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;  text-align: center; display: inline-block; margin:10px 0 0 0;}
-	div#e{border-radius: 10px;background:lightgreen;height: 80px; width: 200px;  text-align: center; display: inline-block; margin:10px 0 0 0;}
+	/* div#e{border-radius: 10px;background:lightgreen;height: 45px; width: 200px;  text-align: center; display: inline-block; margin:0 0 0 0;} */
 	div#d{height: 80px; width: 200px; text-align: center; display: inline-block;}
+	span#span{color:#2828CD;font-size:25px;}
+	span#span1{border-radius: 10px;color:#DB631F;background:#D8F781;padding:10px;}
 	/*글자색깔*/
 	h2#aa{color:#2828CD;}
 	h2#bb{color:#DB631F;}
@@ -75,7 +77,11 @@
     /*teamTable*/
     div#teamTable{width: 350px; display: inline-block;}
     /*teamTable*/
-    .btn {
+     /*수정삭제버튼*/
+    div#btDiv{padding:30px; display: inline-block;}
+    button#bt1, #bt2{padding:10px;font-size:20px;}
+    /*수정삭제버튼*/
+    /* .btn {
 	  display: inline-block;
 	  background: transparent;
 	  text-transform: uppercase;
@@ -102,8 +108,9 @@
 	  border: 1px solid rgba(223,190,106,0);
 	  color: $white;
 	  background-position: 99% 50%;
-	} 
+	}  */
     /* 버튼 디자인 */
+    #h2my{display:inline-block;}
 </style>
 <script>
 
@@ -113,7 +120,15 @@ function fn_teamOut() {
 	}
 }
 </script>
-	<h2>내 팀 정보</h2>
+	<h2 id="h2my">내 팀 정보
+	<%if(!memberLoggedIn.getGrade().equals("선수")) {%> - <span id="span1">	
+	내 직책 : <span id="span"><%=memberLoggedIn.getUserId().equals(capTain)?"팀장":"팀원"%></span></span> 
+	<%} %>
+	</h2>
+	<%-- <div id="e">
+    	<h3 id="bb">내 직책 : <span id="span"><%=memberLoggedIn.getUserId().equals(capTain)?"팀장":"팀원"%></span></h3>
+    	
+    </div> --%>
 	<hr />
 	<%if(memberLoggedIn.getTeamname()!=null) {%>
 	<div style="text-align: center">
@@ -144,11 +159,11 @@ function fn_teamOut() {
             <h3 id="bb">팀원수</h3>
             <h4> <%=rnum %>명</h4>
         </div>
-        <div id="e">
+        <%-- <div id="e">
         	<h3 id="bb">내 직책</h3>
         	<h4> <%=memberLoggedIn.getUserId().equals(capTain)?"팀장":"팀원"%></h4>
         	
-        </div>
+        </div> --%>
         <br /> <br /><br />
         <div id="d">
             <h2 id="aa">활동지역</h2>
@@ -182,6 +197,7 @@ function fn_teamOut() {
             <h3><%=foundInDate %></h3>
         </div>
         <br><br>
+        <h3> < 팀소개글 > </h3>
         <textarea name="" id="" cols="85" rows="7" readonly style="resize: none"><%=introduce %></textarea>
     </div>
     <br>
@@ -195,6 +211,7 @@ function fn_teamOut() {
             <col width="10%">
             <col width="10%">
             <col width="15%">
+            <col width="10%">
         </colgroup>
         <thead>
         <tr>
@@ -203,6 +220,7 @@ function fn_teamOut() {
             <th scope="col">지역</th>
             <th scope="col">등급</th>
             <th scope="col">입단일</th>
+            <th scope="col">강퇴</th>
         </tr>
         </thead>
         <tbody>
@@ -233,14 +251,20 @@ function fn_teamOut() {
 	            </td>
 	            <td><%=tm.getGrade() %></td>
 	            <td><%=tm.getT_EnrollDate() %></td>
-            </tr>
+				<td><input type="checkbox" class="kick" id="kick<%=tm.getRnum() %>" value="<%=tm.getUserId() %>" <%="팀장".equals(tm.getGrade())?"disabled":"" %> /></td>            </tr>
         <%} %>
         </tbody>
         <tfoot>
             <tr>
             <td>종합</td>
             <td colspan="2">총 팀원수</td>
-            <td colspan="3"><%=rnum %>명</td>
+            <td colspan="2"><%=rnum %>명</td>
+            <td>
+            <%if(memberLoggedIn==null){ %>
+            <%}else{%>
+            <button onclick="fn_userKick('<%=teamName%>');">강퇴</button>
+            <%} %>
+            </td>
             </tr>
             </tfoot>
         </table>
@@ -291,6 +315,13 @@ function fn_teamOut() {
             </table>
             <!--//ui object -->
         </div>
+        <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) )  {%>
+        <div id="btDiv">
+              <button id="bt1" class="btn btn-primary" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
+        </div>
+        <%}else{ %>
+        <div id="btDiv"></div>
+        <%} %>
 </div>
 <%} else if (!memberRegisterList.isEmpty()) { %> 
 	<h2>가입 신청한 팀 내역</h2>
@@ -411,6 +442,24 @@ function fn_teamOut() {
 <input type="button" value="팀 생성하기" onclick="location.href='<%=request.getContextPath() %>/member/memberTeamCreate'" class="btn"/>
 <%} %>
 <script>
+function fn_teamUpdate(teamName){
+    location.href="<%=request.getContextPath()%>/search/teamUpdate?teamName="+teamName;
+ };
+ 
+ function fn_userKick(teamName){
+     <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) ) {%>
+     <%for(TeamMember tm3 : memberList){%>
+        var checkbox=checkbox+","+ $("#kick<%=tm3.getRnum() %>:checked").val();
+     <%}%>
+         location.href="<%=request.getContextPath()%>/search/userKick?checkbox="+checkbox+"&teamName="+teamName;
+      <%}else {%>
+         fn_loginAlert()
+      <%}%>
+  };
+  function fn_loginAlert(){
+     alert("소속 팀장만 가능한 기능입니다.");
+  }; 
+ 
 var choose = "";
 function fn_choose_change(choose) {
 	this.choose = choose.value;	

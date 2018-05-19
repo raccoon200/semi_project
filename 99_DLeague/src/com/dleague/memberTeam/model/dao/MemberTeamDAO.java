@@ -523,6 +523,8 @@ public class MemberTeamDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("memberTeamAcitivty");
+		System.out.println(gameNo);
+		System.out.println(score);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, score);
@@ -534,5 +536,55 @@ public class MemberTeamDAO {
 			close(pstmt);
 		}
 		return result;
+		}
+	public int memberTeamGameNOT(Connection conn, String gameNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamGameNOT");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gameNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		}
+	public int memberTeamGameRefuse(Connection conn, String teamName, String choose) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamGameRefuse");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, choose);
+			pstmt.setString(2, teamName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		}
+	public int cntTeamMember(Connection conn, String teamName) {
+		int cnt = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("cntTeamMember");
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) cnt = rset.getInt("cnt");
+			System.out.println(cnt);
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cnt;
 		}
 	}

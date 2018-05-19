@@ -25,7 +25,7 @@ public class MemberDAO {
    public MemberDAO() {
       URL fileUrl = MemberDAO.class.getResource("/sql/member/member-query.properties");
       String fileName = fileUrl.getPath();//절대주소를 String타입으로 리턴
-      System.out.println("fileName@MemberDAO="+fileName);
+      //System.out.println("fileName@MemberDAO="+fileName);
       
       try {
          prop.load(new FileReader(fileName));
@@ -54,7 +54,7 @@ public class MemberDAO {
          if(rset.next()) {
             result = rset.getInt("login_check");
          }
-         System.out.println("result@MemberDAO.loginCheck="+result);
+         //System.out.println("result@MemberDAO.loginCheck="+result);
          
       } catch (SQLException e) {
          e.printStackTrace();
@@ -126,7 +126,7 @@ public class MemberDAO {
          if(rset.next()) {
             result = rset.getInt("passwordCheck");
          }
-         System.out.println("result@MemberDAO.password_check="+result);
+         //System.out.println("result@MemberDAO.password_check="+result);
          
       } catch (SQLException e) {
          e.printStackTrace();
@@ -159,7 +159,7 @@ public class MemberDAO {
          String query = prop.getProperty("memberInfoUpdate");
          PreparedStatement pstmt = null;
          try {
-            //ssssssssss
+            
             pstmt = conn.prepareStatement(query);
    /*         pstmt.setString(1, member.getPassword());*/
             pstmt.setString(1, member.getUserName());
@@ -174,10 +174,10 @@ public class MemberDAO {
             pstmt.setDate(8, member.getEnrolldate());
             pstmt.setString(9, member.getPhoto());
             pstmt.setString(10, member.getUserId());
-            System.out.println(member.getTeamname());
-            System.out.println(member);
+           // System.out.println(member.getTeamname());
+           // System.out.println(member);
             result = pstmt.executeUpdate();
-            System.out.println("MemberDAO@memberinfoUpdate"+member);
+           // System.out.println("MemberDAO@memberinfoUpdate"+member);
          } catch (SQLException e) {
             e.printStackTrace();
          } 
@@ -207,7 +207,7 @@ public class MemberDAO {
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-				e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
@@ -228,7 +228,7 @@ public class MemberDAO {
 			if(rset.next()) {
 				totalMember = rset.getInt("cnt");
 			}
-			System.out.println("totalMember@MemberDAO="+totalMember);
+			//System.out.println("totalMember@MemberDAO="+totalMember);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -325,7 +325,7 @@ public List<Member> selectMemberList(Connection conn, int cPage, int numPerPage,
 			m.setRnum(rset.getInt("rnum"));			
 			list.add(m);
 		}
-		System.out.println("list@MemberDAO.selectMemberList="+list);
+		//System.out.println("list@MemberDAO.selectMemberList="+list);
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} finally {

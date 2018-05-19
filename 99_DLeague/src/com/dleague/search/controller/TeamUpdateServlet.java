@@ -48,7 +48,7 @@ public class TeamUpdateServlet extends HttpServlet {
 		request.setAttribute("list", list);							
 		request.setAttribute("memberList", memberList);							
 
-		request.setAttribute("param", "teamSearch");
+		request.setAttribute("param", "memberTeamInfo");
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/search/teamUpdate.jsp");
 		reqDispatcher.forward(request, response);
 	}
