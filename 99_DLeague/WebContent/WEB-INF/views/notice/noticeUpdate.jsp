@@ -100,6 +100,7 @@ td#upTd{
             		<!-- 파일변경대비 기존파일이름 필드 -->
             		<input type="hidden" name="old_file" value="<%=notice.getOriginal_file_name()%>"/>
             		<input type="hidden" name="old_file_path" value="<%=notice.getRenamed_file_name() %>"/>
+            		<input type="hidden" name="file_empty" value="" />
             	<%} else { %>            	
 	            	<input type="file" name="up_file"/>
             	<%} %>
@@ -121,12 +122,19 @@ td#upTd{
 </form>
 <script>
 function fn_changeFile(value) {
+	console.log();
 	var fileValue = $("[name=up_file]").val().split("\\");
 	var fileName = fileValue[fileValue.length-1];
-	if(fileName==""){
+	if($("[name=up_file]")[0].files.length==0){
+		$("#fname").html("파일 없음");
 		$("#fname").show();
+		$("[name=file_empty]").val('true');
+	}else if(fileName==""){
+		$("#fname").show();
+		$("[name=file_empty]").val('false');
 	}else{
 		$("#fname").hide();
+		$("[name=file_empty]").val('false');
 	}
 
 }

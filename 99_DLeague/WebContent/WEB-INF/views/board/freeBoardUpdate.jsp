@@ -9,55 +9,69 @@
 %>
 <style>
 table.board-table{
-	border:1px solid black;
+	border:1px solid rgb(240,240,240);
 	border-collapse:collapse;
 	width:680px;
+	
 }
 table.board-table tr{
-	border:1px solid black;
+	border:1px solid gray;
 	
 }
 table.board-table tr th{
-	background: rgb(64,128,183);
+	background: rgb(147,213,245);
 	color:white;
+	border-radius: 1px;
 }
 table.board-table tr{
 	height:5px;
 }
-table.board-table tr th, td{
-	border:1px solid rgb(100,100,100);
+table.board-table tr td{
+	border:1px solid rgb(220,220,220);
 	padding:10px;
 	text-align:left;
 	font-size:13px;
 }
+table.board-table tr th{
+	border:1px solid rgb(220,220,220);
+	padding:10px;
+	text-align:center;
+	font-size:13px;
+
+}
+
 table.board-table th{
-	width:60px
+	width:80px;
 }
-td.view-content{
-	height:150px;
+.view-content {
+	height:200px;
+	
 }
-#fname{
+.btn{
+	border-radius:2px;
+	border:1px solid rgb(240,240,240);
+	background:rgb(147,213,245);
+	color:white;
+}
+.btn-area{
+	padding-left:40%;
+	padding-top:5px;
+}
+span#fname{
 	position:absolute;
-	top:12px;
+	top:10px;
 	left:85px;
-	color:black;
+	
+	padding-top:2px;
+	padding-bottom:3px;
+	padding-right:420px;
 	background:white;
-	font-size:14px;
-	padding-right:30px;
+}
+td#upTd{
+	position:relative;
 }
 </style>
 <script>
-$(function(){
-	$("[name=up_file]").change(function(){
-		//$(this).val()은 선택한 파일명임.
-		if($(this).val()==""){
-			$("#fname").show();
-		}	
-		else{
-			$("#fname").hide();
-		}
-	});	
-});
 
 function validate(){
 	var content = $("[name=content]").val();
@@ -84,13 +98,14 @@ function validate(){
 		</tr>
 		<tr>
 			<th>첨부파일</th>
-			<td colspan="5" style="position:relative">
+			<td id="upTd" colspan="5">
 				<%if(board.getOriginal_file_name() != null){ %>
             		<!-- 파일태그에 value속성은 임의로 변경할 수 없음. -->
-            		<input type="file" name="up_file"/>
+            		<input type="file" name="up_file" onchange="fn_changeFile(this)"/>
             		<span id="fname"><%=board.getOriginal_file_name() %></span>
             		<!-- 파일변경대비 기존파일이름 필드 -->
             		<input type="hidden" name="old_file" value="<%=board.getOriginal_file_name()%>"/>
+            		<input type="hidden" name="old_file_path" value="<%=board.getRenamed_file_name() %>"/>
             	<%} else { %>            	
 	            	<input type="file" name="up_file"/>
             	<%} %>
@@ -103,8 +118,21 @@ function validate(){
 			<td colspan="6" class="view-content"><textarea name="board_free_content" id="" cols="100" rows="10" required><%=board.getBoard_free_content() %></textarea></td>
 		</tr>
 	</table>
-	<input type="submit" value="수정" />
-	<input type="button" value="취소" />
+	<div class="btn-area">
+		<input class="btn" type="submit" value="수정" />
+		<input class="btn" type="button" value="취소" onclick='location.href="<%=request.getContextPath()%>/board/freeBoardView?no=<%=board.getBoard_free_no() %>"'/>
+	</div>
 </form>
+<script>
+function fn_changeFile(value) {
+	var fileValue = $("[name=up_file]").val().split("\\");
+	var fileName = fileValue[fileValue.length-1];
+	if(fileName==""){
+		$("#fname").show();
+	}else{
+		$("#fname").hide();
+	}
 
+}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		

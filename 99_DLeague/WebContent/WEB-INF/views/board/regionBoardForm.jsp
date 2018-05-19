@@ -15,35 +15,55 @@
 %>
 <style>
 table.board-table{
-	border:1px solid black;
+	border:1px solid rgb(240,240,240);
 	border-collapse:collapse;
 	width:680px;
+	
 }
 table.board-table tr{
-	border:1px solid black;
+	border:1px solid gray;
 	
 }
 table.board-table tr th{
-	background: rgb(64,128,183);
+	background: rgb(147,213,245);
 	color:white;
+	border-radius: 1px;
 }
 table.board-table tr{
 	height:5px;
 }
-table.board-table tr th, td{
-	border:1px solid rgb(100,100,100);
+table.board-table tr td{
+	border:1px solid rgb(220,220,220);
 	padding:10px;
 	text-align:left;
 	font-size:13px;
+}
+table.board-table tr th{
+	border:1px solid rgb(220,220,220);
+	padding:10px;
+	text-align:center;
+	font-size:13px;
+
 }
 table.board-table tr:hover{
 	background:rgb(240,240,240);
 }
 table.board-table th{
-	width:60px
+	width:80px;
 }
-td.view-content{
-	height:150px;
+.view-content {
+	height:200px;
+	
+}
+.btn{
+	border-radius:2px;
+	border:1px solid rgb(240,240,240);
+	background:rgb(147,213,245);
+	color:white;
+}
+.btn-area{
+	padding-left:40%;
+	padding-top:5px;
 }
 </style>
 
@@ -88,8 +108,11 @@ td.view-content{
 			<td colspan="6" class="view-content"><textarea name="board_region_content" id="" cols="100" rows="10" required></textarea></td>
 		</tr>
 	</table>
-	<input type="submit" value="등록" />
-	<input type="reset" value="초기화" />
+	<div class="btn-area">
+		<input type="submit" value="등록" />
+		<input type="reset" value="초기화" />
+		<input type="button" value="취소" onclick="location.href='<%=request.getContextPath() %>/board/regionBoard'" />
+	</div>
 </form>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		
