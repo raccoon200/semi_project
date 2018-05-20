@@ -245,9 +245,7 @@
 	}
 	</style>
 <script>
-<<<<<<< HEAD
 <%if(memberLoggedIn!=null) { %> 
-=======
 <%-- <%if(memberLoggedIn!=null) { %> 
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
    function fn_validate_team_info() {
@@ -266,7 +264,6 @@
 <%} %>
 =======
 <%} %> --%>
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 </script>
 </head>
 <body>
