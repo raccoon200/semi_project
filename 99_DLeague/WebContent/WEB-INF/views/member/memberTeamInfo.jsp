@@ -81,34 +81,7 @@
     div#btDiv{padding:30px; display: inline-block;}
     button#bt1, #bt2{padding:10px;font-size:20px;}
     /*수정삭제버튼*/
-    /* .btn {
-	  display: inline-block;
-	  background: transparent;
-	  text-transform: uppercase;
-	  font-weight: 500;
-	  font-style: normal;
-	  font-size: 1rem;
-	  letter-spacing: 0.3em;
-	  color: lightgreen;
-	  border-radius: 0;
-	  padding: 18px 80px 20px;
-	  transition: all 0.7s ease-out;
-	  
-	  background: linear-gradient(270deg, lightgreen, lightgreen, rgba(34,34,34,0), rgba(34,34,34,0));
-	  background-position: 1% 50%;
-	  background-size: 300% 300%;
-	  text-decoration: none;
-	  margin: 0.625rem;
-	  border: none;
-	  border: 1px solid lightgreen;
-	}
-	
-	.btn:hover {
-	  color: #fff;
-	  border: 1px solid rgba(223,190,106,0);
-	  color: $white;
-	  background-position: 99% 50%;
-	}  */
+    
     /* 버튼 디자인 */
     #h2my{display:inline-block;}
 </style>
@@ -134,9 +107,6 @@ function fn_teamOut() {
 	<div style="text-align: center">
     <div id="bu">
     	<div id="imgDiv">
-    		<%if(!memberLoggedIn.getUserId().equals(capTain)) {%>
-    		<input type="button" value="팀 탈퇴" style="position:relative; " class="btn" onclick="fn_teamOut();" />
-    		<%} %> 
         	<img id="logoimg" src=
         	<%if(rogo!=null){ %>
         		"<%=request.getContextPath() %>/images/team/<%=rogo %>"
@@ -317,10 +287,12 @@ function fn_teamOut() {
         </div>
         <%if(memberLoggedIn!=null&&("admin".equals(memberLoggedIn.getUserId())||capTain.equals(memberLoggedIn.getUserId())) )  {%>
         <div id="btDiv">
-              <button id="bt1" class="btn btn-primary" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
+            <button id="bt1" class="btn btn-primary" onclick="fn_teamUpdate('<%=teamName%>');">팀정보수정</button>
         </div>
         <%}else{ %>
-        <div id="btDiv"></div>
+        <div id="btDiv">
+       		<button id="bt1" class="btn btn-primary" onclick="fn_teamOut();">팀 탈퇴</button>
+        </div>
         <%} %>
 </div>
 <%} else if (!memberRegisterList.isEmpty()) { %> 
