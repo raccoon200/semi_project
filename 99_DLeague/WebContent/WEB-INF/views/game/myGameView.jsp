@@ -582,10 +582,13 @@ $(function() {
 	<%} %>
   	</div>
   	<br />
+<%if(memberLoggedIn.getTeamname()!=null){ %>
 <button type="button" class="btn btn-primary btn-block disabled" id="btn_game_register" onclick="fn_game_register();" disabled>경기 신청</button>
+<%} %>
 <%if(gameStatus && memberLoggedIn != null && tHome.getTeamName().equals(memberLoggedIn.getTeamname()) && "팀장".equals(memberLoggedIn.getGrade())) {%>
 <button type="button" class="btn btn-danger btn-block" onclick="fn_delete_game();">삭제</button>
 <%} %>
+
 <script>
 $(function(){
 	if(<%=memberLoggedIn.getTeamname() == null%>){
