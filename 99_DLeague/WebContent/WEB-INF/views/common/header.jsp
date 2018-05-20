@@ -158,6 +158,8 @@
 	    margin-right: 45px;
 	    display: block;
 	    position: fixed;
+	    z-index: 10;
+	    background: white;
 	}
 	h3#nav-header{
 	    font-size: 23px;
