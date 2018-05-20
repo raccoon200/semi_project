@@ -4,6 +4,10 @@
 
 <script>
 console.log("<%=param%>");
+function fn_deleteOK() {
+	if(confirm("정말로 삭제하시겠습니까?")) return true;
+	return false;
+}
 </script>
       <section id="center">
 			<nav id="nav">
@@ -65,7 +69,7 @@ console.log("<%=param%>");
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamMemberAcceptPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamMemberAcceptPage"?"nav-selected":""%>'>팀원 수락</a></li>
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamGameAcceptPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamGameAcceptPage"?"nav-selected":""%>'>팀 경기 수락</a></li>
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamActivityPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamActivityPage"?"nav-selected":"" %>'>팀 활동 이력</a></li>
-				<li><a href="<%=request.getContextPath()%>/member/memberTeamDelete?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamDelete"?"nav-selected":"" %>'>팀 삭제</a></li>
+				<li><a href="<%=request.getContextPath()%>/member/memberTeamDelete?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamDelete"?"nav-selected":"" %>' onclick = "return fn_deleteOK();">팀 삭제</a></li>
 			</ul>
 			<%} %>
 			<%if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagement" || param=="memberTeamCreate") {%>
