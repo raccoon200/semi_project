@@ -21,7 +21,7 @@ legend{margin:30px 0 0 0;}
 legend{padding:10px 0px 0px 40px;}
 /* table Object 끝 */
 </style>
-<h2>팀 활동 이력</h2>
+<h2>팀 활동 결과 처리</h2>
     <hr />
     <table class="tbl_type"  cellspacing="0">
     <colgroup>
