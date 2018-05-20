@@ -28,38 +28,56 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 table.team-register-table{
-	border:1px solid black;
+	border:1px solid rgb(240,240,240);
 	border-collapse:collapse;
 	width:680px;
+	
 }
 table.team-register-table tr{
-	border:1px solid black;
+	border:1px solid gray;
 	
 }
 table.team-register-table tr th{
-	background: rgb(64,128,183);
+	background: rgb(147,213,245);
 	color:white;
+	border-radius: 1px;
 }
 table.team-register-table tr{
-	height:10px;
+	height:5px;
 }
-table.team-register-table tr th, td{
-	border:1px solid rgb(100,100,100);
-	padding:13px;
+table.team-register-table tr td{
+	border:1px solid rgb(220,220,220);
+	padding:10px;
 	text-align:left;
 	font-size:13px;
-}c
+}
+table.team-register-table tr th{
+	border:1px solid rgb(220,220,220);
+	padding:10px;
+	text-align:center;
+	font-size:13px;
+
+}
+table.team-register-table tr:hover{
+	background:rgb(240,240,240);
+}
 table.team-register-table th{
-	width:80px
+	width:80px;
 }
-table.team-register-table td{
-	width:160px
+.view-content {
+	height:200px;
+	
 }
-td.view-content{
-	height:150px;
+.btn{
+	border-radius:2px;
+	border:1px solid rgb(240,240,240);
+	background:rgb(147,213,245);
+	color:white;
 }
-div#btDiv{padding:0 0 20px 0;}
-button#delbt{width:132px;}
+.btn-area{
+	padding-left:40%;
+	padding-top:5px;
+}
 </style>
 <script>
 $(function (){
