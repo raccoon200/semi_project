@@ -161,7 +161,7 @@
 	}
 	h3#nav-header{
 	    font-size: 23px;
-	    width: 115px;
+	    width: 130px;
 	    margin: 0 0 30px 15px;
 	    padding-bottom: 25px;
 	    border-bottom: 4px solid rgb(64,128,183);
