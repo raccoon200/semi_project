@@ -135,7 +135,7 @@ $(function (){
 			<td rowspan="2">
 			<img src="<%=request.getContextPath() %>/images/team/<%=logo!=null?logo:"default.png"%>" id="profileImg" width="60px" height="60px" alt="" />
 			<input type="file" name="up_file" id="up_file" accept=".gif, .jpg, .png" onchange="fn_fileUpload(this);"/>
-			<span id="fname">프로필 사진 변경</span>
+			<!-- <span id="fname">프로필 사진 변경</span> -->
 			</td>
 			
 		</tr>
