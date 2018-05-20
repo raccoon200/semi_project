@@ -8,48 +8,71 @@
 %>
 
 <style>
+<style>
 table.team-register-table{
-	border:1px solid black;
+	border:1px solid rgb(240,240,240);
 	border-collapse:collapse;
 	width:680px;
+	
 }
 table.team-register-table tr{
-	border:1px solid black;
+	border:1px solid gray;
 	
 }
 table.team-register-table tr th{
-	background: rgb(64,128,183);
+	background: rgb(147,213,245);
 	color:white;
+	border-radius: 1px;
 }
 table.team-register-table tr{
-	height:10px;
+	height:5px;
 }
-table.team-register-table tr th, td{
-	border:1px solid rgb(100,100,100);
-	padding:13px;
+table.team-register-table tr td{
+	border:1px solid rgb(220,220,220);
+	padding:10px;
 	text-align:left;
 	font-size:13px;
-}c
+}
+table.team-register-table tr th{
+	border:1px solid rgb(220,220,220);
+	padding:10px;
+	text-align:center;
+	font-size:13px;
+
+}
+table.team-register-table tr:hover{
+	background:rgb(240,240,240);
+}
 table.team-register-table th{
-	width:80px
+	width:80px;
 }
-table.team-register-table td{
-	width:160px
+.view-content {
+	height:200px;
+	
 }
-td.view-content{
-	height:150px;
+.btn{
+	border-radius:2px;
+	border:1px solid rgb(240,240,240);
+	background:rgb(147,213,245);
+	color:white;
+}
+.btn-area{
+	padding-left:40%;
+	padding-top:5px;
 }
 </style>
 <script>
+
 function fn_fileUpload(value){
-	if(value.files && value.files[0]) {
-	      var reader = new FileReader();
-	      reader.onload = function (e) {
-	           $('#profileImg').attr('src', e.target.result);
-			}
-	      }
-	      reader.readAsDataURL(value.files[0]);
 	
+	if(value.files && value.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+           $('#profileImg').attr('src', e.target.result);
+		}
+      }
+      reader.readAsDataURL(value.files[0]);
+
 }
 function fn_validate(){
 	if($("[name=teamName]").val().trim().length==0) {
@@ -61,6 +84,7 @@ function fn_validate(){
 </script>
 <h2>팀 생성</h2>
 <form action="<%=request.getContextPath() %>/member/memberTeamCreateEnd" method="post" onsubmit="return fn_validate();" enctype="multipart/form-data">
+	
 	<table class="team-register-table">
 		<tr>
 			<th>팀이름</th>
@@ -109,7 +133,9 @@ function fn_validate(){
 			<td colspan="3" class="view-content"><textarea name="register_msg" id="" cols="100" rows="8" ></textarea></td>
 		</tr>
 	</table>
-	<input type="submit" value="신청" />
-	<input type="reset" value="초기화" />
+	<div class="btn-area">
+		<input class="btn" type="submit" value="신청" />
+		<input class="btn" type="reset" value="초기화" />
+	</div>
 </form>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		

@@ -224,7 +224,7 @@ public class BoardDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, regionCode);
-			pstmt.setString(2, searchValue);
+			pstmt.setString(2, "%"+searchValue+"%");
 			pstmt.setInt(3, (cPage-1)*numPerPage+1);
 			pstmt.setInt(4, cPage*numPerPage);
 			

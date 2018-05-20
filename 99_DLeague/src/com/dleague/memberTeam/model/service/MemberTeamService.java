@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 
+import com.dleague.game.model.vo.Game;
 import com.dleague.memberTeam.model.dao.MemberTeamDAO;
 import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.MemberRegister;
@@ -180,5 +181,42 @@ public class MemberTeamService {
 		int cntR = new MemberTeamDAO().cntRegister(conn, userId);
 		close(conn);
 		return cntR;
+	}
+
+	public List<Game> memberTeamActivityPage(String teamName) {
+		Connection conn = getConnection();
+		List<Game> memberTeamActivity = new MemberTeamDAO().memberTeamActivityPage(conn, teamName);
+		close(conn);
+		return memberTeamActivity;
+	}
+
+	public int memberTeamAcitivty(String gameNo, String score) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().memberTeamAcitivty(conn, gameNo, score);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
+	public int memberTeamGameNOT(String gameNo) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().memberTeamGameNOT(conn, gameNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
+	public int memberTeamGameRefuse(String teamName, String choose) {
+		Connection conn = getConnection();
+		int result = new MemberTeamDAO().memberTeamGameRefuse(conn, teamName, choose);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
+	public int cntTeamMember(String teamName) {
+		Connection conn = getConnection();
+		int cnt = new MemberTeamDAO().cntTeamMember(conn, teamName);
+		return cnt;
 	}
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.dleague.game.model.vo.Game;
 import com.dleague.memberTeam.model.vo.Activity;
 import com.dleague.memberTeam.model.vo.MemberRegister;
 import com.dleague.memberTeam.model.vo.Team;
@@ -491,4 +492,99 @@ public class MemberTeamDAO {
 			}
 		return cntR;
 	}
+	public List<Game> memberTeamActivityPage(Connection conn, String teamName) {
+		PreparedStatement pstmt = null;
+		List<Game> memberTeamActivity = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("memberTeamActivityPage");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			System.out.println(teamName);
+			rset = pstmt.executeQuery();
+			memberTeamActivity = new ArrayList<>();
+			while(rset.next()) {
+				Game g = new Game();
+				g.setGameNo(rset.getInt("game_no"));
+				g.setHome(rset.getString("home"));
+				g.setAway(rset.getString("away"));
+				g.setGameDate(rset.getDate("gamedate"));
+				g.setGameRegDate(rset.getDate("game_reg_date"));
+				g.setStartTime(rset.getString("start_time"));
+				g.setGameContent(rset.getString("game_content"));
+				memberTeamActivity.add(g);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return memberTeamActivity;
+		}
+	public int memberTeamAcitivty(Connection conn, String gameNo, String score) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamAcitivty");
+		System.out.println(gameNo);
+		System.out.println(score);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, score);
+			pstmt.setString(2, gameNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		}
+	public int memberTeamGameNOT(Connection conn, String gameNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamGameNOT");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, gameNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		}
+	public int memberTeamGameRefuse(Connection conn, String teamName, String choose) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberTeamGameRefuse");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, choose);
+			pstmt.setString(2, teamName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		}
+	public int cntTeamMember(Connection conn, String teamName) {
+		int cnt = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("cntTeamMember");
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, teamName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) cnt = rset.getInt("cnt");
+			System.out.println(cnt);
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cnt;
+		}
 	}

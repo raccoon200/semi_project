@@ -4,10 +4,13 @@
 
 <script>
 console.log("<%=param%>");
+function fn_deleteOK() {
+	if(confirm("정말로 삭제하시겠습니까?")) return true;
+	return false;
+}
 </script>
       <section id="center">
 			<nav id="nav">
-			
 			
 			<!-- 공지사항 -->
 			<% if(param=="notice"){ %>
@@ -15,22 +18,16 @@ console.log("<%=param%>");
 			<ul class="nav-list">
 				<li><a id="nav-selected" href="<%=request.getContextPath() %>/notice/noticeList">공지사항</a></li>
 			</ul>
-<<<<<<< HEAD
-			<%} %>
-			
-			<!-- 게시판 -->
-			<% if(param=="freeBoard" || param=="regionBoard" || param=="complainBoard") {%>
-=======
+
 			<%} %>
 			<!-- 게시판 -->
 			<% if(param=="freeBoard" || param=="regionBoard" || param=="complain") {%>
 
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 			<h3 id="nav-header">게시판</h3>
 			<ul class="nav-list">
 				<li><a id='<%=param=="freeBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/freeBoard">자유게시판</a></li>
 				<li><a id='<%=param=="regionBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/regionBoard">지역게시판</a></li>
-				<li><a id='<%=param=="complainBoard"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
+				<li><a id='<%=param=="complain"?"nav-selected":""%>' href="<%=request.getContextPath() %>/board/complainBoard">신고게시판</a></li>
 			</ul>
 			<%} %>
 			<!-- 로그인/회원가입 -->
@@ -65,13 +62,14 @@ console.log("<%=param%>");
 				<li><a href="<%=request.getContextPath() %>/search/gameSearchList" id='<%=param=="teamSearchList"?"nav-selected":""%>'>경기검색</a></li>
 			</ul>
 			<%} %>
-			<%if(param=="memberTeamMemberManagement" || param=="memberTeamGameAcceptPage" || param=="memberTeamMemberAcceptPage") {%>
+			<%if(param=="memberTeamMemberManagement" || param=="memberTeamGameAcceptPage" || param=="memberTeamMemberAcceptPage" || param=="memberTeamActivityPage" || param=="memberTeamDelete") {%>
 			<h3 id="nav-header">팀 관리</h3>
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamManagement?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamMemberManagement"?"nav-selected":""%>'>팀원 관리</a></li>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamMemberAcceptPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamMemberAcceptPage"?"nav-selected":""%>'>팀원 수락</a></li>
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamGameAcceptPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamGameAcceptPage"?"nav-selected":""%>'>팀 경기 수락</a></li>
 				<li><a href="<%=request.getContextPath()%>/member/memberTeamActivityPage?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamActivityPage"?"nav-selected":"" %>'>팀 활동 이력</a></li>
+				<li><a href="<%=request.getContextPath()%>/member/memberTeamDelete?teamName=<%=memberLoggedIn.getTeamname()%>" id='<%=param=="memberTeamDelete"?"nav-selected":"" %>' onclick = "return fn_deleteOK();">팀 삭제</a></li>
 			</ul>
 			<%} %>
 			<%if(param=="memberInfo" || param=="memberTeamInfo" || param=="memberTeamManagement" || param=="memberTeamCreate") {%>

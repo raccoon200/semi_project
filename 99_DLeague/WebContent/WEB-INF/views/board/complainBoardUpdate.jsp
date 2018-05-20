@@ -8,51 +8,66 @@
 %>
 <style>
 table.board-table{
-	border:1px solid black;
+	border:1px solid rgb(240,240,240);
 	border-collapse:collapse;
 	width:680px;
+	
 }
 table.board-table tr{
-	border:1px solid black;
+	border:1px solid gray;
 	
 }
 table.board-table tr th{
-	background: rgb(64,128,183);
+	background: rgb(147,213,245);
 	color:white;
+	border-radius: 1px;
 }
 table.board-table tr{
 	height:5px;
 }
-table.board-table tr th, td{
-	border:1px solid rgb(100,100,100);
+table.board-table tr td{
+	border:1px solid rgb(220,220,220);
 	padding:10px;
 	text-align:left;
 	font-size:13px;
 }
-table.board-table tr:hover{
-	background:rgb(240,240,240);
+table.board-table tr th{
+	border:1px solid rgb(220,220,220);
+	padding:10px;
+	text-align:center;
+	font-size:13px;
+
 }
+
 table.board-table th{
-	width:60px
-}
-td.view-content{
-	height:150px;
-}
-
-div#comment-container button#btn-insert{
 	width:80px;
-	height:50px;
-	color:white;
-	background: rgb(64,128,183);
-	position:relative;
-	top:-20px;
 }
-
-div.comment-viewer{
-	width:670px;
-	height:60px;
-	border:1px solid gray;
+.view-content {
+	height:200px;
 	
+}
+.btn{
+	border-radius:2px;
+	border:1px solid rgb(240,240,240);
+	background:rgb(147,213,245);
+	color:white;
+}
+.btn-area{
+	padding-left:40%;
+	padding-top:5px;
+}
+span#fname{
+	position:absolute;
+	top:10px;
+	left:85px;
+	
+	padding-top:2px;
+	padding-bottom:3px;
+	padding-right:420px;
+	background:white;
+}
+td#upTd{
+	position:relative;
 }
 </style>
 <script>
@@ -90,7 +105,9 @@ div.comment-viewer{
 		<td colspan="6" class="view-content"><textarea name="complain_content" id="" cols="80" rows="10"><%=complain.getComplain_content() %></textarea></td>
 	</tr>
 </table>
-<input type="submit" value="수정" />
-<input type="button" value="취소" />
+<div class="btn-area">
+	<input class="btn" type="submit" value="수정" />
+	<input class="btn" type="button" value="취소" onclick='location.href="<%=request.getContextPath()%>/board/complainBoardView?no=<%=complain.getComplain_no() %>"'/>
+</div>
 </form>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		

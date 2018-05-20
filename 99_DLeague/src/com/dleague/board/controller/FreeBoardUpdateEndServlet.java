@@ -54,7 +54,8 @@ public class FreeBoardUpdateEndServlet extends HttpServlet {
 		String renamedFileName = multiReq.getFilesystemName("up_file");
 		String originalFileName = multiReq.getOriginalFileName("up_file");
 		String board_free_content =multiReq.getParameter("board_free_content");
-		
+		String old_file = multiReq.getParameter("old_file");
+		String old_file_path = multiReq.getParameter("old_file_path"); 
 		FreeBoard board =new FreeBoard();
 		board.setBoard_free_no(board_free_no);
 		board.setBoard_free_title(board_free_title);
@@ -62,6 +63,10 @@ public class FreeBoardUpdateEndServlet extends HttpServlet {
 		board.setBoard_free_content(board_free_content);
 		board.setOriginal_file_name(originalFileName);
 		board.setRenamed_file_name(renamedFileName);
+		if(originalFileName==null) {
+			board.setOriginal_file_name(old_file);
+			board.setRenamed_file_name(old_file_path);
+		}
 		
 		
 		int result = new BoardService().updateFreeBoard(board);
