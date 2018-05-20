@@ -9,9 +9,10 @@
 	String userPhoto="";
 	for(Member m2 : list){
 		userId2=m2.getUserId();
-		m2.getPhoto();
+		userPhoto=m2.getPhoto();
 	}
 	System.out.println(userPhoto);
+	System.out.println(list);
 
 
 %>
