@@ -243,11 +243,16 @@
 	    top: 54px;
 	    left: 170px;
 	}
+<<<<<<< HEAD
 	</style>
 <script>
 <script>
 <%if(memberLoggedIn!=null) { %> 
+=======
+	</style>
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 
+<<<<<<< HEAD
 <%-- <%if(memberLoggedIn!=null) { %> 
 
    function fn_validate_team_info() {
@@ -264,6 +269,8 @@
 <%}%>
 
 </script>
+=======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 </head>
 <body>
     <header id="header">
@@ -337,7 +344,7 @@
                         <!-- onclick="return fn_validate_team_info();" -->
                         <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId() %>" >내 팀 정보</a></li>
 
-                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamManagementPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>">내 팀 관리</a></li>
+                        <li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamManagement?teamName=<%=memberLoggedIn.getTeamname()%>">내 팀 관리</a></li>
                         <% if("선수".equals(memberLoggedIn.getGrade())) { %>
 							<li class="main-nav-sub-li"><a href="<%=request.getContextPath() %>/member/memberTeamCreate?userId=<%=memberLoggedIn.getUserId()%>">팀생성</a><li>
 						<%} %>
