@@ -141,7 +141,7 @@ $(function() {
 			</td>
 		</tr>
 		<tr style=" text-aline : center;">
-			<td style='color: <%=memberLoggedIn.getTeamname().equals(gameStatus?g.getHome():a.getHome())?"red":""%>; font-size : 18px;'>
+			<td style='color: <%=memberLoggedIn.getTeamname()!=null && memberLoggedIn.getTeamname().equals(gameStatus?g.getHome():a.getHome())?"red":""%>; font-size : 18px;'>
 				<%=gameStatus?g.getHome():a.getHome()%>
 			</td>
 			<td></td>
@@ -165,7 +165,7 @@ $(function() {
 			
 		</tr>
 		<tr style=" text-aline : center;">
-			<td style='color: <%=memberLoggedIn.getTeamname().equals(gameStatus?g.getAway():a.getAway())?"red":""%>; font-size : 18px;'>
+			<td style='color: <%=memberLoggedIn.getTeamname()!= null && memberLoggedIn.getTeamname().equals(gameStatus?g.getAway():a.getAway())?"red":""%>; font-size : 18px;'>
 				<%if (gameStatus){ %>
 					<%=g.getAway() !=null?g.getAway():"&nbsp;" %>	
 				<% }else{%>
@@ -582,10 +582,13 @@ $(function() {
 	<%} %>
   	</div>
   	<br />
+<%if(memberLoggedIn.getTeamname()!=null){ %>
 <button type="button" class="btn btn-primary btn-block disabled" id="btn_game_register" onclick="fn_game_register();" disabled>경기 신청</button>
+<%} %>
 <%if(gameStatus && memberLoggedIn != null && tHome.getTeamName().equals(memberLoggedIn.getTeamname()) && "팀장".equals(memberLoggedIn.getGrade())) {%>
 <button type="button" class="btn btn-danger btn-block" onclick="fn_delete_game();">삭제</button>
 <%} %>
+
 <script>
 $(function(){
 	if(<%=memberLoggedIn.getTeamname() == null%>){
