@@ -283,7 +283,7 @@ public class BoardDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, regionCode);
-			pstmt.setString(2, searchValue);
+			pstmt.setString(2, "%"+searchValue+"%");
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				count = rset.getInt("cnt");
@@ -511,7 +511,7 @@ public class BoardDAO {
 		//String query = "SELECT V.* FROM ( SELECT ROWNUM AS RNUM, V.* FROM( SELECT * FROM BOARD_REGION ORDER BY BOARD_REGION_DATE DESC) V ) V WHERE RNUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, searchValue);
+			pstmt.setString(1, "%"+searchValue+"%");
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 			
@@ -590,7 +590,7 @@ public class BoardDAO {
 		String query = prop.getProperty("selectFreeBoardCountById");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, searchValue);
+			pstmt.setString(1, "%"+searchValue+"%");
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				count = rset.getInt("cnt");
@@ -899,7 +899,7 @@ public class BoardDAO {
 		String query = prop.getProperty("selectComplainWriter");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, searchValue);
+			pstmt.setString(1, "%"+searchValue+"%");
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 			
@@ -935,7 +935,7 @@ public class BoardDAO {
 		String query = prop.getProperty("selectComplainC_UserId");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, searchValue);
+			pstmt.setString(1, "%"+searchValue+"%");
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 			
@@ -970,7 +970,7 @@ public class BoardDAO {
 		String query = prop.getProperty("selectComplainC_TeamName");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, searchValue);
+			pstmt.setString(1, "%"+searchValue+"%");
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 			
@@ -1046,7 +1046,7 @@ public class BoardDAO {
 		String query = prop.getProperty("selectComplainWriterCount");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, searchValue);
+			pstmt.setString(1, "%"+searchValue+"%");
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				count = rset.getInt("cnt");
@@ -1066,7 +1066,7 @@ public class BoardDAO {
 		String query = prop.getProperty("selectComplainC_UserIdCount");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, searchValue);
+			pstmt.setString(1, "%"+searchValue+"%");
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				count = rset.getInt("cnt");
@@ -1086,7 +1086,7 @@ public class BoardDAO {
 		String query = prop.getProperty("selectComplainC_TeamNameCount");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, searchValue);
+			pstmt.setString(1, "%"+searchValue+"%");
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				count = rset.getInt("cnt");
