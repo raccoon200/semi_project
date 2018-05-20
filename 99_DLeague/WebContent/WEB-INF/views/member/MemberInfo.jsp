@@ -122,7 +122,7 @@ required/> --%></td>
 <tr><td>
 <label for="birthday">생년월일</label></td>
 <td>
-<input type="text" name="birthday" id="birthday" value="<%=member.getBirthday()%>" required/></td>
+<input type="text" name="birthday" id="birthday" value="<%=member.getBirthday()%>" required readonly/></td>
 </tr>
 
 <tr><td>

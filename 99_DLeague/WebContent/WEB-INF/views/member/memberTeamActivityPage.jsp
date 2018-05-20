@@ -63,8 +63,8 @@ legend{padding:10px 0px 0px 40px;}
 				<td><%=game.getGameRegDate() %></td>
 				<td><%=game.getStartTime() %></td>
 				<td><%=game.getGameContent() %></td>
-				<td><button class="btn" onclick="fn_gameOK(this.value)" value="<%=game.getGameNo()%>"/>수락</button></td>
-				<td><button class="btn" onclick="fn_gameNOT(this.value)" value="<%=game.getGameNo()%>"/>거절</button></td>
+				<td><button class="btn" onclick="fn_gameOK(this.value)" value="<%=game.getGameNo()%>"/>실시</button></td>
+				<td><button class="btn" onclick="fn_gameNOT(this.value)" value="<%=game.getGameNo()%>"/>미실시</button></td>
 				
 			<tr>
 		<%}} %>
