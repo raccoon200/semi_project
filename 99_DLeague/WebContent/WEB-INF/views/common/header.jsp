@@ -243,10 +243,16 @@
 	    top: 54px;
 	    left: 170px;
 	}
+<<<<<<< HEAD
 	</style>
 <script>
+<script>
 <%if(memberLoggedIn!=null) { %> 
+=======
+	</style>
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 
+<<<<<<< HEAD
 <%-- <%if(memberLoggedIn!=null) { %> 
 
    function fn_validate_team_info() {
@@ -260,9 +266,11 @@
 <%} %>
 
 <%} %> --%>
-
 <%}%>
+
 </script>
+=======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 </head>
 <body>
     <header id="header">

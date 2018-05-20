@@ -141,7 +141,7 @@ $(function() {
 			</td>
 		</tr>
 		<tr style=" text-aline : center;">
-			<td style='color: <%=memberLoggedIn.getTeamname().equals(gameStatus?g.getHome():a.getHome())?"red":""%>; font-size : 18px;'>
+			<td style='color: <%=memberLoggedIn.getTeamname()!=null && memberLoggedIn.getTeamname().equals(gameStatus?g.getHome():a.getHome())?"red":""%>; font-size : 18px;'>
 				<%=gameStatus?g.getHome():a.getHome()%>
 			</td>
 			<td></td>
@@ -165,7 +165,7 @@ $(function() {
 			
 		</tr>
 		<tr style=" text-aline : center;">
-			<td style='color: <%=memberLoggedIn.getTeamname().equals(gameStatus?g.getAway():a.getAway())?"red":""%>; font-size : 18px;'>
+			<td style='color: <%=memberLoggedIn.getTeamname()!= null && memberLoggedIn.getTeamname().equals(gameStatus?g.getAway():a.getAway())?"red":""%>; font-size : 18px;'>
 				<%if (gameStatus){ %>
 					<%=g.getAway() !=null?g.getAway():"&nbsp;" %>	
 				<% }else{%>
