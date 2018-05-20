@@ -173,8 +173,8 @@ $(function (){
 	</div>
 </form>
 	<br />
-	<div id="btDiv"><button id="delbt" onclick="fn_teamDelete('<%=teamName%>');">팀해체</button></div>
-</div>
+<%-- 	<div id="btDiv"><button id="delbt" onclick="fn_teamDelete('<%=teamName%>');">팀해체</button></div>
+ --%></div>
 <script>
 function fn_teamDelete(teamName){
 	/* console.log(teamName); */

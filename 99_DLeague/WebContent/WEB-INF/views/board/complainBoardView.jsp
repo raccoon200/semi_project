@@ -256,13 +256,11 @@ function fn_fileDowload(oName, rName){
 	<%} %>
 </table>
 <br />
-<% if(memberLoggedIn!=null && (board.getComplain_writer().equals(memberLoggedIn.getUserId()))){ %>
+<% if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getUserId())){ %>
 <input type="button" class="updateBtn" value="수정" onclick="location.href='<%=request.getContextPath()%>/board/complainBoardUpdate?no=<%=board.getComplain_no()%>'">
 <input type="button" class="deleteBtn" value="삭제" onclick="location.href='<%=request.getContextPath() %>/board/complainBoardDelete?no=<%=board.getComplain_no() %>'"/>
 <%} %>
-<% if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getUserId())){ %>
-<input type="button" class="deleteBtn" value="삭제" onclick="location.href='<%=request.getContextPath() %>/board/complainBoardDelete?no=<%=board.getComplain_no() %>'"/>
-<%} %>
+
 </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>		

@@ -399,7 +399,7 @@ function fn_fileDowload(oName, rName){
 	<input type="button" class="updateBtn" value="글수정" onclick="location.href='<%=request.getContextPath()%>/board/freeBoardUpdate?no=<%=board.getBoard_free_no()%>'">
 	<input type="button" class="deleteBtn" value="글삭제" onclick="location.href='<%=request.getContextPath() %>/board/freeBoardDelete?no=<%=board.getBoard_free_no() %>'"/>
 	<%} %>
-	<% if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getUserId())){ %>
+	<% if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getUserId()) && !"admin".equals(board.getBoard_free_writer())){ %>
 	<input type="button" class="deleteBtn" value="글삭제" onclick="location.href='<%=request.getContextPath() %>/board/freeBoardDelete?no=<%=board.getBoard_free_no() %>'"/>
 	<%} %>
 </div>
