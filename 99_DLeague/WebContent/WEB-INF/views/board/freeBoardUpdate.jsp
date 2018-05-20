@@ -45,7 +45,9 @@ table.board-table th{
 }
 .view-content {
 	height:200px;
-	
+}
+.view-content textarea{
+	resize:none;
 }
 .btn{
 	border-radius:2px;

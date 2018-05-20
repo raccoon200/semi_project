@@ -114,8 +114,9 @@ function fn_checked() {
 	console.log(birthday);
 	console.log(phone);
 	var regExp0 = /^[a-zA-Z0-9]{4,12}$/;
-	var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
-	//id와 비밀번호의 유효성 검사
+	var regExp1 = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/
+/* 	var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
+ */	//id와 비밀번호의 유효성 검사
 	var regExp2 = /[a-z0-9]{2,}$/;
 	var regExp3 = /[a-z0-9]{2,}\.[a-z0-9]{2,}$/;
 	//email의 직접입력부분 유효성검사
@@ -224,7 +225,7 @@ function fn_checked() {
 <tr>
 <td style ="width:110px;"><h5 style="font-weight : bold;">비밀번호</h5></td>
 <td>
-<input class="form-control" type="password" name="password" id="password_" placeholder ="비밀번호를 입력하세요. (영대소문자와 숫자포함 4~12자)" onkeyup="passwordCheckFunction();" value =""/>
+<input class="form-control" type="password" name="password" id="password_" placeholder ="비밀번호를 입력하세요. (1개의 숫자 혹은 특수 문자를 포함한 영문 대소문자 6~20자)" onkeyup="passwordCheckFunction();" value =""/>
 </td>
 </tr>
 <tr>
@@ -253,8 +254,8 @@ function fn_checked() {
 </tr>
 <tr>
 <td style ="width:110px;"><h5 style="font-weight : bold;">이메일</h5></td>
-<td>
-<input type="text" name="email1"  id="email_" value ="" >@
+<td style="text-align: left;">
+<input type="text" name="email1"  id="email_" value =""  >@
 <input type="text" name = "email2" id="email_1" disabled value="naver.com" value = "">
 <select name="selectEmail" id="selectEmail"  style = "height:30px">
 <option value="1">직접입력</option>
@@ -281,7 +282,7 @@ $("#selectEmail").change(function() {
 </tr>
 <tr>
 <td style ="width:110px;"><h5 style="font-weight : bold;">거주지역</h5></td>
-<td>
+<td style = "text-align:left;">
             <select name="regioncode" id="" style = "height:30px">
             <%if(regionList!=null && !regionList.isEmpty()){
             for(int i=0; i<regionList.size(); i++) {
