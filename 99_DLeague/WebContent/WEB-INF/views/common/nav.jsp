@@ -77,7 +77,9 @@ function fn_deleteOK() {
 			<ul class="nav-list">
 				<li><a href="<%=request.getContextPath() %>/member/memberInfoPage" id="<%=param=="memberInfo"?"nav-selected":"" %>" >내 정보</a></li>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamInfoPage?teamName=<%=memberLoggedIn.getTeamname()%>&userId=<%=memberLoggedIn.getUserId()%>" id="<%=param=="memberTeamInfo"?"nav-selected":"" %>">내 팀 정보</a></li>
-				<li><a href="<%=request.getContextPath() %>/member/memberTeamManagement?teamName=<%=memberLoggedIn.getTeamname()%>" id="<%=param=="memberTeamManagement"?"nav-selected":"" %>">내 팀 관리</a></li>
+				<% if("팀장".equals(memberLoggedIn.getGrade())) {%>
+					<li><a href="<%=request.getContextPath() %>/member/memberTeamManagement?teamName=<%=memberLoggedIn.getTeamname()%>" id="<%=param=="memberTeamManagement"?"nav-selected":"" %>">내 팀 관리</a></li>
+				<%} %>
 				<% if("선수".equals(memberLoggedIn.getGrade())) { %>
 				<li><a href="<%=request.getContextPath() %>/member/memberTeamCreate?userId=<%=memberLoggedIn.getUserId()%>" id="<%=param=="memberTeamCreate"?"nav-selected":""%>">팀생성</a></li>
 				<%} %>
