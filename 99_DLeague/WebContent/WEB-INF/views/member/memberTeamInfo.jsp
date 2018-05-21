@@ -97,7 +97,7 @@ function fn_teamOut() {
 	<%if(!(memberLoggedIn.getGrade().equals("선수"))&&!(memberLoggedIn.getGrade().equals("관리자")) ) {%> - <span id="span1">	
 	내 직책 : <span id="span"><%=memberLoggedIn.getUserId().equals(capTain)?"팀장":"팀원"%></span></span> 
 	<%} %>
-	</h2>
+	</h2> 
 	<%-- <div id="e">
     	<h3 id="bb">내 직책 : <span id="span"><%=memberLoggedIn.getUserId().equals(capTain)?"팀장":"팀원"%></span></h3>
     	
