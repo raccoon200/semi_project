@@ -3,8 +3,14 @@
  * Version: Apache Tomcat/8.0.50
 <<<<<<< HEAD
 <<<<<<< HEAD
+ * Generated at: 2018-05-21 00:26:27 UTC
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
  * Generated at: 2018-05-21 00:34:46 UTC
 =======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
  * Generated at: 2018-05-21 00:30:36 UTC
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 =======
@@ -68,10 +74,17 @@ public final class MemberInfo_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_dependants = new java.util.HashMap<java.lang.String,java.lang.Long>(3);
 <<<<<<< HEAD
 <<<<<<< HEAD
+    _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526862247154L));
+    _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1526799624254L));
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
     _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526862432954L));
     _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1526862432922L));
     _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1526429072319L));
 =======
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
     _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526862400178L));
     _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1526799071759L));
     _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1526380612202L));
@@ -84,7 +97,10 @@ public final class MemberInfo_jsp extends org.apache.jasper.runtime.HttpJspBase
 <<<<<<< HEAD
     _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526794586240L));
     _jspx_dependants.put("/WEB-INF/views/common/nav.jsp", Long.valueOf(1526793053040L));
+>>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
     _jspx_dependants.put("/WEB-INF/views/common/footer.jsp", Long.valueOf(1526372379452L));
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
     _jspx_dependants.put("/WEB-INF/views/common/header.jsp", Long.valueOf(1526797107171L));
@@ -460,6 +476,9 @@ return;
 <<<<<<< HEAD
       out.write("\t}\n");
 =======
+<<<<<<< HEAD
+      out.write("\t}\n");
+=======
       out.write("\t}\r\n");
 <<<<<<< HEAD
 =======
@@ -484,6 +503,8 @@ if(memberLoggedIn!=null) {
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project
 >>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
       out.write("\t</style>\n");
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
       out.write(">>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git\n");

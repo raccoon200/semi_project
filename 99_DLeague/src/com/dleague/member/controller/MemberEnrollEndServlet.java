@@ -84,7 +84,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
       member.setBirthday(birthday);
       member.setProfile(profile);
       member.setPhoto(photo);
-      System.out.println("입력한 회원정보 : "+member);
+      // System.out.println("입력한 회원정보 : "+member);
       
       int result = new MemberService().insertMember(member);
       
