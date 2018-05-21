@@ -11,9 +11,9 @@
 		userId2=m2.getUserId();
 		userPhoto=m2.getPhoto();
 	}
-	System.out.println(userPhoto);
+	/* System.out.println(userPhoto);
 	System.out.println(list);
-
+ */
 
 %>
 
