@@ -24,7 +24,7 @@ public class JDBCTemplate {
 			//prop.load(new FileReader("resources/driver.properties"));
 			
 			//클래스객체를 통해서 절대경로 가져오고, 여기서 해당파일을 찾음.
-//			String fileName = JDBCTemplate.class.getResource("/").getPath();
+			//String fileName = JDBCTemplate.class.getResource("/").getPath();
 			//fileName@JDBCTemplate=/C:/Workspaces/webserver_workspace/02_ProductStockManager/WebContent/WEB-INF/classes/
 			String fileName = JDBCTemplate.class.getResource("/driver.properties").getPath();
 			//System.out.println("fileName@JDBCTemplate="+fileName);

@@ -19,15 +19,15 @@ public class MultipartWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getParameter(String key) {
 		String value = "";
-		System.out.println("key = " + key);
+		//System.out.println("key = " + key);
 		//if(key != null && key.equals("password")) {
 		//비밀번호수정시 파라미터 password_new추가
 		if(key != null && (key.equals("password") || key.equals("password_new"))) {
 			value = super.getParameter(key);
-			System.out.println("암호화전 : "+value);
+			//System.out.println("암호화전 : "+value);
 			//암호화처리 메소드호출
 			value = getSha512(value);
-			System.out.println("암호화후 : "+value);
+			//System.out.println("암호화후 : "+value);
 		}
 		else {
 			value = super.getParameter(key);
@@ -57,13 +57,7 @@ public class MultipartWrapper extends HttpServletRequestWrapper {
 		//바이너리데이터 포맷팅으로 Base64인코더를 이용.
 		//바이트배열 => 문자열
 		encPwd = Base64.getEncoder().encodeToString(encryptedBytes);
-		System.out.println(password + ", "+encPwd);
+		//System.out.println(password + ", "+encPwd);
 		return encPwd;
 	}
-	
-	
-	
-	
-	
-	
 }

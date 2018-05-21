@@ -88,7 +88,7 @@ public class MemberTeamCreateEndServlet extends HttpServlet {
 		team.setRegister_msg(register_msg);
 		team.setTeamLogo(teamLogo);;
 		
-		System.out.println("teamLogo : "+teamLogo);
+		//System.out.println("teamLogo : "+teamLogo);
 		
 		//3.비지니스로직 처리
 	

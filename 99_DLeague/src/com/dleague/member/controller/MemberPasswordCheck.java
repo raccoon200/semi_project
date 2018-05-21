@@ -36,7 +36,7 @@ public class MemberPasswordCheck extends HttpServlet {
 		//2.파라미터값 변수에 기록하기
 		String userId = request.getParameter("userId");
 		String birthday = request.getParameter("birthday");
-		System.out.println(birthday);
+		//System.out.println(birthday);
 		
 		//3.비지니스로직
 		int result = new MemberService().passwordCheck(userId, birthday);
