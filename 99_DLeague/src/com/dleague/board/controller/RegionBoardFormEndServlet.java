@@ -64,12 +64,12 @@ public class RegionBoardFormEndServlet extends HttpServlet {
 		board.setRenamed_file_name(renamedFileName);
 		
 		int result = new BoardService().insertRegionBoard(board);
-		System.out.println("result1 : "+result);
+	//	System.out.println("result1 : "+result);
 		if(result>0) {
 			result = new BoardService().selectRecentRegionBoardNo();
 		}
 		
-		System.out.println("result2 : "+result);;
+		//System.out.println("result2 : "+result);;
 		String view = "";
 	
 		if(result>0) {
