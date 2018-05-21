@@ -158,10 +158,12 @@
 	    margin-right: 45px;
 	    display: block;
 	    position: fixed;
+	    z-index: 10;
+	    background: white;
 	}
 	h3#nav-header{
 	    font-size: 23px;
-	    width: 115px;
+	    width: 130px;
 	    margin: 0 0 30px 15px;
 	    padding-bottom: 25px;
 	    border-bottom: 4px solid rgb(64,128,183);
@@ -243,34 +245,7 @@
 	    top: 54px;
 	    left: 170px;
 	}
-<<<<<<< HEAD
 	</style>
-<script>
-<script>
-<%if(memberLoggedIn!=null) { %> 
-=======
-	</style>
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
-
-<<<<<<< HEAD
-<%-- <%if(memberLoggedIn!=null) { %> 
-
-   function fn_validate_team_info() {
-      if(<%=memberLoggedIn.getTeamname()%>!=null) {
-         return true;   
-      }
-      if(confirm("팀이 없습니다. 팀 생성 하시겠습니까??")) location.href="<%=request.getContextPath()%>/member/memberTeamCreate";
-
-      return false;
-	}
-<%} %>
-
-<%} %> --%>
-<%}%>
-
-</script>
-=======
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git
 </head>
 <body>
     <header id="header">

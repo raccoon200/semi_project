@@ -64,9 +64,12 @@ public class RegionBoardFormEndServlet extends HttpServlet {
 		board.setRenamed_file_name(renamedFileName);
 		
 		int result = new BoardService().insertRegionBoard(board);
+		System.out.println("result1 : "+result);
 		if(result>0) {
 			result = new BoardService().selectRecentRegionBoardNo();
 		}
+		
+		System.out.println("result2 : "+result);;
 		String view = "";
 	
 		if(result>0) {
@@ -74,7 +77,7 @@ public class RegionBoardFormEndServlet extends HttpServlet {
 		}else {
 			String msg = "게시글 등록 실패!";
 			view = "/WEB-INF/views/common/msg.jsp";
-			request.setAttribute("msg", "");
+			request.setAttribute("msg", msg);
 			request.setAttribute("loc", "/board/regionBoard");
 		}
 		
