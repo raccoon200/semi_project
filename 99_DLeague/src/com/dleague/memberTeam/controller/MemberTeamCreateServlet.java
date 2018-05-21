@@ -34,7 +34,7 @@ public class MemberTeamCreateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*request.setCharacterEncoding("utf-8");*/
 		String userId = request.getParameter("userId");
-		System.out.println(userId);
+		//System.out.println(userId);
 		MemberTeamService memberTeamService = new MemberTeamService();
 		int cnt = memberTeamService.cntTeamCreate(userId);
 		int cntR = memberTeamService.cntRegister(userId);
