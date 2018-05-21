@@ -35,8 +35,8 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		Member m = new MemberService().selectOne(userId);
 		boolean isUsable = m==null?true:false;
-		System.out.println(userId+" : isUsable? => "+isUsable);
-		request.setAttribute("userId", userId);
+/*		System.out.println(userId+" : isUsable? => "+isUsable);
+*/		request.setAttribute("userId", userId);
 		request.setAttribute("isUsable", isUsable);
 		RequestDispatcher reqDispatcher
 		=request.getRequestDispatcher("/WEB-INF/views/member/checkIdDuplicate.jsp");

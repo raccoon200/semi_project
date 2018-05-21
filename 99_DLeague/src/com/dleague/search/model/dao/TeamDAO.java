@@ -476,8 +476,8 @@ public class TeamDAO {
 			pstmt.setString(1, gameDate);
 			pstmt.setInt(2, numPerPage*(cPage-1)+1);
 			pstmt.setInt(3, numPerPage*cPage);
-			System.out.println(numPerPage*(cPage-1)+1);
-			System.out.println(numPerPage*cPage);
+			/*System.out.println(numPerPage*(cPage-1)+1);
+			System.out.println(numPerPage*cPage);*/
 			rset=pstmt.executeQuery();
 			
 			gameList = new ArrayList<Game>();
@@ -684,7 +684,7 @@ public class TeamDAO {
 			pstmt.setString(1, teamName);
 		
 			result3 = pstmt.executeUpdate();
-			System.out.println("teamName="+teamName+"result3="+result3);
+			/*System.out.println("teamName="+teamName+"result3="+result3);*/
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
