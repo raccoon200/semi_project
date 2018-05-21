@@ -5,7 +5,6 @@
 <%@ page import="java.util.*, com.dleague.board.model.vo.*" %>
 <% 
 	List<Complain> boardList = (ArrayList<Complain>)request.getAttribute("complainBoardList");
-	System.out.println(boardList);
 %>
 <style>
 /* table.board-table{

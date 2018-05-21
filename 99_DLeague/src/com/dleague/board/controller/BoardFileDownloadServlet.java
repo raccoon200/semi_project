@@ -37,9 +37,9 @@ public class BoardFileDownloadServlet extends HttpServlet {
         String saveDirectory = getServletContext().getRealPath("/upload/board");
 		String rName = request.getParameter("rName");
 		String oName = request.getParameter("oName");
-		System.out.printf("oName=%s, rName=%s\n",oName, rName);
+		/*System.out.printf("oName=%s, rName=%s\n",oName, rName);
 		System.out.println(saveDirectory+"/"+rName);
-		
+		*/
 		
 		//2.입출력스트림 생성, IOException처리는 tomcat으로 던져서 처리함.
 		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(saveDirectory+"/"+rName));
@@ -55,10 +55,10 @@ public class BoardFileDownloadServlet extends HttpServlet {
 		if(isMSIE){
 			//ie는 utf-8인코딩을 명시적으로 해줌. 공백을 의미하는 +를 %20로 치환.
 			resFilename = URLEncoder.encode(oName, "UTF-8");
-			System.out.println("ie : "+resFilename);
+			//System.out.println("ie : "+resFilename);
 								
 			resFilename = resFilename.replaceAll("\\+", "%20");
-			System.out.println("ie : "+resFilename);
+			//System.out.println("ie : "+resFilename);
 		} else {
 			//?
 			resFilename = new String(oName.getBytes("UTF-8"),"ISO-8859-1");
