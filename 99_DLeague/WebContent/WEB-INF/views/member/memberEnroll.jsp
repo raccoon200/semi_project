@@ -60,8 +60,8 @@ function fn_birthday() {
 	var year = Number($("#birthday").val().substr(0,2));
 	var month = Number($("#birthday").val().substr(2,2));
 	var day = Number($("#birthday").val().substr(4,2));
-	console.log("year="+year);
-	var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0 ));
+/* 	console.log("year="+year);
+ */	var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0 ));
 	if(month <1 || month >12){
 		return false;
 	} else if(day <1 || day >31) {
@@ -86,7 +86,6 @@ function passwordCheckFunction() {
 	}
 
 function fn_checked() {
-	console.log("안녕");
 	var idtext = document.getElementById("userId_");
 	var patext = document.getElementById("password_");
 	var cpatext = document.getElementById("password_chk");
@@ -106,13 +105,13 @@ function fn_checked() {
 	var birthday = bitext.value;
 	var phone = phtext.value;
 	
-	console.log(userId);
+	/* console.log(userId);
 	console.log(password);
 	console.log(password_chk);
 	console.log("email ="+email_+"@"+email_1);
 	console.log(userName);
 	console.log(birthday);
-	console.log(phone);
+	console.log(phone); */
 	var regExp0 = /^[a-zA-Z0-9]{4,12}$/;
 	var regExp1 = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/
 /* 	var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
@@ -126,8 +125,8 @@ function fn_checked() {
 	// 주민번호 유효성 검사
 	var regph = /^01[0-9]{8,9}$/s;
 	// 폰번호유효성 검사
-	console.log("userid ="+userId);
-	if(!regExp0.test(userId))
+/* 	console.log("userid ="+userId);
+ */	if(!regExp0.test(userId))
 	{
 		alert("Id를 제대로 입력해주세요.");
 		idtext.focus();

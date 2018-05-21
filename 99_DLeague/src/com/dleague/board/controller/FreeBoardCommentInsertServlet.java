@@ -45,7 +45,7 @@ public class FreeBoardCommentInsertServlet extends HttpServlet {
 		freeBoardComment.setBoard_free_comment_ref(freeBoardCommentRef);
 		freeBoardComment.setBoard_free_comment_level(freeBoardCommentLevel);
 		
-		System.out.println(freeBoardComment);
+//		System.out.println(freeBoardComment);
 		int result = new BoardService().insertFreeBoardComment(freeBoardComment);
 		
 		String view = "";

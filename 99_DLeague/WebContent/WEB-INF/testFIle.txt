@@ -1,7 +1,0 @@
-<<<<<<< HEAD
-안녕????? 
-=======
-안녕?????쉽고 직관적으로 보게 
-
-관리자
->>>>>>> branch 'master' of https://github.com/raccoon200/semi_project.git

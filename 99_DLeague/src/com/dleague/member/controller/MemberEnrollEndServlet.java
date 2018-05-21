@@ -46,7 +46,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
       }
          
       String saveDirectory = getServletContext().getRealPath("upload/member");
-      System.out.println("saveDirectory="+saveDirectory);
+      //System.out.println("saveDirectory="+saveDirectory);
       
       int maxPostSize = 1024*1024*10;
       
@@ -66,13 +66,13 @@ public class MemberEnrollEndServlet extends HttpServlet {
       String birthday =multiReq.getParameter("birthday");
       String profile = multiReq.getParameter("profile");
       String photo = multiReq.getFilesystemName("up_file");
-      System.out.println("userid ="+userId);
+      //System.out.println("userid ="+userId);
 
       EncryptWrapper e = new EncryptWrapper(request);
       String encPassword = e.getParameter(password);
       
-      System.out.println("암호화 패스워드 : "+encPassword);
-      System.out.println("password@MemberEnrollEndServlet="+password);
+      //System.out.println("암호화 패스워드 : "+encPassword);
+      //System.out.println("password@MemberEnrollEndServlet="+password);
       
       Member member = new Member();
       member.setUserId(userId);
@@ -84,7 +84,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
       member.setBirthday(birthday);
       member.setProfile(profile);
       member.setPhoto(photo);
-      System.out.println("입력한 회원정보 : "+member);
+      // System.out.println("입력한 회원정보 : "+member);
       
       int result = new MemberService().insertMember(member);
       

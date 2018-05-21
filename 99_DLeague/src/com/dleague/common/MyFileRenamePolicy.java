@@ -36,8 +36,7 @@ public class MyFileRenamePolicy implements FileRenamePolicy {
 		/*	System.out.println("newFile@MyFileRenamePolicy="+newFile.getName());
 			System.out.println("newFile.exist()="+newFile.exists());//true이면, 새이름 부여.
 */			
-		}while(!createNewFile(newFile));
-		
+		} while(!createNewFile(newFile));
 		return newFile;
 	}
 

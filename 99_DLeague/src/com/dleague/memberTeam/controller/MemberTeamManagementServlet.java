@@ -42,7 +42,7 @@ public class MemberTeamManagementServlet extends HttpServlet {
 		HttpSession session = request.getSession(); 
 		Member m = (Member) session.getAttribute("memberLoggedIn");
 		String teamName = m.getTeamname();
-		System.out.println(teamName);
+		//System.out.println(teamName);
 		//String teamName = request.getParameter("teamName");
 		//1. 파라미터 변수에 담기
 		int cPage; 
@@ -59,10 +59,10 @@ public class MemberTeamManagementServlet extends HttpServlet {
 		
 		//전체 게시물 수 
 		int totalMember = new MemberService().selectMemberCount(teamName);	//팀토탈카운트
-		System.out.println("total ="+totalMember);
+		//System.out.println("total ="+totalMember);
 		// (공식1) totalPage
 		int totalPage = (int)(Math.ceil(totalMember/(double)numPerPage));
-		System.out.println("totalPage ="+totalPage);
+		//System.out.println("totalPage ="+totalPage);
 		//2.2 페이징된 회원리스트 가져오기
 		List<Member> list = new MemberService().selectMemberList(cPage, numPerPage, teamName);
 		

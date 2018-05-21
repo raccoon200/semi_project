@@ -365,8 +365,8 @@ public class MemberTeamDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("memberTeamMemberAcceptOrRefuse");
-		System.out.println(userId);
-		System.out.println(teamName);
+		//System.out.println(userId);
+		//System.out.println(teamName);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "Y");
@@ -399,8 +399,8 @@ public class MemberTeamDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("memberTeamMemberAcceptOrRefuse");
-		System.out.println(userId);
-		System.out.println(teamName);
+		//System.out.println(userId);
+		//System.out.println(teamName);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "N");
@@ -500,7 +500,7 @@ public class MemberTeamDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, teamName);
-			System.out.println(teamName);
+			//System.out.println(teamName);
 			rset = pstmt.executeQuery();
 			memberTeamActivity = new ArrayList<>();
 			while(rset.next()) {
@@ -523,8 +523,8 @@ public class MemberTeamDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("memberTeamAcitivty");
-		System.out.println(gameNo);
-		System.out.println(score);
+		//System.out.println(gameNo);
+		//System.out.println(score);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, score);
@@ -578,7 +578,7 @@ public class MemberTeamDAO {
 			pstmt.setString(1, teamName);
 			rset = pstmt.executeQuery();
 			if(rset.next()) cnt = rset.getInt("cnt");
-			System.out.println(cnt);
+			//System.out.println(cnt);
 		} catch (SQLException e) {			
 			e.printStackTrace();
 		} finally {

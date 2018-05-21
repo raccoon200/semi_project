@@ -45,7 +45,7 @@ public class RegionBoardCommentInsert extends HttpServlet {
 		regionBoardComment.setBoard_region_comment_ref(regionBoardCommentRef);
 		regionBoardComment.setBoard_region_comment_level(regionBoardCommentLevel);
 		
-		System.out.println(regionBoardComment);
+		//System.out.println(regionBoardComment);
 		int result = new BoardService().insertRegionBoardComment(regionBoardComment);
 		
 		String view = "";

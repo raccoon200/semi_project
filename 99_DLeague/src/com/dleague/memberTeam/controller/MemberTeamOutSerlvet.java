@@ -30,7 +30,7 @@ public class MemberTeamOutSerlvet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
-		System.out.println("servlet@"+userId);
+		//System.out.println("servlet@"+userId);
 		int result = new MemberTeamService().memberTeamOut(userId);
 		String msg = "";
 		String loc = "/member/logout";

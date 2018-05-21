@@ -40,9 +40,9 @@ public class MemberUpdatePasswordEndServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String password_new = request.getParameter("password_new");
 		
-		System.out.println(userId);
-		System.out.println(password);
-		System.out.println(password_new);
+		//System.out.println(userId);
+		//System.out.println(password);
+		//System.out.println(password_new);
 		
 		Member member = new Member();
 		member.setUserId(userId);
