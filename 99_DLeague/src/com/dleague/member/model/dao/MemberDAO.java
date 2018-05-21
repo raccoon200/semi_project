@@ -191,8 +191,8 @@ public class MemberDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertMember");
-		System.out.println(member);
-		try {
+/*		System.out.println(member);
+*/		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1,  member.getUserId());
 			pstmt.setString(2,  member.getPassword());
