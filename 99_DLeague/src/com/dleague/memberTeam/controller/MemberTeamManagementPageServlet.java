@@ -35,12 +35,12 @@ public class MemberTeamManagementPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 변수에 담기
 		String teamName = request.getParameter("teamName");
-		System.out.println("팀이름"+teamName);
+		//System.out.println("팀이름"+teamName);
 		String msg = "";
 		String loc = "/";
 		
 		if(teamName.equals("null")) {
-			System.out.println("안녕!");
+			//System.out.println("안녕!");
 			msg = "팀이 없습니다! 가입 또는 생성해주세요!";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
@@ -63,8 +63,8 @@ public class MemberTeamManagementPageServlet extends HttpServlet {
 		for(Team t : list){
 			capTain = t.getCapTain();
 		}
-		System.out.println("팀장은 누구!"+capTain);
-		System.out.println("팀원은 누구!"+userId);
+		//System.out.println("팀장은 누구!"+capTain);
+		//System.out.println("팀원은 누구!"+userId);
 		
 		if(!capTain.equals(userId)) {
 			msg = "권한이 없습니다!(팀원)";

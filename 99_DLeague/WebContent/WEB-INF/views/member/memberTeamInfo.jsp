@@ -337,7 +337,7 @@ function fn_teamOut() {
 		</tfoot>
 		</table>
 <% } else if (teamRegister!=null){ %>
-	<%System.out.println(teamRegister); %>
+	<%//System.out.println(teamRegister); %>
 	<h2>팀 생성 신청 내역</h2>
     <input type="button" value="신청 취소" style="position:relative; " class="btn" onclick="fn_registerCancel();" />
     <table class="tbl_type"  cellspacing="0">

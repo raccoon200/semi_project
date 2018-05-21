@@ -31,11 +31,11 @@ public class MemberTeamGameAcceptServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String teamName = request.getParameter("teamName");
 		String choose = request.getParameter("choose");
-		System.out.println("teamName= "+teamName);
-		System.out.println("choose= "+choose);
+		//System.out.println("teamName= "+teamName);
+		//System.out.println("choose= "+choose);
 		
 		int result = new MemberTeamService().memberTeamGameAccept(teamName, choose);
-		System.out.println(result);
+		//System.out.println(result);
 		String Referer = request.getHeader("Referer"); //어디서 시도했는지
 		String Origin  = request.getHeader("Origin");
 		String url = request.getRequestURL().toString(); //url패턴까지

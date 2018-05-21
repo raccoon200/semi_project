@@ -23,10 +23,10 @@ public class EncryptWrapper_Login extends HttpServletRequestWrapper {
 		//비밀번호수정시 파라미터 password_new추가
 		if(key != null && (key.equals("password") || key.equals("password_new"))) {
 			value = super.getParameter(key);
-			System.out.println("암호화전 : "+value);
+			//System.out.println("암호화전 : "+value);
 			//암호화처리 메소드호출
 			value = getSha512(value);
-			System.out.println("암호화후 : "+value);
+			//System.out.println("암호화후 : "+value);
 		}
 		else {
 			value = super.getParameter(key);
